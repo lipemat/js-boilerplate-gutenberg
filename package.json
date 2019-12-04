@@ -1,9 +1,10 @@
 {
   "name": "@lipemat/js-boilerplate-gutenberg",
-  "version": "1.0.0-beta",
   "description": "Gutenberg extension for @lipemat/js-boilerplate",
+  "version": "1.0.0-beta",
   "license": "MIT",
   "main": "index.js",
+  "private": false,
   "sideEffects": false,
   "repository": {
     "type": "git",
@@ -13,7 +14,7 @@
     "@lipemat/js-boilerplate": ">=5.2.0"
   },
   "devDependencies": {
-    "@lipemat/js-boilerplate": "*"
+    "@lipemat/js-boilerplate": ">=5.2.0"
   },
   "bugs": {
     "url": "https://github.com/lipemat/js-boilerplate-gutenberg/issues"
