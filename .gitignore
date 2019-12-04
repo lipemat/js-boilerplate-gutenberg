@@ -1,3 +1,21 @@
+# system/hidden files
+*~
+.DS_Store
+.DS_Store?
+.svn
+.cvs
+*.bak
+*.swp
+.idea
+.sass-cache
+.project
+*.sublime-project
+*.sublime-workspace
+*.map
+.Trashes
+ehthumbs.db
+Thumbs.db
+
 # Logs
 logs
 *.log
