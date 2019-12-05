@@ -7,7 +7,7 @@
 </p>
 
 
-Ant Design extension for [@lipemat/js-boilerplate](https://github.com/lipemat/js-boilerplate) for zero configuration [Gutenberg](https://github.com/WordPress/gutenberg) support.
+Gutenberg extension for [@lipemat/js-boilerplate](https://github.com/lipemat/js-boilerplate) for zero configuration [Gutenberg](https://github.com/WordPress/gutenberg) support.
 
 ### Installation
 ```bash
