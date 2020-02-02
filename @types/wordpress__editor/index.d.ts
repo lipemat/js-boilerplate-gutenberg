@@ -8,7 +8,11 @@ declare module '@wordpress/editor' {
 	 * Initialize the classic tinymce editor.
 	 * @link https://github.com/WordPress/gutenberg/blob/master/packages/block-library/src/classic/edit.js
 	 */
-	type initialize = ( id: string, settings: Settings ) => void;
+	type initialize = ( id: string, settings: {
+		quicktags?: boolean;
+		mediaButtons?: boolean;
+		tinymce: Settings;
+	} | false ) => void;
 
 
 	/**
