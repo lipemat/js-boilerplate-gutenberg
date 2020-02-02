@@ -2,6 +2,13 @@ declare module '@wordpress/editor' {
 	import {ComponentType} from 'react';
 	import {withInstanceIdProps} from '@wordpress/compose';
 	import {withSpokenMessages} from '@wordpress/components'
+	import {Settings} from 'tinymce';
+
+	/**
+	 * Initialize the classic tinymce editor.
+	 * @link https://github.com/WordPress/gutenberg/blob/master/packages/block-library/src/classic/edit.js
+	 */
+	type initialize = ( id: string, settings: Settings ) => void;
 
 
 	/**
@@ -26,8 +33,10 @@ declare module '@wordpress/editor' {
 	}
 
 	export const HierarchicalTermSelector: ComponentType<HierarchicalTermSelector>;
+	export const initialize: initialize;
 
 	export default interface Editor {
+		initialize: initialize
 		HierarchicalTermSelector: ComponentType<HierarchicalTermSelector>;
 	}
 }

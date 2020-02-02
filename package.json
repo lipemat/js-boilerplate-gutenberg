@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/lipemat/js-boilerplate-gutenberg/issues"
   },
-  "homepage": "https://github.com/lipemat/js-boilerplate-gutenberg#readme"
+  "homepage": "https://github.com/lipemat/js-boilerplate-gutenberg#readme",
+  "dependencies": {
+    "@types/tinymce": "^4.5.23"
+  }
 }
