@@ -1,5 +1,5 @@
 declare module '@wordpress/api/media' {
-	import {Links} from '@wordpress/api/shared';
+	import {Links} from '@wordpress/api';
 	import {PostStatus, PostMeta} from '@wordpress/api/posts';
 
 	type Details = {

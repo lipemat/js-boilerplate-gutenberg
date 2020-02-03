@@ -1,5 +1,5 @@
 declare module '@wordpress/api/types' {
-	import {Links} from '@wordpress/api/shared';
+	import {Links} from '@wordpress/api';
 
 	/**
 	 * Post Type Endpoint.

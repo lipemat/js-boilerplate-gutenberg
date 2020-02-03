@@ -1,5 +1,5 @@
 declare module '@wordpress/api/posts' {
-	import {Links} from '@wordpress/api/shared';
+	import {context, Links, order} from '@wordpress/api';
 
 	/* eslint camelcase: 0 */
 
@@ -9,6 +9,7 @@ declare module '@wordpress/api/posts' {
 			[ key: string ]: any;
 		}
 	}
+
 	/**
 	 * Posts Endpoint.
 	 *
@@ -48,5 +49,33 @@ declare module '@wordpress/api/posts' {
 		categories: number[];
 		tags: number[];
 		_links: Links;
+	}
+
+	/**
+	 * List Posts.
+	 *
+	 * https://developer.wordpress.org/rest-api/reference/posts/#arguments
+	 */
+	export interface PostsQuery {
+		context?: context;
+		page?: number;
+		per_page?: number;
+		search?: string;
+		after?: string;
+		author?: number | number[];
+		author_exclude?: number | number[];
+		before?: string;
+		exclude?: number[];
+		include?: number[];
+		offset?: number;
+		order?: order;
+		orderby?: 'author' | 'date' | 'id' | 'include' | 'modified' | 'parent' | 'relevance' | 'slug' | 'include_slugs' | 'title'
+		slug?: string;
+		status?: PostStatus;
+		categories?: number[];
+		categories_exclude?: number[];
+		tags?: number[];
+		tags_exclude?: number[];
+		sticky?: boolean;
 	}
 }

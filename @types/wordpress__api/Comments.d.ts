@@ -1,6 +1,6 @@
 
 declare module '@wordpress/api/comments' {
-	import {Links} from '@wordpress/api/shared';
+	import {Links} from '@wordpress/api';
 
 	/* eslint camelcase: 0 */
 
