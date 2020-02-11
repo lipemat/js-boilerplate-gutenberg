@@ -12,8 +12,19 @@ declare module '@wordpress/api' {
 	export * from '@wordpress/api/media';
 	export * from '@wordpress/api/posts';
 	export * from '@wordpress/api/settings';
-	export * from '@wordpress/api/shared';
 	export * from '@wordpress/api/taxonomies';
 	export * from '@wordpress/api/types';
 	export * from '@wordpress/api/users';
+
+	export type context = 'view' | 'embed' | 'edit';
+	export type order = 'asc' | 'desc';
+
+	export interface Collection {
+		href: string;
+	}
+
+	export interface Links {
+		self: Collection[];
+		collection: Collection[];
+	}
 }

@@ -1,5 +1,5 @@
 declare module '@wordpress/api/users' {
-	import {Links} from '@wordpress/api/shared';
+	import {Links, context, order} from '@wordpress/api';
 
 	/* eslint camelcase: 0 */
 
@@ -48,14 +48,14 @@ declare module '@wordpress/api/users' {
 	 * https://developer.wordpress.org/rest-api/reference/users/#arguments
 	 */
 	export interface UsersQuery {
-		context?: 'view' | 'embed' | 'edit';
+		context?: context;
 		page?: number | 1;
 		per_page?: number | 10;
 		search?: string;
 		exclude?: number[];
 		include?: number[];
 		offset?: number;
-		order?: 'asc' | 'desc';
+		order?: order;
 		orderby?: 'id' | 'include' | 'name' | 'registered_date' | 'slug' | 'include_slugs' | 'email' | 'url';
 		slug?: string;
 		roles?: string[];

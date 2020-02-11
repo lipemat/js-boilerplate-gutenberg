@@ -1,5 +1,5 @@
 declare module '@wordpress/api/taxonomies' {
-	import {Links} from '@wordpress/api/shared';
+	import {Links} from '@wordpress/api';
 
 	/**
 	 * Taxonomies Endpoint.
