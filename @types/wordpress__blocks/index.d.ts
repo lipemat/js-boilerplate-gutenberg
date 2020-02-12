@@ -1,5 +1,6 @@
 declare module '@wordpress/blocks' {
 	import {ReactElement} from 'react';
+	import {iconType} from '@wordpress/components';
 
 	type dataTypes = 'null' | 'boolean' | 'object' | 'array' | 'number' | 'string' | 'integer';
 	export type BlockAttributes = {
@@ -51,7 +52,7 @@ declare module '@wordpress/blocks' {
 		description?: string;
 		category: 'common' | 'formatting' | 'layout' | 'widgets' | 'embed' | string
 		// Svg | dashicon | configuration
-		icon: string | {
+		icon: iconType | {
 			// Specifying a background color to appear with the icon e.g.: in the inserter.
 			background?: string;
 			// Specifying a color for the icon

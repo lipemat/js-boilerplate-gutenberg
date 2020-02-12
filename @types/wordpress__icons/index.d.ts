@@ -16,15 +16,15 @@
  *       when available in WP Core.
  */
 declare module '@wordpress/icons' {
-	import {SVGAttributes} from 'react';
+	import {ComponentType, SVGAttributes} from 'react';
+
+	type IconType = ComponentType<{}>;
 
 	interface Icon extends SVGAttributes<SVGElement> {
 		icon: IconType;
 		size?: number;
 	}
 
-	interface IconType {
-	}
 
 	export const alignCenter: IconType;
 	export const alignJustify: IconType;
