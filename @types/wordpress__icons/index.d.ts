@@ -18,7 +18,7 @@
 declare module '@wordpress/icons' {
 	import {SVGAttributes} from 'react';
 
-	interface Icon extends SVGAttributes<Element> {
+	interface Icon extends SVGAttributes<SVGElement> {
 		icon: IconType;
 		size?: number;
 	}
@@ -103,7 +103,7 @@ declare module '@wordpress/icons' {
 
 	export const Icon: Icon;
 
-	export interface Icons {
+	export default interface Icons {
 		Icon: Icon;
 
 		alignCenter: IconType;

@@ -21,7 +21,9 @@
   },
   "homepage": "https://github.com/lipemat/js-boilerplate-gutenberg#readme",
   "dependencies": {
+    "@types/classnames": "^2.2.9",
     "@types/tinymce": "^4.5.23",
-    "@wordpress/icons": "^1.1.0"
+    "@wordpress/icons": "^1.1.0",
+    "@wordpress/primitives": "^1.1.0"
   }
 }
