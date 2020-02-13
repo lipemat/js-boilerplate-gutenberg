@@ -1,10 +1,16 @@
 declare module '@wordpress/api-fetch' {
-
-	type apiFetch = <T>( options: {
-		Accept?: string;
-		credentials?: 'include' | false
+	/**
+	 * @link https://developer.wordpress.org/block-editor/packages/packages-api-fetch/
+	 */
+	interface FetchOptions<D> extends Omit<Request, 'method'| 'url'> {
 		path: string;
-	} ) => Promise<T>;
+		parse?: boolean;
+		data?: D;
+		url?: string;
+		method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS';
+	}
+
+	type apiFetch = <T, D = {}>( options: FetchOptions<D> ) => Promise<T>;
 
 	export const apiFetch: apiFetch;
 
