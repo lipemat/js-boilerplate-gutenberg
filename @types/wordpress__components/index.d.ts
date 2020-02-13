@@ -1,5 +1,28 @@
 declare module '@wordpress/components' {
 	import {ComponentType, InputHTMLAttributes, ReactNode, SelectHTMLAttributes, SVGAttributes} from 'react';
+	import {ClassNamesFn} from 'classnames/types';
+	import {SVG} from '@wordpress/primitives';
+
+	/**
+	 * @link https://developer.wordpress.org/block-editor/components/button/
+	 */
+	type ButtonParams = {
+		className?: ClassNamesFn;
+		icon?: Dashicon | SVG;
+		iconSize?: number;
+		isBusy?: boolean;
+		isDestructive?: boolean;
+		isLink?: boolean;
+		isPressed?: boolean;
+		isPrimary?: boolean;
+		isSecondary?: boolean;
+		isSmall?: boolean;
+		isTertiary?: boolean;
+		label?: string;
+		shortcut?: shortcutText;
+		showTooltip?: boolean;
+		tooltipPosition?: tooltipPosition;
+	}
 
 	export type colorOptions = Array<{
 		color: string;
@@ -296,6 +319,22 @@ declare module '@wordpress/components' {
 		| 'yes-alt'
 		| 'yes';
 
+	type shortcutText = string | {
+		display: string;
+		ariaLabel: string;
+	};
+
+	type tooltipPosition = 'top left' | 'top right' | 'top-center' | 'bottom left' | 'bottom right' | 'bottom center';
+
+
+	// If href is set, we get a link.
+	interface ButtonLink extends ButtonParams, Omit<HTMLLinkElement, 'className'> {
+	}
+
+	// If href is not set, we get a link.
+	interface ButtonButton extends ButtonParams, Omit<HTMLButtonElement, 'className'> {
+	}
+
 	interface CheckboxControl extends Omit<InputHTMLAttributes<{}>, 'onChange'> {
 		heading?: string;
 		label?: string;
@@ -354,6 +393,16 @@ declare module '@wordpress/components' {
 		className?: string;
 	}
 
+	interface Shortcut extends HTMLSpanElement {
+		shortcut?: shortcutText;
+	}
+
+	interface Tooltip {
+		text?: string;
+		position?: tooltipPosition;
+		shortcut?: shortcutText;
+	}
+
 	interface TextControl extends Omit<InputHTMLAttributes<{}>, 'onChange' | 'onKeyPress'> {
 		label?: string;
 		help?: string;
@@ -370,6 +419,7 @@ declare module '@wordpress/components' {
 		debouncedSpeak?: ( message: string, ariaLive?: 'polite' | 'assertive' ) => void;
 	}
 
+	export const Button: ButtonLink | ButtonButton;
 	export const CheckboxControl: ComponentType<CheckboxControl>;
 	export const ColorPalette: ComponentType<ColorPalette>;
 	export const ColorPicker: ComponentType<ColorPicker>;
@@ -377,19 +427,24 @@ declare module '@wordpress/components' {
 	export const PanelBody: ComponentType<PanelBody>;
 	export const SelectControl: ComponentType<SelectControl>;
 	export const ServerSideRender: ComponentType<ServerSideRender>;
+	export const Shortcut: ComponentType<Shortcut>;
 	export const Spinner: ComponentType<{}>;
 	export const TextControl: ComponentType<TextControl>;
+	export const Tooltip: Tooltip;
 
 	export default interface Components {
-		CheckboxControl: ComponentType<CheckboxControl>
+		Button: ComponentType<ButtonLink | ButtonButton>;
+		CheckboxControl: ComponentType<CheckboxControl>;
 		ColorPalette: ComponentType<ColorPalette>;
 		ColorPicker: ComponentType<ColorPicker>;
 		Dashicon: ComponentType<Dashicon>;
 		PanelBody: ComponentType<PanelBody>;
 		SelectControl: ComponentType<SelectControl>;
 		ServerSideRender: ComponentType<ServerSideRender>;
+		Shortcut: ComponentType<Shortcut>;
 		Spinner: ComponentType<{}>;
 		TextControl: ComponentType<TextControl>;
+		Tooltip: ComponentType<Tooltip>;
 	}
 }
 

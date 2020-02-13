@@ -11,8 +11,9 @@
  *       when available in WP Core.
  */
 declare module '@wordpress/primitives' {
-	import {SVGAttributes} from 'react';
+	import {ComponentType, SVGAttributes} from 'react';
 	import {ClassValue} from 'classnames/types';
+
 
 	interface BlockQuotation extends HTMLQuoteElement {
 	}
@@ -52,32 +53,32 @@ declare module '@wordpress/primitives' {
 		isPressed?: boolean;
 	}
 
-	export const BlockQuotation: BlockQuotation;
-	export const Circle: Circle;
-	export const Defs: Defs;
-	export const G: G;
-	export const HorizontalRule: HorizontalRule;
-	export const LinearGradient: LinearGradient;
-	export const Path: Path;
-	export const Polygon: Polygon;
-	export const RadialGradient: RadialGradient;
-	export const Rect: Rect;
-	export const SVG: SVG;
-	export const Stop: Stop;
+	export const BlockQuotation: ComponentType<BlockQuotation>;
+	export const Circle: ComponentType<Circle>;
+	export const Defs: ComponentType<Defs>;
+	export const G: ComponentType<G>;
+	export const HorizontalRule: ComponentType<HorizontalRule>;
+	export const LinearGradient: ComponentType<LinearGradient>;
+	export const Path: ComponentType<Path>;
+	export const Polygon: ComponentType<Polygon>;
+	export const RadialGradient: ComponentType<RadialGradient>;
+	export const Rect: ComponentType<Rect>;
+	export const SVG: ComponentType<SVG>;
+	export const Stop: ComponentType<Stop>;
 
 	export default interface Primitives {
-		BlockQuotation: BlockQuotation;
-		Circle: Circle;
-		Defs: Defs;
-		G: G;
-		HorizontalRule: HorizontalRule;
-		LinearGradient: LinearGradient;
-		Path: Path;
-		Polygon: Polygon;
-		RadialGradient: RadialGradient;
-		Rect: Rect;
-		SVG: SVG;
-		Stop: Stop;
+		BlockQuotation: ComponentType<BlockQuotation>;
+		Circle: ComponentType<Circle>;
+		Defs: ComponentType<Defs>;
+		G: ComponentType<G>;
+		HorizontalRule: ComponentType<HorizontalRule>;
+		LinearGradient: ComponentType<LinearGradient>;
+		Path: ComponentType<Path>;
+		Polygon: ComponentType<Polygon>;
+		RadialGradient: ComponentType<RadialGradient>;
+		Rect: ComponentType<Rect>;
+		SVG: ComponentType<SVG>;
+		Stop: ComponentType<Stop>;
 	}
 
 
