@@ -37,7 +37,7 @@
   },
   "scripts": {
     "build": "microbundle",
-    "dev": "microbundle watch",
-    "prepublish": "rm -rf dist/* && yarn run build"
+    "prepublish": "rm -rf dist/* && yarn run build",
+    "watch": "microbundle watch"
   }
 }
