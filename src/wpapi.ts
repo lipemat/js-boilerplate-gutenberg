@@ -15,23 +15,23 @@ import {
 } from '@wordpress/api';
 import apiFetch from '@wordpress/api-fetch';
 
-export interface CustomResource {
-	[ route: string ]: () => Request<any, any, any>;
+export interface CustomRoutes {
+	[ route: string ]: () => RequestMethods<any, any, any>;
 }
 
-export interface Resources {
-	categories: () => Request<Category, any, any>;
-	comments: () => Request<Comment, any, CommentCreate>;
-	media: () => Request<Media, any, any>;
-	statuses: () => Request<any, any, any>;
-	pages: () => Request<Post, PostsQuery, any>;
-	posts: () => Request<Post, PostsQuery, any>;
-	settings: () => Request<Settings, any, any>;
-	tags: () => Request<any, any, any>;
-	taxonomies: () => Request<Taxonomy, any, any>;
-	types: () => Request<Type, any, any>;
-	users: () => Request<User, UsersQuery, UserUpdate>;
-	search: () => Request<any, any, any>;
+export interface Routes {
+	categories: () => RequestMethods<Category, any, any>;
+	comments: () => RequestMethods<Comment, any, CommentCreate>;
+	media: () => RequestMethods<Media, any, any>;
+	statuses: () => RequestMethods<any, any, any>;
+	pages: () => RequestMethods<Post, PostsQuery, any>;
+	posts: () => RequestMethods<Post, PostsQuery, any>;
+	settings: () => RequestMethods<Settings, any, any>;
+	tags: () => RequestMethods<any, any, any>;
+	taxonomies: () => RequestMethods<Taxonomy, any, any>;
+	types: () => RequestMethods<Type, any, any>;
+	users: () => RequestMethods<User, UsersQuery, UserUpdate>;
+	search: () => RequestMethods<any, any, any>;
 
 	setNonce: ( nonce: string ) => void;
 	setRootURL: ( URL: string ) => void;
@@ -42,43 +42,32 @@ export interface Resources {
  * Q = Query params.
  * U = Update object properties.
  */
-export interface Request<T, Q, U> {
-	get: ( options?: Q | number ) => Promise<T | T[]>;
+export interface RequestMethods<T, Q, U> {
+	get: ( options?: Q ) => Promise<T[]>;
+	getOne: ( id: number ) => Promise<T>;
 	create: ( data: U ) => Promise<T>;
-	update: ( data: U ) => Promise<T>;
+	update: ( id: number, data: U ) => Promise<T>;
 	delete: ( id: number ) => Promise<T>;
 }
 
 /**
  * T = Object Structure.
-Q = Query params.
-U = Update object properties.
+ * Q = Query params.
+ * U = Update object properties.
  *
  * @param path
  */
-export function createMethods<T, Q, U>( path: string ): Request<T, Q, U> {
+export function createMethods<T, Q, U>( path: string ): RequestMethods<T, Q, U> {
 	return {
-		get: ( data? ) => doRequest<T, Q>( path, 'GET', data as Q ),
+		get: ( data? ) => doRequest<T[], Q>( path, 'GET', data as Q ),
+		getOne: ( id ) => doRequest<T>( path += '/' + id, 'GET' ),
 		create: ( data ) => doRequest<T, U>( path, 'POST', data ),
-		update: ( data ) => doRequest<T, U>( path, 'PATCH', data ),
-		delete: ( id ) => doRequest<T, number>( path, 'DELETE', id ),
+		update: ( id, data ) => doRequest<T, U>( path += '/' + id, 'PATCH', data ),
+		delete: ( id ) => doRequest<T>( path += '/' + id, 'DELETE' ),
 	};
 }
 
-export async function doRequest<T, D>( path: string, requestMethod: method, data: number ): Promise<T>;
-export async function doRequest<T, D>( path: string, requestMethod: method, data?: D ): Promise<T>;
-export async function doRequest<T, D>( path: string, requestMethod: method, data?: D ): Promise<T | T[]>;
-export async function doRequest<T, D>( path: string, requestMethod: method, data?: D | number ) {
-	if ( 'number' === typeof data || 'undefined' === typeof data ) {
-		if ( 'number' === typeof data ) {
-			path += '/' + data;
-		}
-		return apiFetch<T>( {
-			path,
-			method: requestMethod,
-		} );
-	}
-
+export async function doRequest<T, D = {}>( path: string, requestMethod: method, data?: D ): Promise<T> {
 	return apiFetch<T, D>( {
 		path,
 		method: requestMethod,
@@ -86,7 +75,7 @@ export async function doRequest<T, D>( path: string, requestMethod: method, data
 	} );
 }
 
-export default function wpapi<C extends CustomResource>( customRoutes?: [ { [route in keyof C]: () => Request<any, any, any> } ] ): Resources & C {
+export default function wpapi<C extends CustomRoutes>( customRoutes?: CustomRoutes ): Routes & C {
 	const routes = {
 		categories: () => createMethods<Category, any, any>( '/wp/v2/categories' ),
 		comments: () => createMethods<Comment, any, CommentCreate>( '/wp/v2/comments' ),
@@ -113,5 +102,5 @@ export default function wpapi<C extends CustomResource>( customRoutes?: [ { [rou
 		} );
 	}
 
-	return routes as Resources & C;
+	return routes as Routes & C;
 }
