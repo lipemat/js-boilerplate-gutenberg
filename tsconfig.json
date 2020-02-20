@@ -1,3 +1,10 @@
 {
-  "extends": "./node_modules/@lipemat/js-boilerplate/config/tsconfig.json"
+  "extends": "./node_modules/@lipemat/js-boilerplate/config/tsconfig.json",
+  "compilerOptions": {
+    "module": "ESNext"
+  },
+  "include": [
+    "./@types/**/*.ts",
+    "./src/**/*.ts"
+  ]
 }

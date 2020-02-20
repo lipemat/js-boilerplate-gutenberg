@@ -3,18 +3,21 @@
   "description": "Gutenberg extension for @lipemat/js-boilerplate",
   "version": "1.0.1",
   "license": "MIT",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "umd:main": "dist/index.umd.js",
+  "module": "dist/index.module.js",
+  "jsnext:main": "dist/index.module.js",
+  "react-native": "dist/index.module.js",
+  "typings": "dist/index.d.ts",
+  "source": "src/index.ts",
+  "files": [
+    "dist/"
+  ],
   "private": false,
   "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lipemat/js-boilerplate-gutenberg.git"
-  },
-  "peerDependencies": {
-    "@lipemat/js-boilerplate": ">=5.4.1"
-  },
-  "devDependencies": {
-    "@lipemat/js-boilerplate": ">=5.4.1"
   },
   "bugs": {
     "url": "https://github.com/lipemat/js-boilerplate-gutenberg/issues"
@@ -22,6 +25,19 @@
   "homepage": "https://github.com/lipemat/js-boilerplate-gutenberg#readme",
   "dependencies": {
     "@types/classnames": "^2.2.9",
-    "@types/tinymce": "^4.5.23"
+    "@types/tinymce": "^4.5.23",
+    "@wordpress/api-fetch": "^3.11.0"
+  },
+  "devDependencies": {
+    "@lipemat/js-boilerplate": ">=5.4.1",
+    "microbundle": "^0.11.0"
+  },
+  "peerDependencies": {
+    "@lipemat/js-boilerplate": ">=5.4.1"
+  },
+  "scripts": {
+    "build": "microbundle",
+    "dev": "microbundle watch",
+    "prepublish": "rm -rf dist/* && yarn run build"
   }
 }
