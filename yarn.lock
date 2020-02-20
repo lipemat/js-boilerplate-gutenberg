@@ -784,13 +784,6 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@babel/runtime@^7.8.3":
-  version "7.8.4"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.8.4.tgz#d79f5a2040f7caa24d53e563aad49cbc05581308"
-  integrity sha512-neAp3zt80trRVBI1x0azq6c57aNBqYZH8KhMm3TaB7wEI5Q4A2SHfBHE8w9gOhI/lrqxtEbXZgQIrHP+wvSGwQ==
-  dependencies:
-    regenerator-runtime "^0.13.2"
-
 "@babel/template@^7.4.0", "@babel/template@^7.8.3":
   version "7.8.3"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.8.3.tgz#e02ad04fe262a657809327f578056ca15fd4d1b8"
@@ -1473,24 +1466,6 @@
     "@webassemblyjs/wast-parser" "1.8.5"
     "@xtuc/long" "4.2.2"
 
-"@wordpress/element@^2.11.0":
-  version "2.11.0"
-  resolved "https://registry.yarnpkg.com/@wordpress/element/-/element-2.11.0.tgz#7bd6bad7bc90cca88746cb333d0c79c870e2064b"
-  integrity sha512-56ZO8a+E7QEsYwiqS+3BQPSHrCPsOAIEz5smXzntb2f6BjvOKeA64pup40mdn1pNGexe06LBA8cjoZVdLBHB1w==
-  dependencies:
-    "@babel/runtime" "^7.8.3"
-    "@wordpress/escape-html" "^1.7.0"
-    lodash "^4.17.15"
-    react "^16.9.0"
-    react-dom "^16.9.0"
-
-"@wordpress/escape-html@^1.7.0":
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/@wordpress/escape-html/-/escape-html-1.7.0.tgz#8f3e1798a23c16deac7bd0e416f11b90f3f31e89"
-  integrity sha512-xDOBo0P3Jnbdbb/UypsQaplsD2k4UXgd/EpKhMAKhDa2m20GxWWmEKW9IB3/5bS4Rh2YZjVM9WL4JyWPUo4hEA==
-  dependencies:
-    "@babel/runtime" "^7.8.3"
-
 "@wordpress/eslint-plugin@^3.3.0":
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/@wordpress/eslint-plugin/-/eslint-plugin-3.3.0.tgz#3817f4226deeb53494b5556ad46227c34f4a8ae7"
@@ -1504,24 +1479,6 @@
     eslint-plugin-react-hooks "^1.6.1"
     globals "^12.0.0"
     requireindex "^1.2.0"
-
-"@wordpress/icons@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@wordpress/icons/-/icons-1.1.0.tgz#d76ad05a097f133f1055a71752dadaf53794d50d"
-  integrity sha512-JPSWz1qOj7pWhAd3pQaHIRrgVDaePv7w6nPX5Uy3LFny+RfBXMNDh+tBGEQvC5iAAhBhDvJyekiDc63tbdnO4g==
-  dependencies:
-    "@babel/runtime" "^7.8.3"
-    "@wordpress/element" "^2.11.0"
-    "@wordpress/primitives" "^1.1.0"
-
-"@wordpress/primitives@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@wordpress/primitives/-/primitives-1.1.0.tgz#08d562f16266dfd5c63f81f15a5b2030a2d0b9c4"
-  integrity sha512-qENxMXnGASutHqbQzbGOj/66B1LQwSBBLGtL9/Tjze+X9e04tUfdJCGroAgaEKmpDFJO39sL26UhW/f8rKz7cw==
-  dependencies:
-    "@babel/runtime" "^7.8.3"
-    "@wordpress/element" "^2.11.0"
-    classnames "^2.2.5"
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
@@ -2410,7 +2367,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.5, classnames@^2.2.6:
+classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
   integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
@@ -7192,7 +7149,7 @@ rc@^1.0.1, rc@^1.1.6:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-dom@^16.8.6, react-dom@^16.9.0:
+react-dom@^16.8.6:
   version "16.12.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.12.0.tgz#0da4b714b8d13c2038c9396b54a92baea633fe11"
   integrity sha512-LMxFfAGrcS3kETtQaCkTKjMiifahaMySFDn71fZUNpPHZQEzmk/GiAeIT8JSOrHB23fnuCOMruL2a8NYlw+8Gw==
@@ -7275,7 +7232,7 @@ react-transition-group@^2.9.0:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
-react@^16.8.6, react@^16.9.0:
+react@^16.8.6:
   version "16.12.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.12.0.tgz#0c0a9c6a142429e3614834d5a778e18aa78a0b83"
   integrity sha512-fglqy3k5E+81pA8s+7K0/T3DBCF0ZDOher1elBFzF7O6arXJgzyu/FW+COxFvAWXJoJN9KIZbT2LXlukwphYTA==
