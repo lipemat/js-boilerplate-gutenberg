@@ -1,0 +1,5 @@
+{
+	"extends": [
+		"./node_modules/@lipemat/js-boilerplate/config/eslint.config.js"
+	]
+}

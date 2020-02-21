@@ -44,8 +44,8 @@
     "@lipemat/js-boilerplate": ">=5.4.2"
   },
   "scripts": {
-    "build": "microbundle --external @wordpress/api-fetch,@wordpress/url --globals @wordpress/api-fetch=wp.apiFetch,@wordpress/url=wp.url",
+    "build": "microbundle --external @wordpress/api-fetch,@wordpress/i18n,@wordpress/url --globals @wordpress/api-fetch=wp.apiFetch,@wordpress/i18n=wp.i18n,@wordpress/url=wp.url",
     "prepublish": "rm -rf dist/* && yarn run build",
-    "watch": "microbundle watch --external @wordpress/api-fetch,@wordpress/url --globals @wordpress/api-fetch=wp.apiFetch,@wordpress/url=wp.url"
+    "watch": "microbundle watch --external @wordpress/api-fetch,@wordpress/i18n,@wordpress/url --globals @wordpress/api-fetch=wp.apiFetch,@wordpress/i18n=wp.i18n,@wordpress/url=wp.url"
   }
 }

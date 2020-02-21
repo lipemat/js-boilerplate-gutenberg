@@ -14,11 +14,18 @@ import {
 	UserUpdate,
 } from '@wordpress/api';
 import apiFetch from '@wordpress/api-fetch';
+import {parseResponseAndNormalizeError} from './util/parse-response';
 import {addQueryArgs} from '@wordpress/url';
 
 export interface CustomRoutes {
 	[ route: string ]: () => RequestMethods<any, any, any>;
 }
+
+export interface Pagination<T> {
+	totalPages: number;
+	items: T[],
+}
+
 
 export interface Routes {
 	categories: <T = Category, Q = any, U = any>() => RequestMethods<T, Q, U>;
@@ -47,10 +54,12 @@ export interface Routes {
 export interface RequestMethods<T, Q, U> {
 	get: ( options?: Q ) => Promise<T[]>;
 	getOne: ( id: number ) => Promise<T>;
+	getWithPagination: ( options?: Q ) => Promise<Pagination<T[]>>;
 	create: ( data: U ) => Promise<T>;
 	update: ( id: number, data: U ) => Promise<T>;
 	delete: ( id: number ) => Promise<T>;
 }
+
 
 /**
  * T = Object Structure.
@@ -61,26 +70,55 @@ export interface RequestMethods<T, Q, U> {
  */
 export function createMethods<T, Q, U>( path: string ): RequestMethods<T, Q, U> {
 	return {
-		get: ( data? ) => doRequest<T[], Q>( path, 'GET', data as Q ),
-		getOne: ( id ) => doRequest<T>( path += '/' + id, 'GET' ),
-		create: ( data ) => doRequest<T, U>( path, 'POST', data ),
+		create: data => doRequest<T, U>( path, 'POST', data ),
+		delete: id => doRequest<T>( path += '/' + id, 'DELETE' ),
+		get: ( data?: Q | undefined ) => doRequest<T[], Q>( path, 'GET', data as Q ),
+		getOne: id => doRequest<T>( path += '/' + id, 'GET' ),
+		getWithPagination: ( data?: Q | undefined ) => doRequestWithPagination<T[], Q>( path, 'GET', data as Q ),
 		update: ( id, data ) => doRequest<T, U>( path += '/' + id, 'PATCH', data ),
-		delete: ( id ) => doRequest<T>( path += '/' + id, 'DELETE' ),
 	};
 }
 
-export async function doRequest<T, D = {}>( path: string, requestMethod: method, data?: D ): Promise<T> {
+/**
+ * T = Object structure | Response if parse is false.
+ * D = Query params.
+ *
+ * @param path - Path relative to root.
+ * @param requestMethod - GET, POST, PUT, DELETE, PATCH
+ * @param data - Query params.
+ * @param parse - To parse the json result, or return raw Request
+ */
+export async function doRequest<T, D = {}>( path: string, requestMethod: method, data?: D, parse: boolean = true ): Promise<T> {
 	if ( typeof data !== 'undefined' || 'GET' === requestMethod ) {
 		return apiFetch<T, {}>( {
-			path: addQueryArgs( path, data as D ),
 			method: requestMethod,
+			parse,
+			path: addQueryArgs( path, data as D ),
 		} );
 	}
 	return apiFetch<T, D>( {
-		path,
-		method: requestMethod,
 		data,
+		method: requestMethod,
+		parse,
+		path,
 	} );
+}
+
+/**
+ * T = Object structure.
+ * D = Query params.
+ *
+ * @param path - Path relative to root.
+ * @param requestMethod - GET, POST, PUT, DELETE, PATCH
+ * @param data - Query params.
+ */
+export async function doRequestWithPagination<T, D = {}>( path: string, requestMethod: method, data?: D ): Promise<Pagination<T>> {
+	const Result = await doRequest<Response, D>( path, requestMethod, data, false );
+	const items = await parseResponseAndNormalizeError( Result );
+	return {
+		items,
+		totalPages: parseInt( Result.headers.get( 'X-WP-TotalPages' ) || '1' ),
+	};
 }
 
 export default function wpapi<C extends CustomRoutes = {}>( customRoutes?: CustomRoutes ): Routes & C {
@@ -106,14 +144,10 @@ export default function wpapi<C extends CustomRoutes = {}>( customRoutes?: Custo
 		'search',
 	];
 
-	coreRoutes.map( route => {
-		routes[ route ] = () => createMethods( '/wp/v2/' + route );
-	} );
+	coreRoutes.map( route => routes[ route ] = () => createMethods( '/wp/v2/' + route ) );
 
 	if ( typeof customRoutes !== 'undefined' ) {
-		Object.keys( customRoutes ).map( ( route ) => {
-			routes[ route ] = customRoutes[ route ];
-		} );
+		Object.keys( customRoutes ).map( route => routes[ route ] = customRoutes[ route ] );
 	}
 
 	return routes as Routes & C;
