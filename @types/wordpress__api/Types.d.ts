@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 declare module '@wordpress/api/types' {
 	import {Links} from '@wordpress/api';
 

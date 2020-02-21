@@ -1,5 +1,8 @@
 declare module '@wordpress/api/posts' {
-	import {context, Links, order} from '@wordpress/api';
+	import {context, Global, Links, order} from '@wordpress/api';
+	import {User} from '@wordpress/api/users';
+	import {Media} from '@wordpress/api/media';
+	import {Category} from '@wordpress/api/categories';
 
 	/* eslint camelcase: 0 */
 
@@ -49,6 +52,11 @@ declare module '@wordpress/api/posts' {
 		categories: number[];
 		tags: number[];
 		_links: Links;
+		_embedded?: {
+			author: User[];
+			'wp:featuredmedia'?: Media[];
+			'wp:term'?: Category[];
+		}
 	}
 
 	/**
@@ -56,7 +64,7 @@ declare module '@wordpress/api/posts' {
 	 *
 	 * https://developer.wordpress.org/rest-api/reference/posts/#arguments
 	 */
-	export interface PostsQuery {
+	export interface PostsQuery extends Global<Post> {
 		context?: context;
 		page?: number;
 		per_page?: number;

@@ -24,8 +24,43 @@ declare module '@wordpress/api' {
 		href: string;
 	}
 
+	export interface Embeddable {
+		embeddable: boolean;
+		href: string;
+	}
+
 	export interface Links {
 		self: Collection[];
 		collection: Collection[];
+		about: Collection[],
+		curies: [ {
+			name: string;
+			href: string;
+			templated: boolean;
+		} ];
+		author?: Embeddable[];
+		'wp:post_type'?: Collection[];
+		replies?: Embeddable[];
+		'version-history'?: [ {
+			count: number;
+			href: string;
+		} ];
+		'predecessor-version'?: [ {
+			id: number;
+			href: string;
+		} ];
+		'wp:featuredmedia'?: Embeddable[];
+		'wp:attachment'?: Collection[];
+		'wp:term'?: [ {
+			taxonomy: string;
+			embeddable: boolean;
+			href: string;
+		} ]
+
+	}
+
+	export interface Global<T> {
+		_embed?: boolean;
+		_fields?: Array<keyof T>;
 	}
 }

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 declare module '@wordpress/api/media' {
 	import {Links} from '@wordpress/api';
 	import {PostStatus, PostMeta} from '@wordpress/api/posts';
