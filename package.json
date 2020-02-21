@@ -8,6 +8,10 @@
   "module": "dist/index.module.js",
   "jsnext:main": "dist/index.module.js",
   "react-native": "dist/index.module.js",
+  "globals": {
+    "@wordpress/api-fetch": "wp.apiFetch",
+    "@wordpress/url": "wp.url"
+  },
   "typings": "dist/index.d.ts",
   "source": "src/index.ts",
   "files": [
@@ -32,16 +36,15 @@
     "@types/tinymce": "^4.5.23"
   },
   "devDependencies": {
-    "@lipemat/js-boilerplate": ">=5.4.1",
-    "@wordpress/api-fetch": "^3.11.0",
+    "@lipemat/js-boilerplate": ">=5.4.2",
     "microbundle": "^0.11.0"
   },
   "peerDependencies": {
-    "@lipemat/js-boilerplate": ">=5.4.1"
+    "@lipemat/js-boilerplate": ">=5.4.2"
   },
   "scripts": {
-    "build": "microbundle",
+    "build": "microbundle --external @wordpress/api-fetch,@wordpress/url --globals @wordpress/api-fetch=wp.apiFetch,@wordpress/url=wp.url",
     "prepublish": "rm -rf dist/* && yarn run build",
-    "watch": "microbundle watch"
+    "watch": "microbundle watch --external @wordpress/api-fetch,@wordpress/url --globals @wordpress/api-fetch=wp.apiFetch,@wordpress/url=wp.url"
   }
 }

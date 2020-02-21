@@ -14,6 +14,7 @@ import {
 	UserUpdate,
 } from '@wordpress/api';
 import apiFetch from '@wordpress/api-fetch';
+import {addQueryArgs} from '@wordpress/url';
 
 export interface CustomRoutes {
 	[ route: string ]: () => RequestMethods<any, any, any>;
@@ -69,6 +70,12 @@ export function createMethods<T, Q, U>( path: string ): RequestMethods<T, Q, U> 
 }
 
 export async function doRequest<T, D = {}>( path: string, requestMethod: method, data?: D ): Promise<T> {
+	if ( typeof data !== 'undefined' || 'GET' === requestMethod ) {
+		return apiFetch<T, {}>( {
+			path: addQueryArgs( path, data as D ),
+			method: requestMethod,
+		} );
+	}
 	return apiFetch<T, D>( {
 		path,
 		method: requestMethod,
