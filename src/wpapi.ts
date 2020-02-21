@@ -99,8 +99,8 @@ export default function wpapi<C extends CustomRoutes = {}>( customRoutes?: Custo
 		'search',
 	];
 
-	Object.keys( coreRoutes ).map( route => {
-		routes[ route ] = createMethods( '/wp/v2/' + route );
+	coreRoutes.map( route => {
+		routes[ route ] = () => createMethods( '/wp/v2/' + route );
 	} );
 
 	if ( typeof customRoutes !== 'undefined' ) {
