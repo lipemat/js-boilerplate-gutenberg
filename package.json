@@ -37,7 +37,8 @@
   },
   "devDependencies": {
     "@lipemat/js-boilerplate": ">=5.4.2",
-    "microbundle": "^0.11.0"
+    "microbundle": "^0.11.0",
+    "@wordpress/api-fetch": "^3.11.0"
   },
   "peerDependencies": {
     "@lipemat/js-boilerplate": ">=5.4.2"
