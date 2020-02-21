@@ -14,7 +14,8 @@
     "@types/",
     "config/",
     "dist/",
-    "helpers/"
+    "helpers/",
+    "src/"
   ],
   "private": false,
   "sideEffects": false,
