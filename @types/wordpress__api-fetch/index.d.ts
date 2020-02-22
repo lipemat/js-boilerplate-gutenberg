@@ -18,6 +18,7 @@ declare module '@wordpress/api-fetch' {
 		( options: FetchOptions<D> ): Promise<T>;
 		createNonceMiddleware: ( nonce: string ) => Middleware<D>;
 		createRootURLMiddleware: ( URL: string ) => Middleware<D>;
+		nonceEndpoint: string;
 		setFetchHandler: ( options: D ) => Promise<Response>;
 		use: ( middleware: Middleware<D> ) => void;
 	}
