@@ -40,9 +40,6 @@ export interface Routes {
 	types: <T = Type, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	users: <T = User, Q = UsersQuery, U = UserUpdate>() => RequestMethods<T, Q, U>;
 	search: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;
-
-	setNonce: ( nonce: string ) => void;
-	setRootURL: ( URL: string ) => void;
 }
 
 
@@ -122,12 +119,7 @@ export async function doRequestWithPagination<T, D = {}>( path: string, requestM
 }
 
 export default function wpapi<C extends CustomRoutes = {}>( customRoutes?: CustomRoutes ): Routes & C {
-	const routes = {
-		// Use another site's nonce.
-		setNonce: ( nonce: string ) => apiFetch.use( apiFetch.createNonceMiddleware( nonce ) ),
-		// Point to another site's URL.
-		setRootURL: ( URL: string ) => apiFetch.use( apiFetch.createRootURLMiddleware( URL ) ),
-	};
+	const routes: CustomRoutes = {};
 
 	const coreRoutes = [
 		'categories',
