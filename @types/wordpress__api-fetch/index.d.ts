@@ -1,7 +1,7 @@
 declare module '@wordpress/api-fetch' {
 	import {method} from '@wordpress/api';
 
-	type Middleware<D> = ( options: FetchOptions<D>, next: Middleware<D> ) => Middleware<D>;
+	export type Middleware<D> = ( options: FetchOptions<D>, next: Middleware<D> ) => Middleware<D>;
 
 	/**
 	 * @link https://developer.wordpress.org/block-editor/packages/packages-api-fetch/

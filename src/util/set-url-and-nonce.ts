@@ -1,4 +1,4 @@
-import apiFetch from '@wordpress/api-fetch';
+import apiFetch, {Middleware} from '@wordpress/api-fetch';
 import {parseUrl} from './parse-url';
 
 /**
@@ -17,37 +17,48 @@ import {parseUrl} from './parse-url';
  *
  */
 
-let currentURL;
-let currentNonce;
+let currentURL: string;
+let currentNonce: {
+	( options, next ): Middleware<{ headers: object }>;
+	nonce: string;
+};
 
 /**
  * Set the Root URL when not within a WP install.
  *
+ * @link https://developer.wordpress.org/block-editor/packages/packages-api-fetch/#middlewares
+ *
  * @param URL
  */
-export function setRootURL( URL: string ) {
+export function setRootURL( URL: string ): void {
+	if ( undefined === currentURL ) {
+		apiFetch.use( ( options, next ) => {
+			options.url = parseUrl( currentURL, options.path );
+			return next( options );
+		} );
+	}
 	currentURL = URL;
 }
 
-export function setCurrentNonce( nonce: string ) {
-	currentNonce = nonce;
-}
-
-apiFetch.use( ( options, next ) => {
-	if ( undefined === currentURL ) {
-		console.log( 'You must set a root URL via `@lipemat/js-boilerplate-gutenberg{setRootURL}`' );
-		return next( options );
-	}
-	return next( {
-		...options,
-		url: parseUrl( currentURL, options.path ),
-	} );
-} );
-
-
-apiFetch.use( ( options, next ) => {
+/**
+ * Middleware for handling dynamic nonce values.
+ *
+ * @link https://developer.wordpress.org/block-editor/packages/packages-api-fetch/#middlewares
+ *
+ * @param {string} nonce
+ * @param {string} refreshURL - Optional URL that will automatically check for a refreshed nonce if the
+ *                              value is expired.
+ *                              Should be set to `admin_url( 'admin-ajax.php?action=rest-nonce'`
+ */
+export function setNonce( nonce: string, refreshURL?: string ): void {
 	if ( undefined === currentNonce ) {
-		return next( options );
+		currentNonce = apiFetch.createNonceMiddleware( nonce );
+		if ( undefined !== refreshURL ) {
+
+		}
+		apiFetch.nonceEndpoint = refreshURL;
+		apiFetch.use( currentNonce );
 	}
-	return apiFetch.createNonceMiddleware( currentNonce )( options, next );
-} );
+
+	currentNonce.nonce = nonce;
+}
