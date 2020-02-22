@@ -86,7 +86,7 @@ export function createMethods<T, Q, U>( path: string ): RequestMethods<T, Q, U> 
  * @param parse - To parse the json result, or return raw Request
  */
 export async function doRequest<T, D = {}>( path: string, requestMethod: method, data?: D, parse: boolean = true ): Promise<T> {
-	if ( typeof data !== 'undefined' || 'GET' === requestMethod ) {
+	if ( 'undefined' === typeof data || 'GET' === requestMethod ) {
 		return apiFetch<T, {}>( {
 			method: requestMethod,
 			parse,
