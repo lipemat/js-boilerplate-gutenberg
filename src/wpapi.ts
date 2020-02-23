@@ -50,7 +50,7 @@ export interface Routes {
  */
 export interface RequestMethods<T, Q, U> {
 	get: ( options?: Q ) => Promise<T[]>;
-	getOne: ( id: number ) => Promise<T>;
+	getById: ( id: number ) => Promise<T>;
 	getWithPagination: ( options?: Q ) => Promise<Pagination<T[]>>;
 	create: ( data: U ) => Promise<T>;
 	update: ( id: number, data: U ) => Promise<T>;
@@ -70,7 +70,7 @@ export function createMethods<T, Q, U>( path: string ): RequestMethods<T, Q, U> 
 		create: data => doRequest<T, U>( path, 'POST', data ),
 		delete: id => doRequest<T>( path += '/' + id, 'DELETE' ),
 		get: ( data?: Q | undefined ) => doRequest<T[], Q>( path, 'GET', data as Q ),
-		getOne: id => doRequest<T>( path += '/' + id, 'GET' ),
+		getById: id => doRequest<T>( path += '/' + id, 'GET' ),
 		getWithPagination: ( data?: Q | undefined ) => doRequestWithPagination<T[], Q>( path, 'GET', data as Q ),
 		update: ( id, data ) => doRequest<T, U>( path += '/' + id, 'PATCH', data ),
 	};
