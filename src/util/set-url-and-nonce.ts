@@ -1,4 +1,4 @@
-import apiFetch, {Middleware} from '@wordpress/api-fetch';
+import apiFetch, {NonceMiddleware} from '@wordpress/api-fetch';
 import {parseUrl} from './parse-url';
 
 /**
@@ -10,7 +10,7 @@ import {parseUrl} from './parse-url';
  * There is currently no way to change those values within a WP
  * install.
  *
- * If not running on WP, the methods in the file are required
+ * If not running on WP, the methods in this file are required
  * to both set these values and work to change them.
  *
  * These methods are also very useful for unit testing.
@@ -18,10 +18,7 @@ import {parseUrl} from './parse-url';
  */
 
 let currentURL: string;
-let currentNonce: {
-	( options, next ): Middleware<{ headers: object }>;
-	nonce: string;
-};
+let currentNonce: NonceMiddleware;
 
 /**
  * Set the Root URL when not within a WP install.
@@ -32,9 +29,9 @@ let currentNonce: {
  */
 export function setRootURL( URL: string ): void {
 	if ( undefined === currentURL ) {
-		apiFetch.use( ( options, next ) => {
+		apiFetch.use<{p: true}>( ( options, next ) => {
 			options.url = parseUrl( currentURL, options.path );
-			return next( options );
+			return next( options, next );
 		} );
 	}
 	currentURL = URL;
@@ -48,15 +45,14 @@ export function setRootURL( URL: string ): void {
  * @param {string} nonce
  * @param {string} refreshURL - Optional URL that will automatically check for a refreshed nonce if the
  *                              value is expired.
- *                              Should be set to `admin_url( 'admin-ajax.php?action=rest-nonce'`
+ *                              Should be set to `admin_url( 'admin-ajax.php?action=rest-nonce' )`
  */
 export function setNonce( nonce: string, refreshURL?: string ): void {
 	if ( undefined === currentNonce ) {
-		currentNonce = apiFetch.createNonceMiddleware( nonce );
+		currentNonce = apiFetch.createNonceMiddleware<any>( nonce );
 		if ( undefined !== refreshURL ) {
-
+			apiFetch.nonceEndpoint = refreshURL;
 		}
-		apiFetch.nonceEndpoint = refreshURL;
 		apiFetch.use( currentNonce );
 	}
 
