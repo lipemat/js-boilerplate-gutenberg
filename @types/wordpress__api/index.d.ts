@@ -11,6 +11,7 @@ declare module '@wordpress/api' {
 	export * from '@wordpress/api/comments';
 	export * from '@wordpress/api/media';
 	export * from '@wordpress/api/posts';
+	export * from '@wordpress/api/pages';
 	export * from '@wordpress/api/settings';
 	export * from '@wordpress/api/taxonomies';
 	export * from '@wordpress/api/types';
@@ -62,5 +63,6 @@ declare module '@wordpress/api' {
 	export interface Global<T> {
 		_embed?: boolean;
 		_fields?: Array<keyof T>;
+		context?: context;
 	}
 }

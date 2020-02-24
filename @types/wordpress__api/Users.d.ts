@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 declare module '@wordpress/api/users' {
-	import {Links, context, order, Global} from '@wordpress/api';
+	import {Links, order, Global} from '@wordpress/api';
 
 	/**
 	 * Users Endpoint.
@@ -47,7 +47,6 @@ declare module '@wordpress/api/users' {
 	 * https://developer.wordpress.org/rest-api/reference/users/#arguments
 	 */
 	export interface UsersQuery extends Global<User>{
-		context?: context;
 		page?: number | 1;
 		per_page?: number | 10;
 		search?: string;

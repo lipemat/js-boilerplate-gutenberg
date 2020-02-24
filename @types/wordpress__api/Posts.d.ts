@@ -1,16 +1,24 @@
+/* eslint camelcase: 0 */
 declare module '@wordpress/api/posts' {
-	import {context, Global, Links, order} from '@wordpress/api';
+	import {Global, Links, order} from '@wordpress/api';
 	import {User} from '@wordpress/api/users';
 	import {Media} from '@wordpress/api/media';
 	import {Category} from '@wordpress/api/categories';
 
-	/* eslint camelcase: 0 */
-
+	export type PostFormat =
+		'standard'
+		| 'aside'
+		| 'chat'
+		| 'gallery'
+		| 'link'
+		| 'image'
+		| 'quote'
+		| 'status'
+		| 'video'
+		| 'audio';
 	export type PostStatus = 'publish' | 'future' | 'draft' | 'pending' | 'private';
 	export type PostMeta = {
-		meta: {
-			[ key: string ]: any;
-		}
+		[ key: string ]: any;
 	}
 
 	/**
@@ -23,6 +31,7 @@ declare module '@wordpress/api/posts' {
 		date: string;
 		date_gmt: string;
 		guid: {
+			raw?: string;
 			rendered: string;
 		}
 		modified: string;
@@ -30,14 +39,22 @@ declare module '@wordpress/api/posts' {
 		slug: string;
 		status: PostStatus;
 		type: 'post' | string;
+		password?: string;
+		permalink_template?: string;
+		generated_slug?: string;
+		link: string;
 		title: {
+			raw?: string;
 			rendered: string;
 		}
 		content: {
-			rendered: string;
+			block_version?: number;
 			protected: boolean;
+			raw?: string;
+			rendered: string;
 		}
 		excerpt: {
+			raw?: string;
 			rendered: string;
 			protected: boolean;
 		}
@@ -48,7 +65,7 @@ declare module '@wordpress/api/posts' {
 		ping_status: 'open' | 'closed';
 		sticky: boolean;
 		template: string;
-		format: 'standard' | 'aside' | 'chat' | 'gallery' | 'link' | 'image' | 'quote' | 'status' | 'video' | 'audio';
+		format: PostFormat;
 		categories: number[];
 		tags: number[];
 		_links: Links;
@@ -60,12 +77,43 @@ declare module '@wordpress/api/posts' {
 	}
 
 	/**
+	 * Create Post.
+	 *
+	 * https://developer.wordpress.org/rest-api/reference/posts/#create-a-post
+	 */
+	export interface PostCreate {
+		date?: string;
+		date_gmt?: string;
+		slug?: string;
+		status?: PostStatus;
+		password?: string;
+		title?: string | {
+			raw: string;
+		};
+		content?: string | {
+			raw: string;
+		};
+		author?: number;
+		excerpt?: string | {
+			raw: string;
+		};
+		featured_media?: number;
+		comment_status?: 'open' | 'closed';
+		ping_status?: 'open' | 'closed';
+		format?: PostFormat;
+		meta?: PostMeta;
+		sticky?: boolean;
+		template?: string;
+		categories?: number[];
+		tags?: number[];
+	}
+
+	/**
 	 * List Posts.
 	 *
 	 * https://developer.wordpress.org/rest-api/reference/posts/#arguments
 	 */
 	export interface PostsQuery extends Global<Post> {
-		context?: context;
 		page?: number;
 		per_page?: number;
 		search?: string;
@@ -77,7 +125,7 @@ declare module '@wordpress/api/posts' {
 		include?: number[];
 		offset?: number;
 		order?: order;
-		orderby?: 'author' | 'date' | 'id' | 'include' | 'modified' | 'parent' | 'relevance' | 'slug' | 'include_slugs' | 'title'
+		orderby?: 'author' | 'date' | 'id' | 'include' | 'modified' | 'relevance' | 'slug' | 'include_slugs' | 'title';
 		slug?: string;
 		status?: PostStatus;
 		categories?: number[];
