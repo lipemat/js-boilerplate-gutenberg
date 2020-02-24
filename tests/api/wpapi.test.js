@@ -3,6 +3,17 @@ import enableBasicAuth, {authorize} from '../../src/util/authorize';
 
 require( 'unfetch/polyfill' ); // So we can use window.fetch.
 
+/**
+ * The Http-V1 middleware from apiFetch is translates the method
+ * into `X-HTTP-Method-Override` which breaks during jsdom requests.
+ *
+ * We mock it here to simply skip this middleware.
+ */
+jest.mock( '../../node_modules/@wordpress/api-fetch/build/middlewares/http-v1.js', () => ( options, next ) => {
+	return next( options, next );
+} );
+
+
 describe( 'Testing wpapi', () => {
 	const wp = wpapi();
 
@@ -56,6 +67,7 @@ describe( 'Testing wpapi', () => {
 	} );
 
 	it( 'Test CRUD', async() => {
+		jest.setTimeout( 30000 );
 		setRootURL( 'http://starting-point.loc/wp-json/' );
 		enableBasicAuth();
 		await authorize( {user: 'test', password: 'test'} );
@@ -78,8 +90,25 @@ describe( 'Testing wpapi', () => {
 		const updated = await wp.posts().getById( post.id );
 		expect( updated.content.rendered ).toBe( '<p>XXXX</p>\n' );
 
-		const deleted = await wp.posts().delete( post.id, true );
-		expect( deleted ).toBe( 4 );
+		let trashed = await wp.posts().trash( post.id );
+		expect( trashed.status ).toBe( 'trash' );
+		expect( trashed.id ).toBe( post.id );
+		trashed = await wp.posts().getById( post.id );
+		expect( trashed.id ).toBe( post.id );
+		expect( trashed.status ).toBe( 'trash' );
 
+		const secondPost = await wp.posts().create( {
+			title: 'From JS Unit',
+			status: 'publish',
+		} );
+
+		const deleted = await wp.posts().delete( secondPost.id );
+		expect( deleted.deleted ).toBeTruthy();
+		expect( deleted.previous.id ).toBe( secondPost.id );
+		try {
+			await wp.posts().getById( secondPost.id );
+		} catch ( e ) {
+			expect( e.code ).toBe( 'rest_post_invalid_id' );
+		}
 	} );
 } );
