@@ -1,7 +1,8 @@
 import {
 	Category,
 	Comment,
-	CommentCreate, context,
+	CommentCreate,
+	context,
 	Media,
 	method,
 	Post,
@@ -51,12 +52,13 @@ export interface Routes {
  * U = Update object properties.
  */
 export interface RequestMethods<T, Q, U> {
-	get: ( options?: Q ) => Promise<T[]>;
-	getById: ( id: number, data?: {password?: string, context?: context} ) => Promise<T>;
-	getWithPagination: ( options?: Q ) => Promise<Pagination<T[]>>;
 	create: ( data: U ) => Promise<T>;
+	delete: ( id: number, force?: boolean ) => Promise<{ deleted: boolean, previous: T }>;
+	get: ( options?: Q ) => Promise<T[]>;
+	getById: ( id: number, data?: { password?: string, context?: context } ) => Promise<T>;
+	getWithPagination: ( options?: Q ) => Promise<Pagination<T[]>>;
+	trash: ( id: number ) => Promise<T>;
 	update: ( data: U & { id: number } ) => Promise<T>;
-	delete: ( id: number, force?: boolean ) => Promise<T>;
 }
 
 
@@ -69,11 +71,54 @@ export interface RequestMethods<T, Q, U> {
  */
 export function createMethods<T, Q, U>( path: string ): RequestMethods<T, Q, U> {
 	return {
+		/**
+		 * Create a new item.
+		 *
+		 * @param data
+		 */
 		create: data => doRequest<T, U>( path, 'POST', data ),
-		delete: ( id, force? ) => doRequest<T, { force?: boolean }>( path += '/' + id, 'DELETE', {force} ),
+		/**
+		 * Force delete while skipping trash.
+		 *
+		 * @param id
+		 */
+		delete: id => doRequest<{ deleted: boolean, previous: T }, { force: true }>( path += '/' + id, 'DELETE', {force: true} ),
+		/**
+		 * Get items based on query arguments or no query arguments for default response.
+		 *
+		 * @param data
+		 */
 		get: ( data?: Q | undefined ) => doRequest<T[], Q>( path, 'GET', data as Q ),
-		getById: ( id, data? ) => doRequest<T, {password?: string, context?: context}>( path += '/' + id, 'GET', data ),
+		/**
+		 * Get an item by it's id.
+		 *
+		 * @param id
+		 * @param {Object} data = {
+		 *     context?: set to 'edit' if authenticated and want all properties.
+		 *     password?: if the item is password protected (Probably only posts and pages);
+		 * }
+		 */
+		getById: ( id, data? ) => doRequest<T, { password?: string, context?: context }>( path += '/' + id, 'GET', data ),
+		/**
+		 * Same as `get` but returns the pagination information as well as
+		 * the items.
+		 *
+		 * @param data
+		 */
 		getWithPagination: ( data?: Q | undefined ) => doRequestWithPagination<T[], Q>( path, 'GET', data as Q ),
+		/**
+		 * Move an item to trash without force deleting it.
+		 * Many types do not support this method and must use
+		 * the `delete` method.
+		 *
+		 * @param id
+		 */
+		trash: id => doRequest<T>( path += '/' + id, 'DELETE' ),
+		/**
+		 * Update an item.
+		 *
+		 * @param data
+		 */
 		update: data => doRequest<T, U>( path += '/' + data.id, 'PATCH', data ),
 	};
 }
