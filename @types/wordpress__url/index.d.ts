@@ -1,5 +1,5 @@
 declare module '@wordpress/url' {
-	type addQueryArgs = ( url: string, args: { [ key: string ]: any } ) => string;
+	type addQueryArgs = ( url: string, args?: { [ key: string ]: any } ) => string;
 
 	export const addQueryArgs: addQueryArgs;
 

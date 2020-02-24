@@ -1,7 +1,7 @@
 import {
 	Category,
 	Comment,
-	CommentCreate,
+	CommentCreate, context,
 	Media,
 	method,
 	Post,
@@ -16,6 +16,8 @@ import {
 import apiFetch from '@wordpress/api-fetch';
 import {parseResponseAndNormalizeError} from './util/parse-response';
 import {addQueryArgs} from '@wordpress/url';
+import {PostCreate} from '@wordpress/api/posts';
+import {Page, PageCreate, PagesQuery} from '@wordpress/api/pages';
 
 export interface CustomRoutes {
 	[ route: string ]: () => RequestMethods<any, any, any>;
@@ -32,8 +34,8 @@ export interface Routes {
 	comments: <T = Comment, Q = any, U = CommentCreate>() => RequestMethods<T, Q, U>;
 	media: <T = Media, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	statuses: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;
-	pages: <T = Post, Q = PostsQuery, U = any>() => RequestMethods<T, Q, U>;
-	posts: <T = Post, Q = PostsQuery, U = any>() => RequestMethods<T, Q, U>;
+	pages: <T = Page, Q = PagesQuery, U = PageCreate>() => RequestMethods<T, Q, U>;
+	posts: <T = Post, Q = PostsQuery, U = PostCreate>() => RequestMethods<T, Q, U>;
 	settings: <T = Settings, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	tags: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	taxonomies: <T = Taxonomy, Q = any, U = any>() => RequestMethods<T, Q, U>;
@@ -50,11 +52,11 @@ export interface Routes {
  */
 export interface RequestMethods<T, Q, U> {
 	get: ( options?: Q ) => Promise<T[]>;
-	getById: ( id: number ) => Promise<T>;
+	getById: ( id: number, data?: {password?: string, context?: context} ) => Promise<T>;
 	getWithPagination: ( options?: Q ) => Promise<Pagination<T[]>>;
 	create: ( data: U ) => Promise<T>;
-	update: ( data: U & {id: number} ) => Promise<T>;
-	delete: ( id: number ) => Promise<T>;
+	update: ( data: U & { id: number } ) => Promise<T>;
+	delete: ( id: number, force?: boolean ) => Promise<T>;
 }
 
 
@@ -68,9 +70,9 @@ export interface RequestMethods<T, Q, U> {
 export function createMethods<T, Q, U>( path: string ): RequestMethods<T, Q, U> {
 	return {
 		create: data => doRequest<T, U>( path, 'POST', data ),
-		delete: id => doRequest<T>( path += '/' + id, 'DELETE' ),
+		delete: ( id, force? ) => doRequest<T, { force?: boolean }>( path += '/' + id, 'DELETE', {force} ),
 		get: ( data?: Q | undefined ) => doRequest<T[], Q>( path, 'GET', data as Q ),
-		getById: id => doRequest<T>( path += '/' + id, 'GET' ),
+		getById: ( id, data? ) => doRequest<T, {password?: string, context?: context}>( path += '/' + id, 'GET', data ),
 		getWithPagination: ( data?: Q | undefined ) => doRequestWithPagination<T[], Q>( path, 'GET', data as Q ),
 		update: data => doRequest<T, U>( path += '/' + data.id, 'PATCH', data ),
 	};
@@ -87,10 +89,10 @@ export function createMethods<T, Q, U>( path: string ): RequestMethods<T, Q, U> 
  */
 export async function doRequest<T, D = {}>( path: string, requestMethod: method, data?: D, parse: boolean = true ): Promise<T> {
 	if ( 'undefined' === typeof data || 'GET' === requestMethod ) {
-		return apiFetch<T, {}>( {
+		return apiFetch<T, D>( {
 			method: requestMethod,
 			parse,
-			path: addQueryArgs( path, data as D ),
+			path: addQueryArgs( path, data ),
 		} );
 	}
 	return apiFetch<T, D>( {

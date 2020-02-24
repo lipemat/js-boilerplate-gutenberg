@@ -11,12 +11,12 @@ declare module '@wordpress/api-fetch' {
 	/**
 	 * @link https://developer.wordpress.org/block-editor/packages/packages-api-fetch/
 	 */
-	interface FetchOptions<D> extends Partial<Request> {
-		path: string;
-		parse?: boolean;
+	interface FetchOptions<D> extends RequestInit {
 		data?: D;
-		url?: string;
 		method: method;
+		parse?: boolean;
+		path: string;
+		url?: string;
 	}
 
 	interface ApiFetch {
