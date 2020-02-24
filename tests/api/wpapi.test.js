@@ -97,16 +97,11 @@ describe( 'Testing wpapi', () => {
 		expect( trashed.id ).toBe( post.id );
 		expect( trashed.status ).toBe( 'trash' );
 
-		const secondPost = await wp.posts().create( {
-			title: 'From JS Unit',
-			status: 'publish',
-		} );
-
-		const deleted = await wp.posts().delete( secondPost.id );
+		const deleted = await wp.posts().delete( trashed.id );
 		expect( deleted.deleted ).toBeTruthy();
-		expect( deleted.previous.id ).toBe( secondPost.id );
+		expect( deleted.previous.id ).toBe( trashed.id );
 		try {
-			await wp.posts().getById( secondPost.id );
+			await wp.posts().getById( trashed.id );
 		} catch ( e ) {
 			expect( e.code ).toBe( 'rest_post_invalid_id' );
 		}
