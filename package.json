@@ -33,6 +33,7 @@
   "homepage": "https://github.com/lipemat/js-boilerplate-gutenberg#readme",
   "dependencies": {
     "@types/classnames": "^2.2.9",
+    "@types/js-cookie": "^2.2.4",
     "@types/tinymce": "^4.5.23",
     "js-cookie": "^2.2.1"
   },
