@@ -1,5 +1,8 @@
 #!/bin/bash
 
+### mklink E:\SVN\js-boilerplate-gutenberg\.git\hooks\pre-commit E:\SVN\js-boilerplate-gutenberg\git-hooks\pre-commit
+
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
 GREEN="$(tput setaf 2)"
 WHITE="$(tput setaf 7)"
 YELLOW="$(tput setaf 3)"
@@ -7,25 +10,26 @@ RED="$(tput setaf 1)"
 BLUE="$(tput setaf 6)"
 RESET_COLOR="$(tput setaf 9)"
 
+cd "${DIR}"/.. || exit 1;
+
 function exit_reset_colors() {
-    echo ${RESET_COLOR}
+    echo "${RESET_COLOR}"
     exit 1
 }
 
 function js_tests() {
-    # Run JS tests
-    if [[ "$JS_FILES" ]]; then
-        echo "${YELLOW}[pre-commit]${BLUE} Running JS Tests... ${WHITE}"
+    # Run JS te
+    echo "${YELLOW}[pre-commit]${BLUE} Running JS Tests... ${WHITE}"
 
-        OUTPUT=$(yarn run test --bail 2>&1)
-        if [[ $? != 0 ]]; then
-            echo
-            echo "${BLUE}JS Tests failed. Fix the error before commit!"
-            echo "${RED}$OUTPUT"
-            exit_reset_colors
-        fi
-        echo "${YELLOW}[pre-commit]${GREEN} JS Tests Passed!${WHITE}"
+    OUTPUT=$(yarn run test --bail 2>&1)
+     if [[ $? != 0 ]]; then
+        echo
+        echo "${BLUE}JS Tests failed. Fix the error before commit!"
+        echo "${RED}$OUTPUT"
+        exit_reset_colors
     fi
+    echo "${YELLOW}[pre-commit]${GREEN} JS Tests Passed!${WHITE}"
+
 }
 js_tests &
 
@@ -33,10 +37,10 @@ js_tests &
 # If it sent exit code 1, it failed and the result from `wait` will be false.
 FAIL=0
 for job in $(jobs -p); do
-    wait $job || let "FAIL+=1"
+    wait "$job" || let "FAIL+=1"
 done
 
-echo ${RESET_COLOR}
+echo "${RESET_COLOR}"
 
 # If any of the background tasks failed, we exit 1
 if [[ $FAIL -ne 0 ]]; then
