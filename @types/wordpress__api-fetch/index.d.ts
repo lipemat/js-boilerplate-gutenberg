@@ -1,7 +1,7 @@
 declare module '@wordpress/api-fetch' {
 	import {method} from '@wordpress/api';
 
-	export type Middleware<D> = ( options: FetchOptions<D>, next: Middleware<D> ) => Middleware<D>;
+	export type Middleware<D> = ( options: FetchOptions<D>, next: Middleware<D> ) => D;
 
 	export interface NonceMiddleware {
 		( options, next ): Middleware<{ headers: object }>;
@@ -11,7 +11,7 @@ declare module '@wordpress/api-fetch' {
 	/**
 	 * @link https://developer.wordpress.org/block-editor/packages/packages-api-fetch/
 	 */
-	interface FetchOptions<D> extends RequestInit {
+	export interface FetchOptions<D> extends RequestInit {
 		data?: D; // Data passed as JSON body.
 		method?: method; // Defaults to false.
 		parse?: boolean; // Return items, or entire request.
@@ -25,7 +25,7 @@ declare module '@wordpress/api-fetch' {
 		createRootURLMiddleware: <D>( URL: string ) => Middleware<D>;
 		nonceEndpoint?: string;
 		nonceMiddleware?: NonceMiddleware;
-		setFetchHandler: <D>( options: D ) => Promise<Response>;
+		setFetchHandler: <T, D= {}>( handler: ( options: D ) => Promise<T> ) => void;
 		use: <D>( middleware: Middleware<D> ) => void;
 	}
 

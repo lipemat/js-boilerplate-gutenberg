@@ -1,5 +1,6 @@
-import {setRootURL, wpapi} from '../../src';
+import {restoreNonce, setRootURL, wpapi} from '../../src';
 import enableBasicAuth, {authorize} from '../../src/util/authorize';
+import apiFetch from '@wordpress/api-fetch';
 
 require( 'unfetch/polyfill' ); // So we can use window.fetch.
 
@@ -67,7 +68,6 @@ describe( 'Testing wpapi', () => {
 	} );
 
 	it( 'Test CRUD', async() => {
-		jest.setTimeout( 30000 );
 		setRootURL( 'http://starting-point.loc/wp-json/' );
 		enableBasicAuth();
 		await authorize( {user: 'test', password: 'test'} );
@@ -100,10 +100,35 @@ describe( 'Testing wpapi', () => {
 		const deleted = await wp.posts().delete( trashed.id );
 		expect( deleted.deleted ).toBeTruthy();
 		expect( deleted.previous.id ).toBe( trashed.id );
+		let error;
 		try {
 			await wp.posts().getById( trashed.id );
 		} catch ( e ) {
-			expect( e.code ).toBe( 'rest_post_invalid_id' );
+			error = e;
 		}
+		expect( error.code ).toBe( 'rest_post_invalid_id' );
+
+	} );
+
+	it( 'Test outside requests', async() => {
+		// We get error message from down the stack.
+		jest.spyOn( global.console, 'error' ).mockImplementation( () => jest.fn() );
+
+		restoreNonce();
+		apiFetch.use( apiFetch.createNonceMiddleware( '365edf6304' ) );
+		apiFetch.use( apiFetch.createRootURLMiddleware( 'http://starting-point.loc/wp-json/' ) );
+
+		let error;
+		try {
+			await wp.posts().get();
+		} catch ( e ) {
+			error = e;
+		}
+		expect( error.code ).toBe( 'fetch_error' );
+		setRootURL( 'https://onpointplugins.com/wp-json/' );
+		const posts = await wp.posts().get( {
+			per_page: 1,
+		} );
+		expect( posts ).toHaveLength( 1 );
 	} );
 } );
