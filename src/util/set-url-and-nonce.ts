@@ -6,22 +6,23 @@ import {parseUrl} from './parse-url';
  * and new ones are added to the beginning of the list.
  * WP core calls both the nonce and root URL middleware when
  * `wp-api-fetch` in enqueued.
- *
- * There is currently no way to change those values within a WP
- * install.
+
  *
  * If not running on WP, the methods in this file are required
  * to both set these values and work to change them.
+ * They may also be used to change them within a WP install.
  *
  * These methods are also very useful for unit testing.
- *
  */
 
 let currentURL: string;
 let currentNonce: NonceMiddleware;
 
 /**
- * Set the Root URL when not within a WP install.
+ * Set the Root URL for any following requests.
+ *
+ * We delete the `path` from the options to override createRootURLMiddleware
+ * which always fires later in the stack.
  *
  * @link https://developer.wordpress.org/block-editor/packages/packages-api-fetch/#middlewares
  *
@@ -31,6 +32,7 @@ export function setRootURL( URL: string ): void {
 	if ( undefined === currentURL ) {
 		apiFetch.use<{p: true}>( ( options, next ) => {
 			options.url = parseUrl( currentURL, options.path );
+			delete options.path; // To override the default createRootURLMiddleware.
 			return next( options, next );
 		} );
 	}
