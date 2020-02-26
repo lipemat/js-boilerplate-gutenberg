@@ -56,7 +56,7 @@ export interface RequestMethods<T, Q, U> {
 	delete: ( id: number, force?: boolean ) => Promise<{ deleted: boolean, previous: T }>;
 	get: ( options?: Q ) => Promise<T[]>;
 	getById: ( id: number, data?: { password?: string, context?: context } ) => Promise<T>;
-	getWithPagination: ( options?: Q ) => Promise<Pagination<T[]>>;
+	getWithPagination: ( options?: Q ) => Promise<Pagination<T>>;
 	trash: ( id: number ) => Promise<T>;
 	update: ( data: U & { id: number } ) => Promise<T>;
 }
@@ -105,7 +105,7 @@ export function createMethods<T, Q, U>( path: string ): RequestMethods<T, Q, U> 
 		 *
 		 * @param data
 		 */
-		getWithPagination: ( data?: Q | undefined ) => doRequestWithPagination<T[], Q>( path, 'GET', data as Q ),
+		getWithPagination: ( data?: Q | undefined ) => doRequestWithPagination<T, Q>( path, 'GET', data as Q ),
 		/**
 		 * Move an item to trash without force deleting it.
 		 * Many types do not support this method and must use
