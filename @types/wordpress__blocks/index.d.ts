@@ -3,8 +3,8 @@ declare module '@wordpress/blocks' {
 	import {iconType} from '@wordpress/components';
 
 	type dataTypes = 'null' | 'boolean' | 'object' | 'array' | 'number' | 'string' | 'integer';
-	export type BlockAttributes = {
-		[ key: string ]: {
+	export type BlockAttributes<Attr> = {
+		[ key in keyof Attr ]: {
 			type: dataTypes;
 			source?: 'text' | 'html' | 'query' | 'attribute' | 'meta';
 			default?: any;
@@ -30,7 +30,7 @@ declare module '@wordpress/blocks' {
 			}
 			// When using object types, this defines sub types.
 			properties?: {
-				[key: string ] : {
+				[ key: string ]: {
 					type: dataTypes
 				}
 			}
@@ -46,27 +46,45 @@ declare module '@wordpress/blocks' {
 		isSelected: boolean
 	}
 
+	type Icon = iconType | {
+		// Specifying a background color to appear with the icon e.g.: in the inserter.
+		background?: string;
+		// Specifying a color for the icon
+		foreground?: string;
+		// Specifying a dashicon for the block
+		src: string;
+	}
+
 	// @link https://developer.wordpress.org/block-editor/developers/block-api/block-registration/
 	export type registerBlockType = <Attr>( id: string, settings: {
 		title: string;
 		description?: string;
 		category: 'common' | 'formatting' | 'layout' | 'widgets' | 'embed' | string
 		// Svg | dashicon | configuration
-		icon: iconType | {
-			// Specifying a background color to appear with the icon e.g.: in the inserter.
-			background?: string;
-			// Specifying a color for the icon
-			foreground?: string;
-			// Specifying a dashicon for the block
-			src: string;
-		}
+		icon: Icon;
 		keywords?: string[];
 		styles?: Array<{
 			name: string;
 			label: string;
 			isDefault?: boolean;
 		}>
-		attributes: BlockAttributes;
+		attributes: BlockAttributes<Attr>;
+		example?: {
+			attributes: Attr;
+		};
+		variations?: [ {
+			name: string;
+			title: string;
+			description?: string;
+			icon?: Icon;
+			isDefault?: boolean;
+			attributes?: Attr;
+			innerBlocks?: [[ string, {[attribute: string]: any}]];
+			example?: undefined | {
+				attributes: Attr;
+			};
+			scope?: Array<'block' | 'inserter'>;
+		} ];
 		// @todo type this if we end up ever using it.
 		transforms?: {
 			from: any
