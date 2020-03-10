@@ -61,7 +61,7 @@ declare module '@wordpress/api' {
 	}
 
 	export interface Global<T> {
-		_embed?: boolean;
+		_embed?: true | 'author' | 'replies' | 'wp:featuredmedia' | 'wp:attachment' | 'wp:term';
 		_fields?: Array<keyof T>;
 		context?: context;
 	}
