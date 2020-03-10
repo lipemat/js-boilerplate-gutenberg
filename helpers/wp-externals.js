@@ -20,6 +20,7 @@ module.exports = [
 	'block-editor',
 	'blocks',
 	'components',
+	'core-data',
 	'data',
 	'date',
 	'edit-post',

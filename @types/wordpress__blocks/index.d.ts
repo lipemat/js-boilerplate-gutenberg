@@ -6,14 +6,12 @@ declare module '@wordpress/blocks' {
 	export type BlockAttributes<Attr> = {
 		[ key in keyof Attr ]: {
 			type: dataTypes;
-			source?: 'text' | 'html' | 'query' | 'attribute' | 'meta';
+			source?: 'text' | 'html' | 'query' | 'attribute';
 			default?: any;
 			// jQuery selector of element to extract value from.
 			selector?: string;
 			// Tag to wrap each line when using "html" source and RichText with multiline prop.
 			multiline?: string;
-			// Meta key if using "meta" source.
-			meta?: string;
 			// html attribute of selector element if using "attribute" source
 			attribute?: string;
 			// Extract array of values from markup using "selector" and attributes of html tags.
