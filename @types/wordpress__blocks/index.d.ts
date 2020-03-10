@@ -115,9 +115,25 @@ declare module '@wordpress/blocks' {
 		save: ( attributes?: BlockEditProps<Attr> ) => ReactElement | null;
 	} ) => void;
 
+	/**
+	 * Register a collection to allow organizing blocks into a section based on a plugin/theme/whatever.
+	 *
+	 * @link https://developer.wordpress.org/block-editor/developers/block-api/block-registration/#block-collections
+	 *
+	 * @param namespace - Any blocks matching this namespace will automatically be included
+	 *                    within this collection. e.g. "lipe"
+	 * @param {Object} settings
+	 */
+	export type registerBlockCollection = ( namespace: string, settings: {
+		title: string;
+		icon?: Icon;
+	} ) => void;
+
+	export const registerBlockCollection: registerBlockCollection;
 	export const registerBlockType: registerBlockType;
 
 	export default interface Blocks {
+		registerBlockCollection: registerBlockCollection;
 		registerBlockType: registerBlockType
 	}
 }
