@@ -366,6 +366,14 @@ declare module '@wordpress/components' {
 		className: string;
 	}
 
+	interface Guide {
+		onFinish: () => void;
+		children: ComponentType<GuidePage>[];
+	}
+
+	interface GuidePage {
+	}
+
 	interface PanelBody {
 		title: string;
 		initialOpen?: boolean;
@@ -424,6 +432,8 @@ declare module '@wordpress/components' {
 	export const ColorPalette: ComponentType<ColorPalette>;
 	export const ColorPicker: ComponentType<ColorPicker>;
 	export const Dashicon: ComponentType<Dashicon>;
+	export const Guide: ComponentType<Guide>;
+	export const GuidePage: ComponentType<GuidePage>;
 	export const PanelBody: ComponentType<PanelBody>;
 	export const SelectControl: ComponentType<SelectControl>;
 	export const ServerSideRender: ComponentType<ServerSideRender>;
@@ -438,6 +448,8 @@ declare module '@wordpress/components' {
 		ColorPalette: ComponentType<ColorPalette>;
 		ColorPicker: ComponentType<ColorPicker>;
 		Dashicon: ComponentType<Dashicon>;
+		Guide: ComponentType<Guide>;
+		GuidePage: ComponentType<GuidePage>;
 		PanelBody: ComponentType<PanelBody>;
 		SelectControl: ComponentType<SelectControl>;
 		ServerSideRender: ComponentType<ServerSideRender>;
