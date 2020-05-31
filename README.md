@@ -10,3 +10,9 @@
 ```bash
 yarn add @lipemat/js-boilerplate-gutenberg
 ```
+
+### TypeScript
+
+Due to requirements created by Yarn [PNP](https://classic.yarnpkg.com/en/docs/pnp/), the Gutenberg type definitions have been moved to an [outside library](https://github.com/lipemat/-types-lipemat-gutenberg) and will be maintained there.
+
+The definitions are included within the package.json and should not require any additional steps to access them.
