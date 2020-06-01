@@ -15,7 +15,6 @@
   "typings": "dist/index.d.ts",
   "source": "src/index.ts",
   "files": [
-    "@types/",
     "config/",
     "dist/",
     "helpers/",
@@ -39,12 +38,9 @@
     "js-cookie": "^2.2.1"
   },
   "devDependencies": {
-    "@lipemat/js-boilerplate": ">=5.4.2",
     "@wordpress/api-fetch": "^3.11.0",
-    "add": "^2.0.6",
-    "microbundle": "^0.11.0",
-    "unfetch": "^4.1.0",
-    "yarn": "^1.22.4"
+    "microbundle": "^0.12.0",
+    "unfetch": "^4.1.0"
   },
   "peerDependencies": {
     "@lipemat/js-boilerplate": ">=5.4.2"
