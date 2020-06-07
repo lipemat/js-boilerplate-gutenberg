@@ -16,9 +16,6 @@
 ehthumbs.db
 Thumbs.db
 
-# We don't want to lock stored as this project could be installed anytime
-yarn.lock
-
 # Logs
 logs
 *.log
