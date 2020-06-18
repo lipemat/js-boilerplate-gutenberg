@@ -1,6 +1,7 @@
-import {restoreNonce, setRootURL, wpapi} from '../../src';
+import {clearNonce, restoreNonce, setRootURL, wpapi} from '../../src';
 import enableBasicAuth, {authorize} from '../../src/util/authorize';
 import apiFetch from '@wordpress/api-fetch';
+import {setNonce} from '../../src/util/nonce';
 
 require( 'unfetch/polyfill' ); // So we can use window.fetch.
 
@@ -131,4 +132,62 @@ describe( 'Testing wpapi', () => {
 		} );
 		expect( posts ).toHaveLength( 1 );
 	} );
+
+	/**
+	 * All this test proves is if we have a nonce set for an external
+	 * site that is not correct, the request fails.
+	 *
+	 * We test various ordering of calling `setRootURL` and `setNonce`
+	 * to verify under which conditions a nonce is set.
+	 */
+	it( 'Test for nonce ordering', async() => {
+		jest.spyOn( global.console, 'error' ).mockImplementation( () => jest.fn() );
+
+		setRootURL( 'https://onpointplugins.com/wp-json' );
+		let posts = await wp.posts().get();
+		expect( posts ).toHaveLength( 10 );
+
+		setRootURL( 'https://onpointplugins.com/wp-json' );
+		setNonce( 'nothing-good' );
+		let error;
+		try {
+			await wp.posts().get();
+		} catch ( e ) {
+			error = e;
+		}
+		expect( error.code ).toBe( 'fetch_error' );
+		clearNonce();
+		posts = await wp.posts().get();
+		expect( posts ).toHaveLength( 10 );
+
+		setNonce( 'not-going-to-work' );
+		setRootURL( 'https://onpointplugins.com/wp-json' );
+		try {
+			await wp.posts().get();
+		} catch ( e ) {
+			error = e;
+		}
+		expect( error.code ).toBe( 'fetch_error' );
+		clearNonce();
+		posts = await wp.posts().get();
+		expect( posts ).toHaveLength( 10 );
+
+
+	} );
+
+
+	it( 'Test for nonce passed with root url', async() => {
+		setRootURL( 'https://onpointplugins.com/wp-json', 'still-not-working' );
+		let error;
+		try {
+			await wp.posts().get();
+		} catch ( e ) {
+			error = e;
+		}
+		expect( error.code ).toBe( 'fetch_error' );
+		clearNonce();
+		const posts = await wp.posts().get();
+		expect( posts ).toHaveLength( 10 );
+	} );
+
 } );

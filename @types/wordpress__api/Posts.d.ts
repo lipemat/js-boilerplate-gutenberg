@@ -132,6 +132,7 @@ declare module '@wordpress/api/posts' {
 		categories_exclude?: number[];
 		tags?: number[];
 		tags_exclude?: number[];
+		tax_relation?: 'OR' | 'AND';
 		sticky?: boolean;
 	}
 }

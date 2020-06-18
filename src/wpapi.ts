@@ -20,8 +20,8 @@ import {addQueryArgs} from '@wordpress/url';
 import {PostCreate} from '@wordpress/api/posts';
 import {Page, PageCreate, PagesQuery} from '@wordpress/api/pages';
 
-export interface CustomRoutes {
-	[ route: string ]: () => RequestMethods<any, any, any>;
+export type CustomRoutes<K> = {
+	[ path in keyof K ]: () => RequestMethods<any, any, any>;
 }
 
 export interface Pagination<T> {
@@ -165,8 +165,8 @@ export async function doRequestWithPagination<T, D = {}>( path: string, requestM
 	};
 }
 
-export default function wpapi<C extends CustomRoutes = {}>( customRoutes?: CustomRoutes ): Routes & C {
-	const routes: CustomRoutes = {};
+export default function wpapi<T extends CustomRoutes<T> = {}>( customRoutes?: T  ): Routes & T  {
+	const routes = {};
 
 	const coreRoutes = [
 		'categories',
@@ -189,5 +189,5 @@ export default function wpapi<C extends CustomRoutes = {}>( customRoutes?: Custo
 		Object.keys( customRoutes ).map( route => routes[ route ] = customRoutes[ route ] );
 	}
 
-	return routes as Routes & C;
+	return routes as Routes & T;
 }

@@ -3,17 +3,15 @@ declare module '@wordpress/blocks' {
 	import {iconType} from '@wordpress/components';
 
 	type dataTypes = 'null' | 'boolean' | 'object' | 'array' | 'number' | 'string' | 'integer';
-	export type BlockAttributes = {
-		[ key: string ]: {
+	export type BlockAttributes<Attr> = {
+		[ key in keyof Attr ]: {
 			type: dataTypes;
-			source?: 'text' | 'html' | 'query' | 'attribute' | 'meta';
+			source?: 'text' | 'html' | 'query' | 'attribute';
 			default?: any;
 			// jQuery selector of element to extract value from.
 			selector?: string;
 			// Tag to wrap each line when using "html" source and RichText with multiline prop.
 			multiline?: string;
-			// Meta key if using "meta" source.
-			meta?: string;
 			// html attribute of selector element if using "attribute" source
 			attribute?: string;
 			// Extract array of values from markup using "selector" and attributes of html tags.
@@ -30,7 +28,7 @@ declare module '@wordpress/blocks' {
 			}
 			// When using object types, this defines sub types.
 			properties?: {
-				[key: string ] : {
+				[ key: string ]: {
 					type: dataTypes
 				}
 			}
@@ -46,27 +44,45 @@ declare module '@wordpress/blocks' {
 		isSelected: boolean
 	}
 
+	type Icon = iconType | {
+		// Specifying a background color to appear with the icon e.g.: in the inserter.
+		background?: string;
+		// Specifying a color for the icon
+		foreground?: string;
+		// Specifying a dashicon for the block
+		src: string;
+	}
+
 	// @link https://developer.wordpress.org/block-editor/developers/block-api/block-registration/
 	export type registerBlockType = <Attr>( id: string, settings: {
 		title: string;
 		description?: string;
 		category: 'common' | 'formatting' | 'layout' | 'widgets' | 'embed' | string
 		// Svg | dashicon | configuration
-		icon: iconType | {
-			// Specifying a background color to appear with the icon e.g.: in the inserter.
-			background?: string;
-			// Specifying a color for the icon
-			foreground?: string;
-			// Specifying a dashicon for the block
-			src: string;
-		}
+		icon: Icon;
 		keywords?: string[];
 		styles?: Array<{
 			name: string;
 			label: string;
 			isDefault?: boolean;
 		}>
-		attributes: BlockAttributes;
+		attributes: BlockAttributes<Attr>;
+		example?: {
+			attributes: Attr;
+		};
+		variations?: [ {
+			name: string;
+			title: string;
+			description?: string;
+			icon?: Icon;
+			isDefault?: boolean;
+			attributes?: Attr;
+			innerBlocks?: [[ string, {[attribute: string]: any}]];
+			example?: undefined | {
+				attributes: Attr;
+			};
+			scope?: Array<'block' | 'inserter'>;
+		} ];
 		// @todo type this if we end up ever using it.
 		transforms?: {
 			from: any
@@ -97,9 +113,25 @@ declare module '@wordpress/blocks' {
 		save: ( attributes?: BlockEditProps<Attr> ) => ReactElement | null;
 	} ) => void;
 
+	/**
+	 * Register a collection to allow organizing blocks into a section based on a plugin/theme/whatever.
+	 *
+	 * @link https://developer.wordpress.org/block-editor/developers/block-api/block-registration/#block-collections
+	 *
+	 * @param namespace - Any blocks matching this namespace will automatically be included
+	 *                    within this collection. e.g. "lipe"
+	 * @param {Object} settings
+	 */
+	export type registerBlockCollection = ( namespace: string, settings: {
+		title: string;
+		icon?: Icon;
+	} ) => void;
+
+	export const registerBlockCollection: registerBlockCollection;
 	export const registerBlockType: registerBlockType;
 
 	export default interface Blocks {
+		registerBlockCollection: registerBlockCollection;
 		registerBlockType: registerBlockType
 	}
 }
