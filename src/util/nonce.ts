@@ -14,7 +14,7 @@ export function hasExternalNonce() : boolean {
 
 /**
  * Middleware for setting a nonce value for external requests.
- * Can be called directly or used via `setRootURL`
+ * Can be called directly or used via `setRootURL`.
  *
  * @link https://developer.wordpress.org/block-editor/packages/packages-api-fetch/#built-in-middlewares
  *
@@ -46,8 +46,11 @@ export function clearNonce(): void {
 	}
 	clearNonceMiddleware = addMiddleware( ( options, next ) => {
 		if ( typeof options.headers !== 'undefined' ) {
-			delete options.headers[ 'X-WP-Nonce' ];
-			delete options.headers[ 'x-wp-nonce' ];
+			for ( const headerName in options.headers ) {
+				if ( 'x-wp-nonce' === headerName.toLowerCase() ) {
+					delete options.headers[ headerName ];
+				}
+			}
 		}
 
 		return next( options, next );
