@@ -1,5 +1,4 @@
 import {addMiddleware, removeMiddleware} from './request-handler';
-import apiFetch from '@wordpress/api-fetch';
 
 
 let clearNonceMiddleware: number;
@@ -27,7 +26,7 @@ export function setNonce( nonce: string ): void {
 	if ( setNonceMiddleware ) {
 		removeMiddleware( setNonceMiddleware );
 	}
-	setNonceMiddleware = addMiddleware( apiFetch.createNonceMiddleware( nonce ) );
+	setNonceMiddleware = addMiddleware( createNonceMiddleware( nonce ) );
 
 	restoreNonce();
 }
@@ -65,4 +64,37 @@ export function restoreNonce(): void {
 		removeMiddleware( clearNonceMiddleware );
 	}
 	clearNonceMiddleware = 0;
+}
+
+/**
+ * The nonce middleware built into api-fetch will not allow
+ * changing of the nonce once it is set, so we roll our own
+ * which changes the header each time.
+ *
+ * @see apiFetch.createNonceMiddleware
+ *
+ * @param nonce
+ */
+function createNonceMiddleware( nonce ) {
+	function middleware( options, next ) {
+		const {headers = {}} = options;
+		// Remove any existing.
+		for ( const headerName in headers ) {
+			if ( 'x-wp-nonce' === headerName.toLowerCase() ) {
+				delete headers[ headerName ];
+			}
+		}
+
+		return next( {
+			...options,
+			headers: {
+				...headers,
+				'X-WP-Nonce': middleware.nonce,
+			},
+		} );
+	}
+
+	middleware.nonce = nonce;
+
+	return middleware;
 }
