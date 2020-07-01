@@ -16,6 +16,13 @@ export function hasExternalNonce() : boolean {
  * Middleware for setting a nonce value for external requests.
  * Can be called directly or used via `setRootURL`.
  *
+ * @notice WP does not support sending a nonce to an external site by default.
+ *         The external site must change the following headers:
+ *         1. 'Access-Control-Allow-Headers: Authorization, Content-Type, X-WP-Nonce'
+ *         2. 'Access-Control-Allow-Credentials: true'
+ *         These may be added via `header()` calls on the `rest_pre_serve_request` filter.
+ *
+ *
  * @link https://developer.wordpress.org/block-editor/packages/packages-api-fetch/#built-in-middlewares
  *
  * @see setRootURL
