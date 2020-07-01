@@ -1,7 +1,7 @@
 {
   "name": "@lipemat/js-boilerplate-gutenberg",
   "description": "Gutenberg extension for @lipemat/js-boilerplate",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "license": "MIT",
   "main": "dist/index.js",
   "umd:main": "dist/index.umd.js",
