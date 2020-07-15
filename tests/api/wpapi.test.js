@@ -1,7 +1,16 @@
-import {clearNonce, hasExternalNonce, restoreNonce, setRootURL, wpapi} from '../../src';
+import {
+	addMiddleware,
+	clearNonce,
+	hasExternalNonce,
+	removeMiddleware,
+	restoreNonce,
+	setRootURL,
+	wpapi,
+} from '../../src';
 import enableBasicAuth, {authorize} from '../../src/util/authorize';
 import apiFetch from '@wordpress/api-fetch';
 import {isNonceCleared, setNonce} from '../../src/util/nonce';
+import {clearAllMiddleware, createRunStep, getAllMiddleware} from '../../src/util/request-handler';
 
 require( 'unfetch/polyfill' ); // So we can use window.fetch.
 
@@ -133,6 +142,7 @@ describe( 'Testing wpapi', () => {
 		expect( posts ).toHaveLength( 1 );
 	} );
 
+
 	/**
 	 * All this test proves is if we have a nonce set for an external
 	 * site that is not correct, the request fails.
@@ -173,6 +183,25 @@ describe( 'Testing wpapi', () => {
 		expect( posts ).toHaveLength( 10 );
 	} );
 
+	it( 'Test middleware ordering', () => {
+		clearAllMiddleware();
+		const first = addMiddleware( ( o, n ) => n( 'first' ) );
+		const second = addMiddleware( ( o, n ) => n( 'second' ) );
+		const third = addMiddleware( ( o, n ) => n( 'third' ) );
+
+		expect( first ).toBe( 0 );
+		expect( second ).toBe( 1 );
+		expect( third ).toBe( 2 );
+
+		removeMiddleware( second );
+		expect( addMiddleware( ( o, n ) => n( 'fourth' ) ) ).toBe( 3 );
+		expect( getAllMiddleware().length ).toBe( 4 );
+		expect( createRunStep( 0, getAllMiddleware().filter( Boolean ) )( {} ) ).toBe( 'fourth' );
+		removeMiddleware( 3 );
+		removeMiddleware( 0 );
+		expect( createRunStep( 0, getAllMiddleware().filter( Boolean ) )( {} ) ).toBe( 'third' );
+		clearAllMiddleware();
+	} );
 
 	it( 'Test Restore Nonce', () => {
 		restoreNonce();
