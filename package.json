@@ -5,7 +5,7 @@
   "license": "MIT",
   "main": "dist/index.js",
   "umd:main": "dist/index.umd.js",
-  "module": "dist/index.module.js",
+  "module": "dist/index.js",
   "jsnext:main": "dist/index.module.js",
   "react-native": "dist/index.module.js",
   "globals": {
@@ -40,7 +40,7 @@
   "devDependencies": {
     "@lipemat/js-boilerplate": ">=5.4.2",
     "@wordpress/api-fetch": "^3.11.0",
-    "microbundle": "^0.11.0",
+    "microbundle": "^0.12.3",
     "unfetch": "^4.1.0"
   },
   "peerDependencies": {
