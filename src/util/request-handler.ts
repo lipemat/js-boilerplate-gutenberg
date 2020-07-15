@@ -68,7 +68,7 @@ const middlewares: Middleware<any>[] = [];
 export function addMiddleware<D>( middleware: Middleware<D> ): number {
 	apiFetch.setFetchHandler( defaultFetchHandler );
 	middlewares.push( middleware );
-	return Math.max( ...[ ...middlewares.keys() ] );
+	return middlewares.length - 1;
 }
 
 /**
@@ -81,13 +81,20 @@ export function removeMiddleware( index: number ): Middleware<any>[] {
 	return middlewares;
 }
 
+export function clearAllMiddleware(): void {
+	middlewares.length = 0;
+}
+
+export function getAllMiddleware(): Middleware<any>[] {
+	return middlewares;
+}
 
 /**
  * @see apiFetch()
  * @param index
  * @param steps
  */
-const createRunStep = ( index: number, steps: Middleware<any>[] ) => ( workingOptions: FetchOptions<any> ): FetchOptions<any> => {
+export const createRunStep = ( index: number, steps: Middleware<any>[] ) => ( workingOptions: FetchOptions<any> ): FetchOptions<any> => {
 	if ( 'undefined' === typeof steps[ index ] ) {
 		return workingOptions;
 	}
