@@ -1,7 +1,7 @@
-import {clearNonce, restoreNonce, setRootURL, wpapi} from '../../src';
+import {clearNonce, hasExternalNonce, restoreNonce, setRootURL, wpapi} from '../../src';
 import enableBasicAuth, {authorize} from '../../src/util/authorize';
 import apiFetch from '@wordpress/api-fetch';
-import {setNonce} from '../../src/util/nonce';
+import {isNonceCleared, setNonce} from '../../src/util/nonce';
 
 require( 'unfetch/polyfill' ); // So we can use window.fetch.
 
@@ -171,8 +171,27 @@ describe( 'Testing wpapi', () => {
 		clearNonce();
 		posts = await wp.posts().get();
 		expect( posts ).toHaveLength( 10 );
+	} );
 
 
+	it( 'Test Restore Nonce', () => {
+		restoreNonce();
+		expect( isNonceCleared() ).toBeFalsy();
+		setNonce( 'arbitrary' );
+		expect( hasExternalNonce() ).toBeTruthy();
+		expect( isNonceCleared() ).toBeFalsy();
+
+		clearNonce();
+		expect( isNonceCleared() ).toBeTruthy();
+		expect( hasExternalNonce() ).toBeFalsy();
+
+		setNonce( 'arbitrary' );
+		expect( hasExternalNonce() ).toBeTruthy();
+		expect( isNonceCleared() ).toBeFalsy();
+
+		restoreNonce();
+		expect( hasExternalNonce() ).toBeFalsy();
+		expect( isNonceCleared() ).toBeFalsy();
 	} );
 
 
