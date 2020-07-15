@@ -1,20 +1,34 @@
 import {addMiddleware, removeMiddleware} from './request-handler';
 
 
-let clearNonceMiddleware: number;
-let setNonceMiddleware: number;
+let clearNonceMiddleware: number | undefined;
+let setNonceMiddleware: number | undefined;
 
 /**
  * Do have a nonce manually set?
  *
  */
 export function hasExternalNonce() : boolean {
-	return !! clearNonceMiddleware;
+	return 'undefined' !== typeof setNonceMiddleware;
+}
+
+/**
+ * Are all nonces currently cleared?
+ */
+export function isNonceCleared(): boolean {
+	return 'undefined' !== typeof clearNonceMiddleware;
 }
 
 /**
  * Middleware for setting a nonce value for external requests.
- * Can be called directly or used via `setRootURL`
+ * Can be called directly or used via `setRootURL`.
+ *
+ * @notice WP does not support sending a nonce to an external site by default.
+ *         The external site must change the following headers:
+ *         1. 'Access-Control-Allow-Headers: Authorization, Content-Type, X-WP-Nonce'
+ *         2. 'Access-Control-Allow-Credentials: true'
+ *         These may be added via `header()` calls on the `rest_pre_serve_request` filter.
+ *
  *
  * @link https://developer.wordpress.org/block-editor/packages/packages-api-fetch/#built-in-middlewares
  *
@@ -23,12 +37,8 @@ export function hasExternalNonce() : boolean {
  * @param {string} nonce
  */
 export function setNonce( nonce: string ): void {
-	if ( setNonceMiddleware ) {
-		removeMiddleware( setNonceMiddleware );
-	}
-	setNonceMiddleware = addMiddleware( createNonceMiddleware( nonce ) );
-
 	restoreNonce();
+	setNonceMiddleware = addMiddleware( createNonceMiddleware( nonce ) );
 }
 
 /**
@@ -38,16 +48,20 @@ export function setNonce( nonce: string ): void {
  *
  */
 export function clearNonce(): void {
-	if ( setNonceMiddleware ) {
+	if ( 'undefined' !== typeof setNonceMiddleware ) {
 		removeMiddleware( setNonceMiddleware );
+		setNonceMiddleware = undefined;
 	}
-	if ( clearNonceMiddleware ) {
+	if ( 'undefined' !== typeof clearNonceMiddleware ) {
 		return;
 	}
 	clearNonceMiddleware = addMiddleware( ( options, next ) => {
 		if ( typeof options.headers !== 'undefined' ) {
-			delete options.headers[ 'X-WP-Nonce' ];
-			delete options.headers[ 'x-wp-nonce' ];
+			for ( const headerName in options.headers ) {
+				if ( 'x-wp-nonce' === headerName.toLowerCase() ) {
+					delete options.headers[ headerName ];
+				}
+			}
 		}
 
 		return next( options, next );
@@ -55,15 +69,19 @@ export function clearNonce(): void {
 }
 
 /**
- * Restore any previously set nonce by removing the middleware
+ * Restore the original nonce by removing the middleware
  * which clears it.
  *
  */
 export function restoreNonce(): void {
-	if ( clearNonceMiddleware ) {
+	if ( 'undefined' !== typeof setNonceMiddleware ) {
+		removeMiddleware( setNonceMiddleware );
+	}
+	if ( 'undefined' !== typeof clearNonceMiddleware ) {
 		removeMiddleware( clearNonceMiddleware );
 	}
-	clearNonceMiddleware = 0;
+	setNonceMiddleware = undefined;
+	clearNonceMiddleware = undefined;
 }
 
 /**
