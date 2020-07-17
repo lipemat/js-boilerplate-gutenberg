@@ -6,13 +6,13 @@ declare module '@wordpress/data' {
 
 	import {ComponentType} from 'react';
 
-	type select = <Result>( store: string ) => {
+	export function select( store: 'core' ): {
 		getMedia: ( id: number ) => Media;
-		getMediaItems: () => Media[];
+		getMediaItems: () => Media[ ];
 		getPostType: ( slug: string ) => Type;
 		getSite: () => Settings;
 		getTaxonomy: ( slug: string ) => Taxonomy;
-		getTaxonomies: () => Taxonomy[];
+		getTaxonomies: () => Taxonomy[ ];
 
 		// @todo properly type the rest of these as needed.
 		canUser: ( capability: string ) => boolean;
@@ -42,20 +42,105 @@ declare module '@wordpress/data' {
 		isAutosavingEntityRecord: () => boolean;
 		isPreviewEmbedFallback: () => boolean;
 		isRequestingEmbedPreview: () => boolean;
-		isResolving: () =>boolean;
-		isSavingEntityRecord: () =>boolean;
-		[ selector: string ]: ( key?: string | number ) => Result | any;
+		isResolving: () => boolean;
+		isSavingEntityRecord: () => boolean;
+	};
+	export function select( store: 'core/edit-post' ): {
+		// @todo properly type the rest of these as needed.
+		getActiveGeneralSidebarName: ( key?: string ) => any;
+		getActiveMetaBoxLocations: ( key?: string ) => any;
+		getAllMetaBoxes: ( key?: string ) => any;
+		getCachedResolvers: ( key?: string ) => any;
+		getEditorMode: ( key?: string ) => any;
+		getIsResolving: ( key?: string ) => any;
+		getMetaBoxesPerLocation: ( key?: string ) => any;
+		getPreference: ( key?: string ) => any;
+		getPreferences: ( key?: string ) => any;
+		hasFinishedResolution: ( key?: string ) => any;
+		hasMetaBoxes: ( key?: string ) => any;
+		hasStartedResolution: ( key?: string ) => any;
+		isEditorPanelEnabled: ( key?: string ) => any;
+		isEditorPanelOpened: ( key?: string ) => any;
+		isEditorPanelRemoved: ( key?: string ) => any;
+		isEditorSidebarOpened: ( key?: string ) => any;
+		isFeatureActive: ( key?: string ) => any;
+		isMetaBoxLocationActive: ( key?: string ) => any;
+		isMetaBoxLocationVisible: ( key?: string ) => any;
+		isModalActive: ( key?: string ) => any;
+		isPluginItemPinned: ( key?: string ) => any;
+		isPluginSidebarOpened: ( key?: string ) => any;
+		isPublishSidebarOpened: ( key?: string ) => any;
+		isResolving: ( key?: string ) => any;
+		isSavingMetaBoxes: ( key?: string ) => any;
+
+	}
+	export function select<Methods extends { [ selector: string ]: ( key?: string | number ) => any; }>( store: string ): Methods;
+
+
+	export function dispatch( store: 'core' ): {
+		// @todo properly type the rest of these as needed.
+		addEntities: ( key?: string ) => any;
+		editEntityRecord: ( key?: string ) => any;
+		finishResolution: ( key?: string ) => any;
+		invalidateResolution: ( key?: string ) => any;
+		invalidateResolutionForStore: ( key?: string ) => any;
+		invalidateResolutionForStoreSelector: ( key?: string ) => any;
+		receiveAutosaves: ( key?: string ) => any;
+		receiveCurrentUser: ( key?: string ) => any;
+		receiveEmbedPreview: ( key?: string ) => any;
+		receiveEntityRecords: ( key?: string ) => any;
+		receiveThemeSupports: ( key?: string ) => any;
+		receiveUploadPermissions: ( key?: string ) => any;
+		receiveUserPermission: ( key?: string ) => any;
+		receiveUserQuery: ( key?: string ) => any;
+		redo: ( key?: string ) => any;
+		saveEditedEntityRecord: ( key?: string ) => any;
+		saveEntityRecord: ( key?: string ) => any;
+		saveMedia: ( key?: string ) => any;
+		savePostType: ( key?: string ) => any;
+		saveSite: ( key?: string ) => any;
+		saveTaxonomy: ( key?: string ) => any;
+		saveUser: ( key?: string ) => any;
+		saveWidgetArea: ( key?: string ) => any;
+		startResolution: ( key?: string ) => any;
+		undo: ( key?: string ) => any;
+	}
+	export function dispatch( store: 'core/edit-post' ): {
+		// @todo properly type the rest of these as needed.
+		closeGeneralSidebar: ( key?: string ) => any;
+		closeModal: ( key?: string ) => any;
+		closePublishSidebar: ( key?: string ) => any;
+		finishResolution: ( key?: string ) => any;
+		hideBlockTypes: ( key?: string ) => any;
+		invalidateResolution: ( key?: string ) => any;
+		invalidateResolutionForStore: ( key?: string ) => any;
+		invalidateResolutionForStoreSelector: ( key?: string ) => any;
+		metaBoxUpdatesSuccess: ( key?: string ) => any;
+		openGeneralSidebar: ( key?: string ) => any;
+		openModal: ( key?: string ) => any;
+		openPublishSidebar: ( key?: string ) => any;
+		removeEditorPanel: ( key?: string ) => any;
+		requestMetaBoxUpdates: ( key?: string ) => any;
+		setAvailableMetaBoxesPerLocation: ( key?: string ) => any;
+		showBlockTypes: ( key?: string ) => any;
+		startResolution: ( key?: string ) => any;
+		switchEditorMode: ( key?: string ) => any;
+		toggleEditorPanelEnabled: ( key?: string ) => any;
+		toggleEditorPanelOpened: ( key?: string ) => any;
+		toggleFeature: ( key?: string ) => any;
+		togglePinnedPluginItem: ( key?: string ) => any;
+		togglePublishSidebar: ( key?: string ) => any;
+		updatePreferredStyleVariations: ( key?: string ) => any;
 	}
 
-	export type useSelect = <T>( callback: ( select: select ) => T, deps?: Array<any> ) => T;
-	export type useDispatch = <T>( storeName: string ) => ( newValue: any ) => void;
-	export type withDispatch = <T>( callback: ( dispatch: any, ownProps: object, {select: select} ) => T, component: ComponentType<T> ) => ComponentType<T>;
-	export type withSelect = <T>( callback: ( callback: ( select: select ) => T, ownProps: object ) => T, component: ComponentType<T> ) => ComponentType<T>;
+	export type useSelect = <T>( callback: ( selectFunction: typeof select ) => T, deps?: Array<any> ) => T;
+	export type useDispatch = <T>( storeName: string ) => ( newValue: T ) => void;
+	export type withDispatch = <T>( callback: ( dispatchFunction: typeof dispatch, ownProps: object, {select: select} ) => T, component: ComponentType<T> ) => ComponentType<T>;
+	export type withSelect = <T>( callback: ( callback: ( selectFunction: typeof select ) => T, ownProps: object ) => T, component: ComponentType<T> ) => ComponentType<T>;
 
 	export const AsyncModeProvider: ComponentType<{
 		value: boolean
 	}>;
-	export const select: select;
 	export const useDispatch: useDispatch;
 	export const useSelect: useSelect;
 	export const withDispatch: withDispatch;
@@ -65,7 +150,8 @@ declare module '@wordpress/data' {
 		AsyncModeProvider: ComponentType<{
 			value: boolean
 		}>;
-		select: select;
+		dispatch: typeof dispatch;
+		select: typeof select;
 		useDispatch: useDispatch;
 		useSelect: useSelect;
 	}
