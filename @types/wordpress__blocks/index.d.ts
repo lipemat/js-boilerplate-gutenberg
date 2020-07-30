@@ -54,10 +54,10 @@ declare module '@wordpress/blocks' {
 	}
 
 	// @link https://developer.wordpress.org/block-editor/developers/block-api/block-registration/
-	export type registerBlockType = <Attr>( id: string, settings: {
+	export type registerBlockType = <Attr, C = ''>( id: string, settings: {
 		title: string;
 		description?: string;
-		category: 'common' | 'formatting' | 'layout' | 'widgets' | 'embed' | string
+		category: 'text' | 'media' | 'design' | 'widgets' | 'embed' | 'reusable' | C
 		// Svg | dashicon | configuration
 		icon: Icon;
 		keywords?: string[];
