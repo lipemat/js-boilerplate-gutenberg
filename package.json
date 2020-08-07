@@ -5,7 +5,7 @@
   "license": "MIT",
   "main": "dist/index.js",
   "umd:main": "dist/index.umd.js",
-  "module": "dist/index.js",
+  "module": "dist/index.module.js",
   "jsnext:main": "dist/index.module.js",
   "react-native": "dist/index.module.js",
   "globals": {
