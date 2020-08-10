@@ -1,7 +1,8 @@
 import {__} from '@wordpress/i18n';
+import {hasExternalNonce} from './nonce';
 
 /**
- * Taken verbatim from @wordpress/api-fetch/src/utils/response.js
+ * Taken from @wordpress/api-fetch/src/utils/response.js and customized as needed.
  * api-fetch utils are not available via wp global, so we add it to
  * our build here.
  */
@@ -12,7 +13,7 @@ import {__} from '@wordpress/i18n';
  * @param {Response} response
  * @param {boolean}  shouldParseResponse
  *
- * @return {Response} Parsed response
+ * @return {Response} Parsed response.
  */
 const parseResponse = ( response, shouldParseResponse = true ) => {
 	if ( shouldParseResponse ) {
@@ -68,6 +69,11 @@ export function parseAndThrowError( response, shouldParseResponse = true ) {
 			code: 'unknown_error',
 			message: __( 'An unknown error occurred.' ),
 		};
+
+		// Prevent infinite loops when external requests fail.
+		if ( 'rest_cookie_invalid_nonce' === error.code && hasExternalNonce() ) {
+			error.code = 'external_rest_cookie_invalid_nonce';
+		}
 
 		throw error || unknownError;
 	} );

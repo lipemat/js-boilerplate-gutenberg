@@ -4,11 +4,11 @@ import apiFetch, {FetchOptions, Middleware} from '@wordpress/api-fetch';
 
 /**
  * Taken verbatim from @wordpress/api-fetch/src/index.js
- * `defaultFetchHandler` is not available via exports so we add it here.
+ * `defaultFetchHandler` is not available via exports, so we add it here.
  *
  * Middleware may only be used once as they are called in order
  * and new ones are added to the beginning of the list.
- * Therefore we can't change arguments sent to window.fetch right before
+ * Therefore, we can't change arguments sent to window.fetch right before
  * it's sent and WP Core's middleware will always override ours.
  *
  * That is why this file exists to allow changing the arguments right
