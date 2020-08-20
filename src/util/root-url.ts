@@ -5,6 +5,15 @@ import {clearNonce, hasExternalNonce, restoreNonce, setNonce} from './nonce';
 let rootURLMiddleware: number;
 
 /**
+ * Restore original root URL set by WordPresss.
+ *
+ * @since 1.3.0
+ */
+export function restoreRootURL(): void {
+	removeMiddleware( rootURLMiddleware );
+}
+
+/**
  * Set the Root URL for any following requests.
  *
  * We delete the `path` from the options to override createRootURLMiddleware

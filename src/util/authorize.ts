@@ -41,6 +41,22 @@ export function getCurrentAuth(): AuthenticationResult | false {
 }
 
 /**
+ * Logout the currently authorized user.
+ *
+ * Returns true if a user was logged in and false
+ * if they were not.
+ *
+ * @return boolean
+ */
+export function logOut(): boolean {
+	if ( getCurrentAuth() ) {
+		Cookies.remove( COOKIE );
+		return true;
+	}
+	return false;
+}
+
+/**
  * Log a user in and set a cookie to be used on all REST requests.
  * Cookie expires (typically after 7 days) so you must check `isLoggedIn` from
  * time to time and log the user in again.
