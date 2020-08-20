@@ -3,7 +3,7 @@ import {__} from '@wordpress/i18n';
 import apiFetch, {FetchOptions, Middleware} from '@wordpress/api-fetch';
 
 /**
- * Taken verbatim from @wordpress/api-fetch/src/index.js
+ * Taken from @wordpress/api-fetch/src/index.js
  * `defaultFetchHandler` is not available via exports, so we add it here.
  *
  * Middleware may only be used once as they are called in order
@@ -66,7 +66,6 @@ const middlewares: Middleware<any>[] = [];
  * @return {number} index of middleware
  */
 export function addMiddleware<D>( middleware: Middleware<D> ): number {
-	apiFetch.setFetchHandler( defaultFetchHandler );
 	middlewares.push( middleware );
 	return middlewares.length - 1;
 }

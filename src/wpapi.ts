@@ -19,6 +19,7 @@ import {parseResponseAndNormalizeError} from './util/parse-response';
 import {addQueryArgs} from '@wordpress/url';
 import {PostCreate} from '@wordpress/api/posts';
 import {Page, PageCreate, PagesQuery} from '@wordpress/api/pages';
+import {defaultFetchHandler} from './util/request-handler';
 
 export type CustomRoutes<K> = {
 	[ path in keyof K ]: () => RequestMethods<any, any, any>;
@@ -188,6 +189,8 @@ export default function wpapi<T extends CustomRoutes<T> = {}>( customRoutes?: T 
 	if ( typeof customRoutes !== 'undefined' ) {
 		Object.keys( customRoutes ).map( route => routes[ route ] = customRoutes[ route ] );
 	}
+
+	apiFetch.setFetchHandler( defaultFetchHandler );
 
 	return routes as Routes & T;
 }
