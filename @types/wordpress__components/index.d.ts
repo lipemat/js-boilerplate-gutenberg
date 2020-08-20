@@ -395,10 +395,12 @@ declare module '@wordpress/components' {
 		hideLabelFromVision?: boolean
 	}
 
-	export interface ServerSideRender {
+	export interface ServerSideRender<A = object, U = object> {
 		block: string;
-		attributes?: object;
+		attributes?: A;
 		className?: string;
+		httpMethod?: 'GET' | 'POST'
+		urlQueryArgs?: U
 	}
 
 	interface Shortcut extends HTMLSpanElement {
