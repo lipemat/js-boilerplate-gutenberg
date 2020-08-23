@@ -38,7 +38,9 @@ export interface Routes {
 	statuses: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	pages: <T = Page, Q = PagesQuery, U = PageCreate>() => RequestMethods<T, Q, U>;
 	posts: <T = Post, Q = PostsQuery, U = PostCreate>() => RequestMethods<T, Q, U>;
-	settings: <T = Settings, Q = any, U = any>() => RequestMethods<T, Q, U>;
+	settings: <T = Settings, Q = any, U = any>() => {
+		get: ( options?: Q ) => Promise<T>;
+	} & RequestMethods<T, Q, U>;
 	tags: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	taxonomies: <T = Taxonomy, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	types: <T = Type, Q = any, U = any>() => RequestMethods<T, Q, U>;
