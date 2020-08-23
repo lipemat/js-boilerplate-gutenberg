@@ -27,6 +27,10 @@ export function restoreRootURL(): void {
  *                        If previously set, and not provided here, the existing
  *                        nonce will be used.
  *
+ * @notice To use update calls which send PUT requests an additional 'X-HTTP-Method-Override'
+ *         header must be allowed via CORS.
+ *         Use the `rest_allowed_cors_headers` filter. (WP 5.5+)
+ *
  * @see setNonce
  *
  * @example setRootUrl( 'http://my-wordpress-site/wp-json/', 'fh32efsES' );

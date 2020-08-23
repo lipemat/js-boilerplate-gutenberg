@@ -28,7 +28,7 @@ export function isNonceCleared(): boolean {
  *         1. 'Access-Control-Allow-Headers: Authorization, Content-Type, X-WP-Nonce'
  *         2. 'Access-Control-Allow-Credentials: true'
  *         These may be added via `header()` calls on the `rest_pre_serve_request` filter.
- *         3. This may not be needed with WP 5.5+ https://make.wordpress.org/core/2020/07/22/rest-api-changes-in-wordpress-5-5/
+ *         3. This is not be needed with WP 5.5+ https://make.wordpress.org/core/2020/07/22/rest-api-changes-in-wordpress-5-5/
  *
  *
  * @link https://developer.wordpress.org/block-editor/packages/packages-api-fetch/#built-in-middlewares
