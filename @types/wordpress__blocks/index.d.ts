@@ -66,7 +66,12 @@ declare module '@wordpress/blocks' {
 			label: string;
 			isDefault?: boolean;
 		}>
-		attributes: BlockAttributes<Attr>;
+		/**
+		 * Only optional if registered on PHP side via `register_block_type_from_metadata`
+		 *
+		 * @link https://github.com/WordPress/gutenberg/blob/master/docs/designers-developers/developers/block-api/block-metadata.md
+		 */
+		attributes?: BlockAttributes<Attr>;
 		example?: {
 			attributes: Attr;
 		};
