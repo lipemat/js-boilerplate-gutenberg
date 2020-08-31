@@ -173,7 +173,7 @@ describe( 'Testing wpapi', () => {
 		} catch ( e ) {
 			error = e;
 		}
-		expect( error.code ).toBe( 'fetch_error' );
+		expect( error.code ).toBe( 'external_rest_cookie_invalid_nonce' );
 		clearNonce();
 		posts = await wp.posts().get();
 		expect( posts ).toHaveLength( 10 );
@@ -185,7 +185,7 @@ describe( 'Testing wpapi', () => {
 		} catch ( e ) {
 			error = e;
 		}
-		expect( error.code ).toBe( 'fetch_error' );
+		expect( error.code ).toBe( 'external_rest_cookie_invalid_nonce' );
 		clearNonce();
 		posts = await wp.posts().get();
 		expect( posts ).toHaveLength( 10 );
@@ -240,7 +240,7 @@ describe( 'Testing wpapi', () => {
 		} catch ( e ) {
 			error = e;
 		}
-		expect( error.code ).toBe( 'fetch_error' );
+		expect( error.code ).toBe( 'external_rest_cookie_invalid_nonce' );
 		clearNonce();
 		const posts = await wp.posts().get();
 		expect( posts ).toHaveLength( 10 );

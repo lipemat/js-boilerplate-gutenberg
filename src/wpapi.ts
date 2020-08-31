@@ -38,14 +38,15 @@ export interface Routes {
 	statuses: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	pages: <T = Page, Q = PagesQuery, U = PageCreate>() => RequestMethods<T, Q, U>;
 	posts: <T = Post, Q = PostsQuery, U = PostCreate>() => RequestMethods<T, Q, U>;
-	settings: <T = Settings, Q = any, U = any>() => {
-		get: ( options?: Q ) => Promise<T>;
-	} & RequestMethods<T, Q, U>;
 	tags: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	taxonomies: <T = Taxonomy, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	types: <T = Type, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	users: <T = User, Q = UsersQuery, U = UserUpdate>() => RequestMethods<T, Q, U>;
 	search: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;
+	settings: <T = Settings, U = Partial<T>>() => {
+		get: () => Promise<T>;
+		update: ( data: U ) => Promise<T>;
+	};
 }
 
 
@@ -169,7 +170,7 @@ export async function doRequestWithPagination<T, D = {}>( path: string, requestM
 }
 
 export default function wpapi<T extends CustomRoutes<T> = {}>( customRoutes?: T  ): Routes & T  {
-	const routes = {};
+	const routes: any = {};
 
 	const coreRoutes = [
 		'categories',
@@ -178,7 +179,6 @@ export default function wpapi<T extends CustomRoutes<T> = {}>( customRoutes?: T 
 		'statuses',
 		'pages',
 		'posts',
-		'settings',
 		'tags',
 		'taxonomies',
 		'types',
@@ -187,6 +187,14 @@ export default function wpapi<T extends CustomRoutes<T> = {}>( customRoutes?: T 
 	];
 
 	coreRoutes.map( route => routes[ route ] = () => createMethods( '/wp/v2/' + route ) );
+
+	// Settings has limited/special endpoints.
+	routes.settings = () => {
+		return {
+			get: () => doRequest( '/wp/v2/settings', 'GET' ),
+			update: data => doRequest( '/wp/v2/settings', 'POST', data ),
+		};
+	};
 
 	if ( typeof customRoutes !== 'undefined' ) {
 		Object.keys( customRoutes ).map( route => routes[ route ] = customRoutes[ route ] );
