@@ -11,8 +11,8 @@ import {
 	Taxonomy,
 	Type,
 	User,
-	UsersQuery,
 	UserCreate,
+	UsersQuery,
 } from '@wordpress/api';
 import apiFetch from '@wordpress/api-fetch';
 import {parseResponseAndNormalizeError} from './util/parse-response';
@@ -22,7 +22,7 @@ import {Page, PageCreate, PagesQuery} from '@wordpress/api/pages';
 import {defaultFetchHandler} from './util/request-handler';
 
 export type CustomRoutes<K> = {
-	[ path in keyof K ]: () => RequestMethods<any, any, any>;
+	[path in keyof K]: () => RequestMethods<any, any, any>;
 }
 
 export interface Pagination<T> {
@@ -41,7 +41,9 @@ export interface Routes {
 	tags: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	taxonomies: <T = Taxonomy, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	types: <T = Type, Q = any, U = any>() => RequestMethods<T, Q, U>;
-	users: <T = User, Q = UsersQuery, U = UserCreate>() => RequestMethods<T, Q, U>;
+	users: <T = User, Q = UsersQuery, U = UserCreate>() => Omit<RequestMethods<T, Q, U>, 'delete' | 'trash'> & {
+		delete: ( id: number, reassign?: number ) => Promise<{ deleted: boolean, previous: T }>
+	}
 	search: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	settings: <T = Settings, U = Partial<T>>() => {
 		get: () => Promise<T>;
@@ -57,7 +59,7 @@ export interface Routes {
  */
 export interface RequestMethods<T, Q, U, C = U> {
 	create: ( data: U ) => Promise<T>;
-	delete: ( id: number, force?: boolean ) => Promise<{ deleted: boolean, previous: T }>;
+	delete: ( id: number ) => Promise<{ deleted: boolean, previous: T }>;
 	get: ( options?: Q ) => Promise<T[]>;
 	getById: ( id: number, data?: { password?: string, context?: context } ) => Promise<T>;
 	getWithPagination: ( options?: Q ) => Promise<Pagination<T>>;
@@ -169,7 +171,7 @@ export async function doRequestWithPagination<T, D = {}>( path: string, requestM
 	};
 }
 
-export default function wpapi<T extends CustomRoutes<T> = {}>( customRoutes?: T  ): Routes & T  {
+export default function wpapi<T extends CustomRoutes<T> = {}>( customRoutes?: T ): Routes & T {
 	const routes: any = {};
 
 	const coreRoutes = [
@@ -182,11 +184,20 @@ export default function wpapi<T extends CustomRoutes<T> = {}>( customRoutes?: T 
 		'tags',
 		'taxonomies',
 		'types',
-		'users',
 		'search',
 	];
 
 	coreRoutes.map( route => routes[ route ] = () => createMethods( '/wp/v2/' + route ) );
+
+	// Users have a special parameter required for delete.
+	routes.users = () => {
+		const methods = createMethods( '/wp/v2/users' );
+		methods.delete = ( id, reassign = false ) => doRequest( '/wp/v2/users/' + id, 'DELETE', {
+			force: true,
+			reassign,
+		} );
+		return methods;
+	};
 
 	// Settings has limited/special endpoints.
 	routes.settings = () => {
