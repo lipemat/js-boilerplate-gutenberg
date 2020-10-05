@@ -20,12 +20,12 @@ declare module '@wordpress/api/users' {
 	}
 
 	/**
-	 * User Update.
+	 * User Create.
 	 *
-	 * https://developer.wordpress.org/rest-api/reference/users/#arguments-4
+	 * https://developer.wordpress.org/rest-api/reference/users/#create-a-user
 	 */
-	export interface UserUpdate {
-		id: number;
+	export interface UserCreate {
+		username?: string;
 		name?: string;
 		first_name?: string;
 		last_name?: string;

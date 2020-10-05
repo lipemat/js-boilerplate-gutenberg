@@ -12,7 +12,7 @@ import {
 	Type,
 	User,
 	UsersQuery,
-	UserUpdate,
+	UserCreate,
 } from '@wordpress/api';
 import apiFetch from '@wordpress/api-fetch';
 import {parseResponseAndNormalizeError} from './util/parse-response';
@@ -41,7 +41,7 @@ export interface Routes {
 	tags: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	taxonomies: <T = Taxonomy, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	types: <T = Type, Q = any, U = any>() => RequestMethods<T, Q, U>;
-	users: <T = User, Q = UsersQuery, U = UserUpdate>() => RequestMethods<T, Q, U>;
+	users: <T = User, Q = UsersQuery, U = UserCreate>() => RequestMethods<T, Q, U>;
 	search: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	settings: <T = Settings, U = Partial<T>>() => {
 		get: () => Promise<T>;
@@ -55,7 +55,7 @@ export interface Routes {
  * Q = Query params.
  * U = Update object properties.
  */
-export interface RequestMethods<T, Q, U> {
+export interface RequestMethods<T, Q, U, C = U> {
 	create: ( data: U ) => Promise<T>;
 	delete: ( id: number, force?: boolean ) => Promise<{ deleted: boolean, previous: T }>;
 	get: ( options?: Q ) => Promise<T[]>;
