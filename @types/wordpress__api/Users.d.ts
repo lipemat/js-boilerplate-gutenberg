@@ -25,18 +25,18 @@ declare module '@wordpress/api/users' {
 	 * https://developer.wordpress.org/rest-api/reference/users/#create-a-user
 	 */
 	export interface UserCreate {
-		username?: string;
+		username: string;
 		name?: string;
 		first_name?: string;
 		last_name?: string;
-		email?: string;
+		email: string;
 		url?: string;
 		description?: string;
 		locale?: string;
 		nickname?: string;
 		slug?: string;
 		roles?: string[];
-		password?: string;
+		password: string;
 		meta?: { [ key: string ]: any };
 	}
 
