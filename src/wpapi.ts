@@ -41,7 +41,7 @@ export interface Routes {
 	tags: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	taxonomies: <T = Taxonomy, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	types: <T = Type, Q = any, U = any>() => RequestMethods<T, Q, U>;
-	users: <T = User, Q = UsersQuery, U = UserCreate>() => Omit<RequestMethods<T, Q, U>, 'delete' | 'trash'> & {
+	users: <T = User, Q = UsersQuery, U = Partial<UserCreate>, C = UserCreate>() => Omit<RequestMethods<T, Q, U, C>, 'delete' | 'trash'> & {
 		delete: ( id: number, reassign?: number ) => Promise<{ deleted: boolean, previous: T }>
 	}
 	search: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;
@@ -58,7 +58,7 @@ export interface Routes {
  * U = Update object properties.
  */
 export interface RequestMethods<T, Q, U, C = U> {
-	create: ( data: U ) => Promise<T>;
+	create: ( data: C ) => Promise<T>;
 	delete: ( id: number ) => Promise<{ deleted: boolean, previous: T }>;
 	get: ( options?: Q ) => Promise<T[]>;
 	getById: ( id: number, data?: { password?: string, context?: context } ) => Promise<T>;
