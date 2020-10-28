@@ -1,6 +1,7 @@
 import {parseAndThrowError, parseResponseAndNormalizeError} from './parse-response';
 import {__} from '@wordpress/i18n';
-import apiFetch, {FetchOptions, Middleware} from '@wordpress/api-fetch';
+import {FetchOptions, Middleware} from '@wordpress/api-fetch';
+import {getAllMiddleware} from './middleware';
 
 /**
  * Taken from @wordpress/api-fetch/src/index.js
@@ -14,9 +15,7 @@ import apiFetch, {FetchOptions, Middleware} from '@wordpress/api-fetch';
  * That is why this file exists to allow changing the arguments right
  * before sending, after WP Core does theirs.
  *
- * Calling `addMiddleware` automatically switched the request handler to
- * this custom one otherwise, the default apiFetch version is used.
- *
+ * Calling `wpapi` automatically switches the request handler to our.s
  */
 
 
@@ -52,42 +51,6 @@ const checkStatus = response => {
 	throw response;
 };
 
-const middlewares: Middleware<any>[] = [];
-
-/**
- * Add a middleware to be called right before the request fires.
- * Middlewares are chained with new ones being called last.
- *
- * Similar to `apiFetch.use` with the main difference being the order
- * they are called.
- *
- * @param middleware
- *
- * @return {number} index of middleware
- */
-export function addMiddleware<D>( middleware: Middleware<D> ): number {
-	middlewares.push( middleware );
-	return middlewares.length - 1;
-}
-
-/**
- * Remove a particular middleware from the cue.
- *
- * @param index
- */
-export function removeMiddleware( index: number ): Middleware<any>[] {
-	delete middlewares[ index ];
-	return middlewares;
-}
-
-export function clearAllMiddleware(): void {
-	middlewares.length = 0;
-}
-
-export function getAllMiddleware(): Middleware<any>[] {
-	return middlewares;
-}
-
 /**
  * @see apiFetch()
  * @param index
@@ -108,7 +71,7 @@ export const createRunStep = ( index: number, steps: Middleware<any>[] ) => ( wo
 
 
 export const defaultFetchHandler = nextOptions => {
-	const options = createRunStep( 0, middlewares.filter( Boolean ) )( {
+	const options = createRunStep( 0, getAllMiddleware().filter( Boolean ) )( {
 		...DEFAULT_OPTIONS,
 		...nextOptions,
 	} );

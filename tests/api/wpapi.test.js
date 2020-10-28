@@ -1,7 +1,8 @@
 import {
 	addMiddleware,
 	clearNonce,
-	hasExternalNonce, logOut,
+	hasExternalNonce,
+	logOut,
 	removeMiddleware,
 	restoreNonce,
 	setRootURL,
@@ -10,8 +11,9 @@ import {
 import enableBasicAuth, {authorize} from '../../src/util/authorize';
 import apiFetch from '@wordpress/api-fetch';
 import {isNonceCleared, setNonce} from '../../src/util/nonce';
-import {clearAllMiddleware, createRunStep, getAllMiddleware} from '../../src/util/request-handler';
+import {createRunStep} from '../../src/util/request-handler';
 import {restoreRootURL} from '../../src/util/root-url';
+import {clearAllMiddleware, getAllMiddleware} from '../../src/util/middleware';
 
 require( 'unfetch/polyfill' ); // So we can use window.fetch.
 

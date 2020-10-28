@@ -1,4 +1,4 @@
-import {addMiddleware, removeMiddleware} from './request-handler';
+import {addMiddleware, removeMiddleware} from './middleware';
 
 
 let clearNonceMiddleware: number | undefined;

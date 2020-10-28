@@ -1,5 +1,5 @@
 import apiFetch from '@wordpress/api-fetch';
-import {addMiddleware, removeMiddleware} from './request-handler';
+import {addMiddleware, removeMiddleware} from './middleware';
 import {clearNonce, hasExternalNonce, restoreNonce, setNonce} from './nonce';
 
 let rootURLMiddleware: number;
