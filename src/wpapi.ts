@@ -20,6 +20,7 @@ import {addQueryArgs} from '@wordpress/url';
 import {PostCreate} from '@wordpress/api/posts';
 import {Page, PageCreate, PagesQuery} from '@wordpress/api/pages';
 import {defaultFetchHandler} from './util/request-handler';
+import {UserUpdate} from '@wordpress/api/users';
 
 export type CustomRoutes<K> = {
 	[path in keyof K]: () => RequestMethods<any, any, any>;
@@ -41,7 +42,7 @@ export interface Routes {
 	tags: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	taxonomies: <T = Taxonomy, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	types: <T = Type, Q = any, U = any>() => RequestMethods<T, Q, U>;
-	users: <T = User, Q = UsersQuery, U = Partial<UserCreate>, C = UserCreate>() => Omit<RequestMethods<T, Q, U, C>, 'delete' | 'trash'> & {
+	users: <T = User, Q = UsersQuery, U = UserUpdate, C = UserCreate>() => Omit<RequestMethods<T, Q, U, C>, 'delete' | 'trash'> & {
 		delete: ( id: number, reassign?: number ) => Promise<{ deleted: boolean, previous: T }>
 	}
 	search: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;

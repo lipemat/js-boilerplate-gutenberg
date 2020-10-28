@@ -22,7 +22,7 @@ declare module '@wordpress/api/users' {
 	/**
 	 * User Create.
 	 *
-	 * https://developer.wordpress.org/rest-api/reference/users/#create-a-user
+	 * @link https://developer.wordpress.org/rest-api/reference/users/#create-a-user
 	 */
 	export interface UserCreate {
 		username: string;
@@ -40,11 +40,20 @@ declare module '@wordpress/api/users' {
 		meta?: { [ key: string ]: any };
 	}
 
+	/**
+	 * User Update
+	 *
+	 * @link https://developer.wordpress.org/rest-api/reference/users/#update-a-user-2
+	 */
+	export interface UserUpdate extends Partial<Omit<UserCreate, 'username'>> {
+		id?: number;
+	}
+
 
 	/**
 	 * List Users.
 	 *
-	 * https://developer.wordpress.org/rest-api/reference/users/#arguments
+	 * @link https://developer.wordpress.org/rest-api/reference/users/#arguments
 	 */
 	export interface UsersQuery extends Global<User>{
 		page?: number | 1;
