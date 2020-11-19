@@ -40,6 +40,7 @@
   "devDependencies": {
     "@lipemat/js-boilerplate": ">=5.4.2",
     "@wordpress/api-fetch": "^3.18.0",
+    "@wordpress/blocks": "^6.24.1",
     "microbundle": "^0.12.3",
     "unfetch": "^4.1.0"
   },
