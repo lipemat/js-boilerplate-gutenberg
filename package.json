@@ -38,13 +38,13 @@
     "js-cookie": "^2.2.1"
   },
   "devDependencies": {
-    "@lipemat/js-boilerplate": ">=5.4.2",
-    "@wordpress/api-fetch": "^3.18.0",
+    "@lipemat/js-boilerplate": ">=5.7.1",
+    "@wordpress/api-fetch": "^3.20.0",
     "microbundle": "^0.12.3",
     "unfetch": "^4.1.0"
   },
   "peerDependencies": {
-    "@lipemat/js-boilerplate": ">=5.4.2"
+    "@lipemat/js-boilerplate": ">=5.7.1"
   },
   "scripts": {
     "build": "microbundle --external @wordpress/api-fetch,@wordpress/i18n,@wordpress/url --globals @wordpress/api-fetch=wp.apiFetch,@wordpress/i18n=wp.i18n,@wordpress/url=wp.url",
