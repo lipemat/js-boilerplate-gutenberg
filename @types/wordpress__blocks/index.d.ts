@@ -53,7 +53,9 @@ declare module '@wordpress/blocks' {
 		src: string;
 	}
 
-	// @link https://developer.wordpress.org/block-editor/developers/block-api/block-registration/
+	/**
+	 * @link https://developer.wordpress.org/block-editor/developers/block-api/block-registration/
+	 */
 	export type registerBlockType = <Attr, C = ''>( id: string, settings: {
 		title: string;
 		description?: string;
@@ -95,6 +97,11 @@ declare module '@wordpress/blocks' {
 		}
 		// Setting parent lets a block require that it is only available when nested within the specified blocks.
 		parent?: string[];
+		/**
+		 * Features this block supports.
+		 *
+		 * @link https://developer.wordpress.org/block-editor/developers/block-api/block-supports/
+		 */
 		supports?: {
 			align?: boolean | [ 'left' | 'right' | 'full' ]
 			// Remove the support for wide alignment.
@@ -105,6 +112,28 @@ declare module '@wordpress/blocks' {
 			customClassName?: boolean;
 			// Set to false to Remove the support for the generated className.
 			className?: boolean;
+			/**
+			 * Support color selections.
+			 *
+			 * @link https://developer.wordpress.org/block-editor/developers/block-api/block-supports/#color
+			 */
+			color?: {
+				background: boolean; // Enable background color UI control.
+				gradient: boolean; // Enable gradient color UI control.
+				text: boolean; // Enable text color UI control.
+			};
+			/**
+			 * Enable font size UI control.
+			 *
+			 * @link https://developer.wordpress.org/block-editor/developers/block-api/block-supports/#fontsize
+			 */
+			fontSize?: boolean;
+			/**
+			 * Enable line height UI control.
+			 *
+			 * @link https://developer.wordpress.org/block-editor/developers/block-api/block-supports/#lineheight
+			 */
+			lineHeight?: boolean;
 			// Set to false to Remove support for an HTML mode.
 			html?: boolean;
 			// Set to false to Hide this block from the inserter.
