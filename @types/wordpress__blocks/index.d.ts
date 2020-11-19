@@ -116,6 +116,8 @@ declare module '@wordpress/blocks' {
 		}
 		edit: ( attributes: BlockEditProps<Attr> ) => ReactElement;
 		save: ( attributes?: BlockEditProps<Attr> ) => ReactElement | null;
+		// To opt into version 2 https://make.wordpress.org/core/2020/11/18/block-api-version-2/
+		apiVersion?: 2
 	} ) => void;
 
 	/**
