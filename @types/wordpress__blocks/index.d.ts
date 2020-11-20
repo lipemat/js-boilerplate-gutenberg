@@ -44,6 +44,35 @@ declare module '@wordpress/blocks' {
 		isSelected: boolean
 	}
 
+	export type BlockVariation<Attr = Object> = {
+		name: string;
+		title: string;
+		description?: string;
+		icon?: Icon;
+		isDefault?: boolean;
+		attributes?: BlockAttributes<Attr>;
+		innerBlocks?: subBlocks;
+		example?: BlockExample<Attr>;
+		scope?: Array<'block' | 'inserter' | 'transform'>;
+		keywords?: string[];
+	}
+
+	export type BlockExample<Attr = Object> = {
+		attributes: Attr;
+		innerBlocks?: Array<{
+			name: string;
+			attributes: Object;
+		}>;
+	};
+
+	export type StyleVariation = {
+		name: string;
+		label: string;
+		isDefault?: boolean;
+	};
+
+	export type subBlocks = Array<[ string, Object, subBlocks?]>;
+
 	type Icon = iconType | {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.
 		background?: string;
@@ -63,33 +92,15 @@ declare module '@wordpress/blocks' {
 		// Svg | dashicon | configuration
 		icon: Icon;
 		keywords?: string[];
-		styles?: Array<{
-			name: string;
-			label: string;
-			isDefault?: boolean;
-		}>
+		styles?: Array<StyleVariation>;
 		/**
 		 * Only optional if registered on PHP side via `register_block_type_from_metadata`
 		 *
 		 * @link https://github.com/WordPress/gutenberg/blob/master/docs/designers-developers/developers/block-api/block-metadata.md
 		 */
 		attributes?: BlockAttributes<Attr>;
-		example?: {
-			attributes: Attr;
-		};
-		variations?: [ {
-			name: string;
-			title: string;
-			description?: string;
-			icon?: Icon;
-			isDefault?: boolean;
-			attributes?: Attr;
-			innerBlocks?: [[ string, {[attribute: string]: any}]];
-			example?: undefined | {
-				attributes: Attr;
-			};
-			scope?: Array<'block' | 'inserter'>;
-		} ];
+		example?: BlockExample<Attr>;
+		variations?: Array<BlockVariation<Attr>>;
 		// @todo type this if we end up ever using it.
 		transforms?: {
 			from: any
@@ -163,11 +174,57 @@ declare module '@wordpress/blocks' {
 		icon?: Icon;
 	} ) => void;
 
+	/**
+	 * Registers a new block style variation for the given block.
+	 *
+	 * @link https://developer.wordpress.org/block-editor/developers/filters/block-filters/#block-style-variations
+	 *
+	 * @param {string} blockName      Name of block (example: “core/latest-posts”).
+	 * @param {Object} styleVariation
+	 */
+	export type registerBlockStyle = ( blockName: string, styleVariation: StyleVariation ) => void;
+
+	/**
+	 * Unregisters a block style variation for the given block.
+	 *
+	 * @link https://developer.wordpress.org/block-editor/developers/filters/block-filters/#block-style-variations
+	 *
+	 * @param {string} blockName - Name of block (example: “core/latest-posts”).
+	 * @param {string} styleVariationName - Name of CSS class applied to the block.
+	 */
+	export type unregisterBlockStyle = ( blockName: string, styleVariationName: string ) => void;
+
+	/**
+	 * Registers a new block variation for an existing block type.
+	 *
+	 * @link https://make.wordpress.org/core/2020/02/27/introduce-block-variations-api/
+	 *
+	 * @param blockName - Name of the block (example: “core/columns”).
+	 * @param variation - Object describing a block variation.
+	 */
+	export type registerBlockVariation = <Attr>( blockName: string, variation: BlockVariation<Attr> ) => void;
+
+	/**
+	 * Unregisters a block variation defined for an existing block type.
+	 *
+	 * @param blockName - Name of the block (example: “core/columns”).
+	 * @param variationName - Name of the variation defined for the block.
+	 */
+	export type unregisterBlockVariation = ( blockName: string, variationName: string ) => void;
+
 	export const registerBlockCollection: registerBlockCollection;
 	export const registerBlockType: registerBlockType;
+	export const registerBlockStyle: registerBlockStyle;
+	export const unregisterBlockStyle: unregisterBlockStyle;
+	export const registerBlockVariation: registerBlockVariation;
+	export const unregisterBlockVariation: unregisterBlockVariation;
 
 	export default interface Blocks {
 		registerBlockCollection: registerBlockCollection;
-		registerBlockType: registerBlockType
+		registerBlockStyle: registerBlockStyle;
+		registerBlockType: registerBlockType;
+		unregisterBlockStyle: unregisterBlockStyle;
+		registerBlockVariation: registerBlockVariation;
+		unregisterBlockVariation: unregisterBlockVariation;
 	}
 }
