@@ -4,6 +4,7 @@
 declare module '@wordpress/block-editor' {
 	import {ComponentType, FunctionComponent, ReactElement} from 'react';
 	import {colorOptions, ColorPalette as PaletteComponent, PanelBody} from '@wordpress/components';
+	import {subBlocks} from '@wordpress/blocks';
 
 	type getColorClassName = ( prefix: string, slug: string ) => string;
 	type withColorContext = {
@@ -60,6 +61,19 @@ declare module '@wordpress/block-editor' {
 
 	}
 
+	/**
+	 * Support blocks inside your block.
+	 *
+	 * @link https://developer.wordpress.org/block-editor/tutorials/block-tutorial/nested-blocks-inner-blocks/
+	 */
+	interface InnerBlocks {
+		allowedBlocks: string[];
+		template: subBlocks;
+		orientation?: 'horizontal';
+		placeholder?: boolean;
+	}
+
+
 	// These are needed for mapping the compiler to the global variables when using imports.
 	export const ColorPalette: ComponentType<ColorPalette>;
 	export const ColorPaletteControl: ComponentType<ColorPaletteControl>;
@@ -67,6 +81,8 @@ declare module '@wordpress/block-editor' {
 	export const InspectorControls: InspectorControls;
 	export const PanelColorSettings: ComponentType<PanelColorSettings>;
 	export const RichText: ComponentType<RichText>;
+	export const InnerBlocks: InnerBlocks;
+
 	export default interface BlockEditor {
 		ColorPalette: ComponentType<ColorPalette>;
 		ColorPaletteControl: ComponentType<ColorPaletteControl>;
@@ -74,5 +90,6 @@ declare module '@wordpress/block-editor' {
 		InspectorControls: InspectorControls;
 		PanelColorSettings: ComponentType<PanelColorSettings>;
 		RichText: ComponentType<RichText>;
+		InnerBlocks: InnerBlocks;
 	}
 }
