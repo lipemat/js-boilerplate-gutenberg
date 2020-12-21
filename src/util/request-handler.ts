@@ -1,22 +1,21 @@
 import {parseAndThrowError, parseResponseAndNormalizeError} from './parse-response';
 import {__} from '@wordpress/i18n';
-import apiFetch, {FetchOptions, Middleware} from '@wordpress/api-fetch';
+import {FetchOptions, Middleware} from '@wordpress/api-fetch';
+import {getAllMiddleware} from './middleware';
 
 /**
- * Taken verbatim from @wordpress/api-fetch/src/index.js
- * `defaultFetchHandler` is not available via exports so we add it here.
+ * Taken from @wordpress/api-fetch/src/index.js
+ * `defaultFetchHandler` is not available via exports, so we add it here.
  *
  * Middleware may only be used once as they are called in order
  * and new ones are added to the beginning of the list.
- * Therefore we can't change arguments sent to window.fetch right before
+ * Therefore, we can't change arguments sent to window.fetch right before
  * it's sent and WP Core's middleware will always override ours.
  *
  * That is why this file exists to allow changing the arguments right
  * before sending, after WP Core does theirs.
  *
- * Calling `addMiddleware` automatically switched the request handler to
- * this custom one otherwise, the default apiFetch version is used.
- *
+ * Calling `wpapi` automatically switches the request handler to our.s
  */
 
 
@@ -52,42 +51,12 @@ const checkStatus = response => {
 	throw response;
 };
 
-const middlewares: Middleware<any>[] = [];
-
-/**
- * Add a middleware to be called right before the request fires.
- * Middlewares are chained with new ones being called last.
- *
- * Similar to `apiFetch.use` with the main difference being the order
- * they are called.
- *
- * @param middleware
- *
- * @return {number} index of middleware
- */
-export function addMiddleware<D>( middleware: Middleware<D> ): number {
-	apiFetch.setFetchHandler( defaultFetchHandler );
-	middlewares.push( middleware );
-	return Math.max( ...[ ...middlewares.keys() ] );
-}
-
-/**
- * Remove a particular middleware from the cue.
- *
- * @param index
- */
-export function removeMiddleware( index: number ): Middleware<any>[] {
-	delete middlewares[ index ];
-	return middlewares;
-}
-
-
 /**
  * @see apiFetch()
  * @param index
  * @param steps
  */
-const createRunStep = ( index: number, steps: Middleware<any>[] ) => ( workingOptions: FetchOptions<any> ): FetchOptions<any> => {
+export const createRunStep = ( index: number, steps: Middleware<any>[] ) => ( workingOptions: FetchOptions<any> ): FetchOptions<any> => {
 	if ( 'undefined' === typeof steps[ index ] ) {
 		return workingOptions;
 	}
@@ -102,7 +71,7 @@ const createRunStep = ( index: number, steps: Middleware<any>[] ) => ( workingOp
 
 
 export const defaultFetchHandler = nextOptions => {
-	const options = createRunStep( 0, middlewares.filter( Boolean ) )( {
+	const options = createRunStep( 0, getAllMiddleware().filter( Boolean ) )( {
 		...DEFAULT_OPTIONS,
 		...nextOptions,
 	} );

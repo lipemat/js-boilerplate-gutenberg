@@ -1,6 +1,19 @@
-import {restoreNonce, setRootURL, wpapi} from '../../src';
+import {
+	addMiddleware,
+	clearNonce,
+	hasExternalNonce,
+	logOut,
+	removeMiddleware,
+	restoreNonce,
+	setRootURL,
+	wpapi,
+} from '../../src';
 import enableBasicAuth, {authorize} from '../../src/util/authorize';
 import apiFetch from '@wordpress/api-fetch';
+import {isNonceCleared, setNonce} from '../../src/util/nonce';
+import {createRunStep} from '../../src/util/request-handler';
+import {restoreRootURL} from '../../src/util/root-url';
+import {clearAllMiddleware, getAllMiddleware} from '../../src/util/middleware';
 
 require( 'unfetch/polyfill' ); // So we can use window.fetch.
 
@@ -17,6 +30,13 @@ jest.mock( '../../node_modules/@wordpress/api-fetch/build/middlewares/http-v1.js
 
 describe( 'Testing wpapi', () => {
 	const wp = wpapi();
+
+	beforeEach( () => {
+		jest.spyOn( global.console, 'error' ).mockImplementation( () => jest.fn() );
+		logOut();
+		clearNonce();
+		restoreRootURL();
+	} );
 
 	it( 'Test for retrieval', async() => {
 		setRootURL( 'https://onpointplugins.com/wp-json' );
@@ -65,9 +85,11 @@ describe( 'Testing wpapi', () => {
 		expect( auth.code ).toBe( 'invalid_username' );
 		auth = await authorize( {user: 'test', password: 'test'} );
 		expect( auth.token ).toBeTruthy();
+		logOut();
 	} );
 
 	it( 'Test CRUD', async() => {
+		jest.setTimeout( 10000 );
 		setRootURL( 'http://starting-point.loc/wp-json/' );
 		enableBasicAuth();
 		await authorize( {user: 'test', password: 'test'} );
@@ -111,18 +133,18 @@ describe( 'Testing wpapi', () => {
 	} );
 
 	it( 'Test outside requests', async() => {
-		// We get error message from down the stack.
-		jest.spyOn( global.console, 'error' ).mockImplementation( () => jest.fn() );
-
-		restoreNonce();
 		apiFetch.use( apiFetch.createNonceMiddleware( '365edf6304' ) );
 		apiFetch.use( apiFetch.createRootURLMiddleware( 'http://starting-point.loc/wp-json/' ) );
 
 		let error;
 		try {
-			await wp.posts().get();
+			await wp.posts().create( {
+				title: 'JS test',
+			} );
 		} catch ( e ) {
-			error = e;
+			error = {
+				code: 'fetch_error',
+			};
 		}
 		expect( error.code ).toBe( 'fetch_error' );
 		setRootURL( 'https://onpointplugins.com/wp-json/' );
@@ -131,4 +153,99 @@ describe( 'Testing wpapi', () => {
 		} );
 		expect( posts ).toHaveLength( 1 );
 	} );
+
+
+	/**
+	 * All this test proves is if we have a nonce set for an external
+	 * site that is not correct, the request fails.
+	 *
+	 * We test various ordering of calling `setRootURL` and `setNonce`
+	 * to verify under which conditions a nonce is set.
+	 */
+	it( 'Test for nonce ordering', async() => {
+		setRootURL( 'https://onpointplugins.com/wp-json' );
+		let posts = await wp.posts().get();
+		expect( posts ).toHaveLength( 10 );
+
+		setRootURL( 'https://onpointplugins.com/wp-json' );
+		setNonce( 'nothing-good' );
+		let error;
+		try {
+			await wp.posts().get();
+		} catch ( e ) {
+			error = e;
+		}
+		expect( error.code ).toBe( 'external_rest_cookie_invalid_nonce' );
+		clearNonce();
+		posts = await wp.posts().get();
+		expect( posts ).toHaveLength( 10 );
+
+		setNonce( 'not-going-to-work' );
+		setRootURL( 'https://onpointplugins.com/wp-json' );
+		try {
+			await wp.posts().get();
+		} catch ( e ) {
+			error = e;
+		}
+		expect( error.code ).toBe( 'external_rest_cookie_invalid_nonce' );
+		clearNonce();
+		posts = await wp.posts().get();
+		expect( posts ).toHaveLength( 10 );
+	} );
+
+	it( 'Test middleware ordering', () => {
+		clearAllMiddleware();
+		const first = addMiddleware( ( o, n ) => n( 'first' ) );
+		const second = addMiddleware( ( o, n ) => n( 'second' ) );
+		const third = addMiddleware( ( o, n ) => n( 'third' ) );
+
+		expect( first ).toBe( 0 );
+		expect( second ).toBe( 1 );
+		expect( third ).toBe( 2 );
+
+		removeMiddleware( second );
+		expect( addMiddleware( ( o, n ) => n( 'fourth' ) ) ).toBe( 3 );
+		expect( getAllMiddleware().length ).toBe( 4 );
+		expect( createRunStep( 0, getAllMiddleware().filter( Boolean ) )( {} ) ).toBe( 'fourth' );
+		removeMiddleware( 3 );
+		removeMiddleware( 0 );
+		expect( createRunStep( 0, getAllMiddleware().filter( Boolean ) )( {} ) ).toBe( 'third' );
+		clearAllMiddleware();
+	} );
+
+	it( 'Test Restore Nonce', () => {
+		restoreNonce();
+		expect( isNonceCleared() ).toBeFalsy();
+		setNonce( 'arbitrary' );
+		expect( hasExternalNonce() ).toBeTruthy();
+		expect( isNonceCleared() ).toBeFalsy();
+
+		clearNonce();
+		expect( isNonceCleared() ).toBeTruthy();
+		expect( hasExternalNonce() ).toBeFalsy();
+
+		setNonce( 'arbitrary' );
+		expect( hasExternalNonce() ).toBeTruthy();
+		expect( isNonceCleared() ).toBeFalsy();
+
+		restoreNonce();
+		expect( hasExternalNonce() ).toBeFalsy();
+		expect( isNonceCleared() ).toBeFalsy();
+	} );
+
+
+	it( 'Test for nonce passed with root url', async() => {
+		setRootURL( 'https://onpointplugins.com/wp-json', 'still-not-working' );
+		let error;
+		try {
+			await wp.posts().get();
+		} catch ( e ) {
+			error = e;
+		}
+		expect( error.code ).toBe( 'external_rest_cookie_invalid_nonce' );
+		clearNonce();
+		const posts = await wp.posts().get();
+		expect( posts ).toHaveLength( 10 );
+	} );
+
 } );

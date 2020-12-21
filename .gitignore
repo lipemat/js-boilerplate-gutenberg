@@ -6,7 +6,6 @@
 .cvs
 *.bak
 *.swp
-.idea
 .sass-cache
 .project
 *.sublime-project
@@ -15,6 +14,9 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Lock file which is never used as this is a library
+yarn.lock
 
 # Logs
 logs
@@ -82,3 +84,29 @@ dist
 /.rts2_cache_umd/
 /.rts2_cache_es/
 /.rts2_cache_cjs/
+
+# PHPStorm files
+# https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore
+# User-specific stuff
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+.idea/php.xml
+.idea/sshConfigs.xml
+# Generated files
+.idea/**/contentModel.xml
+# Sensitive or high-churn files
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
+# JIRA plugin
+atlassian-ide-plugin.xml
+# Editor-based Rest Client
+.idea/httpRequests
+

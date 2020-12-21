@@ -1,7 +1,7 @@
 {
   "extends": "@lipemat/js-boilerplate/config/tsconfig.json",
   "compilerOptions": {
-    "module": "ESNext"
+    "module": "commonjs"
   },
   "include": [
     "./src/**/*.ts"
