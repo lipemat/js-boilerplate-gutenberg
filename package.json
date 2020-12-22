@@ -1,7 +1,10 @@
 {
   "name": "@lipemat/js-boilerplate-gutenberg",
-  "description": "Gutenberg extension for @lipemat/js-boilerplate",
   "version": "2.0.0-beta-1",
+  "description": "Gutenberg extension for @lipemat/js-boilerplate",
+  "engines": {
+    "node": ">=14.15.3 <15.0.0"
+  },
   "license": "MIT",
   "main": "dist/index.js",
   "umd:main": "dist/index.umd.js",
@@ -32,19 +35,16 @@
   "homepage": "https://github.com/lipemat/js-boilerplate-gutenberg#readme",
   "dependencies": {
     "@types/lipemat-js-boilerplate": "https://github.com/lipemat/types-js-boilerplate.git#semver:^v1.0.0-beta-4",
-    "@wordpress/api-fetch": "^3.11.0",
-    "@wordpress/i18n": "^3.9.0",
-    "@wordpress/url": "^2.15.0",
     "js-cookie": "^2.2.1"
   },
   "devDependencies": {
-    "@lipemat/js-boilerplate": ">=5.7.1",
+    "@lipemat/js-boilerplate": ">=6.0.0-beta-13",
     "@wordpress/api-fetch": "^3.20.0",
     "microbundle": "^0.12.3",
     "unfetch": "^4.1.0"
   },
   "peerDependencies": {
-    "@lipemat/js-boilerplate": ">=5.7.1"
+    "@lipemat/js-boilerplate": ">=6.0.0-beta-13"
   },
   "scripts": {
     "build": "microbundle --external @wordpress/api-fetch,@wordpress/i18n,@wordpress/url --globals @wordpress/api-fetch=wp.apiFetch,@wordpress/i18n=wp.i18n,@wordpress/url=wp.url",
