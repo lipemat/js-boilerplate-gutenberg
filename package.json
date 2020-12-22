@@ -31,10 +31,7 @@
   },
   "homepage": "https://github.com/lipemat/js-boilerplate-gutenberg#readme",
   "dependencies": {
-    "@types/classnames": "^2.2.9",
-    "@types/js-cookie": "^2.2.4",
-    "@types/lipemat-js-boilerplate": "https://github.com/lipemat/types-js-boilerplate.git",
-    "@types/tinymce": "^4.5.23",
+    "@types/lipemat-js-boilerplate": "https://github.com/lipemat/types-js-boilerplate.git#semver:^v1.0.0-beta-4",
     "@wordpress/api-fetch": "^3.11.0",
     "@wordpress/i18n": "^3.9.0",
     "@wordpress/url": "^2.15.0",
