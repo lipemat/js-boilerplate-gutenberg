@@ -1,11 +1,16 @@
-import {clearApplicationPassword, getAuthorizationUrl, hasApplicationPassword, setRootURL, wpapi} from '../../../src';
-import enableApplicationPassword from '../../../src/util/authorize';
+import {
+	clearApplicationPassword,
+	enableApplicationPassword,
+	getAuthorizationUrl,
+	hasApplicationPassword,
+	setRootURL,
+	wpapi,
+} from '../../../src';
 
 describe( 'Testing authorize', () => {
 	const wp = wpapi();
 
 	beforeEach( () => {
-		jest.spyOn( global.console, 'error' ).mockImplementation( () => jest.fn() );
 		setRootURL( 'http://starting-point.loc/wp-json/' );
 		clearApplicationPassword();
 	} );
