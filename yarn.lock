@@ -1704,7 +1704,6 @@ __metadata:
     "@lipemat/js-boilerplate": 6.0.0-beta.20
     "@types/lipemat-js-boilerplate": "lipemat/types-js-boilerplate#semver:^1.0.0"
     "@wordpress/api-fetch": ^3.20.0
-    "@wordpress/url": ^2.19.0
     eslint: ^6
     jest-cli: ^26
     js-cookie: ^2.2.1
@@ -2754,7 +2753,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@wordpress/url@npm:^2.19.0, @wordpress/url@npm:^2.20.0":
+"@wordpress/url@npm:^2.20.0":
   version: 2.20.0
   resolution: "@wordpress/url@npm:2.20.0"
   dependencies:

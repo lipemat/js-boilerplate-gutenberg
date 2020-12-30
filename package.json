@@ -39,7 +39,6 @@
   "devDependencies": {
     "@lipemat/js-boilerplate": "6.0.0-beta.20",
     "@wordpress/api-fetch": "^3.20.0",
-    "@wordpress/url": "^2.19.0",
     "eslint": "^6",
     "jest-cli": "^26",
     "microbundle": "^0.12.3",
