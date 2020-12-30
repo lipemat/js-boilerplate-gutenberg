@@ -2,38 +2,22 @@ import {
 	addMiddleware,
 	clearNonce,
 	hasExternalNonce,
-	logOut,
 	removeMiddleware,
 	restoreNonce,
 	setRootURL,
 	wpapi,
 } from '../../src';
-import enableBasicAuth, {authorize} from '../../src/util/authorize';
 import apiFetch from '@wordpress/api-fetch';
 import {isNonceCleared, setNonce} from '../../src/util/nonce';
 import {createRunStep} from '../../src/util/request-handler';
 import {restoreRootURL} from '../../src/util/root-url';
 import {clearAllMiddleware, getAllMiddleware} from '../../src/util/middleware';
 
-require( 'unfetch/polyfill' ); // So we can use window.fetch.
-
-/**
- * The Http-V1 middleware from apiFetch translates the method
- * into `X-HTTP-Method-Override` which breaks during jsdom requests.
- *
- * We mock it here to simply skip this middleware.
- */
-jest.mock( '@wordpress/api-fetch/build/middlewares/http-v1.js', () => ( options, next ) => {
-	return next( options, next );
-} );
-
-
 describe( 'Testing wpapi', () => {
 	const wp = wpapi();
 
 	beforeEach( () => {
 		jest.spyOn( global.console, 'error' ).mockImplementation( () => jest.fn() );
-		logOut();
 		clearNonce();
 		restoreRootURL();
 	} );
@@ -79,58 +63,6 @@ describe( 'Testing wpapi', () => {
 		expect( posts[ 0 ].content ).toBe( undefined );
 	} );
 
-	it( 'Test basic auth', async() => {
-		setRootURL( 'http://starting-point.loc/wp-json/' );
-		let auth = await authorize( {user: 'testxxx', password: 'testxx'} );
-		expect( auth.code ).toBe( 'invalid_username' );
-		auth = await authorize( {user: 'test', password: 'test'} );
-		expect( auth.token ).toBeTruthy();
-		logOut();
-	} );
-
-	it( 'Test CRUD', async() => {
-		jest.setTimeout( 10000 );
-		setRootURL( 'http://starting-point.loc/wp-json/' );
-		enableBasicAuth();
-		await authorize( {user: 'test', password: 'test'} );
-
-		const post = await wp.posts().create( {
-			title: 'From JS Unit',
-			status: 'publish',
-		} );
-		expect( post ).toStrictEqual( await wp.posts().getById( post.id, {context: 'edit'} ) );
-
-		const result = await wp.posts().update( {
-			id: post.id,
-			content: 'XXXX',
-			title: {
-				raw: 'TTTT',
-			},
-		} );
-		expect( result.title.raw ).toBe( 'TTTT' );
-		expect( result.content.raw ).toBe( 'XXXX' );
-		const updated = await wp.posts().getById( post.id );
-		expect( updated.content.rendered ).toBe( '<p>XXXX</p>\n' );
-
-		let trashed = await wp.posts().trash( post.id );
-		expect( trashed.status ).toBe( 'trash' );
-		expect( trashed.id ).toBe( post.id );
-		trashed = await wp.posts().getById( post.id );
-		expect( trashed.id ).toBe( post.id );
-		expect( trashed.status ).toBe( 'trash' );
-
-		const deleted = await wp.posts().delete( trashed.id );
-		expect( deleted.deleted ).toBeTruthy();
-		expect( deleted.previous.id ).toBe( trashed.id );
-		let error;
-		try {
-			await wp.posts().getById( trashed.id );
-		} catch ( e ) {
-			error = e;
-		}
-		expect( error.code ).toBe( 'rest_post_invalid_id' );
-
-	} );
 
 	it( 'Test outside requests', async() => {
 		apiFetch.use( apiFetch.createNonceMiddleware( '365edf6304' ) );

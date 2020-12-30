@@ -5,8 +5,7 @@ let clearNonceMiddleware: number | undefined;
 let setNonceMiddleware: number | undefined;
 
 /**
- * Do have a nonce manually set?
- *
+ * Do we have a nonce manually set?
  */
 export function hasExternalNonce(): boolean {
 	return 'undefined' !== typeof setNonceMiddleware;

@@ -2829,10 +2829,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "npm:26.6.2"
       ],
       [
-        "js-cookie",
-        "npm:2.2.1"
-      ],
-      [
         "js-tokens",
         "npm:4.0.0"
       ],
@@ -4936,8 +4932,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/lipemat-js-boilerplate", "https://github.com/lipemat/types-js-boilerplate.git#commit=0bb712ed87229700fdbdd244d41a334f3be01fe7"],
             ["@wordpress/api-fetch", "npm:3.21.0"],
             ["eslint", "npm:6.8.0"],
-            ["jest-cli", "npm:26.6.3"],
-            ["js-cookie", "npm:2.2.1"],
+            ["jest", "npm:26.6.3"],
             ["microbundle", "npm:0.12.4"],
             ["typescript", "patch:typescript@npm%3A4.1.3#builtin<compat/typescript>::version=4.1.3&hash=cc6730"],
             ["unfetch", "npm:4.2.0"]
@@ -7852,8 +7847,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/lipemat-js-boilerplate", "https://github.com/lipemat/types-js-boilerplate.git#commit=0bb712ed87229700fdbdd244d41a334f3be01fe7"],
             ["@wordpress/api-fetch", "npm:3.21.0"],
             ["eslint", "npm:6.8.0"],
-            ["jest-cli", "npm:26.6.3"],
-            ["js-cookie", "npm:2.2.1"],
+            ["jest", "npm:26.6.3"],
             ["microbundle", "npm:0.12.4"],
             ["typescript", "patch:typescript@npm%3A4.1.3#builtin<compat/typescript>::version=4.1.3&hash=cc6730"],
             ["unfetch", "npm:4.2.0"]
@@ -15855,15 +15849,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:14.14.16"],
             ["merge-stream", "npm:2.0.0"],
             ["supports-color", "npm:7.2.0"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["js-cookie", [
-        ["npm:2.2.1", {
-          "packageLocation": "./.yarn/cache/js-cookie-npm-2.2.1-e879cd2148-c110f78427.zip/node_modules/js-cookie/",
-          "packageDependencies": [
-            ["js-cookie", "npm:2.2.1"]
           ],
           "linkType": "HARD",
         }]
