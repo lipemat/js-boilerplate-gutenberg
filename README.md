@@ -15,6 +15,16 @@ yarn add @lipemat/js-boilerplate-gutenberg
 
 ### TypeScript
 
-Due to requirements created by Yarn [PNP](https://classic.yarnpkg.com/en/docs/pnp/), the Gutenberg type definitions have been moved to an [outside library](https://github.com/lipemat/-types-lipemat-gutenberg) and will be maintained there.
+Due to requirements created by Yarn [PNP](https://yarnpkg.com/features/pnp), the Gutenberg type definitions have been moved to an [outside library](https://github.com/lipemat/-types-lipemat-gutenberg) and will be maintained there.
 
-The definitions are included within the package.json and should not require any additional steps to access them.
+If you are not using PNP, the definitions are included in this package's `package.json` so there are no additional steps to use them.
+
+If you are using PNP you may add the definitions to your `package.json` like so.
+
+```JSON 
+"dependencies": {
+    "@types/lipemat-js-boilerplate": "lipemat/types-js-boilerplate#semver:^1.0.0"
+  }
+```
+
+
