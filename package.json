@@ -23,7 +23,6 @@
     "helpers/",
     "src/"
   ],
-  "private": false,
   "sideEffects": false,
   "repository": {
     "type": "git",
@@ -38,16 +37,21 @@
     "js-cookie": "^2.2.1"
   },
   "devDependencies": {
-    "@lipemat/js-boilerplate": ">=6.0.0-beta-13",
+    "@lipemat/js-boilerplate": "6.0.0-beta.20",
     "@wordpress/api-fetch": "^3.20.0",
+    "@wordpress/url": "^2.19.0",
+    "eslint": "^6",
+    "jest-cli": "^26",
     "microbundle": "^0.12.3",
+    "typescript": "^4",
     "unfetch": "^4.1.0"
   },
   "peerDependencies": {
-    "@lipemat/js-boilerplate": ">=6.0.0-beta-13"
+    "@lipemat/js-boilerplate": ">=6.0.0-beta.20"
   },
   "scripts": {
     "build": "microbundle --external @wordpress/api-fetch,@wordpress/i18n,@wordpress/url --globals @wordpress/api-fetch=wp.apiFetch,@wordpress/i18n=wp.i18n,@wordpress/url=wp.url",
+    "postinstall": "lipemat-js-boilerplate fix-pnp",
     "prepublishOnly": "rm -rf dist/* && yarn run build",
     "test": "lipemat-js-boilerplate test",
     "watch": "microbundle watch --external @wordpress/api-fetch,@wordpress/i18n,@wordpress/url --globals @wordpress/api-fetch=wp.apiFetch,@wordpress/i18n=wp.i18n,@wordpress/url=wp.url"

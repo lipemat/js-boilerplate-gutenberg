@@ -18,12 +18,12 @@ import {clearAllMiddleware, getAllMiddleware} from '../../src/util/middleware';
 require( 'unfetch/polyfill' ); // So we can use window.fetch.
 
 /**
- * The Http-V1 middleware from apiFetch is translates the method
+ * The Http-V1 middleware from apiFetch translates the method
  * into `X-HTTP-Method-Override` which breaks during jsdom requests.
  *
  * We mock it here to simply skip this middleware.
  */
-jest.mock( '../../node_modules/@wordpress/api-fetch/build/middlewares/http-v1.js', () => ( options, next ) => {
+jest.mock( '@wordpress/api-fetch/build/middlewares/http-v1.js', () => ( options, next ) => {
 	return next( options, next );
 } );
 
