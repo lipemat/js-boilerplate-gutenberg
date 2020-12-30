@@ -119,7 +119,7 @@ export async function getAuthorizationUrl( data: AuthorizationParams ): Promise<
 /**
  * Authorize a user via the native REST authentication.
  *
- * Adds a known application password to all requests.
+ * Adds a known application password to all subsequent requests.
  *
  * @link https://make.wordpress.org/core/2020/11/05/application-passwords-integration-guide/
  *
