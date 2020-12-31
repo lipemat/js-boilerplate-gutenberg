@@ -9,6 +9,7 @@ import {
 
 describe( 'Testing authorize', () => {
 	const wp = wpapi();
+	const PASSWORD = 'J3wb fq94 xlqk YdGI my9E 8egk';
 
 	beforeEach( () => {
 		setRootURL( 'http://starting-point.loc/wp-json/' );
@@ -29,7 +30,7 @@ describe( 'Testing authorize', () => {
 
 	it( 'Test clear of application password', async() => {
 		expect( hasApplicationPassword() ).toBeFalsy();
-		enableApplicationPassword( 'test', 'nnDn zPX6 5Fqc 21tG zLH0 Rtep' );
+		enableApplicationPassword( 'test', PASSWORD );
 		expect( hasApplicationPassword() ).toBeTruthy();
 		clearApplicationPassword();
 		expect( hasApplicationPassword() ).toBeFalsy();
@@ -38,7 +39,7 @@ describe( 'Testing authorize', () => {
 
 	it( 'Test CRUD', async() => {
 		jest.setTimeout( 10000 );
-		enableApplicationPassword( 'test', 'nnDn zPX6 5Fqc 21tG zLH0 Rtep' );
+		enableApplicationPassword( 'test', PASSWORD );
 
 		const post = await wp.posts().create( {
 			title: 'From JS Unit',

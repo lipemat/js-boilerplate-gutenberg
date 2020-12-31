@@ -27,7 +27,7 @@ If you are using PNP you may add the definitions to your `package.json` like so.
 
 ```JSON 
 "dependencies": {
-    "@types/lipemat-js-boilerplate": "lipemat/types-js-boilerplate#semver:^1.0.0"
+    "@types/lipemat__js-boilerplate": "lipemat/types-js-boilerplate#semver:^1.0.0"
   }
 ```
 

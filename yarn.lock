@@ -1701,8 +1701,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@lipemat/js-boilerplate-gutenberg@workspace:."
   dependencies:
-    "@lipemat/js-boilerplate": 6.0.0-beta.20
-    "@types/lipemat-js-boilerplate": "lipemat/types-js-boilerplate#semver:^1.0.0"
+    "@lipemat/js-boilerplate": 6.0.0-beta.21
+    "@types/lipemat__js-boilerplate": "lipemat/types-js-boilerplate#semver:^1.1.0"
     "@wordpress/api-fetch": ^3.20.0
     eslint: ^6
     jest: ^26
@@ -1714,9 +1714,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@lipemat/js-boilerplate@npm:6.0.0-beta.20":
-  version: 6.0.0-beta.20
-  resolution: "@lipemat/js-boilerplate@npm:6.0.0-beta.20"
+"@lipemat/js-boilerplate@npm:6.0.0-beta.21":
+  version: 6.0.0-beta.21
+  resolution: "@lipemat/js-boilerplate@npm:6.0.0-beta.21"
   dependencies:
     "@babel/core": ^7.4.3
     "@babel/plugin-syntax-dynamic-import": ^7.8.3
@@ -1729,7 +1729,7 @@ __metadata:
     "@lipemat/eslint-config": ^1.0.0-beta-3
     "@lipemat/postcss-loader": ^3.1.2
     "@lipemat/webpack-cleanup-plugin": ^1.0.0
-    "@types/lipemat-js-boilerplate": "github:lipemat/types-js-boilerplate#semver:^1.0.0"
+    "@types/lipemat__js-boilerplate": "github:lipemat/types-js-boilerplate#semver:^1.0.0"
     babel-jest: ^24.7.1
     babel-loader: ^8.0.5
     classnames: ^2.2.6
@@ -1771,7 +1771,7 @@ __metadata:
     webpack-subresource-integrity: ^1.5.2
   bin:
     lipemat-js-boilerplate: bin/lipemat-js-boilerplace.js
-  checksum: 7fa085657ee7e32c1b9ed615cb2efea3eac430db0ca184d5e8c6e0549c2ad11a1af61b1aa75864441cd60c518fc9b927df264ecb8ce73a002b649b62462ce0ff
+  checksum: 1b96a28aaafca570a345c9a9e133eae5975d571d194f39a27384c102da5747cc5c23f36d7172d96442317705abf811bbaa40962fbdce68ff2f9c672c6929bea8
   languageName: node
   linkType: hard
 
@@ -2165,9 +2165,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lipemat-js-boilerplate@github:lipemat/types-js-boilerplate#semver:^1.0.0, @types/lipemat-js-boilerplate@lipemat/types-js-boilerplate#semver:^1.0.0":
-  version: 1.0.0
-  resolution: "@types/lipemat-js-boilerplate@https://github.com/lipemat/types-js-boilerplate.git#commit=0bb712ed87229700fdbdd244d41a334f3be01fe7"
+"@types/lipemat__js-boilerplate@github:lipemat/types-js-boilerplate#semver:^1.0.0, @types/lipemat__js-boilerplate@lipemat/types-js-boilerplate#semver:^1.1.0":
+  version: 1.1.0
+  resolution: "@types/lipemat__js-boilerplate@https://github.com/lipemat/types-js-boilerplate.git#commit=3b56612151cb5feccef307f1cc4d0b6e945ac7da"
   dependencies:
     "@types/classnames": ^2.2.9
     "@types/jest": ^24.0.19
@@ -2178,7 +2178,7 @@ __metadata:
     "@types/react-router-dom": ^4.3.4
     "@types/react-transition-group": ^4.2.4
     "@types/tinymce": ^4.5.23
-  checksum: eedb3e340f202900a4f840f14f5683297833db153b087c09147ff03405d33cc7039de0a13a4489a51bc056c1ec5be460d37faf90d7cdf022896b3035ddd2b3c0
+  checksum: d73d1d598dbf0943b9601ec84f6eb949e486671e24c320445f16814bcfc7ffef59bc8891fcb3ce8d4a5fac00d768beaebb04492bec28b9f0d485a73eba8d7fb7
   languageName: node
   linkType: hard
 
@@ -2190,9 +2190,9 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:*":
-  version: 14.14.16
-  resolution: "@types/node@npm:14.14.16"
-  checksum: 220a7496ec73861ad7fb4ae762618bb46ac9d5d5f92f3a2fcebfd1a81a509ff558eface7bcd1d632598a8a28f856a74b324e7165918e8334a59c221cb06d15e3
+  version: 14.14.17
+  resolution: "@types/node@npm:14.14.17"
+  checksum: 2bb32c683d8446128cf3240b4af6cc884c6ee006a845d1901becadc46255d1263bf265abde5ccb37a09d9a318fc3964d07afc941d52544f2d7f249dbb28d9420
   languageName: node
   linkType: hard
 
