@@ -1,6 +1,6 @@
 {
   "name": "@lipemat/js-boilerplate-gutenberg",
-  "version": "2.0.0-beta.6",
+  "version": "2.0.0",
   "description": "Gutenberg extension for @lipemat/js-boilerplate",
   "engines": {
     "node": ">=14.15.3"
@@ -36,7 +36,7 @@
     "@types/lipemat__js-boilerplate": "lipemat/types-js-boilerplate#semver:^1.1.0"
   },
   "devDependencies": {
-    "@lipemat/js-boilerplate": "6.0.0-beta.21",
+    "@lipemat/js-boilerplate": "6.0.0",
     "@wordpress/api-fetch": "^3.20.0",
     "eslint": "^6",
     "jest": "^26",
@@ -45,7 +45,7 @@
     "unfetch": "^4.1.0"
   },
   "peerDependencies": {
-    "@lipemat/js-boilerplate": ">=6.0.0-beta.20"
+    "@lipemat/js-boilerplate": ">=6.0.0"
   },
   "scripts": {
     "build": "microbundle --external @wordpress/api-fetch,@wordpress/i18n,@wordpress/url --globals @wordpress/api-fetch=wp.apiFetch,@wordpress/i18n=wp.i18n,@wordpress/url=wp.url",
