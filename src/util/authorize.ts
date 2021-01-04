@@ -1,21 +1,26 @@
 /**
- * Middleware to handling basic authentication.
+ * Middleware to handling Application Password authentication.
  *
- * The site running the Rest API must support basic authentication.
- * Works out of the box with `Lipe\Lib\Rest_Api`
+ * The site running the Rest API must have applications passwords enabled.
+ * 1. Be running 5.6+ or have the application passwords plugin installed.
+ * 2. Have SSL or 'WP_ENVIRONMENT_TYPE' set to 'local'.
  *
- * @link https://github.com/lipemat/wordpress-libs/blob/master/src/Rest_Api/Login.php
+ * @link https://make.wordpress.org/core/2020/11/05/application-passwords-integration-guide/
  *
- * @see E:\SVN\starting-point\wp-content\mu-plugins\rest-authentication.php
  */
-import Cookies from 'js-cookie';
 import apiFetch from '@wordpress/api-fetch';
 import {__} from '@wordpress/i18n';
+import {addQueryArgs} from '@wordpress/url';
+import {addMiddleware, removeMiddleware} from './middleware';
 
-export interface AuthenticationResult {
-	user_id: number, // eslint-disable-line camelcase
-	token: string;
-	expires: string;
+export interface AuthenticationRestRoute {
+	authentication: {
+		'application-passwords'?: {
+			endpoints: {
+				authorization: string
+			}
+		}
+	}
 }
 
 export interface AuthenticationFailure {
@@ -24,100 +29,120 @@ export interface AuthenticationFailure {
 	data: any
 }
 
-export interface Credentials {
-	user: string;
-	password: string;
+export interface AuthorizationParams {
+	/* eslint-disable camelcase */
+	/**
+	 * Plain text application identifier.
+	 */
+	app_name: string;
+	/**
+	 * UUID to identify the application.
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/wp_generate_uuid4/
+	 * @link https://www.uuidgenerator.net/
+	 */
+	app_id?: string; // Must be a UUID.
+	/**
+	 * URL the user will be redirected to after authorization.
+	 * Supports app links (e.g. myapp://).
+	 *
+	 * Must be an https or application URL.
+	 *
+	 * If omitted, will display a password to the user.
+	 */
+	success_url?: string;
+	/**
+	 * URL the user will be redirected to after authorization.
+	 * Supports app links (e.g. myapp://).
+	 *
+	 * Must be an https or application URL.
+	 *
+	 * If omitted will use `success_url` with `?success=false` appended.
+	 * If `success_url` is also omitted will direct to WP dashboard.
+	 */
+	reject_url?: string;
+	/* eslint-enable camelcase */
 }
 
-const COOKIE = '@lipemat/js-boilerplate-gutenberg/util/basic-auth/token';
-
-export function isLoggedIn(): boolean {
-	return false !== getCurrentAuth();
-}
-
-export function getCurrentAuth(): AuthenticationResult | false {
-	const cookieValue = Cookies.get( COOKIE );
-	return ! cookieValue ? false : JSON.parse( cookieValue );
-}
+let applicationPasswordMiddleware: number | undefined;
 
 /**
- * Logout the currently authorized user.
- *
- * Returns true if a user was logged in and false
- * if they were not.
- *
- * @return boolean
+ * Do we have an application password set?
  */
-export function logOut(): boolean {
-	if ( getCurrentAuth() ) {
-		Cookies.remove( COOKIE );
-		return true;
+export function hasApplicationPassword(): boolean {
+	return 'undefined' !== typeof applicationPasswordMiddleware;
+}
+
+
+/**
+ * Remove any previously set application password.
+ */
+export function clearApplicationPassword(): void {
+	if ( 'undefined' !== typeof applicationPasswordMiddleware ) {
+		removeMiddleware( applicationPasswordMiddleware );
+		applicationPasswordMiddleware = undefined;
 	}
-	return false;
 }
 
 /**
- * Log a user in and set a cookie to be used on all REST requests.
- * Cookie expires (typically after 7 days) so you must check `isLoggedIn` from
- * time to time and log the user in again.
+ * Retrieve the URL to the application password endpoint on the current site.
  *
- * Should only be called once per application vs before every request.
+ * Used to redirect your user to a WP site which they have an account on, then
+ * the WP site redirects the user back to your app with the application password
+ * included.
  *
- * @param {Credentials} credentials - Credentials
- * @param {string} path - Path of REST endpoint for logging in (defaults to `Lipe\Lib\Rest_Api's endpoint)
+ * @link https://make.wordpress.org/core/2020/11/05/application-passwords-integration-guide/
+ * @link http://starting-point.loc/wp-admin/authorize-application.php
  *
+ * @param {AuthorizationParams} data
  */
-export async function authorize( credentials: Credentials, path: string = '/auth/v1/login/' ): Promise<AuthenticationResult | AuthenticationFailure> {
-	if ( ! isLoggedIn() ) {
-		try {
-			const response = await apiFetch<AuthenticationResult>( {
-				path,
-				method: 'POST',
-				headers: {
-					Authorization: 'Basic ' + btoa( credentials.user + ':' + credentials.password ),
-				},
-			} );
+export async function getAuthorizationUrl( data: AuthorizationParams ): Promise<string | AuthenticationFailure> {
+	try {
+		const response = await apiFetch<AuthenticationRestRoute>( {
+			path: '/',
+			method: 'GET',
+		} );
 
-			if ( response.token ) {
-				const expires = new Date( response.expires.replace( ' ', 'T' ) );
-				Cookies.set( COOKIE, response, {expires} );
-			}
-			return response;
-		} catch ( error ) {
-			return error;
+		if ( ! response.authentication[ 'application-passwords' ] ) {
+			return {
+				code: 'application_passwords_disabled',
+				message: __( 'Application passwords are not enabled on this site.' ),
+				data: null,
+			};
 		}
+		return addQueryArgs( response.authentication[ 'application-passwords' ].endpoints.authorization, data );
+	} catch ( error ) {
+		return error;
 	}
-	return getCurrentAuth() || {
-		code: 'invalid auth',
-		message: __( 'Auth cookie is invalid' ),
-		data: null,
-	};
 }
 
 /**
- * Enables basic auth support on all following requests.
+ * Authorize a user via the native REST authentication.
  *
- * The authorization cookie is set via `authorize` and this
- * function won't do anything without the cookie.
+ * Adds a known application password to all subsequent requests.
  *
- * Typically you call this in once for the application or section
- * that will need authorization and manage the actual login via authorize.
+ * @link https://make.wordpress.org/core/2020/11/05/application-passwords-integration-guide/
  *
- * @see authorize
+ * @requires Version 5.6+ of WP core or the "Application Passwords" plugin.
+ *
+ * @requires authentication to be enabled via .htaccess
+ * <IfModule mod_fcgid.c>
+ *   CGIPassAuth on
+ * </IfModule>
+ *
+ * @param {string} user
+ * @param {string} applicationPassword
  */
-export default function enabledBasicAuth(): void {
-	apiFetch.use( ( options, next ) => {
-		const auth = getCurrentAuth();
-		if ( auth ) {
-			const {headers = {}} = options;
-			return next( {
-				...options,
-				headers: {
-					...headers,
-					'Authorization': 'Bearer ' + auth.token,
-				},
-			}, next );
-		}
-		return next( options, next );
+export function enableApplicationPassword( user: string, applicationPassword: string ): void {
+	clearApplicationPassword();
+	applicationPasswordMiddleware = addMiddleware( ( options, next ) => {
+		const {headers = {}} = options;
+		return next( {
+			...options,
+			headers: {
+				...headers,
+				Authorization: 'Basic ' + btoa( user + ':' + applicationPassword ),
+			},
+		}, next );
 	} );
 }

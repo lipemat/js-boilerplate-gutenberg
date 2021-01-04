@@ -1,4 +1,6 @@
 import {
+	ApplicationPassword,
+	ApplicationPasswordCreate,
 	Category,
 	Comment,
 	CommentCreate,
@@ -33,6 +35,13 @@ export interface Pagination<T> {
 
 
 export interface Routes {
+	applicationPasswords: <T = ApplicationPassword, U = ApplicationPasswordCreate>() => {
+		create: ( userId: number, data: U ) => Promise<T & { password: string; }>;
+		delete: ( userId: number, uuid: string ) => Promise<{ deleted: boolean, previous: T }>;
+		get: ( userId: number ) => Promise<T[]>;
+		getById: ( userId: number, uuid: string ) => Promise<T>;
+		update: ( userId: number, uuid: string, data: U ) => Promise<T>;
+	};
 	categories: <T = Category, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	comments: <T = Comment, Q = any, U = CommentCreate>() => RequestMethods<T, Q, U>;
 	media: <T = Media, Q = any, U = any>() => RequestMethods<T, Q, U>;
@@ -199,6 +208,17 @@ export default function wpapi<T extends CustomRoutes<T> = {}>( customRoutes?: T 
 			reassign,
 		} );
 		return methods;
+	};
+
+	// Application passwords have special endpoints.
+	routes.applicationPasswords = () => {
+		return {
+			create: ( userId, data ) => doRequest( `/wp/v2/users/${userId}/application-passwords`, 'POST', data ),
+			delete: ( userId, uuid ) => doRequest( `/wp/v2/users/${userId}/application-passwords/${uuid}`, 'DELETE' ),
+			get: userId => doRequest( `/wp/v2/users/${userId}/application-passwords`, 'GET' ),
+			getById: ( userId, uuid ) => doRequest( `/wp/v2/users/${userId}/application-passwords/${uuid}`, 'GET' ),
+			update: ( userId, uuid, data ) => doRequest( `/wp/v2/users/${userId}/application-passwords/${uuid}`, 'PUT', data ),
+		};
 	};
 
 	// Settings has limited/special endpoints.

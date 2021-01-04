@@ -5,7 +5,7 @@ import {clearNonce, hasExternalNonce, restoreNonce, setNonce} from './nonce';
 let rootURLMiddleware: number;
 
 /**
- * Restore original root URL set by WordPresss.
+ * Restore original root URL set by WordPress.
  *
  * @since 1.3.0
  */
