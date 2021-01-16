@@ -1,6 +1,6 @@
 const wpExternals = require( '../helpers/wp-externals' );
 const webpackConfig = require( '@lipemat/js-boilerplate/config/webpack.dist' );
-let externalsDefault = Object.assign( {}, webpackConfig.externals );
+const externalsDefault = Object.assign( {}, webpackConfig.externals );
 
 /**
  * We use the core version of React DOM on production builds.
