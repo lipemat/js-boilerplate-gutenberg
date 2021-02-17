@@ -1,5 +1,14 @@
 declare module '@wordpress/components' {
-	import {ComponentType, InputHTMLAttributes, ReactNode, SelectHTMLAttributes, SVGAttributes} from 'react';
+	import {
+		ButtonHTMLAttributes,
+		ComponentType,
+		CSSProperties,
+		InputHTMLAttributes,
+		MouseEvent,
+		ReactNode,
+		SelectHTMLAttributes,
+		SVGAttributes,
+	} from 'react';
 	import {ClassNamesFn} from 'classnames/types';
 	import {SVG} from '@wordpress/primitives';
 
@@ -22,6 +31,7 @@ declare module '@wordpress/components' {
 		shortcut?: shortcutText;
 		showTooltip?: boolean;
 		tooltipPosition?: tooltipPosition;
+		children?: ReactNode;
 	}
 
 	export type colorOptions = Array<{
@@ -328,11 +338,14 @@ declare module '@wordpress/components' {
 
 
 	// If href is set, we get a link.
-	interface ButtonLink extends ButtonParams, Omit<HTMLLinkElement, 'className'> {
+	interface ButtonLink extends ButtonParams, Omit<Partial<HTMLLinkElement>, 'className' | 'children'> {
+		href: string;
+		onClick?: ( ev: MouseEvent<HTMLLinkElement> ) => void;
 	}
 
-	// If href is not set, we get a link.
-	interface ButtonButton extends ButtonParams, Omit<HTMLButtonElement, 'className'> {
+	// If href is not set, we get a button.
+	interface ButtonButton extends ButtonParams, Omit<Partial<HTMLButtonElement>, 'className' | 'children'> {
+		onClick?: ( ev: MouseEvent<HTMLButtonElement> ) => void;
 	}
 
 	interface CheckboxControl extends Omit<InputHTMLAttributes<{}>, 'onChange'> {
@@ -366,6 +379,65 @@ declare module '@wordpress/components' {
 		className: string;
 	}
 
+	interface Grid {
+		align?: CSSProperties['alignItems'];
+		/**
+		 * Adjusts the horizontal and vertical alignment of children.
+		 */
+		alignment?:
+			'bottom'
+			| 'bottomLeft'
+			| 'bottomRight'
+			| 'center'
+			| 'edge'
+			| 'left'
+			| 'right'
+			| 'stretch'
+			| 'top'
+			| 'topLeft'
+			| 'topRight';
+		/**
+		 * Adjusts the number of columns of the `Grid`.
+		 *
+		 * @default 2
+		 */
+		columns?: Array<number | undefined> | number;
+		/**
+		 * Adjusts the `grid-column-gap`.
+		 */
+		columnGap?: CSSProperties['gridColumnGap'];
+		/**
+		 * Changes the CSS display from `grid` to `inline-grid`.
+		 */
+		isInline?: boolean;
+		/**
+		 * Gap between each child.
+		 *
+		 * @default 3
+		 */
+		gap?: number;
+		/**
+		 * Adjusts the inline alignment of children.
+		 */
+		justify?: CSSProperties['justifyContent'];
+		/**
+		 * Adjusts the `grid-row-gap`.
+		 */
+		rowGap?: CSSProperties['gridRowGap'];
+		/**
+		 * Adjusts the number of rows of the `Grid`.
+		 */
+		rows?: Array<number | undefined> | number;
+		/**
+		 * Adjusts the CSS grid `template-columns`.
+		 */
+		templateColumns?: CSSProperties['gridTemplateColumns'];
+		/**
+		 * Adjusts the CSS grid `template-rows`.
+		 */
+		templateRows?: CSSProperties['gridTemplateRows'];
+	}
+
 	interface Guide {
 		onFinish: () => void;
 		children: ComponentType<GuidePage>[];
@@ -379,6 +451,7 @@ declare module '@wordpress/components' {
 		initialOpen?: boolean;
 		icon?: string
 		children?: ReactNode[] | ReactNode;
+		buttonProps?: ButtonHTMLAttributes<{}>;
 	}
 
 	interface SelectControl extends Omit<SelectHTMLAttributes<{}>, 'onChange'> {
@@ -424,16 +497,34 @@ declare module '@wordpress/components' {
 		type?: string;
 	}
 
+	/**
+	 * Truncate is a typography primitive that trims text content.
+	 * For almost all cases, it is recommended that Text, Heading, or Subheading is used to render text content.
+	 *
+	 * However, Truncate is available for custom implementations.
+	 */
+	interface Truncate {
+		// The ellipsis string when truncate is set.
+		ellipsis?: string;
+		// Determines where to truncate. For example, we can truncate text right in the middle. To do this, we need to set ellipsizeMode to middle and a text limit.
+		ellipsizeMode?: 'auto' | 'head' | 'middle' | 'tail';
+		// Determines the max characters when truncate is set.
+		limit?: number;
+		// Clamps the text content to the specifiec numberOfLines, adding the ellipsis at the end.
+		numberOfLines?: number;
+	}
+
 	export interface withSpokenMessages {
 		speak?: ( message: string, ariaLive?: 'polite' | 'assertive' ) => void;
 		debouncedSpeak?: ( message: string, ariaLive?: 'polite' | 'assertive' ) => void;
 	}
 
-	export const Button: ButtonLink | ButtonButton;
+	export const Button: ComponentType<ButtonLink | ButtonButton>;
 	export const CheckboxControl: ComponentType<CheckboxControl>;
 	export const ColorPalette: ComponentType<ColorPalette>;
 	export const ColorPicker: ComponentType<ColorPicker>;
 	export const Dashicon: ComponentType<Dashicon>;
+	export const Grid: ComponentType<Grid>;
 	export const Guide: ComponentType<Guide>;
 	export const GuidePage: ComponentType<GuidePage>;
 	export const PanelBody: ComponentType<PanelBody>;
@@ -443,6 +534,7 @@ declare module '@wordpress/components' {
 	export const Spinner: ComponentType<{}>;
 	export const TextControl: ComponentType<TextControl>;
 	export const Tooltip: Tooltip;
+	export const Truncate: Truncate;
 
 	export default interface Components {
 		Button: ComponentType<ButtonLink | ButtonButton>;
@@ -450,6 +542,7 @@ declare module '@wordpress/components' {
 		ColorPalette: ComponentType<ColorPalette>;
 		ColorPicker: ComponentType<ColorPicker>;
 		Dashicon: ComponentType<Dashicon>;
+		Grid: ComponentType<Grid>;
 		Guide: ComponentType<Guide>;
 		GuidePage: ComponentType<GuidePage>;
 		PanelBody: ComponentType<PanelBody>;
@@ -459,6 +552,7 @@ declare module '@wordpress/components' {
 		Spinner: ComponentType<{}>;
 		TextControl: ComponentType<TextControl>;
 		Tooltip: ComponentType<Tooltip>;
+		Truncate: Truncate;
 	}
 }
 

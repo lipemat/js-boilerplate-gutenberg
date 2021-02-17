@@ -48,6 +48,7 @@ declare module '@wordpress/blocks' {
 		name: string;
 		title: string;
 		description?: string;
+		category?: string;
 		icon?: Icon;
 		isDefault?: boolean;
 		attributes?: BlockAttributes<Attr>;
@@ -79,7 +80,7 @@ declare module '@wordpress/blocks' {
 		// Specifying a color for the icon
 		foreground?: string;
 		// Specifying a dashicon for the block
-		src: string;
+		src: iconType;
 	}
 
 	/**
