@@ -36,11 +36,12 @@ export interface Pagination<T> {
 
 export interface Routes {
 	applicationPasswords: <T = ApplicationPassword, U = ApplicationPasswordCreate>() => {
-		create: ( userId: number, data: U ) => Promise<T & { password: string; }>;
-		delete: ( userId: number, uuid: string ) => Promise<{ deleted: boolean, previous: T }>;
-		get: ( userId: number ) => Promise<T[]>;
-		getById: ( userId: number, uuid: string ) => Promise<T>;
-		update: ( userId: number, uuid: string, data: U ) => Promise<T>;
+		create: ( userId: number | 'me', data: U ) => Promise<T & { password: string; }>;
+		delete: ( userId: number | 'me', uuid: string ) => Promise<{ deleted: boolean, previous: T }>;
+		get: ( userId: number | 'me' ) => Promise<T[]>;
+		getById: ( userId: number | 'me', uuid: string ) => Promise<T>;
+		introspect: ( userId: number | 'me' ) => Promise<T>;
+		update: ( userId: number | 'me', uuid: string, data: U ) => Promise<T>;
 	};
 	categories: <T = Category, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	comments: <T = Comment, Q = any, U = CommentCreate>() => RequestMethods<T, Q, U>;
@@ -217,6 +218,7 @@ export default function wpapi<T extends CustomRoutes<T> = {}>( customRoutes?: T 
 			delete: ( userId, uuid ) => doRequest( `/wp/v2/users/${userId}/application-passwords/${uuid}`, 'DELETE' ),
 			get: userId => doRequest( `/wp/v2/users/${userId}/application-passwords`, 'GET' ),
 			getById: ( userId, uuid ) => doRequest( `/wp/v2/users/${userId}/application-passwords/${uuid}`, 'GET' ),
+			introspect: userId => doRequest( `/wp/v2/users/${userId}/application-passwords/introspect`, 'GET' ),
 			update: ( userId, uuid, data ) => doRequest( `/wp/v2/users/${userId}/application-passwords/${uuid}`, 'PUT', data ),
 		};
 	};
