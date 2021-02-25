@@ -33,12 +33,12 @@
   },
   "homepage": "https://github.com/lipemat/js-boilerplate-gutenberg#readme",
   "dependencies": {
-    "@types/lipemat__js-boilerplate": "lipemat/types-js-boilerplate#semver:^1.1.0"
+    "@types/lipemat__js-boilerplate": "lipemat/types-js-boilerplate#semver:^1.2.1"
   },
   "devDependencies": {
-    "@lipemat/js-boilerplate": "^6.0.0",
+    "@lipemat/js-boilerplate": "^6.2.1",
     "@wordpress/api-fetch": "^3.20.0",
-    "eslint": "^6",
+    "eslint": "^7.17.0",
     "jest": "^26",
     "microbundle": "^0.12.3",
     "typescript": "^4",
