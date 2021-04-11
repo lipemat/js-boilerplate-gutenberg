@@ -446,7 +446,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ],
       [
         "@babel/runtime",
-        "npm:7.12.5"
+        "npm:7.13.10"
       ],
       [
         "@babel/runtime-corejs3",
@@ -750,7 +750,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ],
       [
         "@types/react",
-        "npm:16.14.2"
+        "npm:16.14.5"
       ],
       [
         "@types/react-dom",
@@ -775,6 +775,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       [
         "@types/responselike",
         "npm:1.0.0"
+      ],
+      [
+        "@types/scheduler",
+        "npm:0.16.1"
       ],
       [
         "@types/sizzle",
@@ -925,20 +929,60 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "npm:3.0.1"
       ],
       [
+        "@wordpress/compose",
+        "npm:3.25.1"
+      ],
+      [
+        "@wordpress/data",
+        "npm:4.27.1"
+      ],
+      [
+        "@wordpress/deprecated",
+        "npm:2.12.1"
+      ],
+      [
+        "@wordpress/dom",
+        "npm:2.17.1"
+      ],
+      [
+        "@wordpress/element",
+        "npm:2.20.1"
+      ],
+      [
+        "@wordpress/escape-html",
+        "npm:1.12.1"
+      ],
+      [
         "@wordpress/eslint-plugin",
         "virtual:a4ab378737c0559434651940909fad35e3fe572d16ded59e25bd41468a885e1927f70bf52370a9bc4de9cbb86e49fe8995f45e2463cdcd02234e624ed4131a91#npm:7.4.0"
       ],
       [
         "@wordpress/hooks",
-        "npm:2.11.1"
+        "npm:2.12.1"
       ],
       [
         "@wordpress/i18n",
         "npm:3.18.0"
       ],
       [
+        "@wordpress/is-shallow-equal",
+        "npm:3.1.1"
+      ],
+      [
+        "@wordpress/keycodes",
+        "npm:2.19.1"
+      ],
+      [
         "@wordpress/prettier-config",
         "npm:0.4.0"
+      ],
+      [
+        "@wordpress/priority-queue",
+        "npm:1.11.1"
+      ],
+      [
+        "@wordpress/redux-routine",
+        "npm:3.14.1"
       ],
       [
         "@wordpress/url",
@@ -1401,6 +1445,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "npm:2.2.1"
       ],
       [
+        "clipboard",
+        "npm:2.0.8"
+      ],
+      [
         "cliui",
         "npm:6.0.0"
       ],
@@ -1717,6 +1765,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "npm:1.0.0"
       ],
       [
+        "delegate",
+        "npm:3.2.0"
+      ],
+      [
         "delegates",
         "npm:1.0.0"
       ],
@@ -1887,6 +1939,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       [
         "enzyme-to-json",
         "virtual:4a820b64106fdec5b69240caf095136f0e0a3e531d8ff15e3734cfa760886164332d3624219f31e912bb4cb6fed4c5c929c376f5631d086a0069211e405b9ef7#npm:3.6.1"
+      ],
+      [
+        "equivalent-key-map",
+        "npm:0.2.2"
       ],
       [
         "errno",
@@ -2289,6 +2345,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "npm:0.1.2"
       ],
       [
+        "good-listener",
+        "npm:1.2.2"
+      ],
+      [
         "got",
         "npm:9.6.0"
       ],
@@ -2667,6 +2727,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       [
         "is-potential-custom-element-name",
         "npm:1.0.0"
+      ],
+      [
+        "is-promise",
+        "npm:4.0.0"
       ],
       [
         "is-reference",
@@ -3207,6 +3271,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       [
         "moo",
         "npm:0.5.1"
+      ],
+      [
+        "mousetrap",
+        "npm:1.6.5"
       ],
       [
         "mri",
@@ -3988,6 +4056,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "virtual:72283d001711e954c631fd780376ac2001312b2db16bce5fb5a40be387e005fe5b6129a1693851edd84027f496d7c312ec3986b7f11dc889e46fc45a3cb50ac6#npm:1.2.0"
       ],
       [
+        "react-resize-aware",
+        "virtual:008980cdd63d07869a1d2818dc8fa977b75036d2120d01eb9258e9d7ac6217779a476197661085f7746c3c67529fe88ec81710fff7a91041d794b2d78a672d49#npm:3.1.0"
+      ],
+      [
         "react-test-renderer",
         "virtual:4a820b64106fdec5b69240caf095136f0e0a3e531d8ff15e3734cfa760886164332d3624219f31e912bb4cb6fed4c5c929c376f5631d086a0069211e405b9ef7#npm:16.14.0"
       ],
@@ -4026,6 +4098,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       [
         "recursive-readdir-sync",
         "npm:1.0.6"
+      ],
+      [
+        "redux",
+        "npm:4.0.5"
       ],
       [
         "reflect.ownkeys",
@@ -4216,6 +4292,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "npm:1.1.10"
       ],
       [
+        "rungen",
+        "npm:0.3.2"
+      ],
+      [
         "sade",
         "npm:1.7.4"
       ],
@@ -4254,6 +4334,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       [
         "schema-utils",
         "npm:3.0.0"
+      ],
+      [
+        "select",
+        "npm:1.1.2"
       ],
       [
         "select-hose",
@@ -4413,7 +4497,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ],
       [
         "sprintf-js",
-        "npm:1.0.3"
+        "npm:1.1.2"
       ],
       [
         "sshpk",
@@ -4516,6 +4600,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "npm:1.3.2"
       ],
       [
+        "symbol-observable",
+        "npm:1.2.0"
+      ],
+      [
         "symbol-tree",
         "npm:3.2.4"
       ],
@@ -4568,6 +4656,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "npm:0.3.0"
       ],
       [
+        "tiny-emitter",
+        "npm:2.1.0"
+      ],
+      [
         "tiny-glob",
         "npm:0.2.8"
       ],
@@ -4618,6 +4710,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       [
         "tunnel-agent",
         "npm:0.6.0"
+      ],
+      [
+        "turbo-combine-reducers",
+        "npm:1.0.2"
       ],
       [
         "tweetnacl",
@@ -4730,6 +4826,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       [
         "use",
         "npm:3.1.1"
+      ],
+      [
+        "use-memo-one",
+        "virtual:008980cdd63d07869a1d2818dc8fa977b75036d2120d01eb9258e9d7ac6217779a476197661085f7746c3c67529fe88ec81710fff7a91041d794b2d78a672d49#npm:1.1.2"
       ],
       [
         "util-deprecate",
@@ -4946,6 +5046,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@lipemat/js-boilerplate", "npm:6.3.0"],
             ["@types/lipemat__js-boilerplate", "https://github.com/lipemat/types-js-boilerplate.git#commit=297a9a1db21556bd372e8c9548f0c8b1caebbfe5"],
             ["@wordpress/api-fetch", "npm:3.21.5"],
+            ["@wordpress/data", "npm:4.27.1"],
             ["eslint", "npm:7.18.0"],
             ["jest", "npm:26.6.3"],
             ["microbundle", "npm:0.12.4"],
@@ -7351,6 +7452,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "HARD",
         }],
+        ["npm:7.13.10", {
+          "packageLocation": "./.yarn/cache/@babel-runtime-npm-7.13.10-d9a6e8f765-22014226b9.zip/node_modules/@babel/runtime/",
+          "packageDependencies": [
+            ["@babel/runtime", "npm:7.13.10"],
+            ["regenerator-runtime", "npm:0.13.7"]
+          ],
+          "linkType": "HARD",
+        }],
         ["npm:7.13.7", {
           "packageLocation": "./.yarn/cache/@babel-runtime-npm-7.13.7-0b22167f8d-8be9fd44bb.zip/node_modules/@babel/runtime/",
           "packageDependencies": [
@@ -7889,6 +7998,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@lipemat/js-boilerplate", "npm:6.3.0"],
             ["@types/lipemat__js-boilerplate", "https://github.com/lipemat/types-js-boilerplate.git#commit=297a9a1db21556bd372e8c9548f0c8b1caebbfe5"],
             ["@wordpress/api-fetch", "npm:3.21.5"],
+            ["@wordpress/data", "npm:4.27.1"],
             ["eslint", "npm:7.18.0"],
             ["jest", "npm:26.6.3"],
             ["microbundle", "npm:0.12.4"],
@@ -8554,6 +8664,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "HARD",
         }],
+        ["npm:16.14.5", {
+          "packageLocation": "./.yarn/cache/@types-react-npm-16.14.5-4d99bb992c-76840cce4d.zip/node_modules/@types/react/",
+          "packageDependencies": [
+            ["@types/react", "npm:16.14.5"],
+            ["@types/prop-types", "npm:15.7.3"],
+            ["@types/scheduler", "npm:0.16.1"],
+            ["csstype", "npm:3.0.5"]
+          ],
+          "linkType": "HARD",
+        }],
         ["npm:17.0.0", {
           "packageLocation": "./.yarn/cache/@types-react-npm-17.0.0-d4f5adb6f0-dcef2034b8.zip/node_modules/@types/react/",
           "packageDependencies": [
@@ -8577,6 +8697,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-react-dom-npm-16.9.11-42318d8a2f-b22a7ac54a.zip/node_modules/@types/react-dom/",
           "packageDependencies": [
             ["@types/react-dom", "npm:16.9.11"],
+            ["@types/react", "npm:16.14.2"]
+          ],
+          "linkType": "HARD",
+        }],
+        ["npm:16.9.12", {
+          "packageLocation": "./.yarn/cache/@types-react-dom-npm-16.9.12-2194cd9aa1-49745de25f.zip/node_modules/@types/react-dom/",
+          "packageDependencies": [
+            ["@types/react-dom", "npm:16.9.12"],
             ["@types/react", "npm:16.14.2"]
           ],
           "linkType": "HARD",
@@ -8631,6 +8759,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["@types/responselike", "npm:1.0.0"],
             ["@types/node", "npm:14.14.17"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@types/scheduler", [
+        ["npm:0.16.1", {
+          "packageLocation": "./.yarn/cache/@types-scheduler-npm-0.16.1-9a58541608-0124c2e4de.zip/node_modules/@types/scheduler/",
+          "packageDependencies": [
+            ["@types/scheduler", "npm:0.16.1"]
           ],
           "linkType": "HARD",
         }]
@@ -9225,6 +9362,99 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["@wordpress/compose", [
+        ["npm:3.25.1", {
+          "packageLocation": "./.yarn/cache/@wordpress-compose-npm-3.25.1-008980cdd6-633244eea2.zip/node_modules/@wordpress/compose/",
+          "packageDependencies": [
+            ["@wordpress/compose", "npm:3.25.1"],
+            ["@babel/runtime", "npm:7.13.10"],
+            ["@wordpress/deprecated", "npm:2.12.1"],
+            ["@wordpress/dom", "npm:2.17.1"],
+            ["@wordpress/element", "npm:2.20.1"],
+            ["@wordpress/is-shallow-equal", "npm:3.1.1"],
+            ["@wordpress/keycodes", "npm:2.19.1"],
+            ["@wordpress/priority-queue", "npm:1.11.1"],
+            ["clipboard", "npm:2.0.8"],
+            ["lodash", "npm:4.17.20"],
+            ["memize", "npm:1.1.0"],
+            ["mousetrap", "npm:1.6.5"],
+            ["react-resize-aware", "virtual:008980cdd63d07869a1d2818dc8fa977b75036d2120d01eb9258e9d7ac6217779a476197661085f7746c3c67529fe88ec81710fff7a91041d794b2d78a672d49#npm:3.1.0"],
+            ["use-memo-one", "virtual:008980cdd63d07869a1d2818dc8fa977b75036d2120d01eb9258e9d7ac6217779a476197661085f7746c3c67529fe88ec81710fff7a91041d794b2d78a672d49#npm:1.1.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@wordpress/data", [
+        ["npm:4.27.1", {
+          "packageLocation": "./.yarn/cache/@wordpress-data-npm-4.27.1-83219cf084-d17da1ff2b.zip/node_modules/@wordpress/data/",
+          "packageDependencies": [
+            ["@wordpress/data", "npm:4.27.1"],
+            ["@babel/runtime", "npm:7.13.10"],
+            ["@wordpress/compose", "npm:3.25.1"],
+            ["@wordpress/deprecated", "npm:2.12.1"],
+            ["@wordpress/element", "npm:2.20.1"],
+            ["@wordpress/is-shallow-equal", "npm:3.1.1"],
+            ["@wordpress/priority-queue", "npm:1.11.1"],
+            ["@wordpress/redux-routine", "npm:3.14.1"],
+            ["equivalent-key-map", "npm:0.2.2"],
+            ["is-promise", "npm:4.0.0"],
+            ["lodash", "npm:4.17.20"],
+            ["memize", "npm:1.1.0"],
+            ["redux", "npm:4.0.5"],
+            ["turbo-combine-reducers", "npm:1.0.2"],
+            ["use-memo-one", "virtual:008980cdd63d07869a1d2818dc8fa977b75036d2120d01eb9258e9d7ac6217779a476197661085f7746c3c67529fe88ec81710fff7a91041d794b2d78a672d49#npm:1.1.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@wordpress/deprecated", [
+        ["npm:2.12.1", {
+          "packageLocation": "./.yarn/cache/@wordpress-deprecated-npm-2.12.1-6a9aaa733c-7c8a16abe8.zip/node_modules/@wordpress/deprecated/",
+          "packageDependencies": [
+            ["@wordpress/deprecated", "npm:2.12.1"],
+            ["@babel/runtime", "npm:7.13.10"],
+            ["@wordpress/hooks", "npm:2.12.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@wordpress/dom", [
+        ["npm:2.17.1", {
+          "packageLocation": "./.yarn/cache/@wordpress-dom-npm-2.17.1-3d80e181df-925ac68fc1.zip/node_modules/@wordpress/dom/",
+          "packageDependencies": [
+            ["@wordpress/dom", "npm:2.17.1"],
+            ["@babel/runtime", "npm:7.13.10"],
+            ["lodash", "npm:4.17.20"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@wordpress/element", [
+        ["npm:2.20.1", {
+          "packageLocation": "./.yarn/cache/@wordpress-element-npm-2.20.1-af37265804-500d5bbe0d.zip/node_modules/@wordpress/element/",
+          "packageDependencies": [
+            ["@wordpress/element", "npm:2.20.1"],
+            ["@babel/runtime", "npm:7.13.10"],
+            ["@types/react", "npm:16.14.5"],
+            ["@types/react-dom", "npm:16.9.12"],
+            ["@wordpress/escape-html", "npm:1.12.1"],
+            ["lodash", "npm:4.17.20"],
+            ["react", "npm:16.14.0"],
+            ["react-dom", "virtual:af37265804ae5f138d8f4572c635ce69e4bdec224f5a052eca0ba492633953d8039ab3de5fb1f8f532b04c4449762524ceade73741803141638c53412835eb9a#npm:16.14.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@wordpress/escape-html", [
+        ["npm:1.12.1", {
+          "packageLocation": "./.yarn/cache/@wordpress-escape-html-npm-1.12.1-0d33f0c817-6d06670ad2.zip/node_modules/@wordpress/escape-html/",
+          "packageDependencies": [
+            ["@wordpress/escape-html", "npm:1.12.1"],
+            ["@babel/runtime", "npm:7.13.10"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["@wordpress/eslint-plugin", [
         ["npm:7.4.0", {
           "packageLocation": "./.yarn/cache/@wordpress-eslint-plugin-npm-7.4.0-659bbdd364-6dd1078f9b.zip/node_modules/@wordpress/eslint-plugin/",
@@ -9271,6 +9501,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/runtime", "npm:7.13.7"]
           ],
           "linkType": "HARD",
+        }],
+        ["npm:2.12.1", {
+          "packageLocation": "./.yarn/cache/@wordpress-hooks-npm-2.12.1-e1605a9fa1-4548c4a581.zip/node_modules/@wordpress/hooks/",
+          "packageDependencies": [
+            ["@wordpress/hooks", "npm:2.12.1"],
+            ["@babel/runtime", "npm:7.13.10"]
+          ],
+          "linkType": "HARD",
         }]
       ]],
       ["@wordpress/i18n", [
@@ -9287,6 +9525,42 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["tannin", "npm:1.2.0"]
           ],
           "linkType": "HARD",
+        }],
+        ["npm:3.19.1", {
+          "packageLocation": "./.yarn/cache/@wordpress-i18n-npm-3.19.1-42e76fc480-203435d1e3.zip/node_modules/@wordpress/i18n/",
+          "packageDependencies": [
+            ["@wordpress/i18n", "npm:3.19.1"],
+            ["@babel/runtime", "npm:7.13.10"],
+            ["@wordpress/hooks", "npm:2.12.1"],
+            ["gettext-parser", "npm:1.4.0"],
+            ["lodash", "npm:4.17.20"],
+            ["memize", "npm:1.1.0"],
+            ["sprintf-js", "npm:1.1.2"],
+            ["tannin", "npm:1.2.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@wordpress/is-shallow-equal", [
+        ["npm:3.1.1", {
+          "packageLocation": "./.yarn/cache/@wordpress-is-shallow-equal-npm-3.1.1-1d03fa9177-fc1bdb2180.zip/node_modules/@wordpress/is-shallow-equal/",
+          "packageDependencies": [
+            ["@wordpress/is-shallow-equal", "npm:3.1.1"],
+            ["@babel/runtime", "npm:7.13.10"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@wordpress/keycodes", [
+        ["npm:2.19.1", {
+          "packageLocation": "./.yarn/cache/@wordpress-keycodes-npm-2.19.1-16f48e7ce0-1881620c1a.zip/node_modules/@wordpress/keycodes/",
+          "packageDependencies": [
+            ["@wordpress/keycodes", "npm:2.19.1"],
+            ["@babel/runtime", "npm:7.13.10"],
+            ["@wordpress/i18n", "npm:3.19.1"],
+            ["lodash", "npm:4.17.20"]
+          ],
+          "linkType": "HARD",
         }]
       ]],
       ["@wordpress/prettier-config", [
@@ -9294,6 +9568,29 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@wordpress-prettier-config-npm-0.4.0-ec25f85d26-e1221d3b2b.zip/node_modules/@wordpress/prettier-config/",
           "packageDependencies": [
             ["@wordpress/prettier-config", "npm:0.4.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@wordpress/priority-queue", [
+        ["npm:1.11.1", {
+          "packageLocation": "./.yarn/cache/@wordpress-priority-queue-npm-1.11.1-cc16699e2c-4a32d86395.zip/node_modules/@wordpress/priority-queue/",
+          "packageDependencies": [
+            ["@wordpress/priority-queue", "npm:1.11.1"],
+            ["@babel/runtime", "npm:7.13.10"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@wordpress/redux-routine", [
+        ["npm:3.14.1", {
+          "packageLocation": "./.yarn/cache/@wordpress-redux-routine-npm-3.14.1-f76393a76c-ddcdb104b3.zip/node_modules/@wordpress/redux-routine/",
+          "packageDependencies": [
+            ["@wordpress/redux-routine", "npm:3.14.1"],
+            ["@babel/runtime", "npm:7.13.10"],
+            ["is-promise", "npm:4.0.0"],
+            ["lodash", "npm:4.17.20"],
+            ["rungen", "npm:0.3.2"]
           ],
           "linkType": "HARD",
         }]
@@ -10940,6 +11237,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["clipboard", [
+        ["npm:2.0.8", {
+          "packageLocation": "./.yarn/cache/clipboard-npm-2.0.8-00bb557e08-8eab011ad8.zip/node_modules/clipboard/",
+          "packageDependencies": [
+            ["clipboard", "npm:2.0.8"],
+            ["good-listener", "npm:1.2.2"],
+            ["select", "npm:1.1.2"],
+            ["tiny-emitter", "npm:2.1.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["cliui", [
         ["npm:5.0.0", {
           "packageLocation": "./.yarn/cache/cliui-npm-5.0.0-885b5f48ee-25e61dc985.zip/node_modules/cliui/",
@@ -12009,6 +12318,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["delegate", [
+        ["npm:3.2.0", {
+          "packageLocation": "./.yarn/cache/delegate-npm-3.2.0-d3f849ea99-ccbbf29eb4.zip/node_modules/delegate/",
+          "packageDependencies": [
+            ["delegate", "npm:3.2.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["delegates", [
         ["npm:1.0.0", {
           "packageLocation": "./.yarn/cache/delegates-npm-1.0.0-9b1942d75f-7459e34d29.zip/node_modules/delegates/",
@@ -12600,6 +12918,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packagePeers": [
             "@types/enzyme",
             "enzyme"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["equivalent-key-map", [
+        ["npm:0.2.2", {
+          "packageLocation": "./.yarn/cache/equivalent-key-map-npm-0.2.2-0409127f33-de66b7756c.zip/node_modules/equivalent-key-map/",
+          "packageDependencies": [
+            ["equivalent-key-map", "npm:0.2.2"]
           ],
           "linkType": "HARD",
         }]
@@ -14056,6 +14383,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["good-listener", [
+        ["npm:1.2.2", {
+          "packageLocation": "./.yarn/cache/good-listener-npm-1.2.2-e7865da849-640a1627e5.zip/node_modules/good-listener/",
+          "packageDependencies": [
+            ["good-listener", "npm:1.2.2"],
+            ["delegate", "npm:3.2.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["got", [
         ["npm:9.6.0", {
           "packageLocation": "./.yarn/cache/got-npm-9.6.0-80edc15fd0-4cfb862eb7.zip/node_modules/got/",
@@ -15255,6 +15592,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/is-potential-custom-element-name-npm-1.0.0-0000641861-55b1ae44cf.zip/node_modules/is-potential-custom-element-name/",
           "packageDependencies": [
             ["is-potential-custom-element-name", "npm:1.0.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["is-promise", [
+        ["npm:4.0.0", {
+          "packageLocation": "./.yarn/cache/is-promise-npm-4.0.0-1e3c05420c-7085bdc4ea.zip/node_modules/is-promise/",
+          "packageDependencies": [
+            ["is-promise", "npm:4.0.0"]
           ],
           "linkType": "HARD",
         }]
@@ -17176,6 +17522,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/moo-npm-0.5.1-6281c30315-d637b67ae6.zip/node_modules/moo/",
           "packageDependencies": [
             ["moo", "npm:0.5.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["mousetrap", [
+        ["npm:1.6.5", {
+          "packageLocation": "./.yarn/cache/mousetrap-npm-1.6.5-9cd826966c-5630741691.zip/node_modules/mousetrap/",
+          "packageDependencies": [
+            ["mousetrap", "npm:1.6.5"]
           ],
           "linkType": "HARD",
         }]
@@ -19548,6 +19903,23 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "react"
           ],
           "linkType": "HARD",
+        }],
+        ["virtual:af37265804ae5f138d8f4572c635ce69e4bdec224f5a052eca0ba492633953d8039ab3de5fb1f8f532b04c4449762524ceade73741803141638c53412835eb9a#npm:16.14.0", {
+          "packageLocation": "./.yarn/$$virtual/react-dom-virtual-25e2de46de/0/cache/react-dom-npm-16.14.0-516a97ad33-a13558f0e7.zip/node_modules/react-dom/",
+          "packageDependencies": [
+            ["react-dom", "virtual:af37265804ae5f138d8f4572c635ce69e4bdec224f5a052eca0ba492633953d8039ab3de5fb1f8f532b04c4449762524ceade73741803141638c53412835eb9a#npm:16.14.0"],
+            ["@types/react", "npm:16.14.5"],
+            ["loose-envify", "npm:1.4.0"],
+            ["object-assign", "npm:4.1.1"],
+            ["prop-types", "npm:15.7.2"],
+            ["react", "npm:16.14.0"],
+            ["scheduler", "npm:0.19.1"]
+          ],
+          "packagePeers": [
+            "@types/react",
+            "react"
+          ],
+          "linkType": "HARD",
         }]
       ]],
       ["react-hot-loader", [
@@ -19630,6 +20002,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packagePeers": [
             "@types/react-native",
             "react-native"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["react-resize-aware", [
+        ["npm:3.1.0", {
+          "packageLocation": "./.yarn/cache/react-resize-aware-npm-3.1.0-0d77ab8ec1-ac23a8238b.zip/node_modules/react-resize-aware/",
+          "packageDependencies": [
+            ["react-resize-aware", "npm:3.1.0"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:008980cdd63d07869a1d2818dc8fa977b75036d2120d01eb9258e9d7ac6217779a476197661085f7746c3c67529fe88ec81710fff7a91041d794b2d78a672d49#npm:3.1.0", {
+          "packageLocation": "./.yarn/$$virtual/react-resize-aware-virtual-c6c0a2a0d9/0/cache/react-resize-aware-npm-3.1.0-0d77ab8ec1-ac23a8238b.zip/node_modules/react-resize-aware/",
+          "packageDependencies": [
+            ["react-resize-aware", "virtual:008980cdd63d07869a1d2818dc8fa977b75036d2120d01eb9258e9d7ac6217779a476197661085f7746c3c67529fe88ec81710fff7a91041d794b2d78a672d49#npm:3.1.0"],
+            ["@types/react", null],
+            ["react", null]
+          ],
+          "packagePeers": [
+            "@types/react",
+            "react"
           ],
           "linkType": "HARD",
         }]
@@ -19815,6 +20209,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/recursive-readdir-sync-npm-1.0.6-be1bf5dc6f-2d195b162f.zip/node_modules/recursive-readdir-sync/",
           "packageDependencies": [
             ["recursive-readdir-sync", "npm:1.0.6"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["redux", [
+        ["npm:4.0.5", {
+          "packageLocation": "./.yarn/cache/redux-npm-4.0.5-aca53e621f-112739c2fb.zip/node_modules/redux/",
+          "packageDependencies": [
+            ["redux", "npm:4.0.5"],
+            ["loose-envify", "npm:1.4.0"],
+            ["symbol-observable", "npm:1.2.0"]
           ],
           "linkType": "HARD",
         }]
@@ -20435,6 +20840,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["rungen", [
+        ["npm:0.3.2", {
+          "packageLocation": "./.yarn/cache/rungen-npm-0.3.2-69387f25de-6d0f9e1f89.zip/node_modules/rungen/",
+          "packageDependencies": [
+            ["rungen", "npm:0.3.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["sade", [
         ["npm:1.7.4", {
           "packageLocation": "./.yarn/cache/sade-npm-1.7.4-5946bee411-cff044d607.zip/node_modules/sade/",
@@ -20575,6 +20989,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/json-schema", "npm:7.0.6"],
             ["ajv", "npm:6.12.6"],
             ["ajv-keywords", "virtual:2b49db17d1e4e8854e6e7543c07eb7bc19ec9da65a1b99b9cb28e764846d419e5ecd6e057ad65249f2b928862ffd70dbf8a7c79643ccdd7c1c40cab5b59aa03f#npm:3.5.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["select", [
+        ["npm:1.1.2", {
+          "packageLocation": "./.yarn/cache/select-npm-1.1.2-13cd366fa2-66be63b7cf.zip/node_modules/select/",
+          "packageDependencies": [
+            ["select", "npm:1.1.2"]
           ],
           "linkType": "HARD",
         }]
@@ -21508,6 +21931,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["symbol-observable", [
+        ["npm:1.2.0", {
+          "packageLocation": "./.yarn/cache/symbol-observable-npm-1.2.0-9e812a0a39-268834a1d4.zip/node_modules/symbol-observable/",
+          "packageDependencies": [
+            ["symbol-observable", "npm:1.2.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["symbol-tree", [
         ["npm:3.2.4", {
           "packageLocation": "./.yarn/cache/symbol-tree-npm-3.2.4-fe70cdb75b-0b9af4e5f0.zip/node_modules/symbol-tree/",
@@ -21700,6 +22132,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["tiny-emitter", [
+        ["npm:2.1.0", {
+          "packageLocation": "./.yarn/cache/tiny-emitter-npm-2.1.0-2a4d94f487-0055509c72.zip/node_modules/tiny-emitter/",
+          "packageDependencies": [
+            ["tiny-emitter", "npm:2.1.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["tiny-glob", [
         ["npm:0.2.8", {
           "packageLocation": "./.yarn/cache/tiny-glob-npm-0.2.8-4706635fd4-85bf5cb225.zip/node_modules/tiny-glob/",
@@ -21872,6 +22313,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["tunnel-agent", "npm:0.6.0"],
             ["safe-buffer", "npm:5.2.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["turbo-combine-reducers", [
+        ["npm:1.0.2", {
+          "packageLocation": "./.yarn/cache/turbo-combine-reducers-npm-1.0.2-96ef269bce-cc7652d406.zip/node_modules/turbo-combine-reducers/",
+          "packageDependencies": [
+            ["turbo-combine-reducers", "npm:1.0.2"]
           ],
           "linkType": "HARD",
         }]
@@ -22199,6 +22649,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/use-npm-3.1.1-7ba643714c-8dd3bdeeda.zip/node_modules/use/",
           "packageDependencies": [
             ["use", "npm:3.1.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["use-memo-one", [
+        ["npm:1.1.2", {
+          "packageLocation": "./.yarn/cache/use-memo-one-npm-1.1.2-f58177cfe3-3796487ae7.zip/node_modules/use-memo-one/",
+          "packageDependencies": [
+            ["use-memo-one", "npm:1.1.2"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:008980cdd63d07869a1d2818dc8fa977b75036d2120d01eb9258e9d7ac6217779a476197661085f7746c3c67529fe88ec81710fff7a91041d794b2d78a672d49#npm:1.1.2", {
+          "packageLocation": "./.yarn/$$virtual/use-memo-one-virtual-7d7b5a5bb2/0/cache/use-memo-one-npm-1.1.2-f58177cfe3-3796487ae7.zip/node_modules/use-memo-one/",
+          "packageDependencies": [
+            ["use-memo-one", "virtual:008980cdd63d07869a1d2818dc8fa977b75036d2120d01eb9258e9d7ac6217779a476197661085f7746c3c67529fe88ec81710fff7a91041d794b2d78a672d49#npm:1.1.2"],
+            ["@types/react", null],
+            ["react", null]
+          ],
+          "packagePeers": [
+            "@types/react",
+            "react"
           ],
           "linkType": "HARD",
         }]
