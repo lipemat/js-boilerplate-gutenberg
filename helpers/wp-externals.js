@@ -29,6 +29,7 @@ module.exports = [
 	'hooks',
 	'i18n',
 	'plugins',
+	'rich-text',
 	'url',
 	'utils',
 ].reduce(
@@ -40,7 +41,7 @@ module.exports = [
 		wp: 'wp',
 		// We must use the WP Core global React within blocks or hooks will not work.
 		react: 'React',
-		'lodash': 'lodash',
+		lodash: 'lodash',
 	},
 );
 
