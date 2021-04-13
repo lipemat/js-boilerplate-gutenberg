@@ -754,7 +754,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ],
       [
         "@types/react-dom",
-        "npm:16.9.10"
+        "npm:16.9.12"
       ],
       [
         "@types/react-router",
@@ -925,12 +925,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "npm:3.21.5"
       ],
       [
+        "@wordpress/autop",
+        "npm:2.12.2"
+      ],
+      [
+        "@wordpress/blob",
+        "npm:2.13.2"
+      ],
+      [
+        "@wordpress/block-serialization-default-parser",
+        "npm:3.10.2"
+      ],
+      [
+        "@wordpress/blocks",
+        "npm:8.0.2"
+      ],
+      [
         "@wordpress/browserslist-config",
         "npm:3.0.1"
       ],
       [
         "@wordpress/compose",
-        "npm:3.25.1"
+        "npm:3.25.2"
       ],
       [
         "@wordpress/data",
@@ -938,19 +954,19 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ],
       [
         "@wordpress/deprecated",
-        "npm:2.12.1"
+        "npm:2.12.2"
       ],
       [
         "@wordpress/dom",
-        "npm:2.17.1"
+        "npm:2.17.2"
       ],
       [
         "@wordpress/element",
-        "npm:2.20.1"
+        "npm:2.20.2"
       ],
       [
         "@wordpress/escape-html",
-        "npm:1.12.1"
+        "npm:1.12.2"
       ],
       [
         "@wordpress/eslint-plugin",
@@ -958,31 +974,51 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ],
       [
         "@wordpress/hooks",
-        "npm:2.12.1"
+        "npm:2.12.2"
+      ],
+      [
+        "@wordpress/html-entities",
+        "npm:2.11.2"
       ],
       [
         "@wordpress/i18n",
-        "npm:3.18.0"
+        "npm:3.19.2"
+      ],
+      [
+        "@wordpress/icons",
+        "npm:2.10.2"
       ],
       [
         "@wordpress/is-shallow-equal",
-        "npm:3.1.1"
+        "npm:3.1.2"
       ],
       [
         "@wordpress/keycodes",
-        "npm:2.19.1"
+        "npm:2.19.2"
+      ],
+      [
+        "@wordpress/plugins",
+        "npm:2.25.2"
       ],
       [
         "@wordpress/prettier-config",
         "npm:0.4.0"
       ],
       [
+        "@wordpress/primitives",
+        "npm:1.12.2"
+      ],
+      [
         "@wordpress/priority-queue",
-        "npm:1.11.1"
+        "npm:1.11.2"
       ],
       [
         "@wordpress/redux-routine",
-        "npm:3.14.1"
+        "npm:3.14.2"
+      ],
+      [
+        "@wordpress/shortcode",
+        "npm:2.13.2"
       ],
       [
         "@wordpress/url",
@@ -1450,7 +1486,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ],
       [
         "cliui",
-        "npm:6.0.0"
+        "npm:5.0.0"
       ],
       [
         "clone-response",
@@ -2431,6 +2467,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       [
         "hpack.js",
         "npm:2.1.6"
+      ],
+      [
+        "hpq",
+        "npm:1.3.0"
       ],
       [
         "hsl-regex",
@@ -4057,7 +4097,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ],
       [
         "react-resize-aware",
-        "virtual:008980cdd63d07869a1d2818dc8fa977b75036d2120d01eb9258e9d7ac6217779a476197661085f7746c3c67529fe88ec81710fff7a91041d794b2d78a672d49#npm:3.1.0"
+        "virtual:675bec0159ccab432ec0bf2ba314f447212a2c4f27e9f36af4b9554766a8cf62833e2835cb5f58a77e74e55a5cf94d129cfd88158ed77ece34a07a40dadd2aad#npm:3.1.0"
       ],
       [
         "react-test-renderer",
@@ -4162,6 +4202,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       [
         "relateurl",
         "npm:0.2.7"
+      ],
+      [
+        "rememo",
+        "npm:3.0.0"
       ],
       [
         "remove-trailing-separator",
@@ -4400,12 +4444,20 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "npm:0.1.1"
       ],
       [
+        "showdown",
+        "npm:1.9.1"
+      ],
+      [
         "side-channel",
         "npm:1.0.4"
       ],
       [
         "signal-exit",
         "npm:3.0.3"
+      ],
+      [
+        "simple-html-tokenizer",
+        "npm:0.5.11"
       ],
       [
         "simple-swizzle",
@@ -4664,6 +4716,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "npm:0.2.8"
       ],
       [
+        "tinycolor2",
+        "npm:1.4.2"
+      ],
+      [
         "tmpl",
         "npm:1.0.4"
       ],
@@ -4829,7 +4885,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ],
       [
         "use-memo-one",
-        "virtual:008980cdd63d07869a1d2818dc8fa977b75036d2120d01eb9258e9d7ac6217779a476197661085f7746c3c67529fe88ec81710fff7a91041d794b2d78a672d49#npm:1.1.2"
+        "virtual:675bec0159ccab432ec0bf2ba314f447212a2c4f27e9f36af4b9554766a8cf62833e2835cb5f58a77e74e55a5cf94d129cfd88158ed77ece34a07a40dadd2aad#npm:1.1.2"
       ],
       [
         "util-deprecate",
@@ -5046,7 +5102,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@lipemat/js-boilerplate", "npm:6.3.0"],
             ["@types/lipemat__js-boilerplate", "https://github.com/lipemat/types-js-boilerplate.git#commit=297a9a1db21556bd372e8c9548f0c8b1caebbfe5"],
             ["@wordpress/api-fetch", "npm:3.21.5"],
+            ["@wordpress/blocks", "npm:8.0.2"],
             ["@wordpress/data", "npm:4.27.1"],
+            ["@wordpress/plugins", "npm:2.25.2"],
             ["eslint", "npm:7.18.0"],
             ["jest", "npm:26.6.3"],
             ["microbundle", "npm:0.12.4"],
@@ -7998,7 +8056,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@lipemat/js-boilerplate", "npm:6.3.0"],
             ["@types/lipemat__js-boilerplate", "https://github.com/lipemat/types-js-boilerplate.git#commit=297a9a1db21556bd372e8c9548f0c8b1caebbfe5"],
             ["@wordpress/api-fetch", "npm:3.21.5"],
+            ["@wordpress/blocks", "npm:8.0.2"],
             ["@wordpress/data", "npm:4.27.1"],
+            ["@wordpress/plugins", "npm:2.25.2"],
             ["eslint", "npm:7.18.0"],
             ["jest", "npm:26.6.3"],
             ["microbundle", "npm:0.12.4"],
@@ -9353,6 +9413,67 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["@wordpress/autop", [
+        ["npm:2.12.2", {
+          "packageLocation": "./.yarn/cache/@wordpress-autop-npm-2.12.2-4daecd736e-5da04a71d1.zip/node_modules/@wordpress/autop/",
+          "packageDependencies": [
+            ["@wordpress/autop", "npm:2.12.2"],
+            ["@babel/runtime", "npm:7.13.10"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@wordpress/blob", [
+        ["npm:2.13.2", {
+          "packageLocation": "./.yarn/cache/@wordpress-blob-npm-2.13.2-7a30fdd7a8-cc5071a7a9.zip/node_modules/@wordpress/blob/",
+          "packageDependencies": [
+            ["@wordpress/blob", "npm:2.13.2"],
+            ["@babel/runtime", "npm:7.13.10"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@wordpress/block-serialization-default-parser", [
+        ["npm:3.10.2", {
+          "packageLocation": "./.yarn/cache/@wordpress-block-serialization-default-parser-npm-3.10.2-442b305a58-9ee888deae.zip/node_modules/@wordpress/block-serialization-default-parser/",
+          "packageDependencies": [
+            ["@wordpress/block-serialization-default-parser", "npm:3.10.2"],
+            ["@babel/runtime", "npm:7.13.10"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@wordpress/blocks", [
+        ["npm:8.0.2", {
+          "packageLocation": "./.yarn/cache/@wordpress-blocks-npm-8.0.2-8e5be5a50a-4a2779a3f2.zip/node_modules/@wordpress/blocks/",
+          "packageDependencies": [
+            ["@wordpress/blocks", "npm:8.0.2"],
+            ["@babel/runtime", "npm:7.13.10"],
+            ["@wordpress/autop", "npm:2.12.2"],
+            ["@wordpress/blob", "npm:2.13.2"],
+            ["@wordpress/block-serialization-default-parser", "npm:3.10.2"],
+            ["@wordpress/compose", "npm:3.25.2"],
+            ["@wordpress/data", "npm:4.27.2"],
+            ["@wordpress/deprecated", "npm:2.12.2"],
+            ["@wordpress/dom", "npm:2.17.2"],
+            ["@wordpress/element", "npm:2.20.2"],
+            ["@wordpress/hooks", "npm:2.12.2"],
+            ["@wordpress/html-entities", "npm:2.11.2"],
+            ["@wordpress/i18n", "npm:3.19.2"],
+            ["@wordpress/icons", "npm:2.10.2"],
+            ["@wordpress/is-shallow-equal", "npm:3.1.2"],
+            ["@wordpress/shortcode", "npm:2.13.2"],
+            ["hpq", "npm:1.3.0"],
+            ["lodash", "npm:4.17.20"],
+            ["rememo", "npm:3.0.0"],
+            ["showdown", "npm:1.9.1"],
+            ["simple-html-tokenizer", "npm:0.5.11"],
+            ["tinycolor2", "npm:1.4.2"],
+            ["uuid", "npm:8.3.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["@wordpress/browserslist-config", [
         ["npm:3.0.1", {
           "packageLocation": "./.yarn/cache/@wordpress-browserslist-config-npm-3.0.1-5b6557a8ab-ba5ed09eea.zip/node_modules/@wordpress/browserslist-config/",
@@ -9378,8 +9499,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["lodash", "npm:4.17.20"],
             ["memize", "npm:1.1.0"],
             ["mousetrap", "npm:1.6.5"],
-            ["react-resize-aware", "virtual:008980cdd63d07869a1d2818dc8fa977b75036d2120d01eb9258e9d7ac6217779a476197661085f7746c3c67529fe88ec81710fff7a91041d794b2d78a672d49#npm:3.1.0"],
-            ["use-memo-one", "virtual:008980cdd63d07869a1d2818dc8fa977b75036d2120d01eb9258e9d7ac6217779a476197661085f7746c3c67529fe88ec81710fff7a91041d794b2d78a672d49#npm:1.1.2"]
+            ["react-resize-aware", "virtual:675bec0159ccab432ec0bf2ba314f447212a2c4f27e9f36af4b9554766a8cf62833e2835cb5f58a77e74e55a5cf94d129cfd88158ed77ece34a07a40dadd2aad#npm:3.1.0"],
+            ["use-memo-one", "virtual:675bec0159ccab432ec0bf2ba314f447212a2c4f27e9f36af4b9554766a8cf62833e2835cb5f58a77e74e55a5cf94d129cfd88158ed77ece34a07a40dadd2aad#npm:1.1.2"]
+          ],
+          "linkType": "HARD",
+        }],
+        ["npm:3.25.2", {
+          "packageLocation": "./.yarn/cache/@wordpress-compose-npm-3.25.2-675bec0159-2cfce85f02.zip/node_modules/@wordpress/compose/",
+          "packageDependencies": [
+            ["@wordpress/compose", "npm:3.25.2"],
+            ["@babel/runtime", "npm:7.13.10"],
+            ["@wordpress/deprecated", "npm:2.12.2"],
+            ["@wordpress/dom", "npm:2.17.2"],
+            ["@wordpress/element", "npm:2.20.2"],
+            ["@wordpress/is-shallow-equal", "npm:3.1.2"],
+            ["@wordpress/keycodes", "npm:2.19.2"],
+            ["@wordpress/priority-queue", "npm:1.11.2"],
+            ["clipboard", "npm:2.0.8"],
+            ["lodash", "npm:4.17.20"],
+            ["memize", "npm:1.1.0"],
+            ["mousetrap", "npm:1.6.5"],
+            ["react-resize-aware", "virtual:675bec0159ccab432ec0bf2ba314f447212a2c4f27e9f36af4b9554766a8cf62833e2835cb5f58a77e74e55a5cf94d129cfd88158ed77ece34a07a40dadd2aad#npm:3.1.0"],
+            ["use-memo-one", "virtual:675bec0159ccab432ec0bf2ba314f447212a2c4f27e9f36af4b9554766a8cf62833e2835cb5f58a77e74e55a5cf94d129cfd88158ed77ece34a07a40dadd2aad#npm:1.1.2"]
           ],
           "linkType": "HARD",
         }]
@@ -9402,7 +9543,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["memize", "npm:1.1.0"],
             ["redux", "npm:4.0.5"],
             ["turbo-combine-reducers", "npm:1.0.2"],
-            ["use-memo-one", "virtual:008980cdd63d07869a1d2818dc8fa977b75036d2120d01eb9258e9d7ac6217779a476197661085f7746c3c67529fe88ec81710fff7a91041d794b2d78a672d49#npm:1.1.2"]
+            ["use-memo-one", "virtual:675bec0159ccab432ec0bf2ba314f447212a2c4f27e9f36af4b9554766a8cf62833e2835cb5f58a77e74e55a5cf94d129cfd88158ed77ece34a07a40dadd2aad#npm:1.1.2"]
+          ],
+          "linkType": "HARD",
+        }],
+        ["npm:4.27.2", {
+          "packageLocation": "./.yarn/cache/@wordpress-data-npm-4.27.2-77e9f29b67-b8836801af.zip/node_modules/@wordpress/data/",
+          "packageDependencies": [
+            ["@wordpress/data", "npm:4.27.2"],
+            ["@babel/runtime", "npm:7.13.10"],
+            ["@wordpress/compose", "npm:3.25.2"],
+            ["@wordpress/deprecated", "npm:2.12.2"],
+            ["@wordpress/element", "npm:2.20.2"],
+            ["@wordpress/is-shallow-equal", "npm:3.1.2"],
+            ["@wordpress/priority-queue", "npm:1.11.2"],
+            ["@wordpress/redux-routine", "npm:3.14.2"],
+            ["equivalent-key-map", "npm:0.2.2"],
+            ["is-promise", "npm:4.0.0"],
+            ["lodash", "npm:4.17.20"],
+            ["memize", "npm:1.1.0"],
+            ["redux", "npm:4.0.5"],
+            ["turbo-combine-reducers", "npm:1.0.2"],
+            ["use-memo-one", "virtual:675bec0159ccab432ec0bf2ba314f447212a2c4f27e9f36af4b9554766a8cf62833e2835cb5f58a77e74e55a5cf94d129cfd88158ed77ece34a07a40dadd2aad#npm:1.1.2"]
           ],
           "linkType": "HARD",
         }]
@@ -9416,6 +9578,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@wordpress/hooks", "npm:2.12.1"]
           ],
           "linkType": "HARD",
+        }],
+        ["npm:2.12.2", {
+          "packageLocation": "./.yarn/cache/@wordpress-deprecated-npm-2.12.2-ecbbf278d5-2fcbf5374b.zip/node_modules/@wordpress/deprecated/",
+          "packageDependencies": [
+            ["@wordpress/deprecated", "npm:2.12.2"],
+            ["@babel/runtime", "npm:7.13.10"],
+            ["@wordpress/hooks", "npm:2.12.2"]
+          ],
+          "linkType": "HARD",
         }]
       ]],
       ["@wordpress/dom", [
@@ -9423,6 +9594,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@wordpress-dom-npm-2.17.1-3d80e181df-925ac68fc1.zip/node_modules/@wordpress/dom/",
           "packageDependencies": [
             ["@wordpress/dom", "npm:2.17.1"],
+            ["@babel/runtime", "npm:7.13.10"],
+            ["lodash", "npm:4.17.20"]
+          ],
+          "linkType": "HARD",
+        }],
+        ["npm:2.17.2", {
+          "packageLocation": "./.yarn/cache/@wordpress-dom-npm-2.17.2-5cc135d74a-9d8067f6aa.zip/node_modules/@wordpress/dom/",
+          "packageDependencies": [
+            ["@wordpress/dom", "npm:2.17.2"],
             ["@babel/runtime", "npm:7.13.10"],
             ["lodash", "npm:4.17.20"]
           ],
@@ -9440,7 +9620,21 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@wordpress/escape-html", "npm:1.12.1"],
             ["lodash", "npm:4.17.20"],
             ["react", "npm:16.14.0"],
-            ["react-dom", "virtual:af37265804ae5f138d8f4572c635ce69e4bdec224f5a052eca0ba492633953d8039ab3de5fb1f8f532b04c4449762524ceade73741803141638c53412835eb9a#npm:16.14.0"]
+            ["react-dom", "virtual:daab9063020a1236d6219c4d03c6988a9b29bd3d84b8b34d8f950fac9c73bf45d44bec9b4398b36f6343265f2312557baab540cb5014932b6d15964762322fa4#npm:16.14.0"]
+          ],
+          "linkType": "HARD",
+        }],
+        ["npm:2.20.2", {
+          "packageLocation": "./.yarn/cache/@wordpress-element-npm-2.20.2-daab906302-42a68a2ec7.zip/node_modules/@wordpress/element/",
+          "packageDependencies": [
+            ["@wordpress/element", "npm:2.20.2"],
+            ["@babel/runtime", "npm:7.13.10"],
+            ["@types/react", "npm:16.14.5"],
+            ["@types/react-dom", "npm:16.9.12"],
+            ["@wordpress/escape-html", "npm:1.12.2"],
+            ["lodash", "npm:4.17.20"],
+            ["react", "npm:16.14.0"],
+            ["react-dom", "virtual:daab9063020a1236d6219c4d03c6988a9b29bd3d84b8b34d8f950fac9c73bf45d44bec9b4398b36f6343265f2312557baab540cb5014932b6d15964762322fa4#npm:16.14.0"]
           ],
           "linkType": "HARD",
         }]
@@ -9450,6 +9644,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@wordpress-escape-html-npm-1.12.1-0d33f0c817-6d06670ad2.zip/node_modules/@wordpress/escape-html/",
           "packageDependencies": [
             ["@wordpress/escape-html", "npm:1.12.1"],
+            ["@babel/runtime", "npm:7.13.10"]
+          ],
+          "linkType": "HARD",
+        }],
+        ["npm:1.12.2", {
+          "packageLocation": "./.yarn/cache/@wordpress-escape-html-npm-1.12.2-7f4e8cbcf5-8ce3251b83.zip/node_modules/@wordpress/escape-html/",
+          "packageDependencies": [
+            ["@wordpress/escape-html", "npm:1.12.2"],
             ["@babel/runtime", "npm:7.13.10"]
           ],
           "linkType": "HARD",
@@ -9509,6 +9711,24 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/runtime", "npm:7.13.10"]
           ],
           "linkType": "HARD",
+        }],
+        ["npm:2.12.2", {
+          "packageLocation": "./.yarn/cache/@wordpress-hooks-npm-2.12.2-71a80a7fe6-fbf5322516.zip/node_modules/@wordpress/hooks/",
+          "packageDependencies": [
+            ["@wordpress/hooks", "npm:2.12.2"],
+            ["@babel/runtime", "npm:7.13.10"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@wordpress/html-entities", [
+        ["npm:2.11.2", {
+          "packageLocation": "./.yarn/cache/@wordpress-html-entities-npm-2.11.2-3489437df8-66c1c6c1db.zip/node_modules/@wordpress/html-entities/",
+          "packageDependencies": [
+            ["@wordpress/html-entities", "npm:2.11.2"],
+            ["@babel/runtime", "npm:7.13.10"]
+          ],
+          "linkType": "HARD",
         }]
       ]],
       ["@wordpress/i18n", [
@@ -9539,6 +9759,32 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["tannin", "npm:1.2.0"]
           ],
           "linkType": "HARD",
+        }],
+        ["npm:3.19.2", {
+          "packageLocation": "./.yarn/cache/@wordpress-i18n-npm-3.19.2-59e1ec8d4e-481aab1f20.zip/node_modules/@wordpress/i18n/",
+          "packageDependencies": [
+            ["@wordpress/i18n", "npm:3.19.2"],
+            ["@babel/runtime", "npm:7.13.10"],
+            ["@wordpress/hooks", "npm:2.12.2"],
+            ["gettext-parser", "npm:1.4.0"],
+            ["lodash", "npm:4.17.20"],
+            ["memize", "npm:1.1.0"],
+            ["sprintf-js", "npm:1.1.2"],
+            ["tannin", "npm:1.2.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@wordpress/icons", [
+        ["npm:2.10.2", {
+          "packageLocation": "./.yarn/cache/@wordpress-icons-npm-2.10.2-f211cd9ba9-ab8529db4c.zip/node_modules/@wordpress/icons/",
+          "packageDependencies": [
+            ["@wordpress/icons", "npm:2.10.2"],
+            ["@babel/runtime", "npm:7.13.10"],
+            ["@wordpress/element", "npm:2.20.2"],
+            ["@wordpress/primitives", "npm:1.12.2"]
+          ],
+          "linkType": "HARD",
         }]
       ]],
       ["@wordpress/is-shallow-equal", [
@@ -9546,6 +9792,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@wordpress-is-shallow-equal-npm-3.1.1-1d03fa9177-fc1bdb2180.zip/node_modules/@wordpress/is-shallow-equal/",
           "packageDependencies": [
             ["@wordpress/is-shallow-equal", "npm:3.1.1"],
+            ["@babel/runtime", "npm:7.13.10"]
+          ],
+          "linkType": "HARD",
+        }],
+        ["npm:3.1.2", {
+          "packageLocation": "./.yarn/cache/@wordpress-is-shallow-equal-npm-3.1.2-f77862e903-7ff6bb5afd.zip/node_modules/@wordpress/is-shallow-equal/",
+          "packageDependencies": [
+            ["@wordpress/is-shallow-equal", "npm:3.1.2"],
             ["@babel/runtime", "npm:7.13.10"]
           ],
           "linkType": "HARD",
@@ -9561,6 +9815,32 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["lodash", "npm:4.17.20"]
           ],
           "linkType": "HARD",
+        }],
+        ["npm:2.19.2", {
+          "packageLocation": "./.yarn/cache/@wordpress-keycodes-npm-2.19.2-5d38822ad8-7faf63ad87.zip/node_modules/@wordpress/keycodes/",
+          "packageDependencies": [
+            ["@wordpress/keycodes", "npm:2.19.2"],
+            ["@babel/runtime", "npm:7.13.10"],
+            ["@wordpress/i18n", "npm:3.19.2"],
+            ["lodash", "npm:4.17.20"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@wordpress/plugins", [
+        ["npm:2.25.2", {
+          "packageLocation": "./.yarn/cache/@wordpress-plugins-npm-2.25.2-8b4ba248b7-bdf89c6739.zip/node_modules/@wordpress/plugins/",
+          "packageDependencies": [
+            ["@wordpress/plugins", "npm:2.25.2"],
+            ["@babel/runtime", "npm:7.13.10"],
+            ["@wordpress/compose", "npm:3.25.2"],
+            ["@wordpress/element", "npm:2.20.2"],
+            ["@wordpress/hooks", "npm:2.12.2"],
+            ["@wordpress/icons", "npm:2.10.2"],
+            ["lodash", "npm:4.17.20"],
+            ["memize", "npm:1.1.0"]
+          ],
+          "linkType": "HARD",
         }]
       ]],
       ["@wordpress/prettier-config", [
@@ -9572,11 +9852,31 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["@wordpress/primitives", [
+        ["npm:1.12.2", {
+          "packageLocation": "./.yarn/cache/@wordpress-primitives-npm-1.12.2-d5a04fffd4-dfe32be37d.zip/node_modules/@wordpress/primitives/",
+          "packageDependencies": [
+            ["@wordpress/primitives", "npm:1.12.2"],
+            ["@babel/runtime", "npm:7.13.10"],
+            ["@wordpress/element", "npm:2.20.2"],
+            ["classnames", "npm:2.3.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["@wordpress/priority-queue", [
         ["npm:1.11.1", {
           "packageLocation": "./.yarn/cache/@wordpress-priority-queue-npm-1.11.1-cc16699e2c-4a32d86395.zip/node_modules/@wordpress/priority-queue/",
           "packageDependencies": [
             ["@wordpress/priority-queue", "npm:1.11.1"],
+            ["@babel/runtime", "npm:7.13.10"]
+          ],
+          "linkType": "HARD",
+        }],
+        ["npm:1.11.2", {
+          "packageLocation": "./.yarn/cache/@wordpress-priority-queue-npm-1.11.2-0e22bd2429-1a605e3b58.zip/node_modules/@wordpress/priority-queue/",
+          "packageDependencies": [
+            ["@wordpress/priority-queue", "npm:1.11.2"],
             ["@babel/runtime", "npm:7.13.10"]
           ],
           "linkType": "HARD",
@@ -9591,6 +9891,29 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["is-promise", "npm:4.0.0"],
             ["lodash", "npm:4.17.20"],
             ["rungen", "npm:0.3.2"]
+          ],
+          "linkType": "HARD",
+        }],
+        ["npm:3.14.2", {
+          "packageLocation": "./.yarn/cache/@wordpress-redux-routine-npm-3.14.2-c903bb14f1-295e10eaea.zip/node_modules/@wordpress/redux-routine/",
+          "packageDependencies": [
+            ["@wordpress/redux-routine", "npm:3.14.2"],
+            ["@babel/runtime", "npm:7.13.10"],
+            ["is-promise", "npm:4.0.0"],
+            ["lodash", "npm:4.17.20"],
+            ["rungen", "npm:0.3.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@wordpress/shortcode", [
+        ["npm:2.13.2", {
+          "packageLocation": "./.yarn/cache/@wordpress-shortcode-npm-2.13.2-fc36e1cc23-c25c4e33a7.zip/node_modules/@wordpress/shortcode/",
+          "packageDependencies": [
+            ["@wordpress/shortcode", "npm:2.13.2"],
+            ["@babel/runtime", "npm:7.13.10"],
+            ["lodash", "npm:4.17.20"],
+            ["memize", "npm:1.1.0"]
           ],
           "linkType": "HARD",
         }]
@@ -11214,6 +11537,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/classnames-npm-2.2.6-98e9901cf4-490eaeca59.zip/node_modules/classnames/",
           "packageDependencies": [
             ["classnames", "npm:2.2.6"]
+          ],
+          "linkType": "HARD",
+        }],
+        ["npm:2.3.1", {
+          "packageLocation": "./.yarn/cache/classnames-npm-2.3.1-f2ae0a8d3c-57d536eded.zip/node_modules/classnames/",
+          "packageDependencies": [
+            ["classnames", "npm:2.3.1"]
           ],
           "linkType": "HARD",
         }]
@@ -14646,6 +14976,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["obuf", "npm:1.1.2"],
             ["readable-stream", "npm:2.3.7"],
             ["wbuf", "npm:1.7.3"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["hpq", [
+        ["npm:1.3.0", {
+          "packageLocation": "./.yarn/cache/hpq-npm-1.3.0-d236956476-70fb4f3309.zip/node_modules/hpq/",
+          "packageDependencies": [
+            ["hpq", "npm:1.3.0"]
           ],
           "linkType": "HARD",
         }]
@@ -19904,10 +20243,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "HARD",
         }],
-        ["virtual:af37265804ae5f138d8f4572c635ce69e4bdec224f5a052eca0ba492633953d8039ab3de5fb1f8f532b04c4449762524ceade73741803141638c53412835eb9a#npm:16.14.0", {
-          "packageLocation": "./.yarn/$$virtual/react-dom-virtual-25e2de46de/0/cache/react-dom-npm-16.14.0-516a97ad33-a13558f0e7.zip/node_modules/react-dom/",
+        ["virtual:daab9063020a1236d6219c4d03c6988a9b29bd3d84b8b34d8f950fac9c73bf45d44bec9b4398b36f6343265f2312557baab540cb5014932b6d15964762322fa4#npm:16.14.0", {
+          "packageLocation": "./.yarn/$$virtual/react-dom-virtual-e16a075b28/0/cache/react-dom-npm-16.14.0-516a97ad33-a13558f0e7.zip/node_modules/react-dom/",
           "packageDependencies": [
-            ["react-dom", "virtual:af37265804ae5f138d8f4572c635ce69e4bdec224f5a052eca0ba492633953d8039ab3de5fb1f8f532b04c4449762524ceade73741803141638c53412835eb9a#npm:16.14.0"],
+            ["react-dom", "virtual:daab9063020a1236d6219c4d03c6988a9b29bd3d84b8b34d8f950fac9c73bf45d44bec9b4398b36f6343265f2312557baab540cb5014932b6d15964762322fa4#npm:16.14.0"],
             ["@types/react", "npm:16.14.5"],
             ["loose-envify", "npm:1.4.0"],
             ["object-assign", "npm:4.1.1"],
@@ -20014,10 +20353,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:008980cdd63d07869a1d2818dc8fa977b75036d2120d01eb9258e9d7ac6217779a476197661085f7746c3c67529fe88ec81710fff7a91041d794b2d78a672d49#npm:3.1.0", {
-          "packageLocation": "./.yarn/$$virtual/react-resize-aware-virtual-c6c0a2a0d9/0/cache/react-resize-aware-npm-3.1.0-0d77ab8ec1-ac23a8238b.zip/node_modules/react-resize-aware/",
+        ["virtual:675bec0159ccab432ec0bf2ba314f447212a2c4f27e9f36af4b9554766a8cf62833e2835cb5f58a77e74e55a5cf94d129cfd88158ed77ece34a07a40dadd2aad#npm:3.1.0", {
+          "packageLocation": "./.yarn/$$virtual/react-resize-aware-virtual-a99e787f6a/0/cache/react-resize-aware-npm-3.1.0-0d77ab8ec1-ac23a8238b.zip/node_modules/react-resize-aware/",
           "packageDependencies": [
-            ["react-resize-aware", "virtual:008980cdd63d07869a1d2818dc8fa977b75036d2120d01eb9258e9d7ac6217779a476197661085f7746c3c67529fe88ec81710fff7a91041d794b2d78a672d49#npm:3.1.0"],
+            ["react-resize-aware", "virtual:675bec0159ccab432ec0bf2ba314f447212a2c4f27e9f36af4b9554766a8cf62833e2835cb5f58a77e74e55a5cf94d129cfd88158ed77ece34a07a40dadd2aad#npm:3.1.0"],
             ["@types/react", null],
             ["react", null]
           ],
@@ -20370,6 +20709,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/relateurl-npm-0.2.7-7687cc0a2a-856db0385d.zip/node_modules/relateurl/",
           "packageDependencies": [
             ["relateurl", "npm:0.2.7"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["rememo", [
+        ["npm:3.0.0", {
+          "packageLocation": "./.yarn/cache/rememo-npm-3.0.0-65d0276e2c-724d8c1066.zip/node_modules/rememo/",
+          "packageDependencies": [
+            ["rememo", "npm:3.0.0"]
           ],
           "linkType": "HARD",
         }]
@@ -21221,6 +21569,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["showdown", [
+        ["npm:1.9.1", {
+          "packageLocation": "./.yarn/cache/showdown-npm-1.9.1-c01239fc92-ec5d438ab1.zip/node_modules/showdown/",
+          "packageDependencies": [
+            ["showdown", "npm:1.9.1"],
+            ["yargs", "npm:14.2.3"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["side-channel", [
         ["npm:1.0.4", {
           "packageLocation": "./.yarn/cache/side-channel-npm-1.0.4-e1f38b9e06-84258ce3ed.zip/node_modules/side-channel/",
@@ -21238,6 +21596,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/signal-exit-npm-3.0.3-5a2d797648-f8f3fec95c.zip/node_modules/signal-exit/",
           "packageDependencies": [
             ["signal-exit", "npm:3.0.3"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["simple-html-tokenizer", [
+        ["npm:0.5.11", {
+          "packageLocation": "./.yarn/cache/simple-html-tokenizer-npm-0.5.11-4ac29f0cc9-7b4cdb3c25.zip/node_modules/simple-html-tokenizer/",
+          "packageDependencies": [
+            ["simple-html-tokenizer", "npm:0.5.11"]
           ],
           "linkType": "HARD",
         }]
@@ -22152,6 +22519,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["tinycolor2", [
+        ["npm:1.4.2", {
+          "packageLocation": "./.yarn/cache/tinycolor2-npm-1.4.2-462ba30c26-cf33d084cb.zip/node_modules/tinycolor2/",
+          "packageDependencies": [
+            ["tinycolor2", "npm:1.4.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["tmpl", [
         ["npm:1.0.4", {
           "packageLocation": "./.yarn/cache/tmpl-npm-1.0.4-35b37c2875-44de07fb81.zip/node_modules/tmpl/",
@@ -22661,10 +23037,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:008980cdd63d07869a1d2818dc8fa977b75036d2120d01eb9258e9d7ac6217779a476197661085f7746c3c67529fe88ec81710fff7a91041d794b2d78a672d49#npm:1.1.2", {
-          "packageLocation": "./.yarn/$$virtual/use-memo-one-virtual-7d7b5a5bb2/0/cache/use-memo-one-npm-1.1.2-f58177cfe3-3796487ae7.zip/node_modules/use-memo-one/",
+        ["virtual:675bec0159ccab432ec0bf2ba314f447212a2c4f27e9f36af4b9554766a8cf62833e2835cb5f58a77e74e55a5cf94d129cfd88158ed77ece34a07a40dadd2aad#npm:1.1.2", {
+          "packageLocation": "./.yarn/$$virtual/use-memo-one-virtual-b8c118c403/0/cache/use-memo-one-npm-1.1.2-f58177cfe3-3796487ae7.zip/node_modules/use-memo-one/",
           "packageDependencies": [
-            ["use-memo-one", "virtual:008980cdd63d07869a1d2818dc8fa977b75036d2120d01eb9258e9d7ac6217779a476197661085f7746c3c67529fe88ec81710fff7a91041d794b2d78a672d49#npm:1.1.2"],
+            ["use-memo-one", "virtual:675bec0159ccab432ec0bf2ba314f447212a2c4f27e9f36af4b9554766a8cf62833e2835cb5f58a77e74e55a5cf94d129cfd88158ed77ece34a07a40dadd2aad#npm:1.1.2"],
             ["@types/react", null],
             ["react", null]
           ],
@@ -23457,6 +23833,24 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "HARD",
         }],
+        ["npm:14.2.3", {
+          "packageLocation": "./.yarn/cache/yargs-npm-14.2.3-b84ca3cee2-cfe46545a6.zip/node_modules/yargs/",
+          "packageDependencies": [
+            ["yargs", "npm:14.2.3"],
+            ["cliui", "npm:5.0.0"],
+            ["decamelize", "npm:1.2.0"],
+            ["find-up", "npm:3.0.0"],
+            ["get-caller-file", "npm:2.0.5"],
+            ["require-directory", "npm:2.1.1"],
+            ["require-main-filename", "npm:2.0.0"],
+            ["set-blocking", "npm:2.0.0"],
+            ["string-width", "npm:3.1.0"],
+            ["which-module", "npm:2.0.0"],
+            ["y18n", "npm:4.0.1"],
+            ["yargs-parser", "npm:15.0.1"]
+          ],
+          "linkType": "HARD",
+        }],
         ["npm:15.4.1", {
           "packageLocation": "./.yarn/cache/yargs-npm-15.4.1-ca1c444de1-dbf687d6b9.zip/node_modules/yargs/",
           "packageDependencies": [
@@ -23481,6 +23875,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/yargs-parser-npm-13.1.2-546b639909-82d3b7ab99.zip/node_modules/yargs-parser/",
           "packageDependencies": [
             ["yargs-parser", "npm:13.1.2"],
+            ["camelcase", "npm:5.3.1"],
+            ["decamelize", "npm:1.2.0"]
+          ],
+          "linkType": "HARD",
+        }],
+        ["npm:15.0.1", {
+          "packageLocation": "./.yarn/cache/yargs-parser-npm-15.0.1-7ef5e80780-1969d5cf00.zip/node_modules/yargs-parser/",
+          "packageDependencies": [
+            ["yargs-parser", "npm:15.0.1"],
             ["camelcase", "npm:5.3.1"],
             ["decamelize", "npm:1.2.0"]
           ],
