@@ -7,3 +7,4 @@ export * from './util/authorize';
 export * from './util/autoload';
 export {setNonce, restoreNonce, clearNonce, hasExternalNonce} from './util/nonce';
 export {default as usePostMeta} from './hooks/usePostMeta';
+export {default as useTerms} from './hooks/useTerms';
