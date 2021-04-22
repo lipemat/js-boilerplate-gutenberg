@@ -147,8 +147,8 @@ let selectedBlockId: string | null = null;
  * we've replaced the block with our HMR changed one.
  */
 const storeSelectedBlock = () => {
-	selectedBlockId = select( 'core/editor' ).getSelectedBlockClientId();
-	dispatch( 'core/editor' ).clearSelectedBlock();
+	selectedBlockId = select( 'core/block-editor' ).getSelectedBlockClientId();
+	dispatch( 'core/block-editor' ).clearSelectedBlock();
 };
 
 /**
@@ -162,17 +162,16 @@ const storeSelectedBlock = () => {
  */
 const refreshAllBlocks = ( changedNames: string[] = [] ) => {
 	// Refresh all blocks by iteratively selecting each one.
-	select( 'core/editor' ).getBlocks().forEach( ( {name, clientId} ) => {
+	select( 'core/block-editor' ).getBlocks().forEach( ( {name, clientId} ) => {
 		if ( changedNames.includes( name ) ) {
-			dispatch( 'core/editor' ).selectBlock( clientId );
+			dispatch( 'core/block-editor' ).selectBlock( clientId );
 		}
 	} );
 	// Reselect whatever was selected in the beginning.
 	if ( selectedBlockId ) {
-		dispatch( 'core/editor' ).selectBlock( selectedBlockId );
+		dispatch( 'core/block-editor' ).selectBlock( selectedBlockId );
 	} else {
-		dispatch( 'core/editor' ).clearSelectedBlock();
+		dispatch( 'core/block-editor' ).clearSelectedBlock();
 	}
 	selectedBlockId = null;
 };
-
