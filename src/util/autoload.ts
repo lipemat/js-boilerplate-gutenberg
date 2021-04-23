@@ -43,6 +43,7 @@ export const autoloadBlocks = ( getContext: () => __WebpackModuleApi.RequireCont
 		pluginModule,
 		register: registerBlockType,
 		unregister: unregisterBlockType,
+		type: 'block',
 	} );
 };
 
@@ -64,19 +65,21 @@ export const autoloadPlugins = ( getContext: () => __WebpackModuleApi.RequireCon
 		pluginModule,
 		register: registerPlugin,
 		unregister: unregisterPlugin,
+		type: 'plugin',
 	} );
 };
 
 
 type Autoload<T> = {
-	afterReload: ( changedNames: string[] ) => void,
-	beforeReload: () => void,
+	afterReload: ( changedNames: string[] ) => void;
+	beforeReload: () => void;
 	// Execute and return a `require.context()` call
-	getContext: () => __WebpackModuleApi.RequireContext,
+	getContext: () => __WebpackModuleApi.RequireContext;
 	// Module of the current file from the global {module}.
-	pluginModule: NodeJS.Module
-	register: ( name: string, config: T ) => any,
-	unregister: ( name: string ) => any,
+	pluginModule: NodeJS.Module;
+	register: ( name: string, config: T ) => any;
+	unregister: ( name: string ) => any;
+	type: string; // Identify the type for caching purposes.
 }
 
 /**
@@ -95,6 +98,7 @@ export const autoload = <T>( {
 	pluginModule,
 	register,
 	unregister,
+	type,
 }: Autoload<T> ) => {
 	const cache = {};
 
@@ -112,7 +116,7 @@ export const autoload = <T>( {
 				// Module unchanged: no further action needed.
 				return;
 			}
-			if ( cache[ key ] ) {
+			if ( cache[ `${requiredModule.name}-${type}` ] ) {
 				// Module changed, and prior copy detected: unregister old module.
 				unregister( requiredModule.name );
 			}
@@ -121,7 +125,7 @@ export const autoload = <T>( {
 			register( requiredModule.name, requiredModule.settings );
 
 			changedNames.push( requiredModule.name );
-			cache[ key ] = requiredModule;
+			cache[ `${requiredModule.name}-${type}` ] = requiredModule;
 		} );
 
 		afterReload( changedNames );
