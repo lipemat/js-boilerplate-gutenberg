@@ -56,3 +56,54 @@ const post = await wp.posts().create( {
 } );
 
 ```
+
+### Hot Module Reloading For Blocks and Plugins
+
+Helper methods exists for automatically loading block or plugin files based on a `REGEX` filter as well as handling the various `register` and `unregister` requirements to make HMR work. 
+
+```typescript
+import {autoloadBlocks, autoloadPlugins} from '@lipemat/js-boilerplate-gutenberg';
+
+/**
+ * Use our custom autoloader to automatically require,
+ * register and add HMR support to Gutenberg related items.
+ *
+ * Will load from specified directory recursively.
+ */
+export default () => {
+	// Load all blocks
+	autoloadBlocks( () => require.context( './blocks', true, /block\.tsx$/ ), module );
+
+	// Load all meta boxes
+	autoloadPlugins( () => require.context( './meta-boxes', true, /index\.tsx$/ ), module );
+
+}
+````
+
+### Hooks
+
+#### `usePostMeta`
+
+`usePostMeta` is used to interact with the current post's meta from sidebars or meta boxes within Gutenberg.
+
+Will return the current meta state as well as the original meta state before any changes were made.
+
+You may work with a single meta key like so:
+```typescript
+const [value, updateValue, previous] = usePostMeta( 'custom-meta-key' );
+```
+Or by default work with the whole meta object:
+```typescript
+const [values, updateValues, previous] = usePostMeta();
+```
+
+#### `useTerms`
+
+`useTerms` is used to interact with the current post's terms from sidebars or meta boxes within Gutenberg.
+
+Will return the current terms state as well as the original terms state before any changes were made.
+
+
+```typescript
+const [terms, updateTerms, previous] = useTerms( 'category' );
+```
