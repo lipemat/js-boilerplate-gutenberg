@@ -12,7 +12,7 @@ type Taxonomies = 'category' | 'post_tag' | 'nav_menu';
  *
  * @param taxonomy
  */
-function useTerms<T extends string = Taxonomies>( taxonomy: T ): [ number[], ( terms: number[] ) => void, number[] ] {
+export function useTerms<T extends string = Taxonomies>( taxonomy: T ): [ number[], ( terms: number[] ) => void, number[] ] {
 	const {editPost} = useDispatch( 'core/editor' );
 	const data = useSelect( select => {
 		const taxonomyObject = select( 'core' ).getTaxonomy( taxonomy );
@@ -31,5 +31,3 @@ function useTerms<T extends string = Taxonomies>( taxonomy: T ): [ number[], ( t
 
 	return [ data.current, updateTerms, data.previous ];
 }
-
-export default useTerms;

@@ -6,5 +6,5 @@ export {addMiddleware, removeMiddleware} from './util/middleware';
 export * from './util/authorize';
 export * from './util/autoload';
 export {setNonce, restoreNonce, clearNonce, hasExternalNonce} from './util/nonce';
-export {default as usePostMeta} from './hooks/usePostMeta';
-export {default as useTerms} from './hooks/useTerms';
+export {usePostMeta} from './hooks/usePostMeta';
+export {useTerms} from './hooks/useTerms';

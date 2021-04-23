@@ -15,9 +15,9 @@ interface PostEdit<T> extends PostEditing {
 }
 
 // Work with entire meta object.
-function usePostMeta<T extends PostMeta, K extends keyof T = keyof T>(): [ T, ( key: K, value: T[K] ) => void, T ];
+export function usePostMeta<T extends PostMeta, K extends keyof T = keyof T>(): [ T, ( key: K, value: T[K] ) => void, T ];
 // Work with a single key..
-function usePostMeta<T extends PostMeta, K extends keyof T = keyof T>( metaKey: K ): [ T[K], ( value: T[K] ) => void, T[K] ];
+export function usePostMeta<T extends PostMeta, K extends keyof T = keyof T>( metaKey: K ): [ T[K], ( value: T[K] ) => void, T[K] ];
 
 /**
  * Hook for simple interactions with the current post's meta
@@ -31,7 +31,7 @@ function usePostMeta<T extends PostMeta, K extends keyof T = keyof T>( metaKey: 
  * @param {string} [metaKey] - Pass a meta key to work with an individual meta key.
  *                           By default will work with entire meta object.
  */
-function usePostMeta<T extends PostMeta, K extends keyof T = keyof T>( metaKey?: K ) {
+export function usePostMeta<T extends PostMeta, K extends keyof T = keyof T>( metaKey?: K ) {
 	const {editPost} = useDispatch( 'core/editor' );
 	const meta = useSelect( select => ( {
 		previous: select( 'core/editor' ).getCurrentPostAttribute<PostEdit<T>, 'meta'>( 'meta' ),
@@ -74,5 +74,3 @@ function usePostMeta<T extends PostMeta, K extends keyof T = keyof T>( metaKey?:
 	return [ current, updateAll, previous ];
 
 }
-
-export default usePostMeta;
