@@ -39,7 +39,10 @@ module.exports = [
 	} ),
 	{
 		wp: 'wp',
-		// We must use the WP Core global React within blocks or hooks will not work.
+		/**
+		 * We use the core version of React DOM on production builds.
+		 * For dev builds we use the @hot-loader/react-dom version.
+		 */
 		react: 'React',
 		lodash: 'lodash',
 	},
