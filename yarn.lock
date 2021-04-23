@@ -1737,7 +1737,8 @@ __metadata:
   resolution: "@lipemat/js-boilerplate-gutenberg@workspace:."
   dependencies:
     "@lipemat/js-boilerplate": ^6.2.1
-    "@types/lipemat__js-boilerplate": "lipemat/types-js-boilerplate#semver:^1.2.1"
+    "@types/lipemat__js-boilerplate": "lipemat/types-js-boilerplate#semver:^1.3.0"
+    "@types/webpack-env": ^1.16.0
     "@wordpress/api-fetch": ^3.20.0
     "@wordpress/blocks": ^8.0.2
     "@wordpress/data": ^4.27.1
@@ -2242,9 +2243,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lipemat__js-boilerplate@lipemat/types-js-boilerplate#semver:^1.2.1":
-  version: 1.2.1
-  resolution: "@types/lipemat__js-boilerplate@https://github.com/lipemat/types-js-boilerplate.git#commit=297a9a1db21556bd372e8c9548f0c8b1caebbfe5"
+"@types/lipemat__js-boilerplate@lipemat/types-js-boilerplate#semver:^1.3.0":
+  version: 1.3.0
+  resolution: "@types/lipemat__js-boilerplate@https://github.com/lipemat/types-js-boilerplate.git#commit=bcba7cd7284725fea798aa20e86f254b4d82a29d"
   dependencies:
     "@types/classnames": ^2.2.9
     "@types/jest": ^24.0.19
@@ -2255,7 +2256,8 @@ __metadata:
     "@types/react-router-dom": ^4.3.4
     "@types/react-transition-group": ^4.2.4
     "@types/tinymce": ^4.5.23
-  checksum: 2e8ebce2edee9d9c44766fb804120b20c0bb5169dfe072485efea33e2fcc5112b3d060a680dd3d50bf7bb3659903b4b4b2d6385b5ce0b646584c3c73b3900ac4
+    "@types/webpack-env": ^1.16.0
+  checksum: 9bb98dca570607144ed8b86d576f95381283de276841fc1069a3a55f242f248bace5b11de7733096c7ed55dc37043eb1fa8cd9eab50ed928d975cc54a63ae7a6
   languageName: node
   linkType: hard
 
@@ -2481,6 +2483,13 @@ __metadata:
   dependencies:
     source-map: ^0.6.1
   checksum: 75f1c06245dc31cb44496a4f4b685d313863561892c9cb51e7ba3a90522d4775b276f0febf43b797102309cb44e2226fba15a08aa043cd2423455ff3662d4039
+  languageName: node
+  linkType: hard
+
+"@types/webpack-env@npm:^1.16.0":
+  version: 1.16.0
+  resolution: "@types/webpack-env@npm:1.16.0"
+  checksum: eaf62fb65ba18737174a520a444bb7407e5a6f32581690c5a7a687e6f86e9d4ce336fd9e79989aafa19e5f390046ad54b9100cd3d70a43dcf0ab0161d30cd5bd
   languageName: node
   linkType: hard
 
@@ -14668,21 +14677,21 @@ typescript@^3.9.5:
 
 "typescript@patch:typescript@^3.9.5#builtin<compat/typescript>":
   version: 3.9.7
-  resolution: "typescript@patch:typescript@npm%3A3.9.7#builtin<compat/typescript>::version=3.9.7&hash=cc6730"
+  resolution: "typescript@patch:typescript@npm%3A3.9.7#builtin<compat/typescript>::version=3.9.7&hash=a45b0e"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: f0d3d9c987860c7c458229ab6dd7e3d322405db36b70abccba610b5efd9f9451e4e67a3fc7983c0d3741033c1f1a8d7aa859a1510caa8f20fad762fc39648bfa
+  checksum: ee9b64dafd9997a7f659c402dc4500792e05724a39a9071a0b79fd513466d6f4497e7d4963e092804a387b77e9cb9d4bfe365433fcbf2ca9eea44476ba3df14d
   languageName: node
   linkType: hard
 
 "typescript@patch:typescript@^4#builtin<compat/typescript>, typescript@patch:typescript@^4.1.3#builtin<compat/typescript>":
   version: 4.1.3
-  resolution: "typescript@patch:typescript@npm%3A4.1.3#builtin<compat/typescript>::version=4.1.3&hash=cc6730"
+  resolution: "typescript@patch:typescript@npm%3A4.1.3#builtin<compat/typescript>::version=4.1.3&hash=a45b0e"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 017af992148346e671d5b83b041773825888e9c94db8d2b9472cdbb6d6f0ee85927817473121524d319f8be6ffe5a6904d27ff6ef21356d2274fcadd52e17938
+  checksum: 28f0f616bf6284543bb14d4bfe0e1a74963e5df0396ebccfc6a57bfd4ab70b4284e51b3a2045ed2466151a4a58c8a549edb886a2f7a2232cf08fcf73496592e6
   languageName: node
   linkType: hard
 
