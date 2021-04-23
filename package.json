@@ -11,10 +11,6 @@
   "module": "dist/index.module.js",
   "jsnext:main": "dist/index.module.js",
   "react-native": "dist/index.module.js",
-  "globals": {
-    "@wordpress/api-fetch": "wp.apiFetch",
-    "@wordpress/url": "wp.url"
-  },
   "typings": "dist/index.d.ts",
   "source": "src/index.ts",
   "files": [
