@@ -126,7 +126,12 @@ export async function getAuthorizationUrl( data: AuthorizationParams ): Promise<
  * @requires Version 5.6+ of WP core or the "Application Passwords" plugin.
  *
  * @requires authentication to be enabled via .htaccess
+ *
+ * # Locally we use `mod_fcgid` on cPanel we use `mod_proxy_fcgi`.
  * <IfModule mod_fcgid.c>
+ *   CGIPassAuth on
+ * </IfModule>
+ * <IfModule mod_proxy_fcgi.c>
  *   CGIPassAuth on
  * </IfModule>
  *
