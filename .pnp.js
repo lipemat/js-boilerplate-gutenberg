@@ -718,7 +718,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ],
       [
         "@types/lipemat__js-boilerplate",
-        "https://github.com/lipemat/types-js-boilerplate.git#commit=bcba7cd7284725fea798aa20e86f254b4d82a29d"
+        "https://github.com/lipemat/types-js-boilerplate.git#commit=88ba54be14cfb53068a7c5db3ed569fb749252a6"
+      ],
+      [
+        "@types/lodash",
+        "npm:4.14.168"
       ],
       [
         "@types/minimatch",
@@ -2682,7 +2686,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ],
       [
         "is-core-module",
-        "npm:2.2.0"
+        "npm:2.3.0"
       ],
       [
         "is-data-descriptor",
@@ -4261,7 +4265,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ],
       [
         "resolve",
-        "patch:resolve@npm%3A1.19.0#builtin<compat/resolve>::version=1.19.0&hash=3388aa"
+        "patch:resolve@npm%3A1.20.0#builtin<compat/resolve>::version=1.20.0&hash=3388aa"
       ],
       [
         "resolve-cwd",
@@ -4801,7 +4805,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ],
       [
         "typescript",
-        "patch:typescript@npm%3A4.1.3#builtin<compat/typescript>::version=4.1.3&hash=a45b0e"
+        "patch:typescript@npm%3A4.2.4#builtin<compat/typescript>::version=4.2.4&hash=a45b0e"
       ],
       [
         "unfetch",
@@ -5104,7 +5108,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",
           "packageDependencies": [
             ["@lipemat/js-boilerplate", "npm:6.3.0"],
-            ["@types/lipemat__js-boilerplate", "https://github.com/lipemat/types-js-boilerplate.git#commit=bcba7cd7284725fea798aa20e86f254b4d82a29d"],
+            ["@types/lipemat__js-boilerplate", "https://github.com/lipemat/types-js-boilerplate.git#commit=88ba54be14cfb53068a7c5db3ed569fb749252a6"],
             ["@types/webpack-env", "npm:1.16.0"],
             ["@wordpress/api-fetch", "npm:3.21.5"],
             ["@wordpress/blocks", "npm:8.0.2"],
@@ -5113,7 +5117,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint", "npm:7.18.0"],
             ["jest", "npm:26.6.3"],
             ["microbundle", "npm:0.12.4"],
-            ["typescript", "patch:typescript@npm%3A4.1.3#builtin<compat/typescript>::version=4.1.3&hash=a45b0e"],
+            ["typescript", "patch:typescript@npm%3A4.2.4#builtin<compat/typescript>::version=4.2.4&hash=a45b0e"],
             ["unfetch", "npm:4.2.0"]
           ],
           "linkType": "SOFT",
@@ -8042,7 +8046,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-test-renderer", "virtual:4a820b64106fdec5b69240caf095136f0e0a3e531d8ff15e3734cfa760886164332d3624219f31e912bb4cb6fed4c5c929c376f5631d086a0069211e405b9ef7#npm:16.14.0"],
             ["react-transition-group", "virtual:4a820b64106fdec5b69240caf095136f0e0a3e531d8ff15e3734cfa760886164332d3624219f31e912bb4cb6fed4c5c929c376f5631d086a0069211e405b9ef7#npm:4.4.1"],
             ["style-loader", "virtual:4a820b64106fdec5b69240caf095136f0e0a3e531d8ff15e3734cfa760886164332d3624219f31e912bb4cb6fed4c5c929c376f5631d086a0069211e405b9ef7#npm:2.0.0"],
-            ["typescript", "patch:typescript@npm%3A4.1.3#builtin<compat/typescript>::version=4.1.3&hash=a45b0e"],
+            ["typescript", "patch:typescript@npm%3A4.2.4#builtin<compat/typescript>::version=4.2.4&hash=a45b0e"],
             ["update-notifier", "npm:4.1.3"],
             ["webpack", "virtual:4a820b64106fdec5b69240caf095136f0e0a3e531d8ff15e3734cfa760886164332d3624219f31e912bb4cb6fed4c5c929c376f5631d086a0069211e405b9ef7#npm:5.11.1"],
             ["webpack-assets-manifest", "virtual:4a820b64106fdec5b69240caf095136f0e0a3e531d8ff15e3734cfa760886164332d3624219f31e912bb4cb6fed4c5c929c376f5631d086a0069211e405b9ef7#npm:5.0.0"],
@@ -8059,7 +8063,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["@lipemat/js-boilerplate-gutenberg", "workspace:."],
             ["@lipemat/js-boilerplate", "npm:6.3.0"],
-            ["@types/lipemat__js-boilerplate", "https://github.com/lipemat/types-js-boilerplate.git#commit=bcba7cd7284725fea798aa20e86f254b4d82a29d"],
+            ["@types/lipemat__js-boilerplate", "https://github.com/lipemat/types-js-boilerplate.git#commit=88ba54be14cfb53068a7c5db3ed569fb749252a6"],
             ["@types/webpack-env", "npm:1.16.0"],
             ["@wordpress/api-fetch", "npm:3.21.5"],
             ["@wordpress/blocks", "npm:8.0.2"],
@@ -8068,7 +8072,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint", "npm:7.18.0"],
             ["jest", "npm:26.6.3"],
             ["microbundle", "npm:0.12.4"],
-            ["typescript", "patch:typescript@npm%3A4.1.3#builtin<compat/typescript>::version=4.1.3&hash=a45b0e"],
+            ["typescript", "patch:typescript@npm%3A4.2.4#builtin<compat/typescript>::version=4.2.4&hash=a45b0e"],
             ["unfetch", "npm:4.2.0"]
           ],
           "linkType": "SOFT",
@@ -8215,7 +8219,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["glob", "npm:7.1.6"],
             ["is-reference", "npm:1.2.1"],
             ["magic-string", "npm:0.25.7"],
-            ["resolve", "patch:resolve@npm%3A1.19.0#builtin<compat/resolve>::version=1.19.0&hash=3388aa"],
+            ["resolve", "patch:resolve@npm%3A1.20.0#builtin<compat/resolve>::version=1.20.0&hash=3388aa"],
             ["rollup", "npm:1.32.1"]
           ],
           "packagePeers": [
@@ -8265,7 +8269,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/rollup", null],
             ["builtin-modules", "npm:3.2.0"],
             ["is-module", "npm:1.0.0"],
-            ["resolve", "patch:resolve@npm%3A1.19.0#builtin<compat/resolve>::version=1.19.0&hash=3388aa"],
+            ["resolve", "patch:resolve@npm%3A1.20.0#builtin<compat/resolve>::version=1.20.0&hash=3388aa"],
             ["rollup", "npm:1.32.1"]
           ],
           "packagePeers": [
@@ -8631,20 +8635,30 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "HARD",
         }],
-        ["https://github.com/lipemat/types-js-boilerplate.git#commit=bcba7cd7284725fea798aa20e86f254b4d82a29d", {
-          "packageLocation": "./.yarn/cache/@types-lipemat__js-boilerplate-https-1c4ac2707c-9bb98dca57.zip/node_modules/@types/lipemat__js-boilerplate/",
+        ["https://github.com/lipemat/types-js-boilerplate.git#commit=88ba54be14cfb53068a7c5db3ed569fb749252a6", {
+          "packageLocation": "./.yarn/cache/@types-lipemat__js-boilerplate-https-ddc6b1f232-e7eef832d3.zip/node_modules/@types/lipemat__js-boilerplate/",
           "packageDependencies": [
-            ["@types/lipemat__js-boilerplate", "https://github.com/lipemat/types-js-boilerplate.git#commit=bcba7cd7284725fea798aa20e86f254b4d82a29d"],
+            ["@types/lipemat__js-boilerplate", "https://github.com/lipemat/types-js-boilerplate.git#commit=88ba54be14cfb53068a7c5db3ed569fb749252a6"],
             ["@types/classnames", "npm:2.2.11"],
             ["@types/jest", "npm:24.9.1"],
             ["@types/jquery", "npm:3.5.5"],
             ["@types/js-cookie", "npm:2.2.6"],
+            ["@types/lodash", "npm:4.14.168"],
             ["@types/react", "npm:16.14.4"],
             ["@types/react-dom", "npm:16.9.11"],
             ["@types/react-router-dom", "npm:4.3.5"],
             ["@types/react-transition-group", "npm:4.4.0"],
             ["@types/tinymce", "npm:4.6.0"],
             ["@types/webpack-env", "npm:1.16.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@types/lodash", [
+        ["npm:4.14.168", {
+          "packageLocation": "./.yarn/cache/@types-lodash-npm-4.14.168-2d65abe211-9a4e25f89f.zip/node_modules/@types/lodash/",
+          "packageDependencies": [
+            ["@types/lodash", "npm:4.14.168"]
           ],
           "linkType": "HARD",
         }]
@@ -10658,7 +10672,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/eslint", null],
             ["eslint", "npm:7.18.0"],
             ["eslint-visitor-keys", "npm:1.3.0"],
-            ["resolve", "patch:resolve@npm%3A1.19.0#builtin<compat/resolve>::version=1.19.0&hash=3388aa"]
+            ["resolve", "patch:resolve@npm%3A1.20.0#builtin<compat/resolve>::version=1.20.0&hash=3388aa"]
           ],
           "packagePeers": [
             "@types/eslint",
@@ -10813,7 +10827,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["babel-plugin-macros", "npm:2.8.0"],
             ["@babel/runtime", "npm:7.12.5"],
             ["cosmiconfig", "npm:6.0.0"],
-            ["resolve", "patch:resolve@npm%3A1.19.0#builtin<compat/resolve>::version=1.19.0&hash=3388aa"]
+            ["resolve", "patch:resolve@npm%3A1.20.0#builtin<compat/resolve>::version=1.20.0&hash=3388aa"]
           ],
           "linkType": "HARD",
         }]
@@ -13629,7 +13643,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["object.fromentries", "npm:2.0.3"],
             ["object.values", "npm:1.1.2"],
             ["prop-types", "npm:15.7.2"],
-            ["resolve", "patch:resolve@npm%3A1.19.0#builtin<compat/resolve>::version=1.19.0&hash=3388aa"],
+            ["resolve", "patch:resolve@npm%3A1.20.0#builtin<compat/resolve>::version=1.20.0&hash=3388aa"],
             ["string.prototype.matchall", "npm:4.0.3"]
           ],
           "packagePeers": [
@@ -14308,7 +14322,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["schema-utils", "npm:2.7.0"],
             ["semver", "npm:7.3.4"],
             ["tapable", "npm:1.1.3"],
-            ["typescript", "patch:typescript@npm%3A4.1.3#builtin<compat/typescript>::version=4.1.3&hash=a45b0e"],
+            ["typescript", "patch:typescript@npm%3A4.2.4#builtin<compat/typescript>::version=4.2.4&hash=a45b0e"],
             ["webpack", "virtual:4a820b64106fdec5b69240caf095136f0e0a3e531d8ff15e3734cfa760886164332d3624219f31e912bb4cb6fed4c5c929c376f5631d086a0069211e405b9ef7#npm:5.11.1"]
           ],
           "packagePeers": [
@@ -14431,10 +14445,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "HARD",
         }],
-        ["patch:fsevents@npm%3A2.2.1#builtin<compat/fsevents>::version=2.2.1&hash=11e9ea", {
-          "packageLocation": "./.yarn/unplugged/fsevents-patch-341a3f4cfc/node_modules/fsevents/",
+        ["patch:fsevents@npm%3A2.3.2#builtin<compat/fsevents>::version=2.3.2&hash=11e9ea", {
+          "packageLocation": "./.yarn/unplugged/fsevents-patch-3bc6df0d9f/node_modules/fsevents/",
           "packageDependencies": [
-            ["fsevents", "patch:fsevents@npm%3A2.2.1#builtin<compat/fsevents>::version=2.2.1&hash=11e9ea"],
+            ["fsevents", "patch:fsevents@npm%3A2.3.2#builtin<compat/fsevents>::version=2.3.2&hash=11e9ea"],
             ["node-gyp", "npm:7.1.2"]
           ],
           "linkType": "HARD",
@@ -15670,10 +15684,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["is-core-module", [
-        ["npm:2.2.0", {
-          "packageLocation": "./.yarn/cache/is-core-module-npm-2.2.0-497065e3b0-2344744de9.zip/node_modules/is-core-module/",
+        ["npm:2.3.0", {
+          "packageLocation": "./.yarn/cache/is-core-module-npm-2.3.0-b7e8703f50-d226833132.zip/node_modules/is-core-module/",
           "packageDependencies": [
-            ["is-core-module", "npm:2.2.0"],
+            ["is-core-module", "npm:2.3.0"],
             ["has", "npm:1.0.3"]
           ],
           "linkType": "HARD",
@@ -16419,7 +16433,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:14.14.17"],
             ["anymatch", "npm:3.1.1"],
             ["fb-watchman", "npm:2.0.1"],
-            ["fsevents", "patch:fsevents@npm%3A2.2.1#builtin<compat/fsevents>::version=2.2.1&hash=11e9ea"],
+            ["fsevents", "patch:fsevents@npm%3A2.3.2#builtin<compat/fsevents>::version=2.3.2&hash=11e9ea"],
             ["graceful-fs", "npm:4.2.4"],
             ["jest-regex-util", "npm:26.0.0"],
             ["jest-serializer", "npm:26.6.2"],
@@ -16584,7 +16598,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest-pnp-resolver", "virtual:6ad3c87f852a744f0ca052ddcf60cfb1d20f148e44c4d3bc933aed1297626798d738b65c746a40d5eb58079971d680449b7c0894918212fabb0b9f5575e9f921#npm:1.2.2"],
             ["jest-util", "npm:26.6.2"],
             ["read-pkg-up", "npm:7.0.1"],
-            ["resolve", "patch:resolve@npm%3A1.19.0#builtin<compat/resolve>::version=1.19.0&hash=3388aa"],
+            ["resolve", "patch:resolve@npm%3A1.20.0#builtin<compat/resolve>::version=1.20.0&hash=3388aa"],
             ["slash", "npm:3.0.0"]
           ],
           "linkType": "HARD",
@@ -17655,7 +17669,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["sade", "npm:1.7.4"],
             ["tiny-glob", "npm:0.2.8"],
             ["tslib", "npm:1.14.1"],
-            ["typescript", "patch:typescript@npm%3A3.9.7#builtin<compat/typescript>::version=3.9.7&hash=a45b0e"]
+            ["typescript", "patch:typescript@npm%3A3.9.9#builtin<compat/typescript>::version=3.9.9&hash=a45b0e"]
           ],
           "linkType": "HARD",
         }]
@@ -18132,7 +18146,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["normalize-package-data", "npm:2.5.0"],
             ["hosted-git-info", "npm:2.8.8"],
-            ["resolve", "patch:resolve@npm%3A1.19.0#builtin<compat/resolve>::version=1.19.0&hash=3388aa"],
+            ["resolve", "patch:resolve@npm%3A1.20.0#builtin<compat/resolve>::version=1.20.0&hash=3388aa"],
             ["semver", "npm:5.7.1"],
             ["validate-npm-package-license", "npm:3.0.4"]
           ],
@@ -19265,7 +19279,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["postcss", "npm:7.0.35"],
             ["postcss-value-parser", "npm:3.3.1"],
             ["read-cache", "npm:1.0.0"],
-            ["resolve", "patch:resolve@npm%3A1.19.0#builtin<compat/resolve>::version=1.19.0&hash=3388aa"]
+            ["resolve", "patch:resolve@npm%3A1.20.0#builtin<compat/resolve>::version=1.20.0&hash=3388aa"]
           ],
           "linkType": "HARD",
         }]
@@ -20554,7 +20568,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/rechoir-npm-0.7.0-9bea79bab8-1d4cc8db1d.zip/node_modules/rechoir/",
           "packageDependencies": [
             ["rechoir", "npm:0.7.0"],
-            ["resolve", "patch:resolve@npm%3A1.19.0#builtin<compat/resolve>::version=1.19.0&hash=3388aa"]
+            ["resolve", "patch:resolve@npm%3A1.20.0#builtin<compat/resolve>::version=1.20.0&hash=3388aa"]
           ],
           "linkType": "HARD",
         }]
@@ -20910,11 +20924,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "HARD",
         }],
-        ["patch:resolve@npm%3A1.19.0#builtin<compat/resolve>::version=1.19.0&hash=3388aa", {
-          "packageLocation": "./.yarn/cache/resolve-patch-46f4fba2f6-188d5167e8.zip/node_modules/resolve/",
+        ["patch:resolve@npm%3A1.20.0#builtin<compat/resolve>::version=1.20.0&hash=3388aa", {
+          "packageLocation": "./.yarn/cache/resolve-patch-55fcdb097c-c4a515b760.zip/node_modules/resolve/",
           "packageDependencies": [
-            ["resolve", "patch:resolve@npm%3A1.19.0#builtin<compat/resolve>::version=1.19.0&hash=3388aa"],
-            ["is-core-module", "npm:2.2.0"],
+            ["resolve", "patch:resolve@npm%3A1.20.0#builtin<compat/resolve>::version=1.20.0&hash=3388aa"],
+            ["is-core-module", "npm:2.3.0"],
             ["path-parse", "npm:1.0.6"]
           ],
           "linkType": "HARD",
@@ -21091,7 +21105,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["postcss-load-config", "npm:2.1.2"],
             ["postcss-modules", "npm:2.0.0"],
             ["promise.series", "npm:0.2.0"],
-            ["resolve", "patch:resolve@npm%3A1.19.0#builtin<compat/resolve>::version=1.19.0&hash=3388aa"],
+            ["resolve", "patch:resolve@npm%3A1.20.0#builtin<compat/resolve>::version=1.20.0&hash=3388aa"],
             ["rollup-pluginutils", "npm:2.8.2"],
             ["safe-identifier", "npm:0.4.2"],
             ["style-inject", "npm:0.3.0"]
@@ -21146,7 +21160,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["rollup", "npm:1.32.1"],
             ["rollup-pluginutils", "npm:2.8.1"],
             ["tslib", "npm:1.10.0"],
-            ["typescript", "patch:typescript@npm%3A3.9.7#builtin<compat/typescript>::version=3.9.7&hash=a45b0e"]
+            ["typescript", "patch:typescript@npm%3A3.9.9#builtin<compat/typescript>::version=3.9.9&hash=a45b0e"]
           ],
           "packagePeers": [
             "@types/rollup",
@@ -22799,17 +22813,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["typescript", [
-        ["patch:typescript@npm%3A3.9.7#builtin<compat/typescript>::version=3.9.7&hash=a45b0e", {
-          "packageLocation": "./.yarn/cache/typescript-patch-fb1f2b17f5-ee9b64dafd.zip/node_modules/typescript/",
+        ["patch:typescript@npm%3A3.9.9#builtin<compat/typescript>::version=3.9.9&hash=a45b0e", {
+          "packageLocation": "./.yarn/cache/typescript-patch-92721659c3-05a113f2ec.zip/node_modules/typescript/",
           "packageDependencies": [
-            ["typescript", "patch:typescript@npm%3A3.9.7#builtin<compat/typescript>::version=3.9.7&hash=a45b0e"]
+            ["typescript", "patch:typescript@npm%3A3.9.9#builtin<compat/typescript>::version=3.9.9&hash=a45b0e"]
           ],
           "linkType": "HARD",
         }],
-        ["patch:typescript@npm%3A4.1.3#builtin<compat/typescript>::version=4.1.3&hash=a45b0e", {
-          "packageLocation": "./.yarn/cache/typescript-patch-70d65c27d9-28f0f616bf.zip/node_modules/typescript/",
+        ["patch:typescript@npm%3A4.2.4#builtin<compat/typescript>::version=4.2.4&hash=a45b0e", {
+          "packageLocation": "./.yarn/cache/typescript-patch-70a7929abf-3be4431759.zip/node_modules/typescript/",
           "packageDependencies": [
-            ["typescript", "patch:typescript@npm%3A4.1.3#builtin<compat/typescript>::version=4.1.3&hash=a45b0e"]
+            ["typescript", "patch:typescript@npm%3A4.2.4#builtin<compat/typescript>::version=4.2.4&hash=a45b0e"]
           ],
           "linkType": "HARD",
         }]

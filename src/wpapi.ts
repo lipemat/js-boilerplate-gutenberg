@@ -22,6 +22,7 @@ import {addQueryArgs} from '@wordpress/url';
 import {PostCreate} from '@wordpress/api/posts';
 import {Page, PageCreate, PagesQuery} from '@wordpress/api/pages';
 import {defaultFetchHandler} from './util/request-handler';
+import {SearchItem, SearchQuery} from '@wordpress/api/search';
 import {UserUpdate} from '@wordpress/api/users';
 
 export type CustomRoutes<K> = {
@@ -56,7 +57,10 @@ export interface Routes {
 		delete: ( id: number, reassign?: number ) => Promise<{ deleted: boolean, previous: T }>
 		update: ( data: U ) => Promise<Required<C> & T>;
 	}
-	search: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;
+	search: <T = SearchItem, Q = SearchQuery>() => {
+		get: ( options?: Q ) => Promise<T[]>;
+		getWithPagination: ( options?: Q ) => Promise<Pagination<T>>;
+	}
 	settings: <T = Settings, U = Partial<T>>() => {
 		get: () => Promise<T>;
 		update: ( data: U ) => Promise<T>;
