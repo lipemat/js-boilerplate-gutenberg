@@ -30,6 +30,7 @@ export type CustomRoutes<K> = {
 }
 
 export interface Pagination<T> {
+	totalItems: number;
 	totalPages: number;
 	items: T[],
 }
@@ -184,6 +185,7 @@ export async function doRequestWithPagination<T, D = {}>( path: string, requestM
 	return {
 		items,
 		totalPages: parseInt( Result.headers.get( 'X-WP-TotalPages' ) || '1' ),
+		totalItems: parseInt( Result.headers.get( 'X-WP-Total' ) || '0' ),
 	};
 }
 
