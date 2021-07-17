@@ -1737,7 +1737,7 @@ __metadata:
   resolution: "@lipemat/js-boilerplate-gutenberg@workspace:."
   dependencies:
     "@lipemat/js-boilerplate": ^6.2.1
-    "@types/lipemat__js-boilerplate": "lipemat/types-js-boilerplate#semver:^1.4.0"
+    "@types/lipemat__js-boilerplate": "lipemat/types-js-boilerplate#semver:^1.5.0"
     "@types/webpack-env": ^1.16.0
     "@wordpress/api-fetch": ^3.20.0
     "@wordpress/blocks": ^8.0.2
@@ -2243,9 +2243,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lipemat__js-boilerplate@lipemat/types-js-boilerplate#semver:^1.4.0":
-  version: 1.4.0
-  resolution: "@types/lipemat__js-boilerplate@https://github.com/lipemat/types-js-boilerplate.git#commit=88ba54be14cfb53068a7c5db3ed569fb749252a6"
+"@types/lipemat__js-boilerplate@lipemat/types-js-boilerplate#semver:^1.5.0":
+  version: 1.5.0
+  resolution: "@types/lipemat__js-boilerplate@https://github.com/lipemat/types-js-boilerplate.git#commit=dfd1516fae3441c79930099443827cf3ab9fea88"
   dependencies:
     "@types/classnames": ^2.2.9
     "@types/jest": ^24.0.19
@@ -2258,7 +2258,7 @@ __metadata:
     "@types/react-transition-group": ^4.2.4
     "@types/tinymce": ^4.5.23
     "@types/webpack-env": ^1.16.0
-  checksum: e7eef832d38f4f319b42eeb865913b5b1478c42dea7d60bc52d6056e64fefe52cd0ae577c814725d289ea59beebab24dc163406626cf0b0f2bf206b65b0ac8f1
+  checksum: c3c9350ddad187444568bfdbb9fc68b0a1bca3fe166d1fb6fb5db38413f9d0de2934a030557baa07a5d82370f67213c83b76623af2deee30086e24d08cbe5177
   languageName: node
   linkType: hard
 

@@ -1,7 +1,10 @@
 import {
 	ApplicationPassword,
 	ApplicationPasswordCreate,
+	CategoriesQuery,
 	Category,
+	CategoryCreate,
+	CategoryUpdate,
 	Comment,
 	CommentCreate,
 	context,
@@ -45,7 +48,7 @@ export interface Routes {
 		introspect: ( userId: number | 'me' ) => Promise<T>;
 		update: ( userId: number | 'me', uuid: string, data: U ) => Promise<T>;
 	};
-	categories: <T = Category, Q = any, U = any>() => RequestMethods<T, Q, U>;
+	categories: <T = Category, Q = CategoriesQuery, U = CategoryUpdate, C = CategoryCreate>() => RequestMethods<T, Q, U, C>;
 	comments: <T = Comment, Q = any, U = CommentCreate>() => RequestMethods<T, Q, U>;
 	media: <T = Media, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	statuses: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;
