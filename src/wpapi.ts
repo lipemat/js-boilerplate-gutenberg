@@ -92,14 +92,14 @@ export interface RequestMethods<T, Q, U, C = U> {
  *
  * @param path
  */
-export function createMethods<T, Q, U>( path: string ): RequestMethods<T, Q, U> {
+export function createMethods<T, Q, U, C = U>( path: string ): RequestMethods<T, Q, U, C> {
 	return {
 		/**
 		 * Create a new item.
 		 *
 		 * @param data
 		 */
-		create: data => doRequest<T, U>( path, 'POST', data ),
+		create: data => doRequest<T, C>( path, 'POST', data ),
 		/**
 		 * Force delete while skipping trash.
 		 *
