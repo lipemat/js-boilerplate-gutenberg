@@ -76,6 +76,7 @@ export interface Routes {
  * T = Object Structure.
  * Q = Query params.
  * U = Update object properties.
+ * C = Create object properties.
  */
 export interface RequestMethods<T, Q, U, C = U> {
 	create: ( data: C ) => Promise<T>;
@@ -92,6 +93,7 @@ export interface RequestMethods<T, Q, U, C = U> {
  * T = Object Structure.
  * Q = Query params.
  * U = Update object properties.
+ * C = Create object properties.
  *
  * @param path
  */
