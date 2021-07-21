@@ -48,13 +48,13 @@ export interface Routes {
 		introspect: ( userId: number | 'me' ) => Promise<T>;
 		update: ( userId: number | 'me', uuid: string, data: U ) => Promise<T>;
 	};
-	categories: <T = Category, Q = CategoriesQuery, U = CategoryUpdate, C = CategoryCreate>() => RequestMethods<T, Q, U, C>;
+	categories: <T = Category, Q = CategoriesQuery, U = CategoryUpdate, C = CategoryCreate>() => Omit<RequestMethods<T, Q, U, C>, 'trash'>;
 	comments: <T = Comment, Q = any, U = CommentCreate>() => RequestMethods<T, Q, U>;
 	media: <T = Media, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	statuses: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	pages: <T = Page, Q = PagesQuery, U = PageCreate>() => RequestMethods<T, Q, U>;
 	posts: <T = Post, Q = PostsQuery, U = PostCreate>() => RequestMethods<T, Q, U>;
-	tags: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;
+	tags: <T = any, Q = any, U = any, C = U>() => Omit<RequestMethods<T, Q, U, C>, 'trash'>;
 	taxonomies: <T = Taxonomy, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	types: <T = Type, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	users: <T = User, Q = UsersQuery, U = UserUpdate, C = UserCreate>() => Omit<RequestMethods<T, Q, U, C>, 'delete' | 'trash' | 'update'> & {
