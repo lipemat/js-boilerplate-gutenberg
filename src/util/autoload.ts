@@ -5,8 +5,13 @@
  * Given a path and a entry point's file name, this will automatically
  * load the module and support HMR within Gutenberg.
  *
- * You module's entry point must return a `name` and a `settings` constant
+ * Your module's entry point must export a `name` and a `settings` constant
  * which will be used to either `registerBlockType` or `registerPlugin`.
+ *
+ * You may export an optional `exclude` const to dynamical exclude a block/plugin
+ * from particular context.
+ *
+ * @see PluginModule
  *
  * @example
  *
@@ -26,6 +31,21 @@
 import {BlockSettings, registerBlockType, unregisterBlockType} from '@wordpress/blocks';
 import {PluginSettings, registerPlugin, unregisterPlugin} from '@wordpress/plugins';
 import {dispatch, select} from '@wordpress/data';
+
+/**
+ * Block or plugin modules must export
+ * the following properties.
+ *
+ * name = Name of plugin or block (id format).
+ * settings = Either a plugin or block's settings.
+ * exclude = Exclude plugin or block from the current context.
+ *
+ */
+export type PluginModule<T = BlockSettings<object> | PluginSettings> = {
+	name: string;
+	settings: T;
+	exclude?: boolean;
+}
 
 /**
  * Autoload blocks and add HMR support to them.
@@ -111,7 +131,11 @@ export const autoload = <T>( {
 		}
 		const changedNames: string[] = [];
 		context.keys().forEach( key => {
-			const requiredModule: { name: string, settings: T } = context( key );
+			const requiredModule: PluginModule<T> = context( key );
+			// Module is excluded from the current context.
+			if ( requiredModule.exclude ) {
+				return;
+			}
 			if ( requiredModule === cache[ key ] ) {
 				// Module unchanged: no further action needed.
 				return;

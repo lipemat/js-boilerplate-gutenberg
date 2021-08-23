@@ -61,6 +61,11 @@ const post = await wp.posts().create( {
 
 Helper methods exists for automatically loading block or plugin files based on a `REGEX` filter as well as handling the various `register` and `unregister` requirements to make HMR work. 
 
+Loaded modules are expected to export:
+1. `name`: Name of plugin or block (id format).
+2. `settings`: Either a plugin or block's settings.
+3. `exclude`: Exclude plugin or block from the current context.
+
 ```typescript
 import {autoloadBlocks, autoloadPlugins} from '@lipemat/js-boilerplate-gutenberg';
 
