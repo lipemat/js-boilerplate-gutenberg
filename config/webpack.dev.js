@@ -20,10 +20,10 @@ rules[ 2 ].use[ 0 ] = {
 				const gutenbergEditor = document.querySelector( 'iframe[name="editor-canvas"]' );
 				if ( gutenbergEditor ) {
 					gutenbergEditor.contentDocument.head.appendChild( styleTag );
-				} else {
-					// Default behavior.
-					document.querySelector( 'head' ).appendChild( styleTag );
 				}
+
+				// Default behavior.
+				document.querySelector( 'head' ).appendChild( styleTag );
 			}, 2000 );
 		},
 	},
