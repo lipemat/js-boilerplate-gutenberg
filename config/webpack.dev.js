@@ -21,10 +21,10 @@ rules[ 2 ].use[ 0 ] = {
 				if ( gutenbergEditor ) {
 					gutenbergEditor.contentDocument.head.appendChild( styleTag );
 				}
-
-				// Default behavior.
-				document.querySelector( 'head' ).appendChild( styleTag );
 			}, 2000 );
+
+			// Default behavior.
+			document.querySelector( 'head' ).appendChild( styleTag );
 		},
 	},
 };
