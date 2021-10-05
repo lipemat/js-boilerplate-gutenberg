@@ -26,7 +26,7 @@ import {PostCreate} from '@wordpress/api/posts';
 import {Page, PageCreate, PagesQuery} from '@wordpress/api/pages';
 import {defaultFetchHandler} from './util/request-handler';
 import {SearchItem, SearchQuery} from '@wordpress/api/search';
-import {UserUpdate} from '@wordpress/api/users';
+import {UserEditContext, UserUpdate} from '@wordpress/api/users';
 
 export type CustomRoutes<K> = {
 	[path in keyof K]: () => RequestMethods<any, any, any>;
@@ -57,7 +57,7 @@ export interface Routes {
 	tags: <T = any, Q = any, U = any, C = U>() => Omit<RequestMethods<T, Q, U, C>, 'trash'>;
 	taxonomies: <T = Taxonomy, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	types: <T = Type, Q = any, U = any>() => RequestMethods<T, Q, U>;
-	users: <T = User, Q = UsersQuery, U = UserUpdate, C = UserCreate>() => Omit<RequestMethods<T, Q, U, C>, 'delete' | 'trash' | 'update'> & {
+	users: <T = User, Q = UsersQuery, U = UserUpdate, C = UserCreate, E = UserEditContext>() => Omit<RequestMethods<T, Q, U, C, E>, 'delete' | 'trash' | 'update'> & {
 		delete: ( id: number, reassign?: number ) => Promise<{ deleted: boolean, previous: T }>
 		update: ( data: U ) => Promise<Required<C> & T>;
 	}
@@ -77,15 +77,16 @@ export interface Routes {
  * Q = Query params.
  * U = Update object properties.
  * C = Create object properties.
+ * E = Object properties under 'edit' context.
  */
-export interface RequestMethods<T, Q, U, C = U> {
-	create: ( data: C ) => Promise<T>;
-	delete: ( id: number ) => Promise<{ deleted: boolean, previous: T }>;
+export interface RequestMethods<T, Q, U, C = U, E = T> {
+	create: ( data: C ) => Promise<E>;
+	delete: ( id: number ) => Promise<{ deleted: boolean, previous: E }>;
 	get: ( options?: Q ) => Promise<T[]>;
 	getById: ( id: number, data?: { password?: string, context?: context } ) => Promise<T>;
 	getWithPagination: ( options?: Q ) => Promise<Pagination<T>>;
-	trash: ( id: number ) => Promise<T>;
-	update: ( data: U & { id: number } ) => Promise<T>;
+	trash: ( id: number ) => Promise<E>;
+	update: ( data: U & { id: number } ) => Promise<E>;
 }
 
 

@@ -718,7 +718,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ],
       [
         "@types/lipemat__js-boilerplate",
-        "https://github.com/lipemat/types-js-boilerplate.git#commit=dfd1516fae3441c79930099443827cf3ab9fea88"
+        "https://github.com/lipemat/types-js-boilerplate.git#commit=6c032c56fa3fdc32eac03aced9fad00cf8688587"
       ],
       [
         "@types/lodash",
@@ -5108,7 +5108,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",
           "packageDependencies": [
             ["@lipemat/js-boilerplate", "npm:6.3.0"],
-            ["@types/lipemat__js-boilerplate", "https://github.com/lipemat/types-js-boilerplate.git#commit=dfd1516fae3441c79930099443827cf3ab9fea88"],
+            ["@types/lipemat__js-boilerplate", "https://github.com/lipemat/types-js-boilerplate.git#commit=6c032c56fa3fdc32eac03aced9fad00cf8688587"],
             ["@types/webpack-env", "npm:1.16.0"],
             ["@wordpress/api-fetch", "npm:3.21.5"],
             ["@wordpress/blocks", "npm:8.0.2"],
@@ -8063,7 +8063,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["@lipemat/js-boilerplate-gutenberg", "workspace:."],
             ["@lipemat/js-boilerplate", "npm:6.3.0"],
-            ["@types/lipemat__js-boilerplate", "https://github.com/lipemat/types-js-boilerplate.git#commit=dfd1516fae3441c79930099443827cf3ab9fea88"],
+            ["@types/lipemat__js-boilerplate", "https://github.com/lipemat/types-js-boilerplate.git#commit=6c032c56fa3fdc32eac03aced9fad00cf8688587"],
             ["@types/webpack-env", "npm:1.16.0"],
             ["@wordpress/api-fetch", "npm:3.21.5"],
             ["@wordpress/blocks", "npm:8.0.2"],
@@ -8635,10 +8635,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "HARD",
         }],
-        ["https://github.com/lipemat/types-js-boilerplate.git#commit=dfd1516fae3441c79930099443827cf3ab9fea88", {
-          "packageLocation": "./.yarn/cache/@types-lipemat__js-boilerplate-https-4550ea2e75-c3c9350dda.zip/node_modules/@types/lipemat__js-boilerplate/",
+        ["https://github.com/lipemat/types-js-boilerplate.git#commit=6c032c56fa3fdc32eac03aced9fad00cf8688587", {
+          "packageLocation": "./.yarn/cache/@types-lipemat__js-boilerplate-https-93fed5581e-49f33ea91c.zip/node_modules/@types/lipemat__js-boilerplate/",
           "packageDependencies": [
-            ["@types/lipemat__js-boilerplate", "https://github.com/lipemat/types-js-boilerplate.git#commit=dfd1516fae3441c79930099443827cf3ab9fea88"],
+            ["@types/lipemat__js-boilerplate", "https://github.com/lipemat/types-js-boilerplate.git#commit=6c032c56fa3fdc32eac03aced9fad00cf8688587"],
             ["@types/classnames", "npm:2.2.11"],
             ["@types/jest", "npm:24.9.1"],
             ["@types/jquery", "npm:3.5.5"],
