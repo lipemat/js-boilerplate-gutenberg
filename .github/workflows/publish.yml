@@ -1,0 +1,23 @@
+name: Publish
+env:
+  VERSION: 1.0.0
+  NODE_VERSION: '14.17.6'
+
+on:
+  push:
+    tags:
+      - "*"
+      - "!*beta*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{env.NODE_VERSION}}
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
