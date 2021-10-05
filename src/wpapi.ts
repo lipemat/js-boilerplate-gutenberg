@@ -26,7 +26,7 @@ import {PostCreate} from '@wordpress/api/posts';
 import {Page, PageCreate, PagesQuery} from '@wordpress/api/pages';
 import {defaultFetchHandler} from './util/request-handler';
 import {SearchItem, SearchQuery} from '@wordpress/api/search';
-import {UserEditContext, UserUpdate} from '@wordpress/api/users';
+import {UserUpdate} from '@wordpress/api/users';
 
 export type CustomRoutes<K> = {
 	[path in keyof K]: () => RequestMethods<any, any, any>;
@@ -57,9 +57,8 @@ export interface Routes {
 	tags: <T = any, Q = any, U = any, C = U>() => Omit<RequestMethods<T, Q, U, C>, 'trash'>;
 	taxonomies: <T = Taxonomy, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	types: <T = Type, Q = any, U = any>() => RequestMethods<T, Q, U>;
-	users: <T = User, Q = UsersQuery, U = UserUpdate, C = UserCreate, E = UserEditContext>() => Omit<RequestMethods<T, Q, U, C, E>, 'delete' | 'trash' | 'update'> & {
-		delete: ( id: number, reassign?: number ) => Promise<{ deleted: boolean, previous: T }>
-		update: ( data: U ) => Promise<Required<C> & T>;
+	users: <T = User, Q = UsersQuery, U = UserUpdate, C = UserCreate, E = Required<C> & T>() => Omit<RequestMethods<T, Q, U, C, E>, 'delete' | 'trash'> & {
+		delete: ( id: number, reassign?: number ) => Promise<{ deleted: boolean, previous: T }>;
 	}
 	search: <T = SearchItem, Q = SearchQuery>() => {
 		get: ( options?: Q ) => Promise<T[]>;
