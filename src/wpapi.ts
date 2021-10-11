@@ -97,20 +97,20 @@ export interface RequestMethods<T, Q, U, C = U, E = T> {
  *
  * @param path
  */
-export function createMethods<T, Q, U, C = U>( path: string ): RequestMethods<T, Q, U, C> {
+export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMethods<T, Q, U, C, E> {
 	return {
 		/**
 		 * Create a new item.
 		 *
 		 * @param data
 		 */
-		create: data => doRequest<T, C>( path, 'POST', data ),
+		create: data => doRequest<E, C>( path, 'POST', data ),
 		/**
 		 * Force delete while skipping trash.
 		 *
 		 * @param id
 		 */
-		delete: id => doRequest<{ deleted: boolean, previous: T }, { force: true }>( path += '/' + id, 'DELETE', {force: true} ),
+		delete: id => doRequest<{ deleted: boolean, previous: E }, { force: true }>( path += '/' + id, 'DELETE', {force: true} ),
 		/**
 		 * Get items based on query arguments or no query arguments for default response.
 		 *
@@ -141,13 +141,13 @@ export function createMethods<T, Q, U, C = U>( path: string ): RequestMethods<T,
 		 *
 		 * @param id
 		 */
-		trash: id => doRequest<T>( path += '/' + id, 'DELETE' ),
+		trash: id => doRequest<E>( path += '/' + id, 'DELETE' ),
 		/**
 		 * Update an item.
 		 *
 		 * @param data
 		 */
-		update: data => doRequest<T, U>( path += '/' + data.id, 'PATCH', data ),
+		update: data => doRequest<E, U>( path += '/' + data.id, 'PATCH', data ),
 	};
 }
 
