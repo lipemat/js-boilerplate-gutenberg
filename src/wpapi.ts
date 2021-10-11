@@ -94,6 +94,7 @@ export interface RequestMethods<T, Q, U, C = U, E = T> {
  * Q = Query params.
  * U = Update object properties.
  * C = Create object properties.
+ * E = Object properties under 'edit' context.
  *
  * @param path
  */
