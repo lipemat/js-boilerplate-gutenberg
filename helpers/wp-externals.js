@@ -30,6 +30,7 @@ module.exports = [
 	'i18n',
 	'plugins',
 	'rich-text',
+	'server-side-render',
 	'url',
 	'utils',
 ].reduce(
@@ -47,4 +48,3 @@ module.exports = [
 		lodash: 'lodash',
 	},
 );
-
