@@ -27,6 +27,9 @@ import {Page, PageCreate, PagesQuery} from '@wordpress/api/pages';
 import {defaultFetchHandler} from './util/request-handler';
 import {SearchItem, SearchQuery} from '@wordpress/api/search';
 import {UserUpdate} from '@wordpress/api/users';
+import {Menu, MenuCreate, MenusQuery, MenuUpdate} from '@wordpress/api/menus';
+import {MenuItem, MenuItemCreate, MenuItemsQuery, MenuItemUpdate} from '@wordpress/api/menu-items';
+import {MenuLocation} from '@wordpress/api/menu-locations';
 
 export type CustomRoutes<K> = {
 	[path in keyof K]: () => RequestMethods<any, any, any>;
@@ -51,6 +54,12 @@ export interface Routes {
 	categories: <T = Category, Q = CategoriesQuery, U = CategoryUpdate, C = CategoryCreate>() => Omit<RequestMethods<T, Q, U, C>, 'trash'>;
 	comments: <T = Comment, Q = any, U = CommentCreate>() => RequestMethods<T, Q, U>;
 	media: <T = Media, Q = any, U = any>() => RequestMethods<T, Q, U>;
+	menus: <T = Menu, Q = MenusQuery, U = MenuUpdate, C = MenuCreate>() => Omit<RequestMethods<T, Q, U, C>, 'trash'>;
+	menuItems: <T = MenuItem, Q = MenuItemsQuery,  U = MenuItemUpdate, C = MenuItemCreate>() => RequestMethods<T, Q, U, C>;
+	menuLocations: <T = MenuLocation>() => {
+		get: () => Promise<{[name:string]: T}>;
+		getById: ( id: string ) => Promise<T>;
+	};
 	statuses: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	pages: <T = Page, Q = PagesQuery, U = PageCreate>() => RequestMethods<T, Q, U>;
 	posts: <T = Post, Q = PostsQuery, U = PostCreate>() => RequestMethods<T, Q, U>;
@@ -202,6 +211,9 @@ export default function wpapi<T extends CustomRoutes<T> = {}>( customRoutes?: T 
 		'categories',
 		'comments',
 		'media',
+		'menus',
+		'menu-locations',
+		'menu-items',
 		'statuses',
 		'pages',
 		'posts',
@@ -212,6 +224,10 @@ export default function wpapi<T extends CustomRoutes<T> = {}>( customRoutes?: T 
 	];
 
 	coreRoutes.map( route => routes[ route ] = () => createMethods( '/wp/v2/' + route ) );
+
+	// Menu items use a "-".
+	routes.menuLocations = () => createMethods( '/wp/v2/menu-locations' );
+	routes.menuItems = () => createMethods( '/wp/v2/menu-items' );
 
 	// Users have a special parameter required for delete.
 	routes.users = () => {
