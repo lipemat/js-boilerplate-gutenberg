@@ -58,7 +58,7 @@ export interface Routes {
 	menuItems: <T = MenuItem, Q = MenuItemsQuery,  U = MenuItemUpdate, C = MenuItemCreate>() => RequestMethods<T, Q, U, C>;
 	menuLocations: <T = MenuLocation>() => {
 		get: () => Promise<{[name:string]: T}>;
-		getById: ( id: string ) => Promise<T>;
+		getById: ( location: string ) => Promise<T>;
 	};
 	statuses: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	pages: <T = Page, Q = PagesQuery, U = PageCreate>() => RequestMethods<T, Q, U>;
