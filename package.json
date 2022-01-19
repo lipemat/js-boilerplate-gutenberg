@@ -1,6 +1,6 @@
 {
   "name": "@lipemat/js-boilerplate-gutenberg",
-  "version": "2.6.3-beta.1",
+  "version": "2.6.3",
   "description": "Gutenberg extension for @lipemat/js-boilerplate.",
   "engines": {
     "node": ">=14.17.6"
@@ -32,7 +32,7 @@
     "@types/lipemat__js-boilerplate": "lipemat/types-js-boilerplate#semver:^1.13.0"
   },
   "devDependencies": {
-    "@lipemat/js-boilerplate": "^7.1.7",
+    "@lipemat/js-boilerplate": "^8.0.0-beta.6",
     "@types/webpack-env": "^1.16.0",
     "@wordpress/api-fetch": "^3.20.0",
     "@wordpress/blocks": "^8.0.2",
