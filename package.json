@@ -49,7 +49,7 @@
   },
   "scripts": {
     "build": "microbundle --external @wordpress/api-fetch,@wordpress/blocks,@wordpress/data,@wordpress/edit-post,@wordpress/i18n,@wordpress/plugins,@wordpress/url,react,ReactDOM --globals @wordpress/api-fetch=wp.apiFetch,@wordpress/blocks=wp.blocks,@wordpress/data=wp.data,@wordpress/edit-post=wp.editPost,@wordpress/i18n=wp.i18n,@wordpress/plugins=wp.plugins,@wordpress/url=wp.url,react=React,react-dom=ReactDOM",
-    "install": "lipemat-js-boilerplate fix-pnp",
+    "postprepare": "lipemat-js-boilerplate fix-pnp",
     "prepublishOnly": "rm -rf dist/* && yarn run build",
     "test": "lipemat-js-boilerplate test",
     "watch": "microbundle watch --external @wordpress/api-fetch,@wordpress/blocks,@wordpress/data,@wordpress/edit-post,@wordpress/i18n,@wordpress/plugins,@wordpress/url,react,ReactDOM --globals @wordpress/api-fetch=wp.apiFetch,@wordpress/blocks=wp.blocks,@wordpress/data=wp.data,@wordpress/edit-post=wp.editPost,@wordpress/i18n=wp.i18n,@wordpress/plugins=wp.plugins,@wordpress/url=wp.url,react=React,react-dom=ReactDOM"
