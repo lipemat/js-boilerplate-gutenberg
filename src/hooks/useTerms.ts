@@ -12,20 +12,20 @@ type Taxonomies = 'category' | 'post_tag' | 'nav_menu';
  *
  * @param taxonomy
  */
-export function useTerms<T extends string = Taxonomies>( taxonomy: T ): [ number[], ( terms: number[] ) => void, number[] ] {
+export function useTerms<T extends string = Taxonomies>( taxonomy: T ): [ number[], ( terms: number[] ) => Promise<undefined>, number[] ] {
 	const {editPost} = useDispatch( 'core/editor' );
 	const data = useSelect( select => {
 		const taxonomyObject = select( 'core' ).getTaxonomy( taxonomy );
 		return {
 			taxonomy: taxonomyObject,
-			current: select( 'core/editor' ).getEditedPostAttribute<{ [key in T]: number[] }, T>( taxonomyObject.rest_base as T ),
-			previous: select( 'core/editor' ).getCurrentPostAttribute<{ [key in T]: number[] }, T>( taxonomyObject.rest_base as T ),
+			current: select( 'core/editor' ).getEditedPostAttribute<{ [key in T]: number[] }, T>( taxonomyObject.rest_base as T ?? [] ),
+			previous: select( 'core/editor' ).getCurrentPostAttribute<{ [key in T]: number[] }, T>( taxonomyObject.rest_base as T ?? [] ),
 		};
 	} );
 
-	const updateTerms = useCallback( ( terms: number[] ) => {
-		editPost( {
-			[ data.taxonomy.rest_base ]: terms,
+	const updateTerms = useCallback( ( terms: number[] ): Promise<undefined> => {
+		return editPost( {
+			[ data.taxonomy.rest_base ?? 0 ]: terms,
 		} );
 	}, [ data, editPost ] );
 
