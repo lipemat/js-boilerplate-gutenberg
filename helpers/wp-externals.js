@@ -28,6 +28,7 @@ module.exports = [
 	'element',
 	'hooks',
 	'i18n',
+	'media-utils',
 	'plugins',
 	'rich-text',
 	'server-side-render',
