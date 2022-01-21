@@ -53,7 +53,7 @@ export interface Routes {
 	};
 	categories: <T = Category, Q = CategoriesQuery, U = CategoryUpdate, C = CategoryCreate>() => Omit<RequestMethods<T, Q, U, C>, 'trash'>;
 	comments: <T = Comment, Q = any, U = CommentCreate>() => RequestMethods<T, Q, U>;
-	media: <T = Media, Q = MediaQuery, U = MediaUpdate, C = MediaCreate>() => RequestMethods<T, Q, U, C>;
+	media: <T = Media, Q = MediaQuery, U = MediaUpdate, C = MediaCreate>() => Omit<RequestMethods<T, Q, U, C>, 'trash'>;
 	menus: <T = Menu, Q = MenusQuery, U = MenuUpdate, C = MenuCreate>() => Omit<RequestMethods<T, Q, U, C>, 'trash'>;
 	menuItems: <T = MenuItem, Q = MenuItemsQuery, U = MenuItemUpdate, C = MenuItemCreate>() => RequestMethods<T, Q, U, C>;
 	menuLocations: <T = MenuLocation>() => {
