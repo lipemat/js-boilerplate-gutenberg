@@ -8,7 +8,6 @@ import {
 	Comment,
 	CommentCreate,
 	context,
-	Media,
 	method,
 	Post,
 	PostsQuery,
@@ -24,6 +23,7 @@ import {parseResponseAndNormalizeError} from './util/parse-response';
 import {addQueryArgs} from '@wordpress/url';
 import {PostCreate} from '@wordpress/api/posts';
 import {Page, PageCreate, PagesQuery} from '@wordpress/api/pages';
+import {Media, MediaCreate, MediaQuery, MediaUpdate} from '@wordpress/api/media';
 import {defaultFetchHandler} from './util/request-handler';
 import {SearchItem, SearchQuery} from '@wordpress/api/search';
 import {UserUpdate} from '@wordpress/api/users';
@@ -53,11 +53,11 @@ export interface Routes {
 	};
 	categories: <T = Category, Q = CategoriesQuery, U = CategoryUpdate, C = CategoryCreate>() => Omit<RequestMethods<T, Q, U, C>, 'trash'>;
 	comments: <T = Comment, Q = any, U = CommentCreate>() => RequestMethods<T, Q, U>;
-	media: <T = Media, Q = any, U = any>() => RequestMethods<T, Q, U>;
+	media: <T = Media, Q = MediaQuery, U = MediaUpdate, C = MediaCreate>() => RequestMethods<T, Q, U, C>;
 	menus: <T = Menu, Q = MenusQuery, U = MenuUpdate, C = MenuCreate>() => Omit<RequestMethods<T, Q, U, C>, 'trash'>;
-	menuItems: <T = MenuItem, Q = MenuItemsQuery,  U = MenuItemUpdate, C = MenuItemCreate>() => RequestMethods<T, Q, U, C>;
+	menuItems: <T = MenuItem, Q = MenuItemsQuery, U = MenuItemUpdate, C = MenuItemCreate>() => RequestMethods<T, Q, U, C>;
 	menuLocations: <T = MenuLocation>() => {
-		get: () => Promise<{[name:string]: T}>;
+		get: () => Promise<{ [ name: string ]: T }>;
 		getById: ( location: string ) => Promise<T>;
 	};
 	statuses: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;
