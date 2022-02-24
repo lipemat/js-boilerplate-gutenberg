@@ -19,6 +19,7 @@ module.exports = [
 	'api-fetch',
 	'block-editor',
 	'blocks',
+	'block-serialization-default-parser',
 	'components',
 	'core-data',
 	'data',
