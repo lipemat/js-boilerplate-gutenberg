@@ -28,8 +28,18 @@ import {defaultFetchHandler} from './util/request-handler';
 import {SearchItem, SearchQuery} from '@wordpress/api/search';
 import {UserUpdate} from '@wordpress/api/users';
 import {Menu, MenuCreate, MenusQuery, MenuUpdate} from '@wordpress/api/menus';
-import {MenuItem, MenuItemCreate, MenuItemsQuery, MenuItemUpdate} from '@wordpress/api/menu-items';
+import {
+	MenuItem,
+	MenuItemCreate,
+	MenuItemsQuery,
+	MenuItemUpdate,
+} from '@wordpress/api/menu-items';
 import {MenuLocation} from '@wordpress/api/menu-locations';
+import {
+	EditorBlock,
+	EditorBlockCreate,
+	EditorBlocksQuery,
+} from '@wordpress/api/editor-blocks';
 
 export type CustomRoutes<K> = {
 	[path in keyof K]: () => RequestMethods<any, any, any>;
@@ -51,6 +61,7 @@ export interface Routes {
 		introspect: ( userId: number | 'me' ) => Promise<T>;
 		update: ( userId: number | 'me', uuid: string, data: U ) => Promise<T>;
 	};
+	blocks: <T = EditorBlock, Q = EditorBlocksQuery, U = EditorBlockCreate>() => RequestMethods<T, Q, U>;
 	categories: <T = Category, Q = CategoriesQuery, U = CategoryUpdate, C = CategoryCreate>() => Omit<RequestMethods<T, Q, U, C>, 'trash'>;
 	comments: <T = Comment, Q = any, U = CommentCreate>() => RequestMethods<T, Q, U>;
 	media: <T = Media, Q = MediaQuery, U = MediaUpdate, C = MediaCreate>() => Omit<RequestMethods<T, Q, U, C>, 'trash'>;
@@ -210,6 +221,7 @@ export default function wpapi<T extends CustomRoutes<T> = {}>( customRoutes?: T 
 	const coreRoutes = [
 		'categories',
 		'comments',
+		'blocks',
 		'media',
 		'menus',
 		'menu-locations',
