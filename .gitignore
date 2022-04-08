@@ -6,6 +6,7 @@
 .cvs
 *.bak
 *.swp
+.ready
 .sass-cache
 .project
 *.sublime-project
@@ -50,4 +51,3 @@ dist
 atlassian-ide-plugin.xml
 # Editor-based Rest Client
 .idea/httpRequests
-
