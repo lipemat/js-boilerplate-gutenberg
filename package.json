@@ -1,6 +1,6 @@
 {
   "name": "@lipemat/js-boilerplate-gutenberg",
-  "version": "2.6.5",
+  "version": "2.7.0",
   "description": "Gutenberg extension for @lipemat/js-boilerplate.",
   "engines": {
     "node": ">=14.17.6"
@@ -29,16 +29,16 @@
   },
   "homepage": "https://github.com/lipemat/js-boilerplate-gutenberg#readme",
   "dependencies": {
-    "@types/lipemat__js-boilerplate": "lipemat/types-js-boilerplate#semver:^1.15.0"
+    "@types/lipemat__js-boilerplate": "lipemat/types-js-boilerplate#semver:^1.20.0"
   },
   "devDependencies": {
-    "@lipemat/js-boilerplate": "^8.0.0-beta.6",
+    "@lipemat/js-boilerplate": "^8.3.1",
     "@types/webpack-env": "^1.16.0",
     "@wordpress/api-fetch": "^3.20.0",
     "@wordpress/blocks": "^8.0.2",
     "@wordpress/data": "^4.27.1",
     "@wordpress/plugins": "^2.25.2",
-    "eslint": "^7.17.0",
+    "eslint": "^8",
     "jest": "^26",
     "microbundle": "^0.12.3",
     "typescript": "^4",
@@ -54,5 +54,5 @@
     "test": "lipemat-js-boilerplate test",
     "watch": "microbundle watch --external @wordpress/api-fetch,@wordpress/blocks,@wordpress/data,@wordpress/edit-post,@wordpress/i18n,@wordpress/plugins,@wordpress/url,react,ReactDOM --globals @wordpress/api-fetch=wp.apiFetch,@wordpress/blocks=wp.blocks,@wordpress/data=wp.data,@wordpress/edit-post=wp.editPost,@wordpress/i18n=wp.i18n,@wordpress/plugins=wp.plugins,@wordpress/url=wp.url,react=React,react-dom=ReactDOM"
   },
-  "packageManager": "yarn@3.1.1"
+  "packageManager": "yarn@3.2.0"
 }

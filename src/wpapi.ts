@@ -28,8 +28,18 @@ import {defaultFetchHandler} from './util/request-handler';
 import {SearchItem, SearchQuery} from '@wordpress/api/search';
 import {UserUpdate} from '@wordpress/api/users';
 import {Menu, MenuCreate, MenusQuery, MenuUpdate} from '@wordpress/api/menus';
-import {MenuItem, MenuItemCreate, MenuItemsQuery, MenuItemUpdate} from '@wordpress/api/menu-items';
+import {
+	MenuItem,
+	MenuItemCreate,
+	MenuItemsQuery,
+	MenuItemUpdate,
+} from '@wordpress/api/menu-items';
 import {MenuLocation} from '@wordpress/api/menu-locations';
+import {
+	EditorBlock,
+	EditorBlockCreate,
+	EditorBlocksQuery,
+} from '@wordpress/api/editor-blocks';
 
 export type CustomRoutes<K> = {
 	[path in keyof K]: () => RequestMethods<any, any, any>;
@@ -51,6 +61,7 @@ export interface Routes {
 		introspect: ( userId: number | 'me' ) => Promise<T>;
 		update: ( userId: number | 'me', uuid: string, data: U ) => Promise<T>;
 	};
+	blocks: <T = EditorBlock, Q = EditorBlocksQuery, U = EditorBlockCreate>() => RequestMethods<T, Q, U>;
 	categories: <T = Category, Q = CategoriesQuery, U = CategoryUpdate, C = CategoryCreate>() => Omit<RequestMethods<T, Q, U, C>, 'trash'>;
 	comments: <T = Comment, Q = any, U = CommentCreate>() => RequestMethods<T, Q, U>;
 	media: <T = Media, Q = MediaQuery, U = MediaUpdate, C = MediaCreate>() => Omit<RequestMethods<T, Q, U, C>, 'trash'>;
@@ -105,43 +116,43 @@ export interface RequestMethods<T, Q, U, C = U, E = T> {
  * C = Create object properties.
  * E = Object properties under 'edit' context.
  *
- * @param path
+ * @param  path
  */
 export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMethods<T, Q, U, C, E> {
 	return {
 		/**
 		 * Create a new item.
 		 *
-		 * @param data
+		 * @param  data
 		 */
 		create: data => doRequest<E, C>( path, 'POST', data ),
 		/**
 		 * Force delete while skipping trash.
 		 *
-		 * @param id
+		 * @param  id
 		 */
 		delete: id => doRequest<{ deleted: boolean, previous: E }, { force: true }>( path += '/' + id, 'DELETE', {force: true} ),
 		/**
 		 * Get items based on query arguments or no query arguments for default response.
 		 *
-		 * @param data
+		 * @param  data
 		 */
 		get: ( data?: Q | undefined ) => doRequest<T[], Q>( path, 'GET', data as Q ),
 		/**
 		 * Get an item by it's id.
 		 *
-		 * @param id
+		 * @param          id
 		 * @param {Object} data = {
-		 *     context?: set to 'edit' if authenticated and want all properties.
-		 *     password?: if the item is password protected (Probably only posts and pages);
-		 * }
+		 *                      context?: set to 'edit' if authenticated and want all properties.
+		 *                      password?: if the item is password protected (Probably only posts and pages);
+		 *                      }
 		 */
 		getById: ( id, data? ) => doRequest<T, { password?: string, context?: context }>( path += '/' + id, 'GET', data ),
 		/**
 		 * Same as `get` but returns the pagination information as well as
 		 * the items.
 		 *
-		 * @param data
+		 * @param  data
 		 */
 		getWithPagination: ( data?: Q | undefined ) => doRequestWithPagination<T, Q>( path, 'GET', data as Q ),
 		/**
@@ -149,13 +160,13 @@ export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMet
 		 * Many types do not support this method and must use
 		 * the `delete` method.
 		 *
-		 * @param id
+		 * @param  id
 		 */
 		trash: id => doRequest<E>( path += '/' + id, 'DELETE' ),
 		/**
 		 * Update an item.
 		 *
-		 * @param data
+		 * @param  data
 		 */
 		update: data => doRequest<E, U>( path += '/' + data.id, 'PATCH', data ),
 	};
@@ -165,10 +176,10 @@ export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMet
  * T = Object structure | Response if parse is false.
  * D = Query params.
  *
- * @param path - Path relative to root.
- * @param requestMethod - GET, POST, PUT, DELETE, PATCH
- * @param data - Query params.
- * @param parse - To parse the json result, or return raw Request
+ * @param  path          - Path relative to root.
+ * @param  requestMethod - GET, POST, PUT, DELETE, PATCH
+ * @param  data          - Query params.
+ * @param  parse         - To parse the json result, or return raw Request
  */
 export async function doRequest<T, D = {}>( path: string, requestMethod: method, data?: D, parse: boolean = true ): Promise<T> {
 	if ( 'undefined' === typeof data || 'GET' === requestMethod ) {
@@ -190,9 +201,9 @@ export async function doRequest<T, D = {}>( path: string, requestMethod: method,
  * T = Object structure.
  * D = Query params.
  *
- * @param path - Path relative to root.
- * @param requestMethod - GET, POST, PUT, DELETE, PATCH
- * @param data - Query params.
+ * @param  path          - Path relative to root.
+ * @param  requestMethod - GET, POST, PUT, DELETE, PATCH
+ * @param  data          - Query params.
  */
 export async function doRequestWithPagination<T, D = {}>( path: string, requestMethod: method, data?: D ): Promise<Pagination<T>> {
 	const Result = await doRequest<Response, D>( path, requestMethod, data, false );
@@ -210,6 +221,7 @@ export default function wpapi<T extends CustomRoutes<T> = {}>( customRoutes?: T 
 	const coreRoutes = [
 		'categories',
 		'comments',
+		'blocks',
 		'media',
 		'menus',
 		'menu-locations',
