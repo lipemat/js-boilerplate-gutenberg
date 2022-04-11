@@ -31,6 +31,7 @@ module.exports = [
 	'i18n',
 	'media-utils',
 	'plugins',
+	'primitives',
 	'rich-text',
 	'server-side-render',
 	'url',
