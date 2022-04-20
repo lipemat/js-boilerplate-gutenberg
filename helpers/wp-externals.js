@@ -21,6 +21,7 @@ module.exports = [
 	'blocks',
 	'block-serialization-default-parser',
 	'components',
+	'compose',
 	'core-data',
 	'data',
 	'date',
