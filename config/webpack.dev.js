@@ -3,6 +3,8 @@ const wpExternals = require( '../helpers/wp-externals' );
 const externalsDefault = Object.assign( {}, webpackConfig.externals );
 const rules = Object.assign( {}, webpackConfig.module.rules );
 
+// @todo Switch to function based return so don't need to require webpack.dist.
+
 /**
  * Gutenberg is loading within FSE and future areas within an iFrame.
  * We must target said iFrame with the generated <style> tags or
