@@ -1,23 +1,4 @@
-import {
-	ApplicationPassword,
-	ApplicationPasswordCreate,
-	CategoriesQuery,
-	Category,
-	CategoryCreate,
-	CategoryUpdate,
-	Comment,
-	CommentCreate,
-	context,
-	method,
-	Post,
-	PostsQuery,
-	Settings,
-	Taxonomy,
-	Type,
-	User,
-	UserCreate,
-	UsersQuery,
-} from '@wordpress/api';
+import {ApplicationPassword, ApplicationPasswordCreate, CategoriesQuery, Category, CategoryCreate, CategoryUpdate, Comment, CommentCreate, context, Global, method, Post, PostsQuery, Settings, Taxonomy, Type, User, UserCreate, UsersQuery} from '@wordpress/api';
 import apiFetch from '@wordpress/api-fetch';
 import {parseResponseAndNormalizeError} from './util/parse-response';
 import {addQueryArgs} from '@wordpress/url';
@@ -28,18 +9,9 @@ import {defaultFetchHandler} from './util/request-handler';
 import {SearchItem, SearchQuery} from '@wordpress/api/search';
 import {UserUpdate} from '@wordpress/api/users';
 import {Menu, MenuCreate, MenusQuery, MenuUpdate} from '@wordpress/api/menus';
-import {
-	MenuItem,
-	MenuItemCreate,
-	MenuItemsQuery,
-	MenuItemUpdate,
-} from '@wordpress/api/menu-items';
+import {MenuItem, MenuItemCreate, MenuItemsQuery, MenuItemUpdate} from '@wordpress/api/menu-items';
 import {MenuLocation} from '@wordpress/api/menu-locations';
-import {
-	EditorBlock,
-	EditorBlockCreate,
-	EditorBlocksQuery,
-} from '@wordpress/api/editor-blocks';
+import {EditorBlock, EditorBlockCreate, EditorBlocksQuery} from '@wordpress/api/editor-blocks';
 
 export type CustomRoutes<K> = {
 	[path in keyof K]: () => RequestMethods<any, any, any>;
@@ -100,12 +72,12 @@ export interface Routes {
  */
 export interface RequestMethods<T, Q, U, C = U, E = T> {
 	create: ( data: C ) => Promise<E>;
-	delete: ( id: number ) => Promise<{ deleted: boolean, previous: E }>;
+	delete: ( id: number ) => Promise<{deleted: boolean, previous: E}>;
 	get: ( options?: Q ) => Promise<T[]>;
-	getById: ( id: number, data?: { password?: string, context?: context } ) => Promise<T>;
+	getById: ( id: number, data?: Global<T> & {password?: string} ) => Promise<T>;
 	getWithPagination: ( options?: Q ) => Promise<Pagination<T>>;
 	trash: ( id: number ) => Promise<E>;
-	update: ( data: U & { id: number } ) => Promise<E>;
+	update: ( data: U & {id: number} ) => Promise<E>;
 }
 
 
