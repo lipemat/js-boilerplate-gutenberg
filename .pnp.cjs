@@ -824,7 +824,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ],\
       [\
         "@types/lipemat__js-boilerplate",\
-        "https://github.com/lipemat/types-js-boilerplate.git#commit=9ac8fb31327f6926a51d5e797cf1b14e084e0277"\
+        "https://github.com/lipemat/types-js-boilerplate.git#commit=b94116e9d1698132f547303c95fd4476a2a85913"\
       ],\
       [\
         "@types/lodash",\
@@ -868,7 +868,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ],\
       [\
         "@types/react",\
-        "npm:16.14.24"\
+        "npm:17.0.44"\
       ],\
       [\
         "@types/react-dom",\
@@ -4871,7 +4871,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ],\
       [\
         "typescript",\
-        "patch:typescript@npm%3A4.6.3#~builtin<compat/typescript>::version=4.6.3&hash=bda367"\
+        "patch:typescript@npm%3A4.6.3#~builtin<compat/typescript>::version=4.6.3&hash=7ad353"\
       ],\
       [\
         "unbox-primitive",\
@@ -5168,7 +5168,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["@lipemat/js-boilerplate", "npm:8.3.1"],\
-            ["@types/lipemat__js-boilerplate", "https://github.com/lipemat/types-js-boilerplate.git#commit=9ac8fb31327f6926a51d5e797cf1b14e084e0277"],\
+            ["@types/lipemat__js-boilerplate", "https://github.com/lipemat/types-js-boilerplate.git#commit=b94116e9d1698132f547303c95fd4476a2a85913"],\
             ["@types/webpack-env", "npm:1.16.3"],\
             ["@wordpress/api-fetch", "npm:3.23.1"],\
             ["@wordpress/blocks", "npm:8.0.3"],\
@@ -5177,7 +5177,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint", "npm:8.12.0"],\
             ["jest", "npm:26.6.3"],\
             ["microbundle", "npm:0.12.4"],\
-            ["typescript", "patch:typescript@npm%3A4.6.3#~builtin<compat/typescript>::version=4.6.3&hash=bda367"],\
+            ["typescript", "patch:typescript@npm%3A4.6.3#~builtin<compat/typescript>::version=4.6.3&hash=7ad353"],\
             ["unfetch", "npm:4.2.0"]\
           ],\
           "linkType": "SOFT"\
@@ -8409,7 +8409,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-test-renderer", "virtual:e22946430a3c054b08c90596239a654a90eea2ea6ae6e758fbf8b99369eb1a61384cbe89af33ecf2a440d21bc5d398676ffa5248efdf7333ea627b93d3427828#npm:17.0.2"],\
             ["react-transition-group", "virtual:e22946430a3c054b08c90596239a654a90eea2ea6ae6e758fbf8b99369eb1a61384cbe89af33ecf2a440d21bc5d398676ffa5248efdf7333ea627b93d3427828#npm:4.4.2"],\
             ["style-loader", "virtual:e22946430a3c054b08c90596239a654a90eea2ea6ae6e758fbf8b99369eb1a61384cbe89af33ecf2a440d21bc5d398676ffa5248efdf7333ea627b93d3427828#npm:3.3.1"],\
-            ["typescript", "patch:typescript@npm%3A4.6.3#~builtin<compat/typescript>::version=4.6.3&hash=bda367"],\
+            ["typescript", "patch:typescript@npm%3A4.6.3#~builtin<compat/typescript>::version=4.6.3&hash=7ad353"],\
             ["update-notifier", "npm:4.1.3"],\
             ["webpack", "virtual:e22946430a3c054b08c90596239a654a90eea2ea6ae6e758fbf8b99369eb1a61384cbe89af33ecf2a440d21bc5d398676ffa5248efdf7333ea627b93d3427828#npm:5.72.0"],\
             ["webpack-assets-manifest", "virtual:e22946430a3c054b08c90596239a654a90eea2ea6ae6e758fbf8b99369eb1a61384cbe89af33ecf2a440d21bc5d398676ffa5248efdf7333ea627b93d3427828#npm:5.1.0"],\
@@ -8426,7 +8426,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@lipemat/js-boilerplate-gutenberg", "workspace:."],\
             ["@lipemat/js-boilerplate", "npm:8.3.1"],\
-            ["@types/lipemat__js-boilerplate", "https://github.com/lipemat/types-js-boilerplate.git#commit=9ac8fb31327f6926a51d5e797cf1b14e084e0277"],\
+            ["@types/lipemat__js-boilerplate", "https://github.com/lipemat/types-js-boilerplate.git#commit=b94116e9d1698132f547303c95fd4476a2a85913"],\
             ["@types/webpack-env", "npm:1.16.3"],\
             ["@wordpress/api-fetch", "npm:3.23.1"],\
             ["@wordpress/blocks", "npm:8.0.3"],\
@@ -8435,7 +8435,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint", "npm:8.12.0"],\
             ["jest", "npm:26.6.3"],\
             ["microbundle", "npm:0.12.4"],\
-            ["typescript", "patch:typescript@npm%3A4.6.3#~builtin<compat/typescript>::version=4.6.3&hash=bda367"],\
+            ["typescript", "patch:typescript@npm%3A4.6.3#~builtin<compat/typescript>::version=4.6.3&hash=7ad353"],\
             ["unfetch", "npm:4.2.0"]\
           ],\
           "linkType": "SOFT"\
@@ -9113,6 +9113,25 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/webpack-env", "npm:1.16.3"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["https://github.com/lipemat/types-js-boilerplate.git#commit=b94116e9d1698132f547303c95fd4476a2a85913", {\
+          "packageLocation": "./.yarn/cache/@types-lipemat__js-boilerplate-https-a62f12312c-5a22fa0473.zip/node_modules/@types/lipemat__js-boilerplate/",\
+          "packageDependencies": [\
+            ["@types/lipemat__js-boilerplate", "https://github.com/lipemat/types-js-boilerplate.git#commit=b94116e9d1698132f547303c95fd4476a2a85913"],\
+            ["@types/classnames", "npm:2.3.0"],\
+            ["@types/codemirror", "npm:5.60.5"],\
+            ["@types/jest", "npm:24.9.1"],\
+            ["@types/jquery", "npm:3.5.14"],\
+            ["@types/js-cookie", "npm:2.2.7"],\
+            ["@types/lodash", "npm:4.14.181"],\
+            ["@types/react", "npm:17.0.45"],\
+            ["@types/react-dom", "npm:17.0.17"],\
+            ["@types/react-router-dom", "npm:4.3.5"],\
+            ["@types/react-transition-group", "npm:4.4.4"],\
+            ["@types/tinymce", "npm:4.6.5"],\
+            ["@types/webpack-env", "npm:1.16.3"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@types/lodash", [\
@@ -9226,6 +9245,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
+        ["npm:17.0.45", {\
+          "packageLocation": "./.yarn/cache/@types-react-npm-17.0.45-09fff34e88-3cc13a0282.zip/node_modules/@types/react/",\
+          "packageDependencies": [\
+            ["@types/react", "npm:17.0.45"],\
+            ["@types/prop-types", "npm:15.7.5"],\
+            ["@types/scheduler", "npm:0.16.2"],\
+            ["csstype", "npm:3.0.11"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
         ["npm:18.0.0", {\
           "packageLocation": "./.yarn/cache/@types-react-npm-18.0.0-a9684fbc8d-8a9769e2ca.zip/node_modules/@types/react/",\
           "packageDependencies": [\
@@ -9250,6 +9279,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-react-dom-npm-17.0.15-0c1324b974-7b90372bd7.zip/node_modules/@types/react-dom/",\
           "packageDependencies": [\
             ["@types/react-dom", "npm:17.0.15"],\
+            ["@types/react", "npm:17.0.44"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:17.0.17", {\
+          "packageLocation": "./.yarn/cache/@types-react-dom-npm-17.0.17-edb158f2b2-23caf98aa0.zip/node_modules/@types/react-dom/",\
+          "packageDependencies": [\
+            ["@types/react-dom", "npm:17.0.17"],\
             ["@types/react", "npm:17.0.44"]\
           ],\
           "linkType": "HARD"\
@@ -14736,7 +14773,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["schema-utils", "npm:2.7.0"],\
             ["semver", "npm:7.3.6"],\
             ["tapable", "npm:1.1.3"],\
-            ["typescript", "patch:typescript@npm%3A4.6.3#~builtin<compat/typescript>::version=4.6.3&hash=bda367"],\
+            ["typescript", "patch:typescript@npm%3A4.6.3#~builtin<compat/typescript>::version=4.6.3&hash=7ad353"],\
             ["vue-template-compiler", null],\
             ["webpack", "virtual:e22946430a3c054b08c90596239a654a90eea2ea6ae6e758fbf8b99369eb1a61384cbe89af33ecf2a440d21bc5d398676ffa5248efdf7333ea627b93d3427828#npm:5.72.0"]\
           ],\
@@ -17978,7 +18015,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["sade", "npm:1.8.1"],\
             ["tiny-glob", "npm:0.2.9"],\
             ["tslib", "npm:1.14.1"],\
-            ["typescript", "patch:typescript@npm%3A3.9.10#~builtin<compat/typescript>::version=3.9.10&hash=bda367"]\
+            ["typescript", "patch:typescript@npm%3A3.9.10#~builtin<compat/typescript>::version=3.9.10&hash=7ad353"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -21435,7 +21472,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["rollup", "npm:1.32.1"],\
             ["rollup-pluginutils", "npm:2.8.1"],\
             ["tslib", "npm:1.10.0"],\
-            ["typescript", "patch:typescript@npm%3A3.9.10#~builtin<compat/typescript>::version=3.9.10&hash=bda367"]\
+            ["typescript", "patch:typescript@npm%3A3.9.10#~builtin<compat/typescript>::version=3.9.10&hash=7ad353"]\
           ],\
           "packagePeers": [\
             "@types/rollup",\
@@ -23088,17 +23125,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["typescript", [\
-        ["patch:typescript@npm%3A3.9.10#~builtin<compat/typescript>::version=3.9.10&hash=bda367", {\
-          "packageLocation": "./.yarn/cache/typescript-patch-ef99b47708-dc7141ab55.zip/node_modules/typescript/",\
+        ["patch:typescript@npm%3A3.9.10#~builtin<compat/typescript>::version=3.9.10&hash=7ad353", {\
+          "packageLocation": "./.yarn/cache/typescript-patch-e662bac6c3-dc7141ab55.zip/node_modules/typescript/",\
           "packageDependencies": [\
-            ["typescript", "patch:typescript@npm%3A3.9.10#~builtin<compat/typescript>::version=3.9.10&hash=bda367"]\
+            ["typescript", "patch:typescript@npm%3A3.9.10#~builtin<compat/typescript>::version=3.9.10&hash=7ad353"]\
           ],\
           "linkType": "HARD"\
         }],\
-        ["patch:typescript@npm%3A4.6.3#~builtin<compat/typescript>::version=4.6.3&hash=bda367", {\
-          "packageLocation": "./.yarn/cache/typescript-patch-30b732d1e2-6bf45caf84.zip/node_modules/typescript/",\
+        ["patch:typescript@npm%3A4.6.3#~builtin<compat/typescript>::version=4.6.3&hash=7ad353", {\
+          "packageLocation": "./.yarn/cache/typescript-patch-572cbe385b-6bf45caf84.zip/node_modules/typescript/",\
           "packageDependencies": [\
-            ["typescript", "patch:typescript@npm%3A4.6.3#~builtin<compat/typescript>::version=4.6.3&hash=bda367"]\
+            ["typescript", "patch:typescript@npm%3A4.6.3#~builtin<compat/typescript>::version=4.6.3&hash=7ad353"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -28107,9 +28144,13 @@ function patchFs(patchedFs, fakeFs) {
     }
   }
   {
-    patchedFs.read[nodeUtils.promisify.custom] = async (p, buffer, ...args) => {
-      const res = fakeFs.readPromise(p, buffer, ...args);
+    patchedFs.read[nodeUtils.promisify.custom] = async (fd, buffer, ...args) => {
+      const res = fakeFs.readPromise(fd, buffer, ...args);
       return {bytesRead: await res, buffer};
+    };
+    patchedFs.write[nodeUtils.promisify.custom] = async (fd, buffer, ...args) => {
+      const res = fakeFs.writePromise(fd, buffer, ...args);
+      return {bytesWritten: await res, buffer};
     };
   }
 }
@@ -32566,11 +32607,11 @@ Require stack:
     }
     originalExtensionJSFunction.call(this, module, filename);
   };
-  const originalEmitWarning = process.emitWarning;
-  process.emitWarning = function(warning, name, ctor) {
-    if (name === `ExperimentalWarning` && typeof warning === `string` && warning.includes(`--experimental-loader`))
-      return;
-    originalEmitWarning.apply(process, arguments);
+  const originalEmit = process.emit;
+  process.emit = function(name, data, ...args) {
+    if (name === `warning` && typeof data === `object` && data.name === `ExperimentalWarning` && (data.message.includes(`--experimental-loader`) || data.message.includes(`Custom ESM Loaders is an experimental feature`)))
+      return false;
+    return originalEmit.apply(process, arguments);
   };
   patchFs(fs__default.default, new PosixFS(opts.fakeFs));
 }
@@ -33119,7 +33160,10 @@ Required by: ${issuerForDisplay}
             if (runtimeState.enableTopLevelFallback) {
               if (dependencyReference == null && fallbackReference === null) {
                 const reference = runtimeState.fallbackPool.get(dependencyName);
-                if (reference != null) {
+                // # Warnings suppressed via @lipemat/js-boilerplate/fix-pnp script. 
+if (! alwaysWarnOnFallback && reference != null) { 
+dependencyReference = reference; 
+} else if (alwaysWarnOnFallback && reference != null) {
                   fallbackReference = reference;
                 }
               }
