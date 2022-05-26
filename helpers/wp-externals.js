@@ -29,6 +29,7 @@ module.exports = [
 	'editor',
 	'element',
 	'hooks',
+	'html-entities',
 	'i18n',
 	'media-utils',
 	'plugins',
