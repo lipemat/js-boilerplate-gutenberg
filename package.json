@@ -1,9 +1,9 @@
 {
   "name": "@lipemat/js-boilerplate-gutenberg",
-  "version": "2.8.0",
+  "version": "2.9.0",
   "description": "Gutenberg extension for @lipemat/js-boilerplate.",
   "engines": {
-    "node": ">=14.17.6"
+    "node": ">=16.14.2"
   },
   "license": "MIT",
   "main": "dist/index.js",
@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/lipemat/js-boilerplate-gutenberg#readme",
   "dependencies": {
-    "@types/lipemat__js-boilerplate": "lipemat/types-js-boilerplate#semver:^1.20.0"
+    "@types/lipemat__js-boilerplate": "lipemat/types-js-boilerplate#semver:^1.23.0"
   },
   "devDependencies": {
     "@lipemat/js-boilerplate": "^8.3.1",
@@ -54,5 +54,5 @@
     "test": "lipemat-js-boilerplate test",
     "watch": "microbundle watch --external @wordpress/api-fetch,@wordpress/blocks,@wordpress/data,@wordpress/edit-post,@wordpress/i18n,@wordpress/plugins,@wordpress/url,react,ReactDOM --globals @wordpress/api-fetch=wp.apiFetch,@wordpress/blocks=wp.blocks,@wordpress/data=wp.data,@wordpress/edit-post=wp.editPost,@wordpress/i18n=wp.i18n,@wordpress/plugins=wp.plugins,@wordpress/url=wp.url,react=React,react-dom=ReactDOM"
   },
-  "packageManager": "yarn@3.2.0"
+  "packageManager": "yarn@3.2.1"
 }

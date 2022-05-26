@@ -1915,7 +1915,7 @@ __metadata:
   resolution: "@lipemat/js-boilerplate-gutenberg@workspace:."
   dependencies:
     "@lipemat/js-boilerplate": ^8.3.1
-    "@types/lipemat__js-boilerplate": "lipemat/types-js-boilerplate#semver:^1.20.0"
+    "@types/lipemat__js-boilerplate": "lipemat/types-js-boilerplate#semver:^1.23.0"
     "@types/webpack-env": ^1.16.0
     "@wordpress/api-fetch": ^3.20.0
     "@wordpress/blocks": ^8.0.2
@@ -2508,7 +2508,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lipemat__js-boilerplate@github:lipemat/types-js-boilerplate#semver:^1.3.0, @types/lipemat__js-boilerplate@lipemat/types-js-boilerplate#semver:^1.20.0":
+"@types/lipemat__js-boilerplate@github:lipemat/types-js-boilerplate#semver:^1.3.0":
   version: 1.20.0
   resolution: "@types/lipemat__js-boilerplate@https://github.com/lipemat/types-js-boilerplate.git#commit=9ac8fb31327f6926a51d5e797cf1b14e084e0277"
   dependencies:
@@ -2525,6 +2525,26 @@ __metadata:
     "@types/tinymce": ^4.5.23
     "@types/webpack-env": ^1.16.0
   checksum: 73c075d693af3256aa46d3cb26f0717e6b832e068efc5ba83c8eb71986b46b41eaa21a96c218c605adb5b8cecbfae839fb990bb8f11d02d1033b6fdc9ebf568b
+  languageName: node
+  linkType: hard
+
+"@types/lipemat__js-boilerplate@lipemat/types-js-boilerplate#semver:^1.23.0":
+  version: 1.23.0
+  resolution: "@types/lipemat__js-boilerplate@https://github.com/lipemat/types-js-boilerplate.git#commit=b94116e9d1698132f547303c95fd4476a2a85913"
+  dependencies:
+    "@types/classnames": ^2.2.9
+    "@types/codemirror": ^5.60.5
+    "@types/jest": ^24.0.19
+    "@types/jquery": ^3.5.5
+    "@types/js-cookie": ^2.2.4
+    "@types/lodash": ^4.14.168
+    "@types/react": ^16 || ^17
+    "@types/react-dom": ^16 || ^17
+    "@types/react-router-dom": ^4.3.4
+    "@types/react-transition-group": ^4.2.4
+    "@types/tinymce": ^4.5.23
+    "@types/webpack-env": ^1.16.0
+  checksum: 5a22fa0473aea682023a540456207785e53ac6f136ec1c7803fb3895162e116035f9b8cbf189afbb93fc5eb44c1e5d2787549183a5009aa4cae492468c52122d
   languageName: node
   linkType: hard
 
@@ -2598,6 +2618,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-dom@npm:^16 || ^17":
+  version: 17.0.17
+  resolution: "@types/react-dom@npm:17.0.17"
+  dependencies:
+    "@types/react": ^17
+  checksum: 23caf98aa03e968811560f92a2c8f451694253ebe16b670929b24eaf0e7fa62ba549abe9db0ac028a9d8a9086acd6ab9c6c773f163fa21224845edbc00ba6232
+  languageName: node
+  linkType: hard
+
 "@types/react-dom@npm:^16.9.0, @types/react-dom@npm:^16.9.10":
   version: 16.9.14
   resolution: "@types/react-dom@npm:16.9.14"
@@ -2654,6 +2683,17 @@ __metadata:
     "@types/scheduler": "*"
     csstype: ^3.0.2
   checksum: 8a9769e2cabe335c86179881577e6ca32f3a6abdd5adbe2d498e48b78d532130da828a53ef25f21915179da454654b811292e0a8191c8a81af3bf4b05f5673bd
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:^16 || ^17":
+  version: 17.0.45
+  resolution: "@types/react@npm:17.0.45"
+  dependencies:
+    "@types/prop-types": "*"
+    "@types/scheduler": "*"
+    csstype: ^3.0.2
+  checksum: 3cc13a02824c13f6fa4807a83abd065ac1d9943359e76bd995cc7cd2b4148c1176ebd54a30a9f4eb8a0f141ff359d712876f256c4fee707e4290607ef8410b3e
   languageName: node
   linkType: hard
 
@@ -14560,7 +14600,7 @@ __metadata:
 
 "typescript@patch:typescript@^3.9.5#~builtin<compat/typescript>":
   version: 3.9.10
-  resolution: "typescript@patch:typescript@npm%3A3.9.10#~builtin<compat/typescript>::version=3.9.10&hash=bda367"
+  resolution: "typescript@patch:typescript@npm%3A3.9.10#~builtin<compat/typescript>::version=3.9.10&hash=7ad353"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
@@ -14570,7 +14610,7 @@ __metadata:
 
 "typescript@patch:typescript@^4#~builtin<compat/typescript>, typescript@patch:typescript@^4.2.4#~builtin<compat/typescript>":
   version: 4.6.3
-  resolution: "typescript@patch:typescript@npm%3A4.6.3#~builtin<compat/typescript>::version=4.6.3&hash=bda367"
+  resolution: "typescript@patch:typescript@npm%3A4.6.3#~builtin<compat/typescript>::version=4.6.3&hash=7ad353"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver

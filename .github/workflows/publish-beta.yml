@@ -1,7 +1,7 @@
 name: Publish Beta
 env:
-  VERSION: 1.0.0
-  NODE_VERSION: '14.17.6'
+  VERSION: 1.1.0
+  NODE_VERSION: '16.14.2'
 
 on:
   push:
@@ -17,6 +17,7 @@ jobs:
         with:
           node-version: ${{env.NODE_VERSION}}
           registry-url: 'https://registry.npmjs.org'
+      - run: yarn install
       - run: npm publish --tag beta
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
