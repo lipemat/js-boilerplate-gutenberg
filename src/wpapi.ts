@@ -1,4 +1,24 @@
-import {ApplicationPassword, ApplicationPasswordCreate, CategoriesQuery, Category, CategoryCreate, CategoryUpdate, Comment, CommentCreate, context, Global, method, Post, PostsQuery, Settings, Taxonomy, Type, User, UserCreate, UsersQuery} from '@wordpress/api';
+import {
+	ApplicationPassword,
+	ApplicationPasswordCreate,
+	CategoriesQuery,
+	Category,
+	CategoryCreate,
+	CategoryUpdate,
+	Comment,
+	CommentCreate,
+	context,
+	Global,
+	method,
+	Post,
+	PostsQuery,
+	Settings,
+	Taxonomy,
+	Type,
+	User,
+	UserCreate,
+	UsersQuery,
+} from '@wordpress/api';
 import apiFetch from '@wordpress/api-fetch';
 import {parseResponseAndNormalizeError} from './util/parse-response';
 import {addQueryArgs} from '@wordpress/url';
@@ -9,12 +29,21 @@ import {defaultFetchHandler} from './util/request-handler';
 import {SearchItem, SearchQuery} from '@wordpress/api/search';
 import {UserUpdate} from '@wordpress/api/users';
 import {Menu, MenuCreate, MenusQuery, MenuUpdate} from '@wordpress/api/menus';
-import {MenuItem, MenuItemCreate, MenuItemsQuery, MenuItemUpdate} from '@wordpress/api/menu-items';
+import {
+	MenuItem,
+	MenuItemCreate,
+	MenuItemsQuery,
+	MenuItemUpdate,
+} from '@wordpress/api/menu-items';
 import {MenuLocation} from '@wordpress/api/menu-locations';
-import {EditorBlock, EditorBlockCreate, EditorBlocksQuery} from '@wordpress/api/editor-blocks';
+import {
+	EditorBlock,
+	EditorBlockCreate,
+	EditorBlocksQuery,
+} from '@wordpress/api/editor-blocks';
 
 export type CustomRoutes<K> = {
-	[path in keyof K]: () => RequestMethods<any, any, any>;
+	[path in keyof K]: () => Partial<RequestMethods<any, any, any>>;
 }
 
 export interface Pagination<T> {
