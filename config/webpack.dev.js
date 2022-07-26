@@ -3,7 +3,7 @@ const wpExternals = require( '../helpers/wp-externals' );
 const externalsDefault = Object.assign( {}, webpackConfig.externals );
 const rules = Object.assign( {}, webpackConfig.module.rules );
 
-// @todo Switch to function based return so don't need to require webpack.dev.
+// @todo Switch to function based return so don't need to require webpack.dist.
 
 /**
  * Gutenberg is loading within FSE and future areas within an iFrame.
@@ -13,6 +13,15 @@ const rules = Object.assign( {}, webpackConfig.module.rules );
  * 1. We must wait for the iframe to load as it's generated via JS.
  *    so we can't simply point `insert` to `[name="editor-canvas"]`.
  * 2. We don't have much to go on except the iframe name :-(.
+ *
+ * @notice In order for styles to work in FSE when script debug is off
+ *         you must register the style for the block using the CSS handle.
+ *         ```php
+ *          register_block_type( 'lipe-project/master', [
+ *              'editor_style' => self::CSS_HANDLE,
+ *          ] );
+ *          ```
+ * @link https://developer.wordpress.org/block-editor/reference-guides/block-api/block-metadata/#wpdefinedasset
  */
 rules[ 2 ].use[ 0 ] = {
 	loader: 'style-loader',
@@ -22,10 +31,6 @@ rules[ 2 ].use[ 0 ] = {
 				const gutenbergEditor = document.querySelector( 'iframe[name="editor-canvas"]' );
 				if ( gutenbergEditor ) {
 					gutenbergEditor.contentDocument.head.appendChild( styleTag );
-
-					// Run the default again once everything is loaded.
-					// Fixes emoji script race condition turning the Ⓜ into <img>.
-					document.querySelector( 'head' ).appendChild( styleTag );
 				}
 			}, 2000 );
 
