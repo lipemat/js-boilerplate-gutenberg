@@ -21,26 +21,62 @@ const rules = Object.assign( {}, webpackConfig.module.rules );
  *              'editor_style' => self::CSS_HANDLE,
  *          ] );
  *          ```
+ *
  * @link https://developer.wordpress.org/block-editor/reference-guides/block-api/block-metadata/#wpdefinedasset
  */
 rules[ 2 ].use[ 0 ] = {
 	loader: 'style-loader',
 	options: {
-		insert: styleTag => {
-			setTimeout( () => {
-				const gutenbergEditor = document.querySelector( 'iframe[name="editor-canvas"]' );
-				if ( gutenbergEditor ) {
-					gutenbergEditor.contentDocument.head.appendChild( styleTag );
-				}
-			}, 2000 );
+		attributes: {
+			name: 'style-loader',
+		},
+		styleTagTransform: ( css, styleElement ) => {
+			/**
+			 * Taken verbatim from style-loader.
+			 *
+			 * Must live inside this arrow function to be included in
+			 * the browser.
+			 *
+			 * @link https://github.dev/webpack-contrib/style-loader/blob/master/src/runtime/styleTagTransform.js
+			 */
+			// eslint-disable-next-line no-shadow
+			function styleTagTransform( css, styleElement ) {
+				if ( styleElement.styleSheet ) {
+					styleElement.styleSheet.cssText = css;
+				} else {
+					while ( styleElement.firstChild ) {
+						styleElement.removeChild( styleElement.firstChild );
+					}
 
-			// Default behavior.
-			document.querySelector( 'head' ).appendChild( styleTag );
+					styleElement.appendChild( document.createTextNode( css ) );
+				}
+			}
+
+			// Default transformation of <style> tag on root document.
+			styleTagTransform( css, styleElement );
+
+			// Duplicate style tag on Gutenberg iframe and transform.
+			if ( ! styleElement.iframeCloned ) {
+				setTimeout( () => {
+					const gutenbergEditor = document.querySelector( 'iframe[name="editor-canvas"]' );
+					if ( gutenbergEditor ) {
+						// Store the cloned style tag on property for reuse.
+						styleElement.iframeCloned = styleElement.cloneNode( true );
+						gutenbergEditor.contentDocument.head.appendChild( styleElement.iframeCloned );
+					} else {
+						// Use `no-iframe-available` to prevent loops when checking for iframe.
+						styleElement.iframeCloned = 'no-iframe-available';
+					}
+				}, 2000 );
+			} else if ( 'no-iframe-available' !== styleElement.iframeCloned ) {
+				styleTagTransform( css, styleElement.iframeCloned );
+			}
 		},
 	},
 };
 
 
 module.exports = {
+	// Add the global `wp` variable based externals.
 	externals: {...externalsDefault, ...wpExternals},
 };
