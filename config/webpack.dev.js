@@ -13,6 +13,15 @@ const rules = Object.assign( {}, webpackConfig.module.rules );
  * 1. We must wait for the iframe to load as it's generated via JS.
  *    so we can't simply point `insert` to `[name="editor-canvas"]`.
  * 2. We don't have much to go on except the iframe name :-(.
+ *
+ * @notice In order for styles to work in FSE when script debug is off
+ *         you must register the style for the block using the CSS handle.
+ *         ```php
+ *          register_block_type( 'lipe-project/master', [
+ *              'editor_style' => self::CSS_HANDLE,
+ *          ] );
+ *          ```
+ * @link https://developer.wordpress.org/block-editor/reference-guides/block-api/block-metadata/#wpdefinedasset
  */
 rules[ 2 ].use[ 0 ] = {
 	loader: 'style-loader',
