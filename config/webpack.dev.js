@@ -1,7 +1,5 @@
 const webpackConfig = require( '@lipemat/js-boilerplate/config/webpack.dev' );
 const wpExternals = require( '../helpers/wp-externals' );
-const webpack = require( 'webpack' );
-const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const externalsDefault = Object.assign( {}, webpackConfig.externals );
 const rules = Object.assign( {}, webpackConfig.module.rules );
 
@@ -24,31 +22,61 @@ const rules = Object.assign( {}, webpackConfig.module.rules );
  *          ] );
  *          ```
  *
- * @notice style-loader can only target one document at a time so if an iframe
- *         is found, the iframe will receive the styles where outside fields
- *         will not.
- *
  * @link https://developer.wordpress.org/block-editor/reference-guides/block-api/block-metadata/#wpdefinedasset
  */
 rules[ 2 ].use[ 0 ] = {
 	loader: 'style-loader',
 	options: {
-		insert: styleTag => {
-			setTimeout( () => {
-				const gutenbergEditor = document.querySelector( 'iframe[name="editor-canvas"]' );
-				if ( gutenbergEditor ) {
-					gutenbergEditor.contentDocument.head.appendChild( styleTag );
-					console.log( '%cStyling within the editor-canvas iframe, outside styles won\'t work when not in production mode.', 'color: red; font-size: medium;' );
-				}
-			}, 2000 );
+		attributes: {
+			name: 'style-loader',
+		},
+		styleTagTransform: ( css, styleElement ) => {
+			/**
+			 * Taken verbatim from style-loader.
+			 *
+			 * Must live inside this arrow function to be included in
+			 * the browser.
+			 *
+			 * @link https://github.dev/webpack-contrib/style-loader/blob/master/src/runtime/styleTagTransform.js
+			 */
+			// eslint-disable-next-line no-shadow
+			function styleTagTransform( css, styleElement ) {
+				if ( styleElement.styleSheet ) {
+					styleElement.styleSheet.cssText = css;
+				} else {
+					while ( styleElement.firstChild ) {
+						styleElement.removeChild( styleElement.firstChild );
+					}
 
-			// Default behavior.
-			document.querySelector( 'head' ).appendChild( styleTag );
+					styleElement.appendChild( document.createTextNode( css ) );
+				}
+			}
+
+			// Default transformation of <style> tag on root document.
+			styleTagTransform( css, styleElement );
+
+			// Duplicate style tag on Gutenberg iframe and transform.
+			if ( ! styleElement.iframeCloned ) {
+				setTimeout( () => {
+					const gutenbergEditor = document.querySelector( 'iframe[name="editor-canvas"]' );
+					if ( gutenbergEditor ) {
+						// Store the cloned style tag on property for reuse.
+						styleElement.iframeCloned = styleElement.cloneNode( true );
+						gutenbergEditor.contentDocument.head.appendChild( styleElement.iframeCloned );
+					} else {
+						// Use `no-iframe-available` to prevent loops when checking for iframe.
+						styleElement.iframeCloned = 'no-iframe-available';
+					}
+				}, 2000 );
+			} else if ( 'no-iframe-available' !== styleElement.iframeCloned ) {
+				styleTagTransform( css, styleElement.iframeCloned );
+			}
 		},
 	},
 };
 
 
 module.exports = {
+	// Add the global `wp` variable based externals.
 	externals: {...externalsDefault, ...wpExternals},
 };
