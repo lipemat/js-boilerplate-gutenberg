@@ -1,5 +1,7 @@
 const webpackConfig = require( '@lipemat/js-boilerplate/config/webpack.dev' );
 const wpExternals = require( '../helpers/wp-externals' );
+const webpack = require( 'webpack' );
+const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const externalsDefault = Object.assign( {}, webpackConfig.externals );
 const rules = Object.assign( {}, webpackConfig.module.rules );
 
@@ -21,6 +23,11 @@ const rules = Object.assign( {}, webpackConfig.module.rules );
  *              'editor_style' => self::CSS_HANDLE,
  *          ] );
  *          ```
+ *
+ * @notice style-loader can only target one document at a time so if an iframe
+ *         is found, the iframe will receive the styles where outside fields
+ *         will not.
+ *
  * @link https://developer.wordpress.org/block-editor/reference-guides/block-api/block-metadata/#wpdefinedasset
  */
 rules[ 2 ].use[ 0 ] = {
@@ -31,6 +38,7 @@ rules[ 2 ].use[ 0 ] = {
 				const gutenbergEditor = document.querySelector( 'iframe[name="editor-canvas"]' );
 				if ( gutenbergEditor ) {
 					gutenbergEditor.contentDocument.head.appendChild( styleTag );
+					console.log( '%cStyling within the editor-canvas iframe, outside styles won\'t work when not in production mode.', 'color: red; font-size: medium;' );
 				}
 			}, 2000 );
 
