@@ -16,6 +16,8 @@ const rules = Object.assign( {}, webpackConfig.module.rules );
  *
  * @notice In order for styles to work in FSE when script debug is off
  *         you must register the style for the block using the CSS handle.
+ *         Also, `wp_register_style` must be called before `get_block_editor_settings`
+ *         is called so likely the `init` or `wp_loaded` action.
  *         ```php
  *          register_block_type( 'lipe-project/master', [
  *              'editor_style' => self::CSS_HANDLE,
@@ -30,7 +32,7 @@ rules[ 2 ].use[ 0 ] = {
 		attributes: {
 			name: 'style-loader',
 		},
-		styleTagTransform: ( css, styleElement ) => {
+		styleTagTransform: ( content, el ) => {
 			/**
 			 * Taken verbatim from style-loader.
 			 *
@@ -52,24 +54,37 @@ rules[ 2 ].use[ 0 ] = {
 				}
 			}
 
-			// Default transformation of <style> tag on root document.
-			styleTagTransform( css, styleElement );
+			function cloneToGutenbergIframe() {
+				const gutenbergEditor = document.querySelector( 'iframe[name="editor-canvas"]' );
+				if ( gutenbergEditor ) {
+					// Store the cloned style tag on property for reuse.
+					el.iframeCloned = el.cloneNode( true );
+					gutenbergEditor.contentDocument.head.appendChild( el.iframeCloned );
+				}
+			}
+
+			// Default transformation of <style> tag on the root document.
+			styleTagTransform( content, el );
 
 			// Duplicate style tag on Gutenberg iframe and transform.
-			if ( ! styleElement.iframeCloned ) {
+			if ( ! el.iframeCloned ) {
 				setTimeout( () => {
-					const gutenbergEditor = document.querySelector( 'iframe[name="editor-canvas"]' );
-					if ( gutenbergEditor ) {
-						// Store the cloned style tag on property for reuse.
-						styleElement.iframeCloned = styleElement.cloneNode( true );
-						gutenbergEditor.contentDocument.head.appendChild( styleElement.iframeCloned );
-					} else {
-						// Use `no-iframe-available` to prevent loops when checking for iframe.
-						styleElement.iframeCloned = 'no-iframe-available';
+					cloneToGutenbergIframe();
+					// Try again in a few seconds...
+					if ( ! el.iframeCloned ) {
+						setTimeout( () => {
+							cloneToGutenbergIframe();
+							if ( ! el.iframeCloned ) {
+								// Use `no-iframe-available` to prevent checking for the iframe on every change.
+								el.iframeCloned = 'no-iframe-available';
+							}
+						}, 5000 );
 					}
 				}, 2000 );
-			} else if ( 'no-iframe-available' !== styleElement.iframeCloned ) {
-				styleTagTransform( css, styleElement.iframeCloned );
+
+				// Transform the iframe's <style> tag.
+			} else if ( el.iframeCloned && 'no-iframe-available' !== el.iframeCloned ) {
+				styleTagTransform( content, el.iframeCloned );
 			}
 		},
 	},
