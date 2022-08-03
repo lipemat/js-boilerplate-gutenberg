@@ -7,9 +7,9 @@ import {
 	CategoryUpdate,
 	Comment,
 	CommentCreate,
-	context,
+	Context,
 	Global,
-	method,
+	Method,
 	Post,
 	PostsQuery,
 	Settings,
@@ -148,7 +148,7 @@ export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMet
 		 *                      password?: if the item is password protected (Probably only posts and pages);
 		 *                      }
 		 */
-		getById: ( id, data? ) => doRequest<T, { password?: string, context?: context }>( path += '/' + id, 'GET', data ),
+		getById: ( id, data? ) => doRequest<T, { password?: string, context?: Context }>( path += '/' + id, 'GET', data ),
 		/**
 		 * Same as `get` but returns the pagination information as well as
 		 * the items.
@@ -182,7 +182,7 @@ export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMet
  * @param  data          - Query params.
  * @param  parse         - To parse the json result, or return raw Request
  */
-export async function doRequest<T, D = {}>( path: string, requestMethod: method, data?: D, parse: boolean = true ): Promise<T> {
+export async function doRequest<T, D = {}>( path: string, requestMethod: Method, data?: D, parse: boolean = true ): Promise<T> {
 	if ( 'undefined' === typeof data || 'GET' === requestMethod ) {
 		return apiFetch<T, D>( {
 			method: requestMethod,
@@ -206,7 +206,7 @@ export async function doRequest<T, D = {}>( path: string, requestMethod: method,
  * @param  requestMethod - GET, POST, PUT, DELETE, PATCH
  * @param  data          - Query params.
  */
-export async function doRequestWithPagination<T, D = {}>( path: string, requestMethod: method, data?: D ): Promise<Pagination<T>> {
+export async function doRequestWithPagination<T, D = {}>( path: string, requestMethod: Method, data?: D ): Promise<Pagination<T>> {
 	const Result = await doRequest<Response, D>( path, requestMethod, data, false );
 	const items = await parseResponseAndNormalizeError( Result );
 	return {
