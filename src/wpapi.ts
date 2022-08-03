@@ -7,9 +7,9 @@ import {
 	CategoryUpdate,
 	Comment,
 	CommentCreate,
-	context,
+	Context,
 	Global,
-	method,
+	Method,
 	Post,
 	PostsQuery,
 	Settings,
@@ -22,7 +22,7 @@ import {
 import apiFetch from '@wordpress/api-fetch';
 import {parseResponseAndNormalizeError} from './util/parse-response';
 import {addQueryArgs} from '@wordpress/url';
-import {PostCreate} from '@wordpress/api/posts';
+import {PostCreate, PostUpdate} from '@wordpress/api/posts';
 import {Page, PageCreate, PagesQuery} from '@wordpress/api/pages';
 import {Media, MediaCreate, MediaQuery, MediaUpdate} from '@wordpress/api/media';
 import {defaultFetchHandler} from './util/request-handler';
@@ -74,17 +74,17 @@ export interface Routes {
 	};
 	statuses: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	pages: <T = Page, Q = PagesQuery, U = PageCreate>() => RequestMethods<T, Q, U>;
-	posts: <T = Post, Q = PostsQuery, U = PostCreate>() => RequestMethods<T, Q, U>;
+	posts: <T = Post, Q = PostsQuery, U = PostUpdate, C = PostCreate, E = Post<'edit'>>() => RequestMethods<T, Q, U, C, E>;
 	tags: <T = any, Q = any, U = any, C = U>() => Omit<RequestMethods<T, Q, U, C>, 'trash'>;
 	taxonomies: <T = Taxonomy, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	types: <T = Type, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	users: <T = User, Q = UsersQuery, U = UserUpdate, C = UserCreate, E = Required<C> & T>() => Omit<RequestMethods<T, Q, U, C, E>, 'delete' | 'trash'> & {
 		delete: ( id: number, reassign?: number ) => Promise<{ deleted: boolean, previous: T }>;
-	}
+	};
 	search: <T = SearchItem, Q = SearchQuery>() => {
 		get: ( options?: Q ) => Promise<T[]>;
 		getWithPagination: ( options?: Q ) => Promise<Pagination<T>>;
-	}
+	};
 	settings: <T = Settings, U = Partial<T>>() => {
 		get: () => Promise<T>;
 		update: ( data: U ) => Promise<T>;
@@ -148,7 +148,7 @@ export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMet
 		 *                      password?: if the item is password protected (Probably only posts and pages);
 		 *                      }
 		 */
-		getById: ( id, data? ) => doRequest<T, { password?: string, context?: context }>( path += '/' + id, 'GET', data ),
+		getById: ( id, data? ) => doRequest<T, { password?: string, context?: Context }>( path += '/' + id, 'GET', data ),
 		/**
 		 * Same as `get` but returns the pagination information as well as
 		 * the items.
@@ -182,7 +182,7 @@ export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMet
  * @param  data          - Query params.
  * @param  parse         - To parse the json result, or return raw Request
  */
-export async function doRequest<T, D = {}>( path: string, requestMethod: method, data?: D, parse: boolean = true ): Promise<T> {
+export async function doRequest<T, D = {}>( path: string, requestMethod: Method, data?: D, parse: boolean = true ): Promise<T> {
 	if ( 'undefined' === typeof data || 'GET' === requestMethod ) {
 		return apiFetch<T, D>( {
 			method: requestMethod,
@@ -206,7 +206,7 @@ export async function doRequest<T, D = {}>( path: string, requestMethod: method,
  * @param  requestMethod - GET, POST, PUT, DELETE, PATCH
  * @param  data          - Query params.
  */
-export async function doRequestWithPagination<T, D = {}>( path: string, requestMethod: method, data?: D ): Promise<Pagination<T>> {
+export async function doRequestWithPagination<T, D = {}>( path: string, requestMethod: Method, data?: D ): Promise<Pagination<T>> {
 	const Result = await doRequest<Response, D>( path, requestMethod, data, false );
 	const items = await parseResponseAndNormalizeError( Result );
 	return {
