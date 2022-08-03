@@ -22,7 +22,7 @@ import {
 import apiFetch from '@wordpress/api-fetch';
 import {parseResponseAndNormalizeError} from './util/parse-response';
 import {addQueryArgs} from '@wordpress/url';
-import {PostCreate} from '@wordpress/api/posts';
+import {PostCreate, PostUpdate} from '@wordpress/api/posts';
 import {Page, PageCreate, PagesQuery} from '@wordpress/api/pages';
 import {Media, MediaCreate, MediaQuery, MediaUpdate} from '@wordpress/api/media';
 import {defaultFetchHandler} from './util/request-handler';
@@ -74,17 +74,17 @@ export interface Routes {
 	};
 	statuses: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	pages: <T = Page, Q = PagesQuery, U = PageCreate>() => RequestMethods<T, Q, U>;
-	posts: <T = Post, Q = PostsQuery, U = PostCreate>() => RequestMethods<T, Q, U>;
+	posts: <T = Post, Q = PostsQuery, U = PostUpdate, C = PostCreate, E = Post<'edit'>>() => RequestMethods<T, Q, U, C, E>;
 	tags: <T = any, Q = any, U = any, C = U>() => Omit<RequestMethods<T, Q, U, C>, 'trash'>;
 	taxonomies: <T = Taxonomy, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	types: <T = Type, Q = any, U = any>() => RequestMethods<T, Q, U>;
 	users: <T = User, Q = UsersQuery, U = UserUpdate, C = UserCreate, E = Required<C> & T>() => Omit<RequestMethods<T, Q, U, C, E>, 'delete' | 'trash'> & {
 		delete: ( id: number, reassign?: number ) => Promise<{ deleted: boolean, previous: T }>;
-	}
+	};
 	search: <T = SearchItem, Q = SearchQuery>() => {
 		get: ( options?: Q ) => Promise<T[]>;
 		getWithPagination: ( options?: Q ) => Promise<Pagination<T>>;
-	}
+	};
 	settings: <T = Settings, U = Partial<T>>() => {
 		get: () => Promise<T>;
 		update: ( data: U ) => Promise<T>;
