@@ -17,6 +17,7 @@ const camelCaseDash = string => string.replace( /-([a-z])/g, ( match, letter ) =
  */
 module.exports = [
 	'api-fetch',
+	'autop',
 	'block-editor',
 	'blocks',
 	'block-serialization-default-parser',
