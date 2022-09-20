@@ -1,6 +1,6 @@
 {
   "name": "@lipemat/js-boilerplate-gutenberg",
-  "version": "2.9.7",
+  "version": "2.10.0",
   "description": "Gutenberg extension for @lipemat/js-boilerplate.",
   "engines": {
     "node": ">=16.14.2"
@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/lipemat/js-boilerplate-gutenberg#readme",
   "dependencies": {
-    "@types/lipemat__js-boilerplate": "lipemat/types-js-boilerplate#semver:^1.23.0"
+    "@types/lipemat__js-boilerplate": "lipemat/types-js-boilerplate#semver:^1.32.0"
   },
   "devDependencies": {
     "@lipemat/js-boilerplate": "^8.3.1",

@@ -1,46 +1,20 @@
-import {
-	ApplicationPassword,
-	ApplicationPasswordCreate,
-	CategoriesQuery,
-	Category,
-	CategoryCreate,
-	CategoryUpdate,
-	Comment,
-	CommentCreate,
-	Context,
-	Global,
-	Method,
-	Post,
-	PostsQuery,
-	Settings,
-	Taxonomy,
-	Type,
-	User,
-	UserCreate,
-	UsersQuery,
-} from '@wordpress/api';
+import {ApplicationPassword, ApplicationPasswordCreate, Context, Global, Method, Post, PostsQuery, Settings, Taxonomy, Type, TypesQuery} from '@wordpress/api';
 import apiFetch from '@wordpress/api-fetch';
 import {parseResponseAndNormalizeError} from './util/parse-response';
 import {addQueryArgs} from '@wordpress/url';
+import {CategoriesQuery, Category, CategoryCreate, CategoryUpdate} from '@wordpress/api/categories';
+import {Comment, CommentCreate, CommentsQuery, CommentUpdate} from '@wordpress/api/comments';
 import {PostCreate, PostUpdate} from '@wordpress/api/posts';
-import {Page, PageCreate, PagesQuery} from '@wordpress/api/pages';
+import {Page, PageCreate, PagesQuery, PageUpdate} from '@wordpress/api/pages';
 import {Media, MediaCreate, MediaQuery, MediaUpdate} from '@wordpress/api/media';
 import {defaultFetchHandler} from './util/request-handler';
 import {SearchItem, SearchQuery} from '@wordpress/api/search';
-import {UserUpdate} from '@wordpress/api/users';
 import {Menu, MenuCreate, MenusQuery, MenuUpdate} from '@wordpress/api/menus';
-import {
-	MenuItem,
-	MenuItemCreate,
-	MenuItemsQuery,
-	MenuItemUpdate,
-} from '@wordpress/api/menu-items';
+import {User, UserCreate, UsersQuery, UserUpdate} from '@wordpress/api/users';
+import {MenuItem, MenuItemCreate, MenuItemsQuery, MenuItemUpdate} from '@wordpress/api/menu-items';
 import {MenuLocation} from '@wordpress/api/menu-locations';
-import {
-	EditorBlock,
-	EditorBlockCreate,
-	EditorBlocksQuery,
-} from '@wordpress/api/editor-blocks';
+import {EditorBlock, EditorBlockCreate, EditorBlocksQuery, EditorBlockUpdate} from '@wordpress/api/editor-blocks';
+import {TaxonomiesQuery} from '@wordpress/api/taxonomies';
 
 export type CustomRoutes<K> = {
 	[path in keyof K]: () => Partial<RequestMethods<any, any, any>>;
@@ -52,7 +26,6 @@ export interface Pagination<T> {
 	items: T[],
 }
 
-
 export interface Routes {
 	applicationPasswords: <T = ApplicationPassword, U = ApplicationPasswordCreate>() => {
 		create: ( userId: number | 'me', data: U ) => Promise<T & { password: string; }>;
@@ -62,23 +35,23 @@ export interface Routes {
 		introspect: ( userId: number | 'me' ) => Promise<T>;
 		update: ( userId: number | 'me', uuid: string, data: U ) => Promise<T>;
 	};
-	blocks: <T = EditorBlock, Q = EditorBlocksQuery, U = EditorBlockCreate>() => RequestMethods<T, Q, U>;
-	categories: <T = Category, Q = CategoriesQuery, U = CategoryUpdate, C = CategoryCreate>() => Omit<RequestMethods<T, Q, U, C>, 'trash'>;
-	comments: <T = Comment, Q = any, U = CommentCreate>() => RequestMethods<T, Q, U>;
-	media: <T = Media, Q = MediaQuery, U = MediaUpdate, C = MediaCreate>() => Omit<RequestMethods<T, Q, U, C>, 'trash'>;
-	menus: <T = Menu, Q = MenusQuery, U = MenuUpdate, C = MenuCreate>() => Omit<RequestMethods<T, Q, U, C>, 'trash'>;
+	blocks: <T = EditorBlock, Q = EditorBlocksQuery, U = EditorBlockUpdate, C = EditorBlockCreate, E = EditorBlock<'edit'>>() => RequestMethods<T, Q, U, C, E>;
+	categories: <T = Category, Q = CategoriesQuery, U = CategoryUpdate, C = CategoryCreate, E = Category<'edit'>>() => Omit<RequestMethods<T, Q, U, C, E>, 'trash'>;
+	comments: <T = Comment, Q = CommentsQuery, U = CommentUpdate, C = CommentCreate, E = Comment<'edit'>>() => RequestMethods<T, Q, U, C, E>;
+	media: <T = Media, Q = MediaQuery, U = MediaUpdate, C = MediaCreate, E = Media<'edit'>>() => Omit<RequestMethods<T, Q, U, C, E>, 'trash'>;
+	menus: <T = Menu, Q = MenusQuery, U = MenuUpdate, C = MenuCreate, E = Menu<'edit'>>() => Omit<RequestMethods<T, Q, U, C, E>, 'trash'>;
 	menuItems: <T = MenuItem, Q = MenuItemsQuery, U = MenuItemUpdate, C = MenuItemCreate>() => RequestMethods<T, Q, U, C>;
 	menuLocations: <T = MenuLocation>() => {
 		get: () => Promise<{ [ name: string ]: T }>;
 		getById: ( location: string ) => Promise<T>;
 	};
 	statuses: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;
-	pages: <T = Page, Q = PagesQuery, U = PageCreate>() => RequestMethods<T, Q, U>;
+	pages: <T = Page, Q = PagesQuery, U = PageUpdate, C = PageCreate, E = Page<'edit'>>() => RequestMethods<T, Q, U, C, E>;
 	posts: <T = Post, Q = PostsQuery, U = PostUpdate, C = PostCreate, E = Post<'edit'>>() => RequestMethods<T, Q, U, C, E>;
 	tags: <T = any, Q = any, U = any, C = U>() => Omit<RequestMethods<T, Q, U, C>, 'trash'>;
-	taxonomies: <T = Taxonomy, Q = any, U = any>() => RequestMethods<T, Q, U>;
-	types: <T = Type, Q = any, U = any>() => RequestMethods<T, Q, U>;
-	users: <T = User, Q = UsersQuery, U = UserUpdate, C = UserCreate, E = Required<C> & T>() => Omit<RequestMethods<T, Q, U, C, E>, 'delete' | 'trash'> & {
+	taxonomies: <T = Taxonomy, Q = TaxonomiesQuery>() => Pick<RequestMethods<T, Q, never>, 'get' | 'getById'>;
+	types: <T = Type, Q = TypesQuery>() => Pick<RequestMethods<T, Q, never>, 'get' | 'getById'>;
+	users: <T = User, Q = UsersQuery, U = UserUpdate, C = UserCreate, E = User<'edit'>>() => Omit<RequestMethods<T, Q, U, C, E>, 'delete' | 'trash'> & {
 		delete: ( id: number, reassign?: number ) => Promise<{ deleted: boolean, previous: T }>;
 	};
 	search: <T = SearchItem, Q = SearchQuery>() => {
