@@ -3196,7 +3196,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ],\
       [\
         "loader-utils",\
-        "npm:1.4.1"\
+        "npm:1.4.2"\
       ],\
       [\
         "locate-path",\
@@ -8442,7 +8442,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@lipemat-postcss-loader-npm-3.1.2-f481fa237a-96657f332d.zip/node_modules/@lipemat/postcss-loader/",\
           "packageDependencies": [\
             ["@lipemat/postcss-loader", "npm:3.1.2"],\
-            ["loader-utils", "npm:1.4.1"],\
+            ["loader-utils", "npm:1.4.2"],\
             ["postcss", "npm:7.0.39"],\
             ["postcss-load-config", "npm:2.1.2"],\
             ["schema-utils", "npm:1.0.0"]\
@@ -14928,7 +14928,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/generic-names-npm-2.0.1-6ef8235104-5f2d6837dc.zip/node_modules/generic-names/",\
           "packageDependencies": [\
             ["generic-names", "npm:2.0.1"],\
-            ["loader-utils", "npm:1.4.1"]\
+            ["loader-utils", "npm:1.4.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -15505,7 +15505,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/tapable", "npm:1.0.8"],\
             ["@types/webpack", "npm:4.41.32"],\
             ["html-minifier-terser", "npm:5.1.1"],\
-            ["loader-utils", "npm:1.4.1"],\
+            ["loader-utils", "npm:1.4.2"],\
             ["lodash", "npm:4.17.21"],\
             ["pretty-error", "npm:2.1.2"],\
             ["tapable", "npm:1.1.3"],\
@@ -17548,10 +17548,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["loader-utils", [\
-        ["npm:1.4.1", {\
-          "packageLocation": "./.yarn/cache/loader-utils-npm-1.4.1-91a9c6b986-ea0b648cba.zip/node_modules/loader-utils/",\
+        ["npm:1.4.2", {\
+          "packageLocation": "./.yarn/cache/loader-utils-npm-1.4.2-b4537b2f88-eb6fb622ef.zip/node_modules/loader-utils/",\
           "packageDependencies": [\
-            ["loader-utils", "npm:1.4.1"],\
+            ["loader-utils", "npm:1.4.2"],\
             ["big.js", "npm:5.2.2"],\
             ["emojis-list", "npm:3.0.0"],\
             ["json5", "npm:1.0.1"]\
@@ -20653,7 +20653,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["fast-levenshtein", "npm:2.0.6"],\
             ["global", "npm:4.4.0"],\
             ["hoist-non-react-statics", "npm:3.3.2"],\
-            ["loader-utils", "npm:1.4.1"],\
+            ["loader-utils", "npm:1.4.2"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:e22946430a3c054b08c90596239a654a90eea2ea6ae6e758fbf8b99369eb1a61384cbe89af33ecf2a440d21bc5d398676ffa5248efdf7333ea627b93d3427828#npm:17.0.2"],\
