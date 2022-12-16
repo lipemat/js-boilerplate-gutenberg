@@ -26,6 +26,7 @@ module.exports = [
 	'core-data',
 	'data',
 	'date',
+	'dom-ready',
 	'edit-post',
 	'editor',
 	'element',
