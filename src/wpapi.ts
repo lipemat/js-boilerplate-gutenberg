@@ -17,7 +17,7 @@ import {EditorBlock, EditorBlockCreate, EditorBlocksQuery, EditorBlockUpdate} fr
 import {TaxonomiesQuery} from '@wordpress/api/taxonomies';
 
 export type CustomRoutes<K> = {
-	[path in keyof K]: () => Partial<RequestMethods<any, any, any>>;
+	[path in keyof K]: () => Partial<RequestMethods<any, any, any>> | RequestMethods<any, any, any>;
 }
 
 export interface Pagination<T> {
