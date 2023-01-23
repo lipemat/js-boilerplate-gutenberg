@@ -1,4 +1,4 @@
-import {Middleware} from "@wordpress/api-fetch";
+import {Middleware} from '@wordpress/api-fetch';
 
 const middlewares: Middleware<any>[] = [];
 
@@ -9,7 +9,7 @@ const middlewares: Middleware<any>[] = [];
  * Similar to `apiFetch.use` with the main difference being the order
  * they are called.
  *
- * @param middleware
+ * @param  middleware
  *
  * @return {number} index of middleware
  */
@@ -21,7 +21,7 @@ export function addMiddleware<D>( middleware: Middleware<D> ): number {
 /**
  * Remove a particular middleware from the cue.
  *
- * @param index
+ * @param  index
  */
 export function removeMiddleware( index: number ): Middleware<any>[] {
 	delete middlewares[ index ];

@@ -52,8 +52,8 @@ export type PluginModule<T = BlockSettings<object> | PluginSettings> = {
  *
  * @example autoloadBlocks( () => require.context( './blocks', true, /block\.tsx$/ ), module );
  *
- * @param {Function} getContext Execute and return a `require.context()` call.
- * @param pluginModule - Module of the current file from the global {module}.
+ * @param {Function} getContext   Execute and return a `require.context()` call.
+ * @param            pluginModule - Module of the current file from the global {module}.
  */
 export const autoloadBlocks = ( getContext: () => __WebpackModuleApi.RequireContext, pluginModule: NodeJS.Module ) => {
 	autoload<BlockSettings<object>>( {
@@ -72,8 +72,8 @@ export const autoloadBlocks = ( getContext: () => __WebpackModuleApi.RequireCont
  *
  * @example autoloadPlugins( () => require.context( './meta-boxes', true, /index\.tsx$/ ), module );
  *
- * @param {Function} getContext Execute and return a `require.context()` call.
- * @param pluginModule - Module of the current file from the global {module}.
+ * @param {Function} getContext   Execute and return a `require.context()` call.
+ * @param            pluginModule - Module of the current file from the global {module}.
  */
 export const autoloadPlugins = ( getContext: () => __WebpackModuleApi.RequireContext, pluginModule: NodeJS.Module ) => {
 	autoload<PluginSettings>( {
@@ -169,7 +169,7 @@ export const autoload = <T>( {
 let selectedBlockId: string | null = null;
 
 /**
- * Track the currently selected block and clear it's selection.
+ * Track the currently selected block and clear its selection.
  *
  * Allows us to reselect the previously selected block after
  * we've replaced the block with our HMR changed one.
@@ -186,7 +186,7 @@ const storeSelectedBlock = () => {
  * When finished select the originally selected block before we
  * fired the HMR update.
  *
- * @param changedNames
+ * @param  changedNames
  */
 const refreshAllBlocks = ( changedNames: string[] = [] ) => {
 	// Refresh all blocks by iteratively selecting each one.

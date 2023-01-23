@@ -9,18 +9,18 @@ import {getAllMiddleware} from './middleware';
  *
  * Middleware may only be used once as they are called in order
  * and new ones are added to the beginning of the list.
- * Therefore, we can't change arguments sent to window.fetch right before
+ * Therefore, we can't change arguments sent to `window.fetch` right before
  * it's sent and WP Core's middleware will always override ours.
  *
  * That is why this file exists to allow changing the arguments right
  * before sending, after WP Core does theirs.
  *
- * Calling `wpapi` automatically switches the request handler to our.s
+ * Calling `wpapi` automatically switches the request handler to our.
  */
 
 
 /**
- * Default set of header values which should be sent with every request unless
+ * Default set of header values, which should be sent with every request unless
  * explicitly provided through apiFetch options.
  *
  * @type {Object}
@@ -34,7 +34,7 @@ const DEFAULT_HEADERS = {
 };
 
 /**
- * Default set of fetch option values which should be sent with every request
+ * Default set of fetch option values, which should be sent with every request
  * unless explicitly provided through apiFetch options.
  *
  * @type {Object}
@@ -53,8 +53,8 @@ const checkStatus = response => {
 
 /**
  * @see apiFetch()
- * @param index
- * @param steps
+ * @param  index
+ * @param  steps
  */
 export const createRunStep = ( index: number, steps: Middleware<any>[] ) => ( workingOptions: FetchOptions<any> ): FetchOptions<any> => {
 	if ( 'undefined' === typeof steps[ index ] ) {
@@ -97,7 +97,7 @@ export const defaultFetchHandler = nextOptions => {
 	return (
 		responsePromise
 			// Return early if fetch errors. If fetch error, there is most likely no
-			// network connection. Unfortunately fetch just throws a TypeError and
+			// network connection. Unfortunately fetch just throws a TypeError, and
 			// the message might depend on the browser.
 			.then(
 				value =>

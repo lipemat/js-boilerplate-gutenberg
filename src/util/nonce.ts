@@ -86,12 +86,12 @@ export function restoreNonce(): void {
 
 /**
  * The nonce middleware built into api-fetch will not allow
- * changing of the nonce once it is set, so we roll our own
+ * changing of the nonce once it is set, so we roll our own,
  * which changes the header each time.
  *
  * @see apiFetch.createNonceMiddleware
  *
- * @param nonce
+ * @param  nonce
  */
 function createNonceMiddleware( nonce ) {
 	function middleware( options, next ) {
