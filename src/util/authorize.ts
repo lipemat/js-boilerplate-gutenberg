@@ -123,9 +123,9 @@ export async function getAuthorizationUrl( data: AuthorizationParams ): Promise<
  *
  * @link https://make.wordpress.org/core/2020/11/05/application-passwords-integration-guide/
  *
- * @requires Version 5.6+ of WP core or the "Application Passwords" plugin.
+ * @notice Requires 5.6+ of WP core or the "Application Passwords" plugin.
  *
- * @requires authentication to be enabled via .htaccess
+ * @notice Requires authentication to be enabled via .htaccess
  *
  * # Locally we use `mod_fcgid` on cPanel we use `mod_proxy_fcgi`.
  * <IfModule mod_fcgid.c>

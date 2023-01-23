@@ -1,5 +1,4 @@
-import {clearNonce, setRootURL, wpapi} from '../../src';
-import {restoreRootURL} from '../../src/util/root-url';
+import {clearNonce, restoreRootURL, setRootURL, wpapi} from '../../src';
 
 describe( 'Testing wpapi', () => {
 	const wp = wpapi();
@@ -20,7 +19,7 @@ describe( 'Testing wpapi', () => {
 		expect( single.title ).toEqual( posts[ 0 ].title );
 	} );
 
-	it( 'Test for  pagination', async() => {
+	it( 'Test for pagination', async () => {
 		setRootURL( 'https://onpointplugins.com/wp-json' );
 		const posts = await wp.posts().get();
 		expect( posts.length ).toBe( 10 );

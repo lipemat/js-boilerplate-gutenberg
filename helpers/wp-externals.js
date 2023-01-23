@@ -30,6 +30,7 @@ module.exports = [
 	'edit-post',
 	'editor',
 	'element',
+	'escape-html',
 	'hooks',
 	'html-entities',
 	'i18n',
