@@ -50,7 +50,10 @@ export interface Routes {
 	posts: <T = Post, Q = PostsQuery, U = PostUpdate, C = PostCreate, E = Post<'edit'>>() => RequestMethods<T, Q, U, C, E>;
 	tags: <T = any, Q = any, U = any, C = U>() => Omit<RequestMethods<T, Q, U, C>, 'trash'>;
 	taxonomies: <T = Taxonomy, Q = TaxonomiesQuery>() => Pick<RequestMethods<T, Q, never>, 'get' | 'getById'>;
-	types: <T = Type, Q = TypesQuery>() => Pick<RequestMethods<T, Q, never>, 'get' | 'getById'>;
+	types: <T = Type, Q = TypesQuery>() => {
+		get: ( options?: Q ) => Promise<{ [ type: string ]: T }>;
+		getById: ( postType: string ) => Promise<T>;
+	};
 	users: <T = User, Q = UsersQuery, U = UserUpdate, C = UserCreate, E = User<'edit'>>() => Omit<RequestMethods<T, Q, U, C, E>, 'delete' | 'trash'> & {
 		delete: ( id: number, reassign?: number ) => Promise<{ deleted: boolean, previous: T }>;
 	};
@@ -74,12 +77,12 @@ export interface Routes {
  */
 export interface RequestMethods<T, Q, U, C = U, E = T> {
 	create: ( data: C ) => Promise<E>;
-	delete: ( id: number ) => Promise<{deleted: boolean, previous: E}>;
+	delete: ( id: number ) => Promise<{ deleted: boolean, previous: E }>;
 	get: ( options?: Q ) => Promise<T[]>;
-	getById: ( id: number, data?: Global<T> & {password?: string} ) => Promise<T>;
+	getById: ( id: number, data?: Global<T> & { password?: string } ) => Promise<T>;
 	getWithPagination: ( options?: Q ) => Promise<Pagination<T>>;
 	trash: ( id: number ) => Promise<E>;
-	update: ( data: U & {id: number} ) => Promise<E>;
+	update: ( data: U & { id: number } ) => Promise<E>;
 }
 
 
@@ -205,7 +208,6 @@ export default function wpapi<T extends CustomRoutes<T> = {}>( customRoutes?: T 
 		'posts',
 		'tags',
 		'taxonomies',
-		'types',
 		'search',
 	];
 
@@ -242,6 +244,14 @@ export default function wpapi<T extends CustomRoutes<T> = {}>( customRoutes?: T 
 		return {
 			get: () => doRequest( '/wp/v2/settings', 'GET' ),
 			update: data => doRequest( '/wp/v2/settings', 'POST', data ),
+		};
+	};
+
+	// Types have limited endpoints.
+	routes.types = () => {
+		return {
+			get: () => doRequest( '/wp/v2/types', 'GET' ),
+			getById: postType => doRequest( `'/wp/v2/types'/${postType}`, 'GET' ),
 		};
 	};
 
