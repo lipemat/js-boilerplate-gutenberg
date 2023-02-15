@@ -156,16 +156,16 @@ export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMet
  * @param  parse         - To parse the json result, or return raw Request
  */
 export async function doRequest<T, D = {}>( path: string, requestMethod: Method, data?: D, parse: boolean = true ): Promise<T> {
-	if ( 'undefined' === typeof data || 'GET' === requestMethod ) {
+	if ( 'undefined' === typeof data || 'GET' === requestMethod || 'OPTIONS' === requestMethod ) {
 		return apiFetch<T, D>( {
-			method: requestMethod,
+			method: requestMethod as Exclude<Method, 'POST' | 'PUT' | 'PATCH' | 'DELETE'>,
 			parse,
 			path: addQueryArgs( path, data ),
 		} );
 	}
 	return apiFetch<T, D>( {
 		data,
-		method: requestMethod,
+		method: requestMethod as Exclude<Method, 'GET' | 'OPTIONS'>,
 		parse,
 		path,
 	} );
