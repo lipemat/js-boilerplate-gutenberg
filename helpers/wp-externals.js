@@ -72,11 +72,8 @@ module.exports = [
 	{
 		lodash: 'lodash',
 		wp: 'wp',
-		/**
-		 * We use the core version of React DOM on production builds.
-		 * For dev builds we use the @hot-loader/react-dom version.
-		 */
 		react: 'React',
+		'react-dom': 'ReactDOM',
 		/**
 		 * To allow React Fast Refresh (HMR) to work in WP 6.0+ we must
 		 * externalize fast refresh or dequeue `wp-react-refresh-runtime`.
