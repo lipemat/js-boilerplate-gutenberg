@@ -88,7 +88,7 @@ export const defaultFetchHandler = nextOptions => {
 		headers[ 'Content-Type' ] = 'application/json';
 	}
 
-	const responsePromise = window.fetch( url || path, {
+	const responsePromise = window.fetch( url || path || '', {
 		...remainingOptions,
 		body,
 		headers,
