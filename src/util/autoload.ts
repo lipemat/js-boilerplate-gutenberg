@@ -28,9 +28,10 @@
  * @link https://www.npmjs.com/package/@blockhandbook/block-hot-loader
  *
  */
-import {BlockSettings, registerBlockType, unregisterBlockType} from '@wordpress/blocks';
+import {BlockSettings, CreateBlock, registerBlockType, unregisterBlockType} from '@wordpress/blocks';
 import {PluginSettings, registerPlugin, unregisterPlugin} from '@wordpress/plugins';
 import {dispatch, select} from '@wordpress/data';
+
 
 /**
  * Block or plugin modules must export
@@ -167,6 +168,8 @@ export const autoload = <T>( {
 
 // Maintain the selected block ID across HMR updates.
 let selectedBlockId: string | null = null;
+// Generate list of all blocks, which much be touched.
+let refreshClientIds: string[] = [];
 
 /**
  * Track the currently selected block and clear its selection.
@@ -176,7 +179,19 @@ let selectedBlockId: string | null = null;
  */
 const storeSelectedBlock = () => {
 	selectedBlockId = select( 'core/block-editor' ).getSelectedBlockClientId();
-	dispatch( 'core/block-editor' ).clearSelectedBlock();
+};
+
+/**
+ * Recursively find all blocks, which match the changed block names, so
+ * we can touch each one.
+ *
+ */
+const retrieveBlocksToRefresh = ( changedNames: string[] = [], block: CreateBlock ) => {
+	const {name, clientId, innerBlocks} = block;
+	if ( changedNames.includes( name ) ) {
+		refreshClientIds.push( clientId );
+	}
+	innerBlocks.forEach( childBlock => retrieveBlocksToRefresh( changedNames, childBlock ) );
 };
 
 /**
@@ -188,18 +203,20 @@ const storeSelectedBlock = () => {
  *
  * @param  changedNames
  */
-const refreshAllBlocks = ( changedNames: string[] = [] ) => {
+const refreshAllBlocks = async ( changedNames: string[] = [] ) => {
+	await dispatch( 'core/block-editor' ).clearSelectedBlock();
 	// Refresh all blocks by iteratively selecting each one.
-	select( 'core/block-editor' ).getBlocks().forEach( ( {name, clientId} ) => {
-		if ( changedNames.includes( name ) ) {
-			dispatch( 'core/block-editor' ).selectBlock( clientId );
-		}
-	} );
+	select( 'core/block-editor' ).getBlocks().forEach( block => retrieveBlocksToRefresh( changedNames, block ) );
+	for ( let i = 0; i < refreshClientIds.length; i++ ) {
+		await dispatch( 'core/block-editor' ).selectBlock( refreshClientIds[ i ] );
+	}
+
 	// Reselect whatever was selected in the beginning.
 	if ( selectedBlockId ) {
-		dispatch( 'core/block-editor' ).selectBlock( selectedBlockId );
+		await dispatch( 'core/block-editor' ).selectBlock( selectedBlockId );
 	} else {
-		dispatch( 'core/block-editor' ).clearSelectedBlock();
+		await dispatch( 'core/block-editor' ).clearSelectedBlock();
 	}
+	refreshClientIds = [];
 	selectedBlockId = null;
 };
