@@ -2107,7 +2107,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@lipemat/js-boilerplate-gutenberg@workspace:."
   dependencies:
-    "@lipemat/js-boilerplate": ^10.0.0-beta.4
+    "@lipemat/js-boilerplate": ^10.0.0
     "@types/lipemat__js-boilerplate": "lipemat/types-js-boilerplate#semver:^2"
     "@types/webpack-env": ^1.18.0
     "@wordpress/api-fetch": ">=3.20.0 <7.0.0"
@@ -2124,9 +2124,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@lipemat/js-boilerplate@npm:^10.0.0-beta.4":
-  version: 10.0.0-beta.4
-  resolution: "@lipemat/js-boilerplate@npm:10.0.0-beta.4"
+"@lipemat/js-boilerplate@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "@lipemat/js-boilerplate@npm:10.0.0"
   dependencies:
     "@babel/core": ^7.4.3
     "@babel/plugin-syntax-dynamic-import": ^7.8.3
@@ -2137,8 +2137,6 @@ __metadata:
     "@lipemat/css-mqpacker": ^9.0.0
     "@lipemat/eslint-config": ^2.0.1
     "@pmmmwh/react-refresh-webpack-plugin": ^0.5.10
-    "@types/lipemat__js-boilerplate": "github:lipemat/types-js-boilerplate#semver:^2"
-    "@types/webpack-env": ^1.18.0
     "@wordpress/browserslist-config": ^4.1.0
     are-you-es5: ^2.1.1
     babel-jest: ^29.0.0
@@ -2178,7 +2176,7 @@ __metadata:
     webpack-subresource-integrity: ^5.1.0
   bin:
     lipemat-js-boilerplate: bin/lipemat-js-boilerplate.js
-  checksum: 5fd6b581c607c993dad737fd05add633b1e3f729b20f55ddc4966d57826ab80ce694f7b147a5d7053750708c4af1966ba1d81664e1111d791048baf7cc005cbe
+  checksum: 0599d5be58fca14d52e769d5c9eeddcbd50a3716ecceb8e21ee285b4d4bc62212477792ab914c12626dd931b728654b9c4ab87d5d3951cbd0b331d60bc4cf530
   languageName: node
   linkType: hard
 
@@ -2697,7 +2695,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lipemat__js-boilerplate@github:lipemat/types-js-boilerplate#semver:^2, @types/lipemat__js-boilerplate@lipemat/types-js-boilerplate#semver:^2":
+"@types/lipemat__js-boilerplate@lipemat/types-js-boilerplate#semver:^2":
   version: 2.0.1
   resolution: "@types/lipemat__js-boilerplate@https://github.com/lipemat/types-js-boilerplate.git#commit=4daa283d02452860afb71af27f8d16e55b87cb34"
   dependencies:
@@ -13623,11 +13621,11 @@ __metadata:
 
 "typescript@patch:typescript@^4#~builtin<compat/typescript>, typescript@patch:typescript@^4.2.4#~builtin<compat/typescript>":
   version: 4.9.5
-  resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"
+  resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=289587"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: ab417a2f398380c90a6cf5a5f74badd17866adf57f1165617d6a551f059c3ba0a3e4da0d147b3ac5681db9ac76a303c5876394b13b3de75fdd5b1eaa06181c9d
+  checksum: 1f8f3b6aaea19f0f67cba79057674ba580438a7db55057eb89cc06950483c5d632115c14077f6663ea76fd09fce3c190e6414bb98582ec80aa5a4eaf345d5b68
   languageName: node
   linkType: hard
 
