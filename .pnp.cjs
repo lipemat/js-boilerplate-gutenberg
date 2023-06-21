@@ -4218,6 +4218,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "virtual:17fba27df410d4d533e016d63d7b34bbe4d956dd2935560b3e619b1a8264551c2ed8a635e9ceb9088179fc1ce0dd677ff618799cb084bf389bcd2bdf10364b3f#npm:5.3.1"\
       ],\
       [\
+        "rollup-plugin-typescript2",\
+        "virtual:17fba27df410d4d533e016d63d7b34bbe4d956dd2935560b3e619b1a8264551c2ed8a635e9ceb9088179fc1ce0dd677ff618799cb084bf389bcd2bdf10364b3f#npm:0.25.3"\
+      ],\
+      [\
         "rollup-pluginutils",\
         "npm:2.8.2"\
       ],\
@@ -17780,7 +17784,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["sade", "npm:1.8.1"],\
             ["tiny-glob", "npm:0.2.9"],\
             ["tslib", "npm:1.14.1"],\
-            ["typescript", "patch:typescript@npm%3A3.9.10#~builtin<compat/typescript>::version=3.9.10&hash=3bd3d3"]\
+            ["typescript", "patch:typescript@npm%3A5.1.3#~builtin<compat/typescript>::version=5.1.3&hash=5da071"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -21190,7 +21194,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["rollup", "npm:1.32.1"],\
             ["rollup-pluginutils", "npm:2.8.1"],\
             ["tslib", "npm:1.10.0"],\
-            ["typescript", "patch:typescript@npm%3A3.9.10#~builtin<compat/typescript>::version=3.9.10&hash=3bd3d3"]\
+            ["typescript", "patch:typescript@npm%3A5.1.3#~builtin<compat/typescript>::version=5.1.3&hash=5da071"]\
           ],\
           "packagePeers": [\
             "@types/rollup",\
@@ -22660,13 +22664,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["typescript", [\
-        ["patch:typescript@npm%3A3.9.10#~builtin<compat/typescript>::version=3.9.10&hash=3bd3d3", {\
-          "packageLocation": "./.yarn/cache/typescript-patch-7ad1c7f5d0-dc7141ab55.zip/node_modules/typescript/",\
-          "packageDependencies": [\
-            ["typescript", "patch:typescript@npm%3A3.9.10#~builtin<compat/typescript>::version=3.9.10&hash=3bd3d3"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["patch:typescript@npm%3A5.1.3#~builtin<compat/typescript>::version=5.1.3&hash=5da071", {\
           "packageLocation": "./.yarn/cache/typescript-patch-8d03db133e-6f0a9dca6b.zip/node_modules/typescript/",\
           "packageDependencies": [\

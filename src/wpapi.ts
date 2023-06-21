@@ -163,7 +163,7 @@ export async function doRequest<T, D = {}>( path: string, requestMethod: Method,
 		return apiFetch<T, D>( {
 			method: requestMethod as Exclude<Method, 'POST' | 'PUT' | 'PATCH' | 'DELETE'>,
 			parse,
-			path: addQueryArgs( path, data ),
+			path: addQueryArgs( path, data ?? {} ),
 		} );
 	}
 	return apiFetch<T, D>( {

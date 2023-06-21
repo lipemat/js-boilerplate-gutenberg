@@ -4,19 +4,15 @@ import {PostEditing} from '@wordpress/edit-post';
 import {useCallback} from 'react';
 
 /**
- * @todo Switch to js-boilerplate-gutenberg version once we are on V2.
- */
-
-/**
  * Support passing a Type for the meta shape.
  */
-interface PostEdit<T> extends PostEditing {
+interface PostEdit<T extends {}> extends PostEditing {
 	meta: T;
 }
 
 // Work with entire meta object.
 export function usePostMeta<T extends PostMeta, K extends keyof T = keyof T>(): [ T, ( key: K, value: T[K] ) => void, T ];
-// Work with a single key..
+// Work with a single key.
 export function usePostMeta<T extends PostMeta, K extends keyof T = keyof T>( metaKey: K ): [ T[K], ( value: T[K] ) => void, T[K] ];
 
 /**
@@ -72,5 +68,4 @@ export function usePostMeta<T extends PostMeta, K extends keyof T = keyof T>( me
 
 	// Working with entire meta object.
 	return [ current, updateAll, previous ];
-
 }

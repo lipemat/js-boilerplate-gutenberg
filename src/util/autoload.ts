@@ -162,7 +162,7 @@ export const autoload = <T>( {
 	const context = loadModules();
 
 	if ( pluginModule.hot && context?.id ) {
-		pluginModule.hot.accept( context.id, loadModules );
+		pluginModule.hot.accept( context.id.toString(), loadModules );
 	}
 };
 

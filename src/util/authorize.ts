@@ -29,7 +29,7 @@ export interface AuthenticationFailure {
 	data: any
 }
 
-export interface AuthorizationParams {
+export type AuthorizationParams = {
 	/* eslint-disable camelcase */
 	/**
 	 * Plain text application identifier.
@@ -110,7 +110,7 @@ export async function getAuthorizationUrl( data: AuthorizationParams ): Promise<
 				data: null,
 			};
 		}
-		return addQueryArgs( response.authentication[ 'application-passwords' ].endpoints.authorization, data );
+		return addQueryArgs<AuthorizationParams>( response.authentication[ 'application-passwords' ].endpoints.authorization, data );
 	} catch ( error ) {
 		return error;
 	}
