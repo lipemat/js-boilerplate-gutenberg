@@ -38,6 +38,7 @@
     "@wordpress/blocks": "^8.0.2",
     "@wordpress/data": "^4.27.1",
     "@wordpress/plugins": "^2.25.2",
+    "@wordpress/rich-text": "^6.14.0",
     "eslint": "^8",
     "jest": "^29",
     "microbundle": "^0.12.3",
@@ -48,11 +49,11 @@
     "@lipemat/js-boilerplate": ">=10.1.0"
   },
   "scripts": {
-    "build": "microbundle --external @wordpress/api-fetch,@wordpress/blocks,@wordpress/data,@wordpress/edit-post,@wordpress/i18n,@wordpress/plugins,@wordpress/url,react,ReactDOM --globals @wordpress/api-fetch=wp.apiFetch,@wordpress/blocks=wp.blocks,@wordpress/data=wp.data,@wordpress/edit-post=wp.editPost,@wordpress/i18n=wp.i18n,@wordpress/plugins=wp.plugins,@wordpress/url=wp.url,react=React,react-dom=ReactDOM",
+    "build": "microbundle --external @wordpress/api-fetch,@wordpress/blocks,@wordpress/data,@wordpress/edit-post,@wordpress/i18n,@wordpress/plugins,@wordpress/rich-text,@wordpress/url,react,ReactDOM --globals @wordpress/api-fetch=wp.apiFetch,@wordpress/blocks=wp.blocks,@wordpress/data=wp.data,@wordpress/edit-post=wp.editPost,@wordpress/i18n=wp.i18n,@wordpress/plugins=wp.plugins,@wordpress/rich-text=wp.richText,@wordpress/url=wp.url,react=React,react-dom=ReactDOM",
     "postprepare": "lipemat-js-boilerplate fix-pnp",
     "prepublishOnly": "rm -rf dist/* && yarn run build",
     "test": "lipemat-js-boilerplate test",
-    "watch": "microbundle watch --external @wordpress/api-fetch,@wordpress/blocks,@wordpress/data,@wordpress/edit-post,@wordpress/i18n,@wordpress/plugins,@wordpress/url,react,ReactDOM --globals @wordpress/api-fetch=wp.apiFetch,@wordpress/blocks=wp.blocks,@wordpress/data=wp.data,@wordpress/edit-post=wp.editPost,@wordpress/i18n=wp.i18n,@wordpress/plugins=wp.plugins,@wordpress/url=wp.url,react=React,react-dom=ReactDOM"
+    "watch": "microbundle watch --external @wordpress/api-fetch,@wordpress/blocks,@wordpress/data,@wordpress/edit-post,@wordpress/i18n,@wordpress/rich-text,@wordpress/plugins,@wordpress/url,react,ReactDOM --globals @wordpress/api-fetch=wp.apiFetch,@wordpress/blocks=wp.blocks,@wordpress/data=wp.data,@wordpress/edit-post=wp.editPost,@wordpress/i18n=wp.i18n,@wordpress/plugins=wp.plugins,@wordpress/rich-text=wp.richText,@wordpress/url=wp.url,react=React,react-dom=ReactDOM"
   },
   "resolutions": {
     "typescript": "^5.1.3"
