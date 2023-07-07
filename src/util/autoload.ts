@@ -17,10 +17,12 @@
  *
  * ```js
  * export default () => {
- *	// Load all blocks
- *	autoloadBlocks( () => require.context( './blocks', true, /block\.tsx$/ ), module );
- *  // Load all meta boxes
- *  autoloadPlugins( () => require.context( './meta-boxes', true, /index\.tsx$/ ), module );
+ *	    // Load all blocks.
+ *	    autoloadBlocks( () => require.context( './blocks', true, /block\.tsx$/ ), module );
+ *      // Load all meta boxes.
+ *      autoloadPlugins( () => require.context( './meta-boxes', true, /index\.tsx$/ ), module );
+ *      // Load all formats.
+ *      autoloadFormats( () => require.context( './formats', true, /index\.tsx$/ ), module );
  *	};
  * ```
  *
@@ -31,6 +33,7 @@
 import {BlockSettings, CreateBlock, registerBlockType, unregisterBlockType} from '@wordpress/blocks';
 import {PluginSettings, registerPlugin, unregisterPlugin} from '@wordpress/plugins';
 import {dispatch, select} from '@wordpress/data';
+import {registerFormatType, unregisterFormatType} from '@wordpress/rich-text';
 
 
 /**
@@ -39,7 +42,7 @@ import {dispatch, select} from '@wordpress/data';
  *
  * name = Name of plugin or block (id format).
  * settings = Either a plugin or block's settings.
- * exclude = Exclude plugin or block from the current context.
+ * exclude = Exclude a plugin or block from the current context.
  *
  */
 export type PluginModule<T = BlockSettings<object> | PluginSettings> = {
@@ -87,6 +90,28 @@ export const autoloadPlugins = ( getContext: () => __WebpackModuleApi.RequireCon
 		register: registerPlugin,
 		unregister: unregisterPlugin,
 		type: 'plugin',
+	} );
+};
+
+/**
+ * Autoload formats and add HMR support to them.
+ *
+ * @example autoloadFormats( () => require.context( './formats', true, /index\.tsx$/ ), module );
+ *
+ * @param  getContext
+ * @param  pluginModule
+ */
+export const autoloadFormats = ( getContext: () => __WebpackModuleApi.RequireContext, pluginModule: NodeJS.Module ) => {
+	autoload<PluginSettings>( {
+		afterReload: () => {
+		},
+		beforeReload: () => {
+		},
+		getContext,
+		pluginModule,
+		register: registerFormatType,
+		unregister: unregisterFormatType,
+		type: 'format',
 	} );
 };
 
@@ -142,7 +167,7 @@ export const autoload = <T>( {
 				return;
 			}
 			if ( cache[ `${requiredModule.name}-${type}` ] ) {
-				// Module changed, and prior copy detected: unregister old module.
+				// Module changed, and prior copy detected: unregister the old module.
 				unregister( requiredModule.name );
 			}
 
