@@ -24,8 +24,7 @@ describe( 'Testing authorize', () => {
 			reject_url: 'https://starting-point.loc/fail',
 			success_url: 'https://starting-point.loc/success',
 		} );
-		expect( url ).toBe( 'http://starting-point.loc/wp-admin/authorize-application.php?app_id=92ee9ae3-6f64-4234-9856-f9c863af5916&app_name=Jest%20Unit%20Test&reject_url=https%3A%2F%2Fstarting-point.loc%2Ffail&success_url=https%3A%2F%2Fstarting-point.loc%2Fsuccess' );
-
+		expect( url ).toBe( 'https://starting-point.loc/wp-admin/authorize-application.php?app_id=92ee9ae3-6f64-4234-9856-f9c863af5916&app_name=Jest%20Unit%20Test&reject_url=https%3A%2F%2Fstarting-point.loc%2Ffail&success_url=https%3A%2F%2Fstarting-point.loc%2Fsuccess' );
 	} );
 
 	it( 'Test clear of application password', async() => {
@@ -82,10 +81,9 @@ describe( 'Testing authorize', () => {
 				title: 'From JS Unit',
 				status: 'publish',
 			} );
-		} catch( e ) {
+		} catch ( e ) {
 			error = e;
 		}
 		expect( error.code ).toBe( 'rest_cannot_create' );
-
 	} );
 } );
