@@ -1,7 +1,13 @@
 const wpExternals = require( '../helpers/wp-externals' );
 const iframeLoader = require( '../helpers/iframe-loader' );
+const ReactRefreshFix = require( '../helpers/ReactRefreshFix' );
 
 module.exports = function( config ) {
+	/**
+	 * Prevent errors with React Refresh when React is not used.
+	 */
+	config.plugins.push( new ReactRefreshFix() );
+
 	/**
 	 * Change the loader to our custom loader
 	 * for the `/\.pcss$/` rule.
