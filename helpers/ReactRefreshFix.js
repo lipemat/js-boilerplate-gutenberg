@@ -1,4 +1,5 @@
 const webpack = require( 'webpack' );
+const {getEntries} = require( '@lipemat/js-boilerplate/helpers/entries' );
 
 const {RuntimeModule, Template} = webpack;
 
@@ -39,10 +40,16 @@ if ( 'undefined' === typeof ReactRefreshRuntime ) {
 }
 
 class ReactRefreshFix {
+	/**
+	 * Tap into the compilation to add the ReactRefreshFixRuntime module.
+	 */
 	apply( compiler ) {
 		compiler.hooks.compilation.tap( 'ReactRefreshFix', compilation => {
 			compilation.hooks.additionalChunkRuntimeRequirements.tap( 'ReactRefreshFix', chunk => {
-				compilation.addRuntimeModule( chunk, new ReactRefreshFixRuntime() );
+				// Only add the module to chunks that are entry points.
+				if ( Object.keys( getEntries() ).includes( chunk.name ) ) {
+					compilation.addRuntimeModule( chunk, new ReactRefreshFixRuntime() );
+				}
 			} );
 		} );
 	}
