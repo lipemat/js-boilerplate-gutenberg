@@ -10,7 +10,12 @@ RED="$(tput setaf 1)"
 BLUE="$(tput setaf 6)"
 RESET_COLOR="$(tput setaf 9)"
 
-cd "${DIR}"/.. || exit 1;
+# Replace possible paths to .git hooks based on context.
+DIR=${DIR//\/.git}
+DIR=${DIR//\/modules/}
+DIR=${DIR//\/hooks/}
+
+cd "${DIR}" || exit 1;
 
 function exit_reset_colors() {
     echo "${RESET_COLOR}"
