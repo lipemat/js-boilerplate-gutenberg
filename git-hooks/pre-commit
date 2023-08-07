@@ -8,7 +8,7 @@ WHITE="$(tput setaf 7)"
 YELLOW="$(tput setaf 3)"
 RED="$(tput setaf 1)"
 BLUE="$(tput setaf 6)"
-RESET_COLOR="$(tput setaf 9)"
+RESET_COLOR="$(tput sgr0)"
 
 # Replace possible paths to .git hooks based on context.
 DIR=${DIR//\/.git}
