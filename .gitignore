@@ -21,7 +21,8 @@ Thumbs.db
 
 # Yarn berry files
 install-state.gz
-/node_modules
+build-state.yml
+node_modules
 
 # Dist files
 dist
