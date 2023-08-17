@@ -26,6 +26,7 @@ module.exports = [
 	'block-library',
 	'block-serialization-default-parser',
 	'blocks',
+	'commands',
 	'components',
 	'compose',
 	'core-data',
