@@ -1,9 +1,10 @@
 {
   "extends": "@lipemat/js-boilerplate/config/tsconfig.json",
-  "compilerOptions": {
-    "module": "commonjs"
-  },
   "include": [
     "./src/**/*.ts"
-  ]
+  ],
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "module": "CommonJS"
+  }
 }
