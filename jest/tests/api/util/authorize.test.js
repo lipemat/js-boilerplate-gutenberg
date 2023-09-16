@@ -5,7 +5,7 @@ import {
 	hasApplicationPassword,
 	setRootURL,
 	wpapi,
-} from '../../../src';
+} from '../../../../src';
 
 describe( 'Testing authorize', () => {
 	const wp = wpapi();

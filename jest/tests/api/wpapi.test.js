@@ -1,4 +1,4 @@
-import {clearNonce, restoreRootURL, setRootURL, wpapi} from '../../src';
+import {clearNonce, restoreRootURL, setRootURL, wpapi} from '../../../src';
 
 describe( 'Testing wpapi', () => {
 	const wp = wpapi();

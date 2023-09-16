@@ -1,6 +1,5 @@
-import {clearNonce, hasExternalNonce, restoreNonce, setNonce, setRootURL, wpapi} from '../../../src';
-import {restoreRootURL} from '../../../src/util/root-url';
-import {isNonceCleared} from '../../../src/util/nonce';
+import {clearNonce, hasExternalNonce, restoreNonce, setNonce, setRootURL, wpapi, restoreRootURL} from '../../../../src';
+import {isNonceCleared} from '../../../../src/util/nonce';
 
 describe( 'Testing nonce', () => {
 	const wp = wpapi();
@@ -68,5 +67,4 @@ describe( 'Testing nonce', () => {
 		expect( hasExternalNonce() ).toBeFalsy();
 		expect( isNonceCleared() ).toBeFalsy();
 	} );
-
 } );

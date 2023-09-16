@@ -1,7 +1,10 @@
 {
   "extends": "@lipemat/js-boilerplate/config/tsconfig.json",
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "JS Boilerplate Gutenberg",
   "include": [
-    "./src/**/*.ts"
+    "src/**/*",
+    "jest/**/*"
   ],
   "compilerOptions": {
     "esModuleInterop": true,

@@ -1,4 +1,4 @@
-import {clearNonce, restoreRootURL, setRootURL, wpapi} from '../../../src';
+import {clearNonce, restoreRootURL, setRootURL, wpapi} from '../../../../src';
 import apiFetch from '@wordpress/api-fetch';
 
 describe( 'Testing root URL', () => {
@@ -45,5 +45,4 @@ describe( 'Testing root URL', () => {
 		const posts = await wp.posts().get();
 		expect( posts ).toHaveLength( 10 );
 	} );
-
 } );
