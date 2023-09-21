@@ -16,8 +16,7 @@
   "files": [
     "config/",
     "dist/",
-    "helpers/",
-    "src/"
+    "helpers/"
   ],
   "sideEffects": false,
   "repository": {
