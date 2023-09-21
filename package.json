@@ -11,8 +11,8 @@
   "module": "dist/index.module.js",
   "jsnext:main": "dist/index.module.js",
   "react-native": "dist/index.module.js",
-  "typings": "dist/index.d.ts",
   "source": "src/index.ts",
+  "types": "dist/index.d.ts",
   "files": [
     "config/",
     "dist/",
@@ -51,10 +51,10 @@
     "@lipemat/js-boilerplate": ">=10.4.0"
   },
   "scripts": {
-    "build": "microbundle --external @wordpress/api-fetch,@wordpress/blocks,@wordpress/data,@wordpress/edit-post,@wordpress/i18n,@wordpress/plugins,@wordpress/rich-text,@wordpress/url,react,ReactDOM --globals @wordpress/api-fetch=wp.apiFetch,@wordpress/blocks=wp.blocks,@wordpress/data=wp.data,@wordpress/edit-post=wp.editPost,@wordpress/i18n=wp.i18n,@wordpress/plugins=wp.plugins,@wordpress/rich-text=wp.richText,@wordpress/url=wp.url,react=React,react-dom=ReactDOM",
+    "build": "microbundle --tsconfig ./dev/tsconfig.json --external @wordpress/api-fetch,@wordpress/blocks,@wordpress/data,@wordpress/edit-post,@wordpress/i18n,@wordpress/plugins,@wordpress/rich-text,@wordpress/url,react,ReactDOM --globals @wordpress/api-fetch=wp.apiFetch,@wordpress/blocks=wp.blocks,@wordpress/data=wp.data,@wordpress/edit-post=wp.editPost,@wordpress/i18n=wp.i18n,@wordpress/plugins=wp.plugins,@wordpress/rich-text=wp.richText,@wordpress/url=wp.url,react=React,react-dom=ReactDOM",
     "prepublishOnly": "rm -rf dist/* && yarn run build",
     "test": "lipemat-js-boilerplate test",
-    "watch": "microbundle watch --external @wordpress/api-fetch,@wordpress/blocks,@wordpress/data,@wordpress/edit-post,@wordpress/i18n,@wordpress/rich-text,@wordpress/plugins,@wordpress/url,react,ReactDOM --globals @wordpress/api-fetch=wp.apiFetch,@wordpress/blocks=wp.blocks,@wordpress/data=wp.data,@wordpress/edit-post=wp.editPost,@wordpress/i18n=wp.i18n,@wordpress/plugins=wp.plugins,@wordpress/rich-text=wp.richText,@wordpress/url=wp.url,react=React,react-dom=ReactDOM"
+    "watch": "microbundle --tsconfig ./dev/tsconfig.json watch --external @wordpress/api-fetch,@wordpress/blocks,@wordpress/data,@wordpress/edit-post,@wordpress/i18n,@wordpress/rich-text,@wordpress/plugins,@wordpress/url,react,ReactDOM --globals @wordpress/api-fetch=wp.apiFetch,@wordpress/blocks=wp.blocks,@wordpress/data=wp.data,@wordpress/edit-post=wp.editPost,@wordpress/i18n=wp.i18n,@wordpress/plugins=wp.plugins,@wordpress/rich-text=wp.richText,@wordpress/url=wp.url,react=React,react-dom=ReactDOM"
   },
   "resolutions": {
     "typescript": "^5.1.6"
