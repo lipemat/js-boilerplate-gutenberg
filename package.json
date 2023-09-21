@@ -1,6 +1,6 @@
 {
   "name": "@lipemat/js-boilerplate-gutenberg",
-  "version": "3.2.1",
+  "version": "3.3.0",
   "description": "Gutenberg extension for @lipemat/js-boilerplate.",
   "engines": {
     "node": ">=16.14.2"
