@@ -38,6 +38,9 @@ const iframeLoader = {
 			function cloneToGutenbergIframe() {
 				const gutenbergEditor = document.querySelector( 'iframe[name="editor-canvas"]' );
 				if ( null !== gutenbergEditor && gutenbergEditor.contentDocument.head ) {
+					if ( gutenbergEditor.contentDocument.head.innerText === '' ) {
+						return;
+					}
 					// Store the cloned style tag on property for reuse.
 					el.iframeCloned = el.cloneNode( true );
 					gutenbergEditor.contentDocument.head.appendChild( el.iframeCloned );
@@ -58,9 +61,9 @@ const iframeLoader = {
 								// Use `no-iframe-available` to prevent checking for the iframe on every change.
 								el.iframeCloned = 'no-iframe-available';
 							}
-						}, 5000 );
+						}, 7000 );
 					}
-				}, 2000 );
+				}, 3000 );
 
 				// Transform the iframe's <style> tag.
 			} else if ( el.iframeCloned && 'no-iframe-available' !== el.iframeCloned ) {
