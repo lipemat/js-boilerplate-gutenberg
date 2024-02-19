@@ -37,7 +37,7 @@ const iframeLoader = {
 
 			function cloneToGutenbergIframe() {
 				const gutenbergEditor = document.querySelector( 'iframe[name="editor-canvas"]' );
-				if ( gutenbergEditor ) {
+				if ( null !== gutenbergEditor && gutenbergEditor.contentDocument.head ) {
 					// Store the cloned style tag on property for reuse.
 					el.iframeCloned = el.cloneNode( true );
 					gutenbergEditor.contentDocument.head.appendChild( el.iframeCloned );
