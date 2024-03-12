@@ -10,7 +10,7 @@ interface PostEdit<T extends {}> extends PostEditing {
 	meta: T;
 }
 
-// Work with entire meta object.
+// Work with the entire metadata object.
 export function usePostMeta<T extends PostMeta, K extends keyof T = keyof T>(): [ T, ( key: K, value: T[K] ) => void, T ];
 // Work with a single key.
 export function usePostMeta<T extends PostMeta, K extends keyof T = keyof T>( metaKey: K ): [ T[K], ( value: T[K] ) => void, T[K] ];
@@ -30,7 +30,7 @@ export function usePostMeta<T extends PostMeta, K extends keyof T = keyof T>( me
  * @link https://developer.wordpress.org/block-editor/how-to-guides/plugin-sidebar-0/plugin-sidebar-5-update-meta/
  *
  * @param {string} [metaKey] - Pass a meta key to work with an individual meta key.
- *                           By default will work with entire meta object.
+ *                           By default, will work with the entire metadata object.
  */
 export function usePostMeta<T extends PostMeta, K extends keyof T = keyof T>( metaKey?: K ) {
 	const {editPost} = useDispatch( 'core/editor' );
@@ -38,22 +38,23 @@ export function usePostMeta<T extends PostMeta, K extends keyof T = keyof T>( me
 		previous: select( 'core/editor' ).getCurrentPostAttribute<PostEdit<T>, 'meta'>( 'meta' ),
 		current: select( 'core/editor' ).getEditedPostAttribute<PostEdit<T>, 'meta'>( 'meta' ),
 	} ) );
+	const single = 'string' === typeof metaKey && '' !== metaKey;
 
-	const current = metaKey ? meta.current[ metaKey ] : meta.current;
-	const previous = metaKey ? meta.previous[ metaKey ] : meta.previous;
+	const current = single ? meta.current[ metaKey ] : meta.current;
+	const previous = single ? meta.previous[ metaKey ] : meta.previous;
 
 	/**
 	 * Update a single value.
 	 */
 	const updateSingle = useCallback( ( value: T[K] ) => {
-		if ( metaKey ) {
+		if ( single ) {
 			editPost( {
 				meta: {
 					[ metaKey ]: value,
 				},
 			} );
 		}
-	}, [ editPost, metaKey ] );
+	}, [ editPost, metaKey, single ] );
 
 	/**
 	 * Update the entire object.
@@ -66,11 +67,11 @@ export function usePostMeta<T extends PostMeta, K extends keyof T = keyof T>( me
 		} );
 	}, [ editPost ] );
 
-	// Working with single meta value.
-	if ( metaKey ) {
+	// Working with a single meta value.
+	if ( single ) {
 		return [ current, updateSingle, previous ];
 	}
 
-	// Working with entire meta object.
+	// Working with the entire metadata object.
 	return [ current, updateAll, previous ];
 }
