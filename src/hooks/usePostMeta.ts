@@ -22,6 +22,11 @@ export function usePostMeta<T extends PostMeta, K extends keyof T = keyof T>( me
  * Will return the current meta state as well as the original meta
  * state before any changes were made.
  *
+ * @notice The "Custom Fields" panel will override changes made using this hook unless the
+ *         meta field is filtered as `is_protected_meta`.
+ *         @see https://github.com/WordPress/gutenberg/issues/23078
+ *
+ *
  * @link https://developer.wordpress.org/block-editor/how-to-guides/plugin-sidebar-0/plugin-sidebar-5-update-meta/
  *
  * @param {string} [metaKey] - Pass a meta key to work with an individual meta key.
