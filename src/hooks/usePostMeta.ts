@@ -24,6 +24,7 @@ export function usePostMeta<T extends PostMeta, K extends keyof T = keyof T>( me
  *
  * @notice The "Custom Fields" panel will override changes made using this hook unless the
  *         meta field is filtered as `is_protected_meta`.
+ *         Must also use `'auth_callback' => '__return_true'` when registering the meta field or only super admins will be able to edit it.
  *         @see https://github.com/WordPress/gutenberg/issues/23078
  *
  *
