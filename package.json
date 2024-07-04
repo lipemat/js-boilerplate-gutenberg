@@ -3,7 +3,7 @@
   "version": "3.3.3",
   "description": "Gutenberg extension for @lipemat/js-boilerplate.",
   "engines": {
-    "node": ">=16.14.2"
+    "node": ">=20.11.0"
   },
   "license": "MIT",
   "main": "dist/index.js",
