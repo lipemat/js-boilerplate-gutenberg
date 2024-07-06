@@ -1,7 +1,8 @@
 name: Publish
 env:
-  VERSION: 3.0.1
-  NODE_VERSION: '16.14.2'
+  VERSION: 3.3.0
+  NODE_VERSION: '20.11.0'
+  TZ: 'America/Chicago'
 
 on:
   push:
@@ -11,15 +12,15 @@ on:
 
 jobs:
   publish:
-    name: Publish on NPM.js
+    name: Publish on npm.js
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{env.NODE_VERSION}}
-          registry-url: 'https://registry.npmjs.org'
-      - run: yarn install
-      - run: npm publish --access public
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup
+
+      - name: Publish to NPM
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

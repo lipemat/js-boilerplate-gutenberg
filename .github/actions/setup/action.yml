@@ -1,0 +1,30 @@
+###################################################
+# Local action to set up the action's environment.
+#
+# Separate action from the main `deploy.yml` configuration
+# to allow for separation in the Action log and reuse
+# or partial workflow.
+#
+# @version 1.4.0
+#
+###################################################
+
+name: Setup Deploy Environment
+description: Setup files and server dependencies.
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: ${{env.NODE_VERSION}}
+        registry-url: 'https://registry.npmjs.org'
+    - name: Install yarn
+      shell: bash
+      run: corepack enable
+    - name: Install ts-node
+      shell: bash
+      run: npm install -g ts-node
+    - name: Install node modules
+      shell: bash
+      run: yarn install
