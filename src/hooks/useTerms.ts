@@ -1,5 +1,5 @@
 import {useDispatch, useSelect} from '@wordpress/data';
-import {useCallback} from 'react';
+import {useCallback} from './useCallback';
 
 type Taxonomies = 'category' | 'post_tag' | 'nav_menu';
 

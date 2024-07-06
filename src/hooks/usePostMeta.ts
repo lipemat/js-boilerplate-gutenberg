@@ -1,7 +1,7 @@
 import {useDispatch, useSelect} from '@wordpress/data';
 import {PostMeta} from '@wordpress/api/posts';
 import {PostEditing} from '@wordpress/edit-post';
-import {useCallback} from 'react';
+import {useCallback} from './useCallback';
 
 /**
  * Support passing a Type for the meta shape.
