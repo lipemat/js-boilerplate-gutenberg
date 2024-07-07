@@ -108,7 +108,7 @@ export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMet
 		 *
 		 * @param  id
 		 */
-		delete: id => doRequest<{ deleted: boolean, previous: E }, { force: true }>( path += '/' + id, 'DELETE', {force: true} ),
+		delete: id => doRequest<{ deleted: boolean, previous: E }, { force: true }>( path + '/' + id, 'DELETE', {force: true} ),
 		/**
 		 * Get items based on query arguments or no query arguments for default response.
 		 *
@@ -124,7 +124,7 @@ export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMet
 		 *                      password?: if the item is password protected (Probably only posts and pages);
 		 *                      }
 		 */
-		getById: ( id, data? ) => doRequest<T, { password?: string, context?: Context }>( path += '/' + id, 'GET', data ),
+		getById: ( id, data? ) => doRequest<T, { password?: string, context?: Context }>( path + '/' + id, 'GET', data ),
 		/**
 		 * Same as `get` but returns the pagination information as well as
 		 * the items.
@@ -139,13 +139,13 @@ export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMet
 		 *
 		 * @param  id
 		 */
-		trash: id => doRequest<E>( path += '/' + id, 'DELETE' ),
+		trash: id => doRequest<E>( path + '/' + id, 'DELETE' ),
 		/**
 		 * Update an item.
 		 *
 		 * @param  data
 		 */
-		update: data => doRequest<E, U>( path += '/' + data.id, 'PATCH', data ),
+		update: data => doRequest<E, U>( path + '/' + data.id, 'PATCH', data ),
 	};
 }
 
