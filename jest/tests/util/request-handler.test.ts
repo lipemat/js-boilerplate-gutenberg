@@ -28,6 +28,33 @@ describe( 'request-handler.ts', () => {
 	} );
 
 
+	it( 'Included data in a GET request', async () => {
+		await wpapi().posts().get( {per_page: 10} );
+		expect( fetch ).toHaveBeenCalledWith( 'https://example.com/wp/v2/posts?per_page=10&_locale=user', {
+			body: undefined,
+			credentials: 'include',
+			headers: {
+				Accept: 'application/json, */*;q=0.1',
+			},
+			method: 'GET',
+		} );
+	} );
+
+
+	it( 'Included data in a POST request', async () => {
+		await wpapi().posts().create( {title: 'Hello, world!'} );
+		expect( fetch ).toHaveBeenCalledWith( 'https://example.com/wp/v2/posts?_locale=user', {
+			body: '{"title":"Hello, world!"}',
+			credentials: 'include',
+			headers: {
+				Accept: 'application/json, */*;q=0.1',
+				'Content-Type': 'application/json',
+			},
+			method: 'POST',
+		} );
+	} );
+
+
 	it( 'Uses a root URL', async () => {
 		setRootURL( 'https://example.com' );
 		await wpapi().posts().get();
