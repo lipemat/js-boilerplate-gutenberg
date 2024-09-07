@@ -1,21 +1,40 @@
-import {addMiddleware, removeMiddleware} from './middleware';
+import {getFullUrl} from './root-url';
+import {checkStatus, fetchHandler} from './request-handler';
+import type {FetchOptions} from '@wordpress/api-fetch';
+import type {ErrorResponse} from './parse-response';
+
+let currentNonce: string = '';
+let initialNonce: string = '';
+let refreshingNonce: boolean = false;
 
 
-let clearNonceMiddleware: number | undefined;
-let setNonceMiddleware: number | undefined;
+/**
+ * Set the initial nonce to be used as the default for any
+ * requests before setting a new nonce or clearing it.
+ */
+export function setInitialNonce( nonce: string | undefined ): void {
+	if ( '' === initialNonce && undefined !== nonce ) {
+		currentNonce = nonce;
+		initialNonce = nonce;
+	}
+}
+
+export function getNonce(): string {
+	return currentNonce;
+}
 
 /**
  * Do we have a nonce manually set?
  */
 export function hasExternalNonce(): boolean {
-	return 'undefined' !== typeof setNonceMiddleware;
+	return currentNonce !== '' && ( initialNonce !== '' && currentNonce !== initialNonce );
 }
 
 /**
- * Are all nonces currently cleared?
+ * Are all nonce currently cleared?
  */
 export function isNonceCleared(): boolean {
-	return 'undefined' !== typeof clearNonceMiddleware;
+	return '' === currentNonce;
 }
 
 /**
@@ -37,8 +56,7 @@ export function isNonceCleared(): boolean {
  * @param {string} nonce
  */
 export function setNonce( nonce: string ): void {
-	restoreNonce();
-	setNonceMiddleware = addMiddleware( createNonceMiddleware( nonce ) );
+	currentNonce = nonce;
 }
 
 /**
@@ -48,24 +66,7 @@ export function setNonce( nonce: string ): void {
  *
  */
 export function clearNonce(): void {
-	if ( 'undefined' !== typeof setNonceMiddleware ) {
-		removeMiddleware( setNonceMiddleware );
-		setNonceMiddleware = undefined;
-	}
-	if ( 'undefined' !== typeof clearNonceMiddleware ) {
-		return;
-	}
-	clearNonceMiddleware = addMiddleware( ( options, next ) => {
-		if ( typeof options.headers !== 'undefined' ) {
-			for ( const headerName in options.headers ) {
-				if ( 'x-wp-nonce' === headerName.toLowerCase() ) {
-					delete options.headers[ headerName ];
-				}
-			}
-		}
-
-		return next( options, next );
-	} );
+	currentNonce = '';
 }
 
 /**
@@ -74,45 +75,39 @@ export function clearNonce(): void {
  *
  */
 export function restoreNonce(): void {
-	if ( 'undefined' !== typeof setNonceMiddleware ) {
-		removeMiddleware( setNonceMiddleware );
-	}
-	if ( 'undefined' !== typeof clearNonceMiddleware ) {
-		removeMiddleware( clearNonceMiddleware );
-	}
-	setNonceMiddleware = undefined;
-	clearNonceMiddleware = undefined;
+	currentNonce = initialNonce;
 }
 
+
 /**
- * The nonce middleware built into api-fetch will not allow
- * changing of the nonce once it is set, so we roll our own,
- * which changes the header each time.
+ * Refresh the nonce if the request failed because the nonce has expired.
  *
- * @see apiFetch.createNonceMiddleware
+ * Similar to the `apiFetch` function in the `@wordpress/api-fetch` package.
  *
- * @param  nonce
+ * See @wordpress/api-fetch.apiFetch
  */
-function createNonceMiddleware( nonce ) {
-	function middleware( options, next ) {
-		const {headers = {}} = options;
-		// Remove any existing.
-		for ( const headerName in headers ) {
-			if ( 'x-wp-nonce' === headerName.toLowerCase() ) {
-				delete headers[ headerName ];
-			}
-		}
-
-		return next( {
-			...options,
-			headers: {
-				...headers,
-				'X-WP-Nonce': middleware.nonce,
-			},
-		} );
+export function refreshNonce<T, D = {}>( error: ErrorResponse, requestOptions: FetchOptions<D> ): Promise<T> {
+	if ( error.code !== 'rest_cookie_invalid_nonce' ) {
+		return Promise.reject( error );
 	}
+	if ( '' !== initialNonce ) {
+		currentNonce = initialNonce;
+	}
+	if ( refreshingNonce ) {
+		return Promise.reject( error );
+	}
+	refreshingNonce = true;
 
-	middleware.nonce = nonce;
-
-	return middleware;
+	return (
+		window.fetch( getFullUrl( {path: 'wp-admin/admin-ajax.php?action=rest-nonce'}, false ) )
+			.then( checkStatus )
+			.then( data => data.text() )
+			.then( text => {
+				setNonce( text );
+				return fetchHandler<T, D>( requestOptions );
+			} )
+			.finally( () => {
+				refreshingNonce = false;
+			} )
+	);
 }
