@@ -1,21 +1,18 @@
 import {wpapi} from '../../../src';
 
 const mockResponse = jest.fn();
-jest.mock( '@wordpress/api-fetch', () => {
+jest.mock( '../../../src/util/request-handler', () => {
 	const fn = function( ...args ) {
 		return mockResponse( ...args );
 	};
-	fn.setFetchHandler = () => {
-	};
 	return {
-		__esModule: true,
-		default: fn,
+		fetchHandler: fn,
 	};
 } );
 
 describe( 'Testing doRequest', () => {
 	it( 'Test for ID doubling up', async () => {
-		const posts = wpapi().posts();
+		const posts = wpapi( 'default' ).posts();
 		await posts.update( {
 			id: 1,
 			title: 'Test',

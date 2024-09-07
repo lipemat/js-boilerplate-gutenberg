@@ -1,14 +1,14 @@
 import {clearNonce, restoreRootURL, setRootURL, wpapi} from '../../../src';
 
 describe( 'Testing wpapi', () => {
-	const wp = wpapi();
+	const wp = wpapi( '' );
 
 	beforeEach( () => {
 		clearNonce();
 		restoreRootURL();
 	} );
 
-	it( 'Test for retrieval', async() => {
+	it( 'Test for retrieval', async () => {
 		setRootURL( 'https://onpointplugins.com/wp-json' );
 		const posts = await wp.posts().get( {
 			per_page: 1,
@@ -34,13 +34,13 @@ describe( 'Testing wpapi', () => {
 		expect( response.items.length ).toBeGreaterThan( 1 );
 	} );
 
-	it( 'Test for fields and embed', async() => {
+	it( 'Test for fields and embed', async () => {
 		setRootURL( 'https://onpointplugins.com/wp-json' );
 		let posts = await wp.posts().get( {
 			per_page: 1,
 			_embed: true,
 		} );
-		expect( posts[ 0 ]._embedded.author.length ).toBe( 1 );
+		expect( posts[ 0 ]._embedded?.author?.length ).toBe( 1 );
 
 		posts = await wp.posts().get( {
 			_fields: [ 'title' ],
