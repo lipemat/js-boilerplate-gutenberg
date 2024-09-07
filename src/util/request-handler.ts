@@ -1,21 +1,14 @@
 import {parseAndThrowError, parseResponseAndNormalizeError} from './parse-response';
 import {__} from '@wordpress/i18n';
-import type {FetchOptions, Middleware} from '@wordpress/api-fetch';
-import {getAllMiddleware} from './middleware';
+import type {FetchOptions} from '@wordpress/api-fetch';
+import {getFullUrl} from './root-url';
+import {getNonce, refreshNonce} from './nonce';
+import {getApplicationPassword} from './authorize';
 
 /**
- * Taken from @wordpress/api-fetch/src/index.js
- * `defaultFetchHandler` is not available via exports, so we add it here.
- *
- * Middleware may only be used once as they are called in order
- * and new ones are added to the beginning of the list.
- * Therefore, we can't change arguments sent to `window.fetch` right before
- * it's sent and WP Core's middleware will always override ours.
- *
- * That is why this file exists to allow changing the arguments right
- * before sending, after WP Core does theirs.
- *
- * Calling `wpapi` automatically switches the request handler to our.
+ * Similar @wordpress/api-fetch/src/index.js
+ * `defaultFetchHandler` expect we don't use middleware nor all the
+ * dependencies required by the original function.
  */
 
 
@@ -23,9 +16,8 @@ import {getAllMiddleware} from './middleware';
  * Default set of header values, which should be sent with every request unless
  * explicitly provided through apiFetch options.
  *
- * @type {Object}
  */
-const DEFAULT_HEADERS = {
+const DEFAULT_HEADERS: HeadersInit = {
 	// The backend uses the Accept header as a condition for considering an
 	// incoming request as a REST request.
 	//
@@ -36,14 +28,12 @@ const DEFAULT_HEADERS = {
 /**
  * Default set of fetch option values, which should be sent with every request
  * unless explicitly provided through apiFetch options.
- *
- * @type {Object}
  */
-const DEFAULT_OPTIONS = {
+const DEFAULT_OPTIONS: RequestInit = {
 	credentials: 'include',
 };
 
-const checkStatus = response => {
+export const checkStatus = ( response: Response ) => {
 	if ( response.status >= 200 && response.status < 300 ) {
 		return response;
 	}
@@ -52,35 +42,22 @@ const checkStatus = response => {
 };
 
 /**
- * @see apiFetch()
- * @param  index
- * @param  steps
+ * Similar to apiFetch but without middle ware.
+ *
  */
-export const createRunStep = ( index: number, steps: Middleware<any>[] ) => ( workingOptions: FetchOptions<any> ): FetchOptions<any> => {
-	if ( 'undefined' === typeof steps[ index ] ) {
-		return workingOptions;
-	}
-	const step = steps[ index ];
-	if ( index === steps.length - 1 ) {
-		return step( workingOptions, options => options );
-	}
+export const fetchHandler = <T, D = {}>( requestOptions: FetchOptions<D> ): Promise<T> => {
+	const options: RequestInit = requestOptions;
+	const {url, path, data, parse = true, ...remainingOptions} = requestOptions;
 
-	const next = createRunStep( index + 1, steps );
-	return step( workingOptions, next );
-};
-
-
-export const defaultFetchHandler = nextOptions => {
-	const options = createRunStep( 0, getAllMiddleware().filter( Boolean ) )( {
-		...DEFAULT_OPTIONS,
-		...nextOptions,
-	} );
-
-	const {url, path, data, parse = true, ...remainingOptions} = options;
-	let {body, headers} = options;
+	let {body} = options;
 
 	// Merge explicitly-provided headers with default values.
-	headers = {...DEFAULT_HEADERS, ...headers};
+	const headers: HeadersInit = {
+		...DEFAULT_HEADERS,
+		...( getNonce() !== '' ? {'X-WP-Nonce': getNonce()} : {} ),
+		...( getApplicationPassword() !== '' ? {Authorization: getApplicationPassword()} : {} ),
+		...options.headers,
+	};
 
 	// The `data` property is a shorthand for sending a JSON body.
 	if ( data ) {
@@ -88,11 +65,15 @@ export const defaultFetchHandler = nextOptions => {
 		headers[ 'Content-Type' ] = 'application/json';
 	}
 
-	const responsePromise = window.fetch( url || path || '', {
+
+	const requestConfig: RequestInit = {
+		...DEFAULT_OPTIONS,
 		...remainingOptions,
 		body,
 		headers,
-	} );
+	};
+
+	const responsePromise = window.fetch( getFullUrl( requestOptions ), requestConfig );
 
 	return (
 		responsePromise
@@ -106,8 +87,10 @@ export const defaultFetchHandler = nextOptions => {
 						.catch( response =>
 							parseAndThrowError( response, parse ),
 						)
-						.then( response =>
-							parseResponseAndNormalizeError( response, parse ),
+						.then( ( response: Response ) =>
+							parseResponseAndNormalizeError<T>( response, parse ),
+						)
+						.catch( response => refreshNonce<T, D>( response, requestOptions )
 						),
 				err => {
 					// Re-throw AbortError for the users to handle it themselves.
