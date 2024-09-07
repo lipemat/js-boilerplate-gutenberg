@@ -1,10 +1,8 @@
 import {clearNonce, restoreRootURL, setInitialNonce, setRootURL, wpapi} from '../../../../src';
-import apiFetch from '@wordpress/api-fetch';
 import {getFullUrl} from '../../../../src/util/root-url';
 
 describe( 'Testing root URL', () => {
 	const wp = wpapi();
-	setInitialNonce( 'default' );
 
 	beforeEach( () => {
 		clearNonce();
@@ -12,8 +10,8 @@ describe( 'Testing root URL', () => {
 	} );
 
 	it( 'Test outside requests', async () => {
-		apiFetch.use( apiFetch.createNonceMiddleware( '365edf6304' ) );
-		apiFetch.use( apiFetch.createRootURLMiddleware( 'http://starting-point.loc/wp-json/' ) );
+		setInitialNonce( '365edf6304' );
+		setRootURL( 'http://starting-point.loc/wp-json/' );
 
 		let error;
 		try {
