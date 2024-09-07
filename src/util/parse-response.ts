@@ -2,10 +2,19 @@ import {__} from '@wordpress/i18n';
 import {hasExternalNonce} from './nonce';
 
 /**
- * Taken from @wordpress/api-fetch/src/utils/response.js and customized as needed.
- * api-fetch utils are not available via wp global, so we add it to
- * our build here.
+ * Similar to @wordpress/api-fetch/src/utils/response.js.
  */
+
+/**
+ * WP REST API error response.
+ *
+ * @see \rest_convert_error_to_response
+ */
+export type ErrorResponse = {
+	code: string;
+	message: string;
+	data?: any;
+};
 
 /**
  * Parses the apiFetch response.
@@ -27,7 +36,7 @@ const parseResponse = ( response, shouldParseResponse = true ) => {
 	return response;
 };
 
-const parseJsonAndNormalizeError = response => {
+const parseJsonAndNormalizeError = async ( response: Response ) => {
 	const invalidJsonError = {
 		code: 'invalid_json',
 		message: __( 'The response is not a valid JSON response.' ),
@@ -37,44 +46,37 @@ const parseJsonAndNormalizeError = response => {
 		throw invalidJsonError;
 	}
 
-	return response.json().catch( () => {
+	try {
+		return await response.json();
+	} catch {
 		throw invalidJsonError;
-	} );
+	}
 };
 
-/**
- * Parses the apiFetch response properly and normalize response errors.
- *
- * @param {Response} response
- * @param {boolean}  shouldParseResponse
- *
- * @return {Promise} Parsed response.
- */
-export const parseResponseAndNormalizeError = (
-	response,
-	shouldParseResponse = true,
-) => {
-	return Promise.resolve(
-		parseResponse( response, shouldParseResponse ),
-	).catch( res => parseAndThrowError( res, shouldParseResponse ) );
+
+export const parseResponseAndNormalizeError = async <T>( response: Response, shouldParseResponse: boolean = true ): Promise<T> => {
+	try {
+		return await Promise.resolve(
+			parseResponse( response, shouldParseResponse ) );
+	} catch ( res ) {
+		return await parseAndThrowError( res, shouldParseResponse );
+	}
 };
 
-export function parseAndThrowError( response, shouldParseResponse = true ) {
+
+export async function parseAndThrowError<T>( response: Response, shouldParseResponse = true ): Promise<T> {
 	if ( ! shouldParseResponse ) {
 		throw response;
 	}
 
-	return parseJsonAndNormalizeError( response ).then( error => {
-		const unknownError = {
-			code: 'unknown_error',
-			message: __( 'An unknown error occurred.' ),
-		};
-
-		// Prevent infinite loops when external requests fail.
-		if ( 'rest_cookie_invalid_nonce' === error.code && hasExternalNonce() ) {
-			error.code = 'external_rest_cookie_invalid_nonce';
-		}
-
-		throw error || unknownError;
-	} );
+	const error = await parseJsonAndNormalizeError( response );
+	const unknownError = {
+		code: 'unknown_error',
+		message: __( 'An unknown error occurred.' ),
+	};
+	// Prevent infinite loops when external requests fail.
+	if ( 'rest_cookie_invalid_nonce' === error.code && hasExternalNonce() ) {
+		error.code = 'external_rest_cookie_invalid_nonce';
+	}
+	throw error || unknownError;
 }
