@@ -7,7 +7,6 @@
     "jest/**/*"
   ],
   "compilerOptions": {
-    "strict": true,
     "esModuleInterop": true,
     "verbatimModuleSyntax": true
   }
