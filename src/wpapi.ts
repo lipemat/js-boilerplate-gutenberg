@@ -192,7 +192,14 @@ export async function doRequestWithPagination<T, D = {}>( path: string, requestM
 	};
 }
 
-export default function wpapi<T extends CustomRoutes<T> = {}>( customRoutes?: T ): Routes & T {
+/**
+ * @param {string}       nonce        - Default nonce to use for all requests.
+ * @param {CustomRoutes} customRoutes - Custom routes to add to the API.
+ */
+export default function wpapi<T extends CustomRoutes<T> = {}>( nonce: string, customRoutes?: T ): Routes & T {
+	if ( '' !== nonce ) {
+		setInitialNonce( nonce );
+	}
 	const routes: any = {};
 
 	const coreRoutes = [
