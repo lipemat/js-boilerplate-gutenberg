@@ -109,7 +109,12 @@ export const defaultFetchHandler = nextOptions => {
 						.then( response =>
 							parseResponseAndNormalizeError( response, parse ),
 						),
-				() => {
+				err => {
+					// Re-throw AbortError for the users to handle it themselves.
+					if ( err && 'AbortError' === err.name ) {
+						throw err;
+					}
+
 					throw {
 						code: 'fetch_error',
 						message: __( 'You are probably offline.' ),
