@@ -1,7 +1,7 @@
 import {clearNonce, restoreRootURL, setRootURL, wpapi} from '../../../src';
 
 describe( 'Testing wpapi', () => {
-	const wp = wpapi();
+	const wp = wpapi( '' );
 
 	beforeEach( () => {
 		clearNonce();
@@ -40,7 +40,7 @@ describe( 'Testing wpapi', () => {
 			per_page: 1,
 			_embed: true,
 		} );
-		expect( posts[ 0 ]._embedded.author.length ).toBe( 1 );
+		expect( posts[ 0 ]._embedded?.author?.length ).toBe( 1 );
 
 		posts = await wp.posts().get( {
 			_fields: [ 'title' ],

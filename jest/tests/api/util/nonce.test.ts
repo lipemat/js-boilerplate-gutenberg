@@ -1,8 +1,8 @@
-import {clearNonce, hasExternalNonce, restoreNonce, setNonce, setRootURL, wpapi, restoreRootURL} from '../../../../src';
+import {clearNonce, hasExternalNonce, restoreNonce, restoreRootURL, setNonce, setRootURL, wpapi} from '../../../../src';
 import {isNonceCleared} from '../../../../src/util/nonce';
 
 describe( 'Testing nonce', () => {
-	const wp = wpapi();
+	const wp = wpapi( 'default' );
 
 	beforeEach( () => {
 		clearNonce();
@@ -17,7 +17,7 @@ describe( 'Testing nonce', () => {
 	 * We test various ordering of calling `setRootURL` and `setNonce`
 	 * to verify under which conditions a nonce is set.
 	 */
-	it( 'Test for nonce ordering', async() => {
+	it( 'Test for nonce ordering', async () => {
 		setRootURL( 'https://onpointplugins.com/wp-json' );
 		let posts = await wp.posts().get();
 		expect( posts ).toHaveLength( 10 );

@@ -1,14 +1,7 @@
-import {
-	clearApplicationPassword,
-	enableApplicationPassword,
-	getAuthorizationUrl,
-	hasApplicationPassword,
-	setRootURL,
-	wpapi,
-} from '../../../../src';
+import {clearApplicationPassword, enableApplicationPassword, getAuthorizationUrl, hasApplicationPassword, setRootURL, wpapi} from '../../../../src';
 
 describe( 'Testing authorize', () => {
-	const wp = wpapi();
+	const wp = wpapi( '' );
 	const PASSWORD = 'J3wb fq94 xlqk YdGI my9E 8egk';
 
 	beforeEach( () => {
@@ -16,7 +9,7 @@ describe( 'Testing authorize', () => {
 		clearApplicationPassword();
 	} );
 
-	it( 'Test application passwords URL', async() => {
+	it( 'Test application passwords URL', async () => {
 		setRootURL( 'http://starting-point.loc/wp-json/' );
 		const url = await getAuthorizationUrl( {
 			app_id: '92ee9ae3-6f64-4234-9856-f9c863af5916',
@@ -24,10 +17,10 @@ describe( 'Testing authorize', () => {
 			reject_url: 'https://starting-point.loc/fail',
 			success_url: 'https://starting-point.loc/success',
 		} );
-		expect( url ).toBe( 'https://starting-point.loc/wp-admin/authorize-application.php?app_id=92ee9ae3-6f64-4234-9856-f9c863af5916&app_name=Jest%20Unit%20Test&reject_url=https%3A%2F%2Fstarting-point.loc%2Ffail&success_url=https%3A%2F%2Fstarting-point.loc%2Fsuccess' );
+		expect( url ).toBe( 'https://starting-point.loc/wp-admin/authorize-application.php?app_id=92ee9ae3-6f64-4234-9856-f9c863af5916&app_name=Jest+Unit+Test&reject_url=https%3A%2F%2Fstarting-point.loc%2Ffail&success_url=https%3A%2F%2Fstarting-point.loc%2Fsuccess' );
 	} );
 
-	it( 'Test clear of application password', async() => {
+	it( 'Test clear of application password', async () => {
 		expect( hasApplicationPassword() ).toBeFalsy();
 		enableApplicationPassword( 'test', PASSWORD );
 		expect( hasApplicationPassword() ).toBeTruthy();
@@ -36,7 +29,7 @@ describe( 'Testing authorize', () => {
 	} );
 
 
-	it( 'Test CRUD', async() => {
+	it( 'Test CRUD', async () => {
 		jest.setTimeout( 10000 );
 		enableApplicationPassword( 'test', PASSWORD );
 
