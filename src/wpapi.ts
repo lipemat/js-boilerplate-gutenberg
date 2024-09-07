@@ -1,20 +1,20 @@
-import {ApplicationPassword, ApplicationPasswordCreate, Context, Global, Method, Post, PostsQuery, Settings, Taxonomy, Type, TypesQuery} from '@wordpress/api';
+import type {ApplicationPassword, ApplicationPasswordCreate, Context, Global, Method, Post, PostsQuery, Settings, Taxonomy, Type, TypesQuery} from '@wordpress/api';
 import apiFetch from '@wordpress/api-fetch';
 import {parseResponseAndNormalizeError} from './util/parse-response';
 import {addQueryArgs} from '@wordpress/url';
-import {CategoriesQuery, Category, CategoryCreate, CategoryUpdate} from '@wordpress/api/categories';
-import {Comment, CommentCreate, CommentsQuery, CommentUpdate} from '@wordpress/api/comments';
-import {PostCreate, PostUpdate} from '@wordpress/api/posts';
-import {Page, PageCreate, PagesQuery, PageUpdate} from '@wordpress/api/pages';
-import {Media, MediaCreate, MediaQuery, MediaUpdate} from '@wordpress/api/media';
+import type {CategoriesQuery, Category, CategoryCreate, CategoryUpdate} from '@wordpress/api/categories';
+import type {Comment, CommentCreate, CommentsQuery, CommentUpdate} from '@wordpress/api/comments';
+import type {PostCreate, PostUpdate} from '@wordpress/api/posts';
+import type {Page, PageCreate, PagesQuery, PageUpdate} from '@wordpress/api/pages';
+import type {Media, MediaCreate, MediaQuery, MediaUpdate} from '@wordpress/api/media';
 import {defaultFetchHandler} from './util/request-handler';
-import {SearchItem, SearchQuery} from '@wordpress/api/search';
-import {Menu, MenuCreate, MenusQuery, MenuUpdate} from '@wordpress/api/menus';
-import {User, UserCreate, UsersQuery, UserUpdate} from '@wordpress/api/users';
-import {MenuItem, MenuItemCreate, MenuItemsQuery, MenuItemUpdate} from '@wordpress/api/menu-items';
-import {MenuLocation} from '@wordpress/api/menu-locations';
-import {EditorBlock, EditorBlockCreate, EditorBlocksQuery, EditorBlockUpdate} from '@wordpress/api/editor-blocks';
-import {TaxonomiesQuery} from '@wordpress/api/taxonomies';
+import type {SearchItem, SearchQuery} from '@wordpress/api/search';
+import type {Menu, MenuCreate, MenusQuery, MenuUpdate} from '@wordpress/api/menus';
+import type {User, UserCreate, UsersQuery, UserUpdate} from '@wordpress/api/users';
+import type {MenuItem, MenuItemCreate, MenuItemsQuery, MenuItemUpdate} from '@wordpress/api/menu-items';
+import type {MenuLocation} from '@wordpress/api/menu-locations';
+import type {EditorBlock, EditorBlockCreate, EditorBlocksQuery, EditorBlockUpdate} from '@wordpress/api/editor-blocks';
+import type {TaxonomiesQuery} from '@wordpress/api/taxonomies';
 
 export type CustomRoutes<K> = {
 	[path in keyof K]: () => Partial<RequestMethods<any, any, any>> | RequestMethods<any, any, any>;

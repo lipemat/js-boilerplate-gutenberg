@@ -1,6 +1,6 @@
 import {useDispatch, useSelect} from '@wordpress/data';
-import {PostMeta} from '@wordpress/api/posts';
-import {PostEditing} from '@wordpress/edit-post';
+import type {PostMeta} from '@wordpress/api/posts';
+import type {PostEditing} from '@wordpress/edit-post';
 import {useCallback} from './useCallback';
 
 /**

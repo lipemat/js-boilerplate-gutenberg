@@ -30,8 +30,8 @@
  * @link https://www.npmjs.com/package/@blockhandbook/block-hot-loader
  *
  */
-import {BlockSettings, CreateBlock, registerBlockType, unregisterBlockType} from '@wordpress/blocks';
-import {PluginSettings, registerPlugin, unregisterPlugin} from '@wordpress/plugins';
+import {type BlockSettings, type CreateBlock, registerBlockType, unregisterBlockType} from '@wordpress/blocks';
+import {type PluginSettings, registerPlugin, unregisterPlugin} from '@wordpress/plugins';
 import {dispatch, select} from '@wordpress/data';
 import {registerFormatType, unregisterFormatType} from '@wordpress/rich-text';
 

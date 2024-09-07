@@ -27,7 +27,7 @@ export function useTerms<T extends string = Taxonomies>( taxonomySlug: T ): [ nu
 			current: select( 'core/editor' ).getEditedPostAttribute<{ [key in T]: number[] }, T>( taxonomy.rest_base as T ),
 			previous: select( 'core/editor' ).getCurrentPostAttribute<{ [key in T]: number[] }, T>( taxonomy.rest_base as T ),
 		};
-	} );
+	}, [ taxonomySlug ] );
 
 	const updateTerms = useCallback( async( terms: number[] ): Promise<undefined> => {
 		if ( ! data.taxonomy ) {

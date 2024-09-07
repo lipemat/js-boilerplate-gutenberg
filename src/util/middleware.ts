@@ -1,4 +1,4 @@
-import {Middleware} from '@wordpress/api-fetch';
+import type {Middleware} from '@wordpress/api-fetch';
 
 const middlewares: Middleware<any>[] = [];
 

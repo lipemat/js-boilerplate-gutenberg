@@ -1,6 +1,6 @@
 import {parseAndThrowError, parseResponseAndNormalizeError} from './parse-response';
 import {__} from '@wordpress/i18n';
-import {FetchOptions, Middleware} from '@wordpress/api-fetch';
+import type {FetchOptions, Middleware} from '@wordpress/api-fetch';
 import {getAllMiddleware} from './middleware';
 
 /**
