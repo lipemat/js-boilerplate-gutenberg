@@ -1,8 +1,9 @@
-import {clearNonce, hasExternalNonce, restoreNonce, restoreRootURL, setNonce, setRootURL, wpapi} from '../../../../src';
+import {clearNonce, hasExternalNonce, restoreNonce, restoreRootURL, setInitialNonce, setNonce, setRootURL, wpapi} from '../../../../src';
 import {isNonceCleared} from '../../../../src/util/nonce';
 
 describe( 'Testing nonce', () => {
-	const wp = wpapi( 'default' );
+	const wp = wpapi();
+	setInitialNonce( 'default' );
 
 	beforeEach( () => {
 		clearNonce();
@@ -12,7 +13,7 @@ describe( 'Testing nonce', () => {
 
 	/**
 	 * All this test proves is if we have a nonce set for an external
-	 * site that is not correct, the request fails.
+	 * site that is incorrect, the request fails.
 	 *
 	 * We test various ordering of calling `setRootURL` and `setNonce`
 	 * to verify under which conditions a nonce is set.
