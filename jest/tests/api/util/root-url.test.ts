@@ -1,9 +1,10 @@
-import {clearNonce, restoreRootURL, setRootURL, wpapi} from '../../../../src';
+import {clearNonce, restoreRootURL, setInitialNonce, setRootURL, wpapi} from '../../../../src';
 import apiFetch from '@wordpress/api-fetch';
 import {getFullUrl} from '../../../../src/util/root-url';
 
 describe( 'Testing root URL', () => {
-	const wp = wpapi( 'default' );
+	const wp = wpapi();
+	setInitialNonce( 'default' );
 
 	beforeEach( () => {
 		clearNonce();
