@@ -1,8 +1,34 @@
-import apiFetch from '@wordpress/api-fetch';
-import {addMiddleware, removeMiddleware} from './middleware';
 import {clearNonce, hasExternalNonce, restoreNonce, setNonce} from './nonce';
+import type {FetchOptions} from '@wordpress/api-fetch';
+import {addQueryArgs, getQueryArg} from '../helpers/url';
 
-let rootURLMiddleware: number;
+let rootURL: string = '';
+
+export function getRootURL(): string {
+	if ( '' === rootURL ) {
+		return window.location.origin + '/wp-json/';
+	}
+
+	return rootURL.replace( /\/$/, '' ) + '/';
+}
+
+export function getFullUrl<D = {}>( requestOptions: FetchOptions<D>, withLocal: boolean = true ): string {
+	let url = '';
+	if ( 'undefined' === typeof requestOptions.url ) {
+		if ( 'string' === typeof requestOptions.path ) {
+			url = getRootURL() + requestOptions.path.replace( /^\//, '' );
+		} else {
+			url = getRootURL();
+		}
+	} else {
+		url = requestOptions.url;
+	}
+	if ( withLocal ) {
+		return userLocaleMiddleware( url );
+	}
+	return url;
+}
+
 
 /**
  * Restore original root URL set by WordPress.
@@ -10,7 +36,7 @@ let rootURLMiddleware: number;
  * @since 1.3.0
  */
 export function restoreRootURL(): void {
-	removeMiddleware( rootURLMiddleware );
+	rootURL = '';
 }
 
 /**
@@ -21,11 +47,11 @@ export function restoreRootURL(): void {
  *
  * @link https://developer.wordpress.org/block-editor/packages/packages-api-fetch/#middlewares
  *
- * @param {string} rootURL - URL of the endpoint.
- * @param {nonce}  nonce   - Optionally provide a nonce for the external site.
- *                         This may be set prior or after via `setNonce`.
- *                         If previously set, and not provided here, the existing
- *                         nonce will be used.
+ * @param {string} url   - URL of the endpoint.
+ * @param {nonce}  nonce - Optionally provide a nonce for the external site.
+ *                       This may be set prior or after via `setNonce`.
+ *                       If previously set, and not provided here, the existing
+ *                       nonce will be used.
  *
  * @notice To use update calls, which send PUT requests an additional 'X-HTTP-Method-Override'
  *         header must be allowed via CORS.
@@ -33,13 +59,10 @@ export function restoreRootURL(): void {
  *
  * @see setNonce
  *
- * @example setRootUrl( 'http://my-wordpress-site/wp-json/', 'fh32efsES' );
+ * @example setRootUrl('https://my-wordpress-site/wp-json/', 'fh32efsES');
  */
-export function setRootURL( rootURL: string, nonce?: string ): void {
-	if ( rootURLMiddleware ) {
-		removeMiddleware( rootURLMiddleware );
-	}
-	rootURLMiddleware = addMiddleware( apiFetch.createRootURLMiddleware( rootURL.replace( /\/$/, '' ) + '/' ) );
+export function setRootURL( url: string, nonce?: string ): void {
+	rootURL = url.replace( /\/$/, '' ) + '/';
 
 	if ( ! window.location.hostname || new URL( rootURL ).hostname !== window.location.hostname ) {
 		if ( nonce !== undefined ) {
@@ -51,3 +74,11 @@ export function setRootURL( rootURL: string, nonce?: string ): void {
 		restoreNonce();
 	}
 }
+
+const userLocaleMiddleware = ( url: string ): string => {
+	if ( '' === getQueryArg( url, '_locale' ) ) {
+		url = addQueryArgs( url, {_locale: 'user'} );
+	}
+
+	return url;
+};
