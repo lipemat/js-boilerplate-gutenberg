@@ -2182,7 +2182,6 @@ __metadata:
     "@types/jest": "npm:^29"
     "@types/lipemat__js-boilerplate": "lipemat/types-js-boilerplate#semver:^2"
     "@types/webpack-env": "npm:^1.18.0"
-    "@wordpress/api-fetch": "npm:>=3.20.0 <7.0.0"
     "@wordpress/blocks": "npm:^8.0.2"
     "@wordpress/data": "npm:^4.27.1"
     "@wordpress/plugins": "npm:^2.25.2"
@@ -3759,17 +3758,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@wordpress/api-fetch@npm:>=3.20.0 <7.0.0":
-  version: 6.55.0
-  resolution: "@wordpress/api-fetch@npm:6.55.0"
-  dependencies:
-    "@babel/runtime": "npm:^7.16.0"
-    "@wordpress/i18n": "npm:^4.58.0"
-    "@wordpress/url": "npm:^3.59.0"
-  checksum: 10c0/f84a733c71978ed485ecb01b8b0a1e04705a384a94bd3df5aa71afefe8414c97f8b758d15460967e2df77961e49e0b91fb742d6670739ce7527f124c3d885054
-  languageName: node
-  linkType: hard
-
 "@wordpress/autop@npm:^2.12.2":
   version: 2.12.2
   resolution: "@wordpress/autop@npm:2.12.2"
@@ -4346,16 +4334,6 @@ __metadata:
     "@babel/runtime": "npm:^7.16.0"
     "@wordpress/is-shallow-equal": "npm:^4.58.0"
   checksum: 10c0/b920d0b00387588f79a5816a06b907f8b5b4d5d69eda35bf7ec4f4fffe1814de0a5b3805765adb7f817a4b70ae8fb2d23d955b8c76801ba86bdb449203ab48d5
-  languageName: node
-  linkType: hard
-
-"@wordpress/url@npm:^3.59.0":
-  version: 3.59.0
-  resolution: "@wordpress/url@npm:3.59.0"
-  dependencies:
-    "@babel/runtime": "npm:^7.16.0"
-    remove-accents: "npm:^0.5.0"
-  checksum: 10c0/9a28f81473e3cbc9cb640dfba6d59f39976fa8d457eac8ab63abdea575a60599543a2f52b70f45a28320644f67d9633095b51eac63c6dcbdc0c2ac1032d9911e
   languageName: node
   linkType: hard
 
@@ -12362,13 +12340,6 @@ __metadata:
   version: 4.0.2
   resolution: "rememo@npm:4.0.2"
   checksum: 10c0/de253eda9eb8d4b9d8f7e0fce16eb7e2a2c547e59bdb332e7dde326b74482e8f1fb5bca793df699f6f6cccf67e480fdd7c6fc7b8d4d180e6670fbeb4b6371853
-  languageName: node
-  linkType: hard
-
-"remove-accents@npm:^0.5.0":
-  version: 0.5.0
-  resolution: "remove-accents@npm:0.5.0"
-  checksum: 10c0/a75321aa1b53d9abe82637115a492770bfe42bb38ed258be748bf6795871202bc8b4badff22013494a7029f5a241057ad8d3f72adf67884dbe15a9e37e87adc4
   languageName: node
   linkType: hard
 
