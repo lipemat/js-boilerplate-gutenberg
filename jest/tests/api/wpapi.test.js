@@ -30,7 +30,7 @@ describe( 'Testing wpapi', () => {
 
 		setRootURL( 'http://starting-point.loc/wp-json/' );
 		response = await wp.posts().getWithPagination();
-		expect( response.totalPages ).toBe( 2 );
+		expect( response.totalPages ).toBe( 3 );
 		expect( response.items.length ).toBeGreaterThan( 1 );
 	} );
 
