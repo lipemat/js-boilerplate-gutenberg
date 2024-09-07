@@ -1,13 +1,11 @@
 import type {ApplicationPassword, ApplicationPasswordCreate, Context, Global, Method, Post, PostsQuery, Settings, Taxonomy, Type, TypesQuery} from '@wordpress/api';
-import apiFetch from '@wordpress/api-fetch';
 import {parseResponseAndNormalizeError} from './util/parse-response';
-import {addQueryArgs} from '@wordpress/url';
 import type {CategoriesQuery, Category, CategoryCreate, CategoryUpdate} from '@wordpress/api/categories';
 import type {Comment, CommentCreate, CommentsQuery, CommentUpdate} from '@wordpress/api/comments';
 import type {PostCreate, PostUpdate} from '@wordpress/api/posts';
 import type {Page, PageCreate, PagesQuery, PageUpdate} from '@wordpress/api/pages';
 import type {Media, MediaCreate, MediaQuery, MediaUpdate} from '@wordpress/api/media';
-import {defaultFetchHandler} from './util/request-handler';
+import {fetchHandler} from './util/request-handler';
 import type {SearchItem, SearchQuery} from '@wordpress/api/search';
 import type {Menu, MenuCreate, MenusQuery, MenuUpdate} from '@wordpress/api/menus';
 import type {User, UserCreate, UsersQuery, UserUpdate} from '@wordpress/api/users';
@@ -15,6 +13,8 @@ import type {MenuItem, MenuItemCreate, MenuItemsQuery, MenuItemUpdate} from '@wo
 import type {MenuLocation} from '@wordpress/api/menu-locations';
 import type {EditorBlock, EditorBlockCreate, EditorBlocksQuery, EditorBlockUpdate} from '@wordpress/api/editor-blocks';
 import type {TaxonomiesQuery} from '@wordpress/api/taxonomies';
+import {addQueryArgs} from './helpers/url';
+import {setInitialNonce} from './util/nonce';
 
 export type CustomRoutes<K> = {
 	[path in keyof K]: () => Partial<RequestMethods<any, any, any>> | RequestMethods<any, any, any>;
@@ -160,13 +160,13 @@ export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMet
  */
 export async function doRequest<T, D = {}>( path: string, requestMethod: Method, data?: D, parse: boolean = true ): Promise<T> {
 	if ( 'undefined' === typeof data || 'GET' === requestMethod || 'OPTIONS' === requestMethod ) {
-		return apiFetch<T, D>( {
+		return fetchHandler<T, D>( {
 			method: requestMethod as Exclude<Method, 'POST' | 'PUT' | 'PATCH' | 'DELETE'>,
 			parse,
 			path: addQueryArgs( path, data ?? {} ),
 		} );
 	}
-	return apiFetch<T, D>( {
+	return fetchHandler<T, D>( {
 		data,
 		method: requestMethod as Exclude<Method, 'GET' | 'OPTIONS'>,
 		parse,
@@ -184,7 +184,7 @@ export async function doRequest<T, D = {}>( path: string, requestMethod: Method,
  */
 export async function doRequestWithPagination<T, D = {}>( path: string, requestMethod: Method, data?: D ): Promise<Pagination<T>> {
 	const Result = await doRequest<Response, D>( path, requestMethod, data, false );
-	const items = await parseResponseAndNormalizeError( Result );
+	const items = await parseResponseAndNormalizeError<T[]>( Result );
 	return {
 		items,
 		totalPages: parseInt( Result.headers.get( 'X-WP-TotalPages' ) || '1' ),
@@ -258,8 +258,6 @@ export default function wpapi<T extends CustomRoutes<T> = {}>( customRoutes?: T 
 	if ( typeof customRoutes !== 'undefined' ) {
 		Object.keys( customRoutes ).map( route => routes[ route ] = customRoutes[ route ] );
 	}
-
-	apiFetch.setFetchHandler( defaultFetchHandler );
 
 	return routes as Routes & T;
 }
