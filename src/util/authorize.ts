@@ -8,10 +8,8 @@
  * @link https://make.wordpress.org/core/2020/11/05/application-passwords-integration-guide/
  *
  */
-import apiFetch from '@wordpress/api-fetch';
-import {__} from '@wordpress/i18n';
-import {addQueryArgs} from '@wordpress/url';
-import {addMiddleware, removeMiddleware} from './middleware';
+import {fetchHandler} from './request-handler';
+import {addQueryArgs} from '../helpers/url';
 
 export interface AuthenticationRestRoute {
 	authentication: {
@@ -20,13 +18,13 @@ export interface AuthenticationRestRoute {
 				authorization: string
 			}
 		}
-	}
+	};
 }
 
 export interface AuthenticationFailure {
 	code: string;
 	message: string;
-	data: any
+	data: any;
 }
 
 export type AuthorizationParams = {
@@ -64,13 +62,17 @@ export type AuthorizationParams = {
 	/* eslint-enable camelcase */
 }
 
-let applicationPasswordMiddleware: number | undefined;
+let applicationPassword: string = '';
+
+export function getApplicationPassword(): string {
+	return applicationPassword;
+}
 
 /**
  * Do we have an application password set?
  */
 export function hasApplicationPassword(): boolean {
-	return 'undefined' !== typeof applicationPasswordMiddleware;
+	return '' !== applicationPassword;
 }
 
 
@@ -78,10 +80,7 @@ export function hasApplicationPassword(): boolean {
  * Remove any previously set application password.
  */
 export function clearApplicationPassword(): void {
-	if ( 'undefined' !== typeof applicationPasswordMiddleware ) {
-		removeMiddleware( applicationPasswordMiddleware );
-		applicationPasswordMiddleware = undefined;
-	}
+	applicationPassword = '';
 }
 
 /**
@@ -98,7 +97,7 @@ export function clearApplicationPassword(): void {
  */
 export async function getAuthorizationUrl( data: AuthorizationParams ): Promise<string | AuthenticationFailure> {
 	try {
-		const response = await apiFetch<AuthenticationRestRoute>( {
+		const response = await fetchHandler<AuthenticationRestRoute>( {
 			path: '/',
 			method: 'GET',
 		} );
@@ -106,11 +105,11 @@ export async function getAuthorizationUrl( data: AuthorizationParams ): Promise<
 		if ( ! response.authentication[ 'application-passwords' ] ) {
 			return {
 				code: 'application_passwords_disabled',
-				message: __( 'Application passwords are not enabled on this site.' ),
+				message: 'Application passwords are not enabled on this site.',
 				data: null,
 			};
 		}
-		return addQueryArgs<AuthorizationParams>( response.authentication[ 'application-passwords' ].endpoints.authorization, data );
+		return addQueryArgs( response.authentication[ 'application-passwords' ].endpoints.authorization, data );
 	} catch ( error ) {
 		return error;
 	}
@@ -136,18 +135,8 @@ export async function getAuthorizationUrl( data: AuthorizationParams ): Promise<
  * </IfModule>
  *
  * @param {string} user
- * @param {string} applicationPassword
+ * @param {string} password
  */
-export function enableApplicationPassword( user: string, applicationPassword: string ): void {
-	clearApplicationPassword();
-	applicationPasswordMiddleware = addMiddleware( ( options, next ) => {
-		const {headers = {}} = options;
-		return next( {
-			...options,
-			headers: {
-				...headers,
-				Authorization: 'Basic ' + btoa( user + ':' + applicationPassword ),
-			},
-		}, next );
-	} );
+export function enableApplicationPassword( user: string, password: string ): void {
+	applicationPassword = 'Basic ' + btoa( user + ':' + password );
 }
