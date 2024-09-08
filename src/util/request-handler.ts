@@ -98,7 +98,7 @@ export const fetchHandler = <T, D = object>( requestOptions: FetchOptions<D> ): 
 						)
 						.catch( response => refreshNonce<T, D>( response, requestOptions )
 						),
-				err => {
+				( err: Error | null ) => {
 					// Re-throw AbortError for the users to handle it themselves.
 					if ( err && 'AbortError' === err.name ) {
 						throw err;

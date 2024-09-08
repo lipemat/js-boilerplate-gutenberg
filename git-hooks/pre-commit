@@ -53,6 +53,21 @@ function validate_ts() {
 }
 validate_ts &
 
+function js_lint() {
+    echo "${YELLOW}[pre-commit]${BLUE} Running JS Lint... ${WHITE}"
+    OUTPUT=$(yarn lipemat-js-boilerplate lint --fix=false 2>&1)
+    if [[ $? != 0 ]]; then
+        echo
+        echo "${BLUE}JS Lint failed. Fix the error before commit!"
+        echo "${RED}$OUTPUT"
+        exit_reset_colors
+    fi
+    echo "${YELLOW}[pre-commit]${GREEN} JS Lint Passed!${RESET_COLOR}"
+
+}
+js_lint &
+
+
 # Go through each background task
 # If it sent exit code 1, it failed and the result from `wait` will be false.
 FAIL=0

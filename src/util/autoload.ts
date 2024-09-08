@@ -18,11 +18,11 @@
  * ```js
  * export default () => {
  *	    // Load all blocks.
- *	    autoloadBlocks( () => require.context( './blocks', true, /block\.tsx$/ ), module );
+ *	    autoloadBlocks(() => require.context('./blocks', true, /block\.tsx$/), module);
  *      // Load all meta boxes.
- *      autoloadPlugins( () => require.context( './meta-boxes', true, /index\.tsx$/ ), module );
+ *      autoloadPlugins(() => require.context('./meta-boxes', true, /index\.tsx$/), module);
  *      // Load all formats.
- *      autoloadFormats( () => require.context( './formats', true, /index\.tsx$/ ), module );
+ *      autoloadFormats(() => require.context('./formats', true, /index\.tsx$/), module);
  *	};
  * ```
  *
@@ -54,7 +54,7 @@ export type PluginModule<T = BlockSettings<object> | PluginSettings> = {
 /**
  * Autoload blocks and add HMR support to them.
  *
- * @example autoloadBlocks( () => require.context( './blocks', true, /block\.tsx$/ ), module );
+ * @example autoloadBlocks(() => require.context('./blocks', true, /block\.tsx$/), module);
  *
  * @param {Function} getContext   Execute and return a `require.context()` call.
  * @param            pluginModule - Module of the current file from the global {module}.
@@ -74,7 +74,7 @@ export const autoloadBlocks = ( getContext: () => __WebpackModuleApi.RequireCont
 /**
  * Autoload plugins and add HMR support to them.
  *
- * @example autoloadPlugins( () => require.context( './meta-boxes', true, /index\.tsx$/ ), module );
+ * @example autoloadPlugins(() => require.context('./meta-boxes', true, /index\.tsx$/), module);
  *
  * @param {Function} getContext   Execute and return a `require.context()` call.
  * @param            pluginModule - Module of the current file from the global {module}.
@@ -96,7 +96,7 @@ export const autoloadPlugins = ( getContext: () => __WebpackModuleApi.RequireCon
 /**
  * Autoload formats and add HMR support to them.
  *
- * @example autoloadFormats( () => require.context( './formats', true, /index\.tsx$/ ), module );
+ * @example autoloadFormats(() => require.context('./formats', true, /index\.tsx$/), module);
  *
  * @param  getContext
  * @param  pluginModule
@@ -120,11 +120,11 @@ type Autoload<T> = {
 	afterReload: ( changedNames: string[] ) => void;
 	beforeReload: () => void;
 	// Execute and return a `require.context()` call
-	getContext: () => __WebpackModuleApi.RequireContext;
+	getContext: () => __WebpackModuleApi.RequireContext | undefined;
 	// Module of the current file from the global {module}.
 	pluginModule: NodeJS.Module;
-	register: ( name: string, config: T ) => any;
-	unregister: ( name: string ) => any;
+	register: ( name: string, config: T ) => object | undefined | void;
+	unregister: ( name: string ) => object | undefined | void;
 	type: string; // Identify the type for caching purposes.
 }
 
@@ -159,14 +159,14 @@ export const autoload = <T>( {
 		context.keys().forEach( key => {
 			const requiredModule: PluginModule<T> = context( key );
 			// Module is excluded from the current context.
-			if ( requiredModule.exclude ) {
+			if ( Boolean( requiredModule.exclude ) ) {
 				return;
 			}
 			if ( requiredModule === cache[ key ] ) {
 				// Module unchanged: no further action needed.
 				return;
 			}
-			if ( cache[ `${requiredModule.name}-${type}` ] ) {
+			if ( Boolean( cache[ `${requiredModule.name}-${type}` ] ) ) {
 				// Module changed, and prior copy detected: unregister the old module.
 				unregister( requiredModule.name );
 			}
@@ -186,7 +186,7 @@ export const autoload = <T>( {
 
 	const context = loadModules();
 
-	if ( pluginModule.hot && context?.id ) {
+	if ( pluginModule.hot && 'undefined' !== typeof context?.id ) {
 		pluginModule.hot.accept( context.id.toString(), loadModules );
 	}
 };
@@ -237,7 +237,7 @@ const refreshAllBlocks = async ( changedNames: string[] = [] ) => {
 	}
 
 	// Reselect whatever was selected in the beginning.
-	if ( selectedBlockId ) {
+	if ( null !== selectedBlockId ) {
 		await dispatch( 'core/block-editor' ).selectBlock( selectedBlockId );
 	} else {
 		await dispatch( 'core/block-editor' ).clearSelectedBlock();

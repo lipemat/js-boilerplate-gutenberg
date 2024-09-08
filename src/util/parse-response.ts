@@ -12,36 +12,33 @@ import {hasExternalNonce} from './nonce';
 export type ErrorResponse = {
 	code: string;
 	message: string;
-	data?: any;
+	data?: object & {
+		status?: number;
+	}
 };
 
 /**
  * Parses the apiFetch response.
- *
- * @param {Response} response
- * @param {boolean}  shouldParseResponse
- *
- * @return {Response} Parsed response.
  */
-const parseResponse = ( response, shouldParseResponse = true ) => {
+const parseResponse = ( response: Response, shouldParseResponse: boolean = true ) => {
 	if ( shouldParseResponse ) {
 		if ( 204 === response.status ) {
 			return null;
 		}
 
-		return response.json ? response.json() : Promise.reject( response );
+		return 'undefined' !== typeof response.json ? response.json() : Promise.reject( response );
 	}
 
 	return response;
 };
 
-const parseJsonAndNormalizeError = async ( response: Response ) => {
+const parseJsonAndNormalizeError = async ( response: Response | undefined ): Promise<ErrorResponse | undefined> => {
 	const invalidJsonError = {
 		code: 'invalid_json',
 		message: 'The response is not a valid JSON response.',
 	};
 
-	if ( ! response || ! response.json ) {
+	if ( ! response || 'undefined' === typeof response.json ) {
 		throw invalidJsonError;
 	}
 
@@ -55,8 +52,7 @@ const parseJsonAndNormalizeError = async ( response: Response ) => {
 
 export const parseResponseAndNormalizeError = async <T>( response: Response, shouldParseResponse: boolean = true ): Promise<T> => {
 	try {
-		return await Promise.resolve(
-			parseResponse( response, shouldParseResponse ) );
+		return parseResponse( response, shouldParseResponse );
 	} catch ( res ) {
 		return await parseAndThrowError( res, shouldParseResponse );
 	}
@@ -74,7 +70,7 @@ export async function parseAndThrowError<T>( response: Response, shouldParseResp
 		message: 'An unknown error occurred.',
 	};
 	// Prevent infinite loops when external requests fail.
-	if ( 'rest_cookie_invalid_nonce' === error.code && hasExternalNonce() ) {
+	if ( 'rest_cookie_invalid_nonce' === error?.code && hasExternalNonce() ) {
 		error.code = 'external_rest_cookie_invalid_nonce';
 	}
 	throw error || unknownError;
