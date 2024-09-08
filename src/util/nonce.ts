@@ -1,11 +1,5 @@
-import {getFullUrl} from './root-url';
-import {checkStatus, fetchHandler} from './request-handler';
-import type {FetchOptions} from '@wordpress/api-fetch';
-import type {ErrorResponse} from './parse-response';
-
 let currentNonce: string = '';
 let initialNonce: string = '';
-let refreshingNonce: boolean = false;
 
 
 /**
@@ -76,38 +70,4 @@ export function clearNonce(): void {
  */
 export function restoreNonce(): void {
 	currentNonce = initialNonce;
-}
-
-
-/**
- * Refresh the nonce if the request failed because the nonce has expired.
- *
- * Similar to the `apiFetch` function in the `@wordpress/api-fetch` package.
- *
- * See @wordpress/api-fetch.apiFetch
- */
-export function refreshNonce<T, D = {}>( error: ErrorResponse, requestOptions: FetchOptions<D> ): Promise<T> {
-	if ( error.code !== 'rest_cookie_invalid_nonce' ) {
-		return Promise.reject( error );
-	}
-	if ( '' !== initialNonce ) {
-		currentNonce = initialNonce;
-	}
-	if ( refreshingNonce ) {
-		return Promise.reject( error );
-	}
-	refreshingNonce = true;
-
-	return (
-		window.fetch( getFullUrl( {path: 'wp-admin/admin-ajax.php?action=rest-nonce'}, false ) )
-			.then( checkStatus )
-			.then( data => data.text() )
-			.then( text => {
-				setNonce( text );
-				return fetchHandler<T, D>( requestOptions );
-			} )
-			.finally( () => {
-				refreshingNonce = false;
-			} )
-	);
 }

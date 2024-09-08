@@ -12,7 +12,7 @@ export function getRootURL(): string {
 	return rootURL.replace( /\/$/, '' ) + '/';
 }
 
-export function getFullUrl<D = {}>( requestOptions: FetchOptions<D>, withLocal: boolean = true ): string {
+export function getFullUrl<D = object>( requestOptions: FetchOptions<D>, withLocal: boolean = true ): string {
 	let url = '';
 	if ( 'undefined' === typeof requestOptions.url ) {
 		if ( 'string' === typeof requestOptions.path ) {
@@ -64,7 +64,7 @@ export function restoreRootURL(): void {
 export function setRootURL( url: string, nonce?: string ): void {
 	rootURL = url.replace( /\/$/, '' ) + '/';
 
-	if ( ! window.location.hostname || new URL( rootURL ).hostname !== window.location.hostname ) {
+	if ( '' === window.location.hostname || new URL( rootURL ).hostname !== window.location.hostname ) {
 		if ( nonce !== undefined ) {
 			setNonce( nonce );
 		} else if ( ! hasExternalNonce() ) {

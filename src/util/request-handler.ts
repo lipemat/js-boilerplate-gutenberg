@@ -1,8 +1,9 @@
-import {parseAndThrowError, parseResponseAndNormalizeError} from './parse-response';
+import {type ErrorResponse, parseAndThrowError, parseResponseAndNormalizeError} from './parse-response';
 import type {FetchOptions} from '@wordpress/api-fetch';
 import {getFullUrl} from './root-url';
-import {getNonce, refreshNonce} from './nonce';
-import {getApplicationPassword} from './authorize';
+import {clearNonce, getNonce, setNonce} from './nonce';
+import {type AuthenticationFailure, type AuthenticationRestRoute, type AuthorizationParams, getApplicationPassword} from './authorize';
+import {addQueryArgs} from '../helpers/url';
 
 /**
  * Similar @wordpress/api-fetch/src/index.js
@@ -32,6 +33,9 @@ const DEFAULT_OPTIONS: RequestInit = {
 	credentials: 'include',
 };
 
+let refreshingNonce: boolean = false;
+
+
 export const checkStatus = ( response: Response ) => {
 	if ( response.status >= 200 && response.status < 300 ) {
 		return response;
@@ -39,6 +43,7 @@ export const checkStatus = ( response: Response ) => {
 
 	throw response;
 };
+
 
 /**
  * Similar to apiFetch but without middle ware.
@@ -107,3 +112,66 @@ export const fetchHandler = <T, D = object>( requestOptions: FetchOptions<D> ): 
 			)
 	);
 };
+
+/**
+ * Retrieve the URL to the application password endpoint on the current site.
+ *
+ * Used to redirect your user to a WP site which they have an account on, then
+ * the WP site redirects the user back to your app with the application password
+ * included.
+ *
+ * @link https://make.wordpress.org/core/2020/11/05/application-passwords-integration-guide/
+ * @link http://starting-point.loc/wp-admin/authorize-application.php
+ *
+ * @param {AuthorizationParams} data
+ */
+export async function getAuthorizationUrl( data: AuthorizationParams ): Promise<string | AuthenticationFailure> {
+	try {
+		const response = await fetchHandler<AuthenticationRestRoute>( {
+			path: '/',
+			method: 'GET',
+		} );
+
+		if ( ! response.authentication[ 'application-passwords' ] ) {
+			return {
+				code: 'application_passwords_disabled',
+				message: 'Application passwords are not enabled on this site.',
+				data: null,
+			};
+		}
+		return addQueryArgs( response.authentication[ 'application-passwords' ].endpoints.authorization, data );
+	} catch ( error ) {
+		return error;
+	}
+}
+
+/**
+ * Refresh the nonce if the request failed because the nonce has expired.
+ *
+ * Similar to the `apiFetch` function in the `@wordpress/api-fetch` package.
+ *
+ * See @wordpress/api-fetch.apiFetch
+ */
+export function refreshNonce<T, D = object>( error: ErrorResponse, requestOptions: FetchOptions<D> ): Promise<T> {
+	if ( error.code !== 'rest_cookie_invalid_nonce' ) {
+		return Promise.reject( error );
+	}
+	clearNonce();
+	if ( refreshingNonce ) {
+		return Promise.reject( error );
+	}
+	refreshingNonce = true;
+
+	return (
+		window.fetch( getFullUrl( {path: 'wp-admin/admin-ajax.php?action=rest-nonce'}, false ) )
+			.then( checkStatus )
+			.then( data => data.text() )
+			.then( text => {
+				setNonce( text );
+				return fetchHandler<T, D>( requestOptions );
+			} )
+			.finally( () => {
+				refreshingNonce = false;
+			} )
+	);
+}
