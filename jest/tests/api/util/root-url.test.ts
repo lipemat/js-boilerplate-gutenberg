@@ -1,5 +1,5 @@
 import {clearNonce, restoreRootURL, setInitialNonce, setRootURL, wpapi} from '../../../../src';
-import {getFullUrl} from '../../../../src/util/root-url';
+import {getFullUrl, getRootURL, setInitialRootURL} from '../../../../src/util/root-url';
 import type {ErrorResponse} from '../../../../src/util/parse-response';
 
 describe( 'Testing root URL', () => {
@@ -7,7 +7,10 @@ describe( 'Testing root URL', () => {
 
 	beforeEach( () => {
 		clearNonce();
-		restoreRootURL();
+		setInitialRootURL( '' );
+		document.head.innerHTML = '';
+		delete window.wpApiSettings;
+		delete window.ajaxurl;
 	} );
 
 	it( 'Test outside requests', async () => {
@@ -44,6 +47,7 @@ describe( 'Testing root URL', () => {
 
 
 	test( 'getFullURL', () => {
+		setInitialRootURL( 'http://localhost/wp-json/' );
 		const fullURL = getFullUrl( {
 			path: '/wp/v2/posts',
 		} );
@@ -64,5 +68,86 @@ describe( 'Testing root URL', () => {
 			url: 'https://someotherplace.com/nothing?_locale=site&per_page=10',
 		} );
 		expect( fullURL4 ).toBe( 'https://someotherplace.com/nothing?_locale=site&per_page=10' );
+	} );
+
+
+	test( 'setInitialRootURL', () => {
+		setRootURL( 'https://onpointplugins.com/wp-json' );
+		expect( getRootURL() ).toBe( 'https://onpointplugins.com/wp-json/' );
+
+		expect( () => restoreRootURL() ).toThrow( URIError );
+		expect( () => getRootURL() ).toThrow( URIError );
+
+		setInitialRootURL( 'https://example.com/wp-json/' );
+		expect( getRootURL() ).toBe( 'https://example.com/wp-json/' );
+		setRootURL( 'https://onpointplugins.com/wp-json' );
+		expect( getRootURL() ).toBe( 'https://onpointplugins.com/wp-json/' );
+		restoreRootURL();
+		expect( getRootURL() ).toBe( 'https://example.com/wp-json/' );
+	} );
+
+
+	test( 'restoreRootURL', () => {
+		setRootURL( 'https://onpointplugins.com/wp-json' );
+		expect( getRootURL() ).toBe( 'https://onpointplugins.com/wp-json/' );
+
+		expect( () => restoreRootURL() ).toThrow( URIError );
+		expect( () => getRootURL() ).toThrow( URIError );
+
+		setInitialRootURL( 'https://example.com/wp-json/' );
+		expect( getRootURL() ).toBe( 'https://example.com/wp-json/' );
+		setRootURL( 'https://onpointplugins.com/wp-json' );
+		expect( getRootURL() ).toBe( 'https://onpointplugins.com/wp-json/' );
+		restoreRootURL();
+		expect( getRootURL() ).toBe( 'https://example.com/wp-json/' );
+
+		setInitialRootURL( '' );
+		window.ajaxurl = '/wp-admin/admin-ajax.php';
+		expect( getRootURL() ).toBe( 'http://localhost/wp-json/' );
+
+		restoreRootURL();
+		expect( getRootURL() ).toBe( 'http://localhost/wp-json/' );
+	} );
+
+
+	it( 'Gets root URL from document link', () => {
+		expect( () => getRootURL() ).toThrow( URIError );
+
+		const link = document.createElement( 'link' );
+		link.rel = 'https://api.w.org/';
+		link.href = 'https://onpointplugins.com/sub/wp-json';
+		document.head.appendChild( link );
+		expect( getRootURL() ).toBe( 'https://onpointplugins.com/sub/wp-json/' );
+
+		setRootURL( 'https://onpointplugins.com/wp-json' );
+		expect( getRootURL() ).toBe( 'https://onpointplugins.com/wp-json/' );
+	} );
+
+
+	it( 'Gets root URL from wpApiSettings', () => {
+		expect( () => getRootURL() ).toThrow( URIError );
+
+		window.wpApiSettings = {
+			root: 'https://onpointplugins.com/wp-json',
+			nonce: '',
+			versionString: 'wp/v2',
+		};
+		expect( getRootURL() ).toBe( 'https://onpointplugins.com/wp-json/' );
+	} );
+
+
+	it( 'Gets root URL from ajaxurl', () => {
+		expect( () => getRootURL() ).toThrow( URIError );
+
+		window.ajaxurl = '/sub/wp-admin/admin-ajax.php';
+		expect( getRootURL() ).toBe( 'http://localhost/sub/wp-json/' );
+		const fullURL3 = getFullUrl( {
+			path: 'wp/v2/posts',
+		} );
+		expect( fullURL3 ).toBe( 'http://localhost/sub/wp-json/wp/v2/posts?_locale=user' );
+
+		window.ajaxurl = 'https://fullurl.com/wp-admin/admin-ajax.php';
+		restoreRootURL();
+		expect( getRootURL() ).toBe( 'https://fullurl.com/wp-json/' );
 	} );
 } );

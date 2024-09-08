@@ -1,11 +1,12 @@
-import {clearNonce, restoreRootURL, setRootURL, wpapi} from '../../../src';
+import {clearNonce, setRootURL, wpapi} from '../../../src';
+import {setInitialRootURL} from '../../../src/util/root-url';
 
 describe( 'Testing wpapi', () => {
 	const wp = wpapi( '' );
 
 	beforeEach( () => {
+		setInitialRootURL( 'http://localhost/wp-json/' );
 		clearNonce();
-		restoreRootURL();
 	} );
 
 	it( 'Test for retrieval', async () => {
