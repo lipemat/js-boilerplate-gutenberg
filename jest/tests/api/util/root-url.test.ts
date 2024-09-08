@@ -1,5 +1,6 @@
 import {clearNonce, restoreRootURL, setInitialNonce, setRootURL, wpapi} from '../../../../src';
 import {getFullUrl} from '../../../../src/util/root-url';
+import type {ErrorResponse} from '../../../../src/util/parse-response';
 
 describe( 'Testing root URL', () => {
 	const wp = wpapi();
@@ -12,18 +13,14 @@ describe( 'Testing root URL', () => {
 	it( 'Test outside requests', async () => {
 		setInitialNonce( '365edf6304' );
 		setRootURL( 'http://starting-point.loc/wp-json/' );
-
-		let error;
 		try {
 			await wp.posts().create( {
 				title: 'JS test',
 			} );
 		} catch ( e ) {
-			error = {
-				code: 'fetch_error',
-			};
+			const error = e as ErrorResponse;
+			expect( error.code ).toBe( 'rest_cannot_create' );
 		}
-		expect( error.code ).toBe( 'fetch_error' );
 		setRootURL( 'https://onpointplugins.com/wp-json/' );
 		const posts = await wp.posts().get( {
 			per_page: 1,
@@ -34,13 +31,12 @@ describe( 'Testing root URL', () => {
 
 	it( 'Test for nonce passed with root url', async () => {
 		setRootURL( 'https://onpointplugins.com/wp-json', 'still-not-working' );
-		let error;
 		try {
 			await wp.posts().get();
 		} catch ( e ) {
-			error = e;
+			const error = e as ErrorResponse;
+			expect( error.code ).toBe( 'external_rest_cookie_invalid_nonce' );
 		}
-		expect( error.code ).toBe( 'external_rest_cookie_invalid_nonce' );
 		clearNonce();
 		const posts = await wp.posts().get();
 		expect( posts ).toHaveLength( 10 );

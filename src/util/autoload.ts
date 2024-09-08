@@ -137,7 +137,7 @@ type Autoload<T> = {
  * which already exist in the cache are unregistered with the provided function,
  * then any incoming (new or updated) modules will be registered.
  */
-export const autoload = <T>( {
+export const autoload = <T extends BlockSettings<object> | PluginSettings>( {
 	afterReload,
 	beforeReload,
 	getContext,
@@ -146,7 +146,7 @@ export const autoload = <T>( {
 	unregister,
 	type,
 }: Autoload<T> ) => {
-	const cache = {};
+	const cache: { [ key: string ]: PluginModule } = {};
 
 	const loadModules = () => {
 		beforeReload();

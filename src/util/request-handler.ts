@@ -68,6 +68,7 @@ export const fetchHandler = <T, D = object>( requestOptions: FetchOptions<D> ): 
 	// The `data` property is a shorthand for sending a JSON body.
 	if ( typeof data !== 'undefined' ) {
 		body = JSON.stringify( data );
+		// @ts-ignore -- Can't make HeaderInit more specific.
 		headers[ 'Content-Type' ] = 'application/json';
 	}
 
@@ -93,6 +94,7 @@ export const fetchHandler = <T, D = object>( requestOptions: FetchOptions<D> ): 
 						.catch( response =>
 							parseAndThrowError( response, parse ),
 						)
+						// @ts-ignore -- Catch clause must be any or unknown.
 						.then( ( response: Response ) =>
 							parseResponseAndNormalizeError<T>( response, parse ),
 						)
@@ -141,7 +143,7 @@ export async function getAuthorizationUrl( data: AuthorizationParams ): Promise<
 		}
 		return addQueryArgs( response.authentication[ 'application-passwords' ].endpoints.authorization, data );
 	} catch ( error ) {
-		return error;
+		return error as string;
 	}
 }
 

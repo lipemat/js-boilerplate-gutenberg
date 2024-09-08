@@ -54,7 +54,8 @@ export const parseResponseAndNormalizeError = async <T>( response: Response, sho
 	try {
 		return parseResponse( response, shouldParseResponse );
 	} catch ( res ) {
-		return await parseAndThrowError( res, shouldParseResponse );
+		// @ts-ignore -- Catch clause must be any or unknown.
+		return await parseAndThrowError<T>( res, shouldParseResponse );
 	}
 };
 
