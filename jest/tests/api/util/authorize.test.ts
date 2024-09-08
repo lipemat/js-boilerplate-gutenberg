@@ -42,19 +42,17 @@ describe( 'Testing authorize', () => {
 		const result = await wp.posts().update( {
 			id: post.id,
 			content: 'XXXX',
-			title: {
-				raw: 'TTTT',
-			},
+			title: 'TTTT',
 		} );
 		expect( result.title.raw ).toBe( 'TTTT' );
 		expect( result.content.raw ).toBe( 'XXXX' );
 		const updated = await wp.posts().getById( post.id );
 		expect( updated.content.rendered ).toBe( '<p>XXXX</p>\n' );
 
-		let trashed = await wp.posts().trash( post.id );
-		expect( trashed.status ).toBe( 'trash' );
-		expect( trashed.id ).toBe( post.id );
-		trashed = await wp.posts().getById( post.id );
+		const trash = await wp.posts().trash( post.id );
+		expect( trash.status ).toBe( 'trash' );
+		expect( trash.id ).toBe( post.id );
+		const trashed = await wp.posts().getById( post.id );
 		expect( trashed.id ).toBe( post.id );
 		expect( trashed.status ).toBe( 'trash' );
 
