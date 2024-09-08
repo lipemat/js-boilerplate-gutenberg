@@ -50,6 +50,7 @@
   },
   "scripts": {
     "build": "microbundle --tsconfig ./dev/tsconfig.json --external @wordpress/blocks,@wordpress/data,@wordpress/edit-post,@wordpress/plugins,@wordpress/rich-text,react,ReactDOM --globals @wordpress/blocks=wp.blocks,@wordpress/data=wp.data,@wordpress/edit-post=wp.editPost,@wordpress/plugins=wp.plugins,@wordpress/rich-text=wp.richText",
+    "lint": "lipemat-js-boilerplate lint",
     "prepublishOnly": "rm -rf dist/* && yarn run build",
     "test": "lipemat-js-boilerplate test",
     "validate-ts": "tsc --noEmit",

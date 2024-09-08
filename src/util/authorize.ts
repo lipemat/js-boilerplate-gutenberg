@@ -22,7 +22,7 @@ export interface AuthenticationRestRoute {
 export interface AuthenticationFailure {
 	code: string;
 	message: string;
-	data: any;
+	data: object | null;
 }
 
 export type AuthorizationParams = {

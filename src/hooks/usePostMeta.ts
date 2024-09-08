@@ -6,7 +6,7 @@ import {useCallback} from './useCallback';
 /**
  * Support passing a Type for the meta shape.
  */
-interface PostEdit<T extends {}> extends PostEditing {
+interface PostEdit<T extends object> extends PostEditing {
 	meta: T;
 }
 
@@ -38,7 +38,7 @@ export function usePostMeta<T extends PostMeta, K extends keyof T = keyof T>( me
 	const meta = useSelect( select => ( {
 		previous: select( 'core/editor' ).getCurrentPostAttribute<PostEdit<T>, 'meta'>( 'meta' ),
 		current: select( 'core/editor' ).getEditedPostAttribute<PostEdit<T>, 'meta'>( 'meta' ),
-	} ) );
+	} ), [] );
 	const single = 'string' === typeof metaKey && '' !== metaKey;
 
 	const current = single ? meta.current[ metaKey ] : meta.current;

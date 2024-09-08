@@ -14,10 +14,9 @@ import type {MenuLocation} from '@wordpress/api/menu-locations';
 import type {EditorBlock, EditorBlockCreate, EditorBlocksQuery, EditorBlockUpdate} from '@wordpress/api/editor-blocks';
 import type {TaxonomiesQuery} from '@wordpress/api/taxonomies';
 import {addQueryArgs} from './helpers/url';
-import {setInitialNonce} from './util/nonce';
 
 export type CustomRoutes<K> = {
-	[path in keyof K]: () => Partial<RequestMethods<any, any, any>> | RequestMethods<any, any, any>;
+	[path in keyof K]: () => Partial<RequestMethods<object, object, object>> | RequestMethods<object, object, object>;
 }
 
 export interface Pagination<T> {
@@ -29,7 +28,10 @@ export interface Pagination<T> {
 export interface Routes {
 	applicationPasswords: <T = ApplicationPassword, U = ApplicationPasswordCreate>() => {
 		create: ( userId: number | 'me', data: U ) => Promise<T & { password: string; }>;
-		delete: ( userId: number | 'me', uuid: string ) => Promise<{ deleted: boolean, previous: T }>;
+		delete: ( userId: number | 'me', uuid: string ) => Promise<{
+			deleted: boolean,
+			previous: T
+		}>;
 		get: ( userId: number | 'me' ) => Promise<T[]>;
 		getById: ( userId: number | 'me', uuid: string ) => Promise<T>;
 		introspect: ( userId: number | 'me' ) => Promise<T>;
@@ -45,10 +47,10 @@ export interface Routes {
 		get: () => Promise<{ [ name: string ]: T }>;
 		getById: ( location: string ) => Promise<T>;
 	};
-	statuses: <T = any, Q = any, U = any>() => RequestMethods<T, Q, U>;
+	statuses: <T = object, Q = object, U = object>() => RequestMethods<T, Q, U>;
 	pages: <T = Page, Q = PagesQuery, U = PageUpdate, C = PageCreate, E = Page<'edit'>>() => RequestMethods<T, Q, U, C, E>;
 	posts: <T = Post, Q = PostsQuery, U = PostUpdate, C = PostCreate, E = Post<'edit'>>() => RequestMethods<T, Q, U, C, E>;
-	tags: <T = any, Q = any, U = any, C = U>() => Omit<RequestMethods<T, Q, U, C>, 'trash'>;
+	tags: <T = object, Q = object, U = object, C = U>() => Omit<RequestMethods<T, Q, U, C>, 'trash'>;
 	taxonomies: <T = Taxonomy, Q = TaxonomiesQuery>() => Pick<RequestMethods<T, Q, never>, 'get' | 'getById'>;
 	types: <T = Type, Q = TypesQuery>() => {
 		get: ( options?: Q ) => Promise<{ [ type: string ]: T }>;
@@ -108,7 +110,9 @@ export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMet
 		 *
 		 * @param  id
 		 */
-		delete: id => doRequest<{ deleted: boolean, previous: E }, { force: true }>( path + '/' + id, 'DELETE', {force: true} ),
+		delete: id => doRequest<{ deleted: boolean, previous: E }, {
+			force: true
+		}>( path + '/' + id, 'DELETE', {force: true} ),
 		/**
 		 * Get items based on query arguments or no query arguments for default response.
 		 *
@@ -124,7 +128,10 @@ export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMet
 		 *                      password?: if the item is password protected (Probably only posts and pages);
 		 *                      }
 		 */
-		getById: ( id, data? ) => doRequest<T, { password?: string, context?: Context }>( path + '/' + id, 'GET', data ),
+		getById: ( id, data? ) => doRequest<T, {
+			password?: string,
+			context?: Context
+		}>( path + '/' + id, 'GET', data ),
 		/**
 		 * Same as `get` but returns the pagination information as well as
 		 * the items.
@@ -158,7 +165,7 @@ export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMet
  * @param  data          - Query params.
  * @param  parse         - To parse the json result, or return raw Request
  */
-export async function doRequest<T, D = {}>( path: string, requestMethod: Method, data?: D, parse: boolean = true ): Promise<T> {
+export async function doRequest<T, D = object>( path: string, requestMethod: Method, data?: D, parse: boolean = true ): Promise<T> {
 	if ( 'undefined' === typeof data || 'GET' === requestMethod || 'OPTIONS' === requestMethod ) {
 		return fetchHandler<T, D>( {
 			method: requestMethod as Exclude<Method, 'POST' | 'PUT' | 'PATCH' | 'DELETE'>,
@@ -182,18 +189,19 @@ export async function doRequest<T, D = {}>( path: string, requestMethod: Method,
  * @param  requestMethod - GET, POST, PUT, DELETE, PATCH
  * @param  data          - Query params.
  */
-export async function doRequestWithPagination<T, D = {}>( path: string, requestMethod: Method, data?: D ): Promise<Pagination<T>> {
+export async function doRequestWithPagination<T, D = object>( path: string, requestMethod: Method, data?: D ): Promise<Pagination<T>> {
 	const Result = await doRequest<Response, D>( path, requestMethod, data, false );
 	const items = await parseResponseAndNormalizeError<T[]>( Result );
+
 	return {
 		items,
-		totalPages: parseInt( Result.headers.get( 'X-WP-TotalPages' ) || '1' ),
-		totalItems: parseInt( Result.headers.get( 'X-WP-Total' ) || '0' ),
+		totalPages: parseInt( Result.headers.get( 'X-WP-TotalPages' ) ?? '1' ),
+		totalItems: parseInt( Result.headers.get( 'X-WP-Total' ) ?? '0' ),
 	};
 }
 
-export default function wpapi<T extends CustomRoutes<T> = {}>( customRoutes?: T ): Routes & T {
-	const routes: any = {};
+export default function wpapi<T extends CustomRoutes<T> = object>( customRoutes?: T ): Routes & T {
+	const routes: { [ key: string ]: () => object } = {};
 
 	const coreRoutes = [
 		'categories',
@@ -230,12 +238,12 @@ export default function wpapi<T extends CustomRoutes<T> = {}>( customRoutes?: T 
 	// Application passwords have special endpoints.
 	routes.applicationPasswords = () => {
 		return {
-			create: ( userId, data ) => doRequest( `/wp/v2/users/${userId}/application-passwords`, 'POST', data ),
-			delete: ( userId, uuid ) => doRequest( `/wp/v2/users/${userId}/application-passwords/${uuid}`, 'DELETE' ),
-			get: userId => doRequest( `/wp/v2/users/${userId}/application-passwords`, 'GET' ),
-			getById: ( userId, uuid ) => doRequest( `/wp/v2/users/${userId}/application-passwords/${uuid}`, 'GET' ),
-			introspect: userId => doRequest( `/wp/v2/users/${userId}/application-passwords/introspect`, 'GET' ),
-			update: ( userId, uuid, data ) => doRequest( `/wp/v2/users/${userId}/application-passwords/${uuid}`, 'PUT', data ),
+			create: ( userId: number, data ) => doRequest( `/wp/v2/users/${userId}/application-passwords`, 'POST', data ),
+			delete: ( userId: number, uuid ) => doRequest( `/wp/v2/users/${userId}/application-passwords/${uuid}`, 'DELETE' ),
+			get: ( userId: number ) => doRequest( `/wp/v2/users/${userId}/application-passwords`, 'GET' ),
+			getById: ( userId: number, uuid ) => doRequest( `/wp/v2/users/${userId}/application-passwords/${uuid}`, 'GET' ),
+			introspect: ( userId: number ) => doRequest( `/wp/v2/users/${userId}/application-passwords/introspect`, 'GET' ),
+			update: ( userId: number, uuid, data ) => doRequest( `/wp/v2/users/${userId}/application-passwords/${uuid}`, 'PUT', data ),
 		};
 	};
 
@@ -243,7 +251,7 @@ export default function wpapi<T extends CustomRoutes<T> = {}>( customRoutes?: T 
 	routes.settings = () => {
 		return {
 			get: () => doRequest( '/wp/v2/settings', 'GET' ),
-			update: data => doRequest( '/wp/v2/settings', 'POST', data ),
+			update: ( data: Partial<Settings> ) => doRequest( '/wp/v2/settings', 'POST', data ),
 		};
 	};
 
@@ -251,7 +259,7 @@ export default function wpapi<T extends CustomRoutes<T> = {}>( customRoutes?: T 
 	routes.types = () => {
 		return {
 			get: () => doRequest( '/wp/v2/types', 'GET' ),
-			getById: postType => doRequest( `'/wp/v2/types'/${postType}`, 'GET' ),
+			getById: ( postType: string ) => doRequest( `'/wp/v2/types'/${postType}`, 'GET' ),
 		};
 	};
 

@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-types -- We don't know the shape of the callback.
 type DependencyList = ReadonlyArray<unknown>;
 
 /**
@@ -10,6 +11,8 @@ type DependencyList = ReadonlyArray<unknown>;
  *
  * @since 3.4.0
  */
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- We don't know the shape of the callback.
 export function useCallback<T extends( ...args: any[] ) => any>( callback: T, dependencies: DependencyList ): T {
 	const callbackRef = {current: callback};
 	const dependenciesRef = {current: dependencies};
