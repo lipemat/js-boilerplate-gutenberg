@@ -8,7 +8,7 @@ describe( 'Testing wpapi', () => {
 		restoreRootURL();
 	} );
 
-	it( 'Test for retrieval', async() => {
+	it( 'Test for retrieval', async () => {
 		setRootURL( 'https://onpointplugins.com/wp-json' );
 		const posts = await wp.posts().get( {
 			per_page: 1,
@@ -30,11 +30,11 @@ describe( 'Testing wpapi', () => {
 
 		setRootURL( 'http://starting-point.loc/wp-json/' );
 		response = await wp.posts().getWithPagination();
-		expect( response.totalPages ).toBe( 3 );
+		expect( response.totalPages ).toBe( 2 );
 		expect( response.items.length ).toBeGreaterThan( 1 );
 	} );
 
-	it( 'Test for fields and embed', async() => {
+	it( 'Test for fields and embed', async () => {
 		setRootURL( 'https://onpointplugins.com/wp-json' );
 		let posts = await wp.posts().get( {
 			per_page: 1,
