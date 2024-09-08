@@ -46,7 +46,9 @@ export const checkStatus = ( response: Response ) => {
  */
 export const fetchHandler = <T, D = object>( requestOptions: FetchOptions<D> ): Promise<T> => {
 	const options: RequestInit = requestOptions;
-	const {url, path, data, parse = true, ...remainingOptions} = requestOptions;
+	const {data, parse = true, ...remainingOptions} = requestOptions;
+	delete remainingOptions.url;
+	delete remainingOptions.path;
 
 	let {body} = options;
 
@@ -59,7 +61,7 @@ export const fetchHandler = <T, D = object>( requestOptions: FetchOptions<D> ): 
 	};
 
 	// The `data` property is a shorthand for sending a JSON body.
-	if ( data ) {
+	if ( typeof data !== 'undefined' ) {
 		body = JSON.stringify( data );
 		headers[ 'Content-Type' ] = 'application/json';
 	}
