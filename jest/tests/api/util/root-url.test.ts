@@ -100,13 +100,6 @@ describe( 'Testing root URL', () => {
 		expect( getRootURL() ).toBe( 'https://onpointplugins.com/wp-json/' );
 		restoreRootURL();
 		expect( getRootURL() ).toBe( 'https://example.com/wp-json/' );
-
-		setInitialRootURL( '' );
-		window.ajaxurl = '/wp-admin/admin-ajax.php';
-		expect( getRootURL() ).toBe( 'http://localhost/wp-json/' );
-
-		restoreRootURL();
-		expect( getRootURL() ).toBe( 'http://localhost/wp-json/' );
 	} );
 
 
@@ -133,21 +126,5 @@ describe( 'Testing root URL', () => {
 			versionString: 'wp/v2',
 		};
 		expect( getRootURL() ).toBe( 'https://onpointplugins.com/wp-json/' );
-	} );
-
-
-	it( 'Gets root URL from ajaxurl', () => {
-		expect( () => getRootURL() ).toThrow( URIError );
-
-		window.ajaxurl = '/sub/wp-admin/admin-ajax.php';
-		expect( getRootURL() ).toBe( 'http://localhost/sub/wp-json/' );
-		const fullURL3 = getFullUrl( {
-			path: 'wp/v2/posts',
-		} );
-		expect( fullURL3 ).toBe( 'http://localhost/sub/wp-json/wp/v2/posts?_locale=user' );
-
-		window.ajaxurl = 'https://fullurl.com/wp-admin/admin-ajax.php';
-		restoreRootURL();
-		expect( getRootURL() ).toBe( 'https://fullurl.com/wp-json/' );
 	} );
 } );

@@ -1,6 +1,6 @@
 import {clearNonce, hasExternalNonce, restoreNonce, setNonce} from './nonce';
 import type {FetchOptions} from '@wordpress/api-fetch';
-import {addQueryArgs, addTrailingSlash, getQueryArg, safeUrl} from '../helpers/url';
+import {addQueryArgs, addTrailingSlash, getQueryArg} from '../helpers/url';
 
 let rootURL: string = '';
 let initialRootURL: string = '';
@@ -40,7 +40,6 @@ export function restoreRootURL(): void {
  * detect the root URL from:
  * 1. Document <link /> element (front-end).
  * 2. `wpApiSettings` any page which has `wp-api-request` enqueued. (admin)
- * 3. Use the `ajaxurl` to determine the base. (admin)
  *
  * Fallback to the current window location of still not found.
  *
@@ -56,8 +55,6 @@ export function getRootURL(): string {
 		rootURL = href;
 	} else if ( undefined !== window.wpApiSettings?.root ) {
 		rootURL = window.wpApiSettings.root;
-	} else if ( undefined !== window.ajaxurl ) {
-		rootURL = safeUrl( window.ajaxurl.replace( /wp-admin\/admin-ajax.php$/, 'wp-json/' ) ).toString();
 	} else {
 		throw new URIError( 'Unable to determine the root URL. Use `setInitialRootURL` to set the root URL.' );
 	}
