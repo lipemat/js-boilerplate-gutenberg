@@ -238,12 +238,12 @@ export default function wpapi<T extends CustomRoutes<T> = object>( customRoutes?
 	// Application passwords have special endpoints.
 	routes.applicationPasswords = () => {
 		return {
-			create: ( userId: number, data ) => doRequest( `/wp/v2/users/${userId}/application-passwords`, 'POST', data ),
-			delete: ( userId: number, uuid ) => doRequest( `/wp/v2/users/${userId}/application-passwords/${uuid}`, 'DELETE' ),
+			create: ( userId: number, data: ApplicationPasswordCreate ) => doRequest( `/wp/v2/users/${userId}/application-passwords`, 'POST', data ),
+			delete: ( userId: number, uuid: string ) => doRequest( `/wp/v2/users/${userId}/application-passwords/${uuid}`, 'DELETE' ),
 			get: ( userId: number ) => doRequest( `/wp/v2/users/${userId}/application-passwords`, 'GET' ),
-			getById: ( userId: number, uuid ) => doRequest( `/wp/v2/users/${userId}/application-passwords/${uuid}`, 'GET' ),
+			getById: ( userId: number, uuid: string ) => doRequest( `/wp/v2/users/${userId}/application-passwords/${uuid}`, 'GET' ),
 			introspect: ( userId: number ) => doRequest( `/wp/v2/users/${userId}/application-passwords/introspect`, 'GET' ),
-			update: ( userId: number, uuid, data ) => doRequest( `/wp/v2/users/${userId}/application-passwords/${uuid}`, 'PUT', data ),
+			update: ( userId: number, uuid: string, data: ApplicationPasswordCreate ) => doRequest( `/wp/v2/users/${userId}/application-passwords/${uuid}`, 'PUT', data ),
 		};
 	};
 
@@ -264,6 +264,7 @@ export default function wpapi<T extends CustomRoutes<T> = object>( customRoutes?
 	};
 
 	if ( typeof customRoutes !== 'undefined' ) {
+		// @ts-ignore -- Object keys can't be mapped.
 		Object.keys( customRoutes ).map( route => routes[ route ] = customRoutes[ route ] );
 	}
 

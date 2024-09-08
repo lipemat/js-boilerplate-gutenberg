@@ -1,5 +1,6 @@
 import {clearNonce, hasExternalNonce, restoreNonce, restoreRootURL, setInitialNonce, setNonce, setRootURL, wpapi} from '../../../../src';
 import {isNonceCleared} from '../../../../src/util/nonce';
+import type {ErrorResponse} from '../../../../src/util/parse-response';
 
 describe( 'Testing nonce', () => {
 	const wp = wpapi();
@@ -25,13 +26,12 @@ describe( 'Testing nonce', () => {
 
 		setRootURL( 'https://onpointplugins.com/wp-json' );
 		setNonce( 'nothing-good' );
-		let error;
 		try {
 			await wp.posts().get();
 		} catch ( e ) {
-			error = e;
+			const error = e as ErrorResponse;
+			expect( error.code ).toBe( 'external_rest_cookie_invalid_nonce' );
 		}
-		expect( error.code ).toBe( 'external_rest_cookie_invalid_nonce' );
 		clearNonce();
 		posts = await wp.posts().get();
 		expect( posts ).toHaveLength( 10 );
@@ -41,13 +41,14 @@ describe( 'Testing nonce', () => {
 		try {
 			await wp.posts().get();
 		} catch ( e ) {
-			error = e;
+			const error = e as ErrorResponse;
+			expect( error.code ).toBe( 'external_rest_cookie_invalid_nonce' );
 		}
-		expect( error.code ).toBe( 'external_rest_cookie_invalid_nonce' );
 		clearNonce();
 		posts = await wp.posts().get();
 		expect( posts ).toHaveLength( 10 );
 	} );
+
 
 	it( 'Test Restore Nonce', () => {
 		restoreNonce();

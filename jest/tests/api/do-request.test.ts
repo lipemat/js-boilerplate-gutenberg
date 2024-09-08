@@ -2,7 +2,7 @@ import {wpapi} from '../../../src';
 
 const mockResponse = jest.fn();
 jest.mock( '../../../src/util/request-handler', () => {
-	const fn = function( ...args ) {
+	const fn = function( ...args: never[] ) {
 		return mockResponse( ...args );
 	};
 	return {

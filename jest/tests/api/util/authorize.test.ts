@@ -1,4 +1,5 @@
 import {clearApplicationPassword, enableApplicationPassword, getAuthorizationUrl, hasApplicationPassword, setRootURL, wpapi} from '../../../../src';
+import type {ErrorResponse} from '../../../../src/util/parse-response';
 
 describe( 'Testing authorize', () => {
 	const wp = wpapi( '' );
@@ -73,8 +74,8 @@ describe( 'Testing authorize', () => {
 				status: 'publish',
 			} );
 		} catch ( e ) {
-			error = e;
+			error = e as ErrorResponse;
+			expect( error.code ).toBe( 'rest_cannot_create' );
 		}
-		expect( error.code ).toBe( 'rest_cannot_create' );
 	} );
 } );
