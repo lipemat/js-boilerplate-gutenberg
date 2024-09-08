@@ -8,8 +8,6 @@
  * @link https://make.wordpress.org/core/2020/11/05/application-passwords-integration-guide/
  *
  */
-import {fetchHandler} from './request-handler';
-import {addQueryArgs} from '../helpers/url';
 
 export interface AuthenticationRestRoute {
 	authentication: {
@@ -81,38 +79,6 @@ export function hasApplicationPassword(): boolean {
  */
 export function clearApplicationPassword(): void {
 	applicationPassword = '';
-}
-
-/**
- * Retrieve the URL to the application password endpoint on the current site.
- *
- * Used to redirect your user to a WP site which they have an account on, then
- * the WP site redirects the user back to your app with the application password
- * included.
- *
- * @link https://make.wordpress.org/core/2020/11/05/application-passwords-integration-guide/
- * @link http://starting-point.loc/wp-admin/authorize-application.php
- *
- * @param {AuthorizationParams} data
- */
-export async function getAuthorizationUrl( data: AuthorizationParams ): Promise<string | AuthenticationFailure> {
-	try {
-		const response = await fetchHandler<AuthenticationRestRoute>( {
-			path: '/',
-			method: 'GET',
-		} );
-
-		if ( ! response.authentication[ 'application-passwords' ] ) {
-			return {
-				code: 'application_passwords_disabled',
-				message: 'Application passwords are not enabled on this site.',
-				data: null,
-			};
-		}
-		return addQueryArgs( response.authentication[ 'application-passwords' ].endpoints.authorization, data );
-	} catch ( error ) {
-		return error;
-	}
 }
 
 /**
