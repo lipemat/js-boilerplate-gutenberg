@@ -33,19 +33,32 @@ function js_tests() {
         echo "${RED}$OUTPUT"
         exit_reset_colors
     fi
-    echo "${YELLOW}[pre-commit]${GREEN} JS Tests Passed!${WHITE}"
+    echo "${YELLOW}[pre-commit]${GREEN} JS Tests Passed!${RESET_COLOR}"
 
 }
 js_tests &
 
+function validate_ts() {
+    echo "${YELLOW}[pre-commit]${BLUE} Validating TS definitions... ${WHITE}"
+
+    OUTPUT=$(yarn run validate-ts 2>&1)
+     if [[ $? != 0 ]]; then
+        echo
+        echo "${BLUE}TS validation failed. Fix the error before commit!"
+        echo "${RED}$OUTPUT"
+        exit_reset_colors
+    fi
+    echo "${YELLOW}[pre-commit]${GREEN} TS validation Passed!${RESET_COLOR}"
+
+}
+validate_ts &
+
 # Go through each background task
 # If it sent exit code 1, it failed and the result from `wait` will be false.
 FAIL=0
-for job in $(jobs -p); do
-    wait "$job" || let "FAIL+=1"
+while [[ $(jobs -p | wc -l) -gt 0 ]]; do
+    wait -n || (( FAIL+=1 ))
 done
-
-echo "${RESET_COLOR}"
 
 # If any of the background tasks failed, we exit 1
 if [[ $FAIL -ne 0 ]]; then
