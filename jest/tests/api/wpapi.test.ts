@@ -49,4 +49,26 @@ describe( 'Testing wpapi', () => {
 		expect( typeof ( posts[ 0 ].title.rendered ) ).toBe( 'string' );
 		expect( posts[ 0 ].content ).toBe( undefined );
 	} );
+
+
+	test( 'Permalinks disabled', async () => {
+		global.fetch = jest.fn().mockImplementation( () => Promise.resolve( {
+			status: 200,
+			headers: new Headers(),
+			json: () => Promise.resolve( [] ),
+		} ) );
+
+		setRootURL( 'https://starting-point.loc/sub/index.php?rest_route=/' );
+		await wp.posts().getWithPagination( {
+			categories: [ 1 ],
+		} );
+		expect( global.fetch ).toHaveBeenCalledWith( 'https://starting-point.loc/sub/index.php?rest_route=%2Fwp%2Fv2%2Fposts&categories=1&_locale=user', {
+			body: undefined,
+			credentials: 'include',
+			headers: {
+				Accept: 'application/json, */*;q=0.1',
+			},
+			method: 'GET',
+		} );
+	} );
 } );

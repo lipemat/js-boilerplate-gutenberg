@@ -1,6 +1,6 @@
 import {clearNonce, hasExternalNonce, restoreNonce, setNonce} from './nonce';
 import type {FetchOptions} from '@wordpress/api-fetch';
-import {addQueryArgs, addTrailingSlash, getQueryArg} from '../helpers/url';
+import {addQueryArgs, addTrailingSlash, getQueryArg, removeLeadingSlash} from '../helpers/url';
 
 let rootURL: string = '';
 let initialRootURL: string = '';
@@ -70,7 +70,12 @@ export function getFullUrl<D = object>( requestOptions: FetchOptions<D>, withLoc
 	let url = '';
 	if ( 'undefined' === typeof requestOptions.url ) {
 		if ( 'string' === typeof requestOptions.path ) {
-			url = getRootURL() + requestOptions.path.replace( /^\//, '' );
+			url = getRootURL();
+			// Pretty permalinks are disabled.
+			if ( url.indexOf( '?' ) > -1 ) {
+				requestOptions.path = requestOptions.path.replace( '?', '&' );
+			}
+			url += removeLeadingSlash( requestOptions.path );
 		} else {
 			url = getRootURL();
 		}

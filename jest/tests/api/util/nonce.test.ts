@@ -1,7 +1,7 @@
 import {clearNonce, hasExternalNonce, restoreNonce, setInitialNonce, setNonce, setRootURL, wpapi} from '../../../../src';
 import {isNonceCleared} from '../../../../src/util/nonce';
 import type {ErrorResponse} from '../../../../src/util/parse-response';
-import {setInitialRootURL} from '../../../../src/util/root-url';
+import {setInitialRootURL} from '../../../../src/index';
 
 describe( 'Testing nonce', () => {
 	const wp = wpapi();
