@@ -1,4 +1,3 @@
-import {__} from '@wordpress/i18n';
 import {hasExternalNonce} from './nonce';
 
 /**
@@ -39,7 +38,7 @@ const parseResponse = ( response, shouldParseResponse = true ) => {
 const parseJsonAndNormalizeError = async ( response: Response ) => {
 	const invalidJsonError = {
 		code: 'invalid_json',
-		message: __( 'The response is not a valid JSON response.' ),
+		message: 'The response is not a valid JSON response.',
 	};
 
 	if ( ! response || ! response.json ) {
@@ -72,7 +71,7 @@ export async function parseAndThrowError<T>( response: Response, shouldParseResp
 	const error = await parseJsonAndNormalizeError( response );
 	const unknownError = {
 		code: 'unknown_error',
-		message: __( 'An unknown error occurred.' ),
+		message: 'An unknown error occurred.',
 	};
 	// Prevent infinite loops when external requests fail.
 	if ( 'rest_cookie_invalid_nonce' === error.code && hasExternalNonce() ) {
