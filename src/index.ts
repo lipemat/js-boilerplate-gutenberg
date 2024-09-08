@@ -1,6 +1,6 @@
 export * from './wpapi';
 export {default as wpapi} from './wpapi';
-export {setRootURL, restoreRootURL} from './util/root-url';
+export {setRootURL, restoreRootURL, setInitialRootURL} from './util/root-url';
 export {fetchHandler, getAuthorizationUrl, refreshNonce} from './util/request-handler';
 export * from './util/authorize';
 export * from './util/autoload';
