@@ -27,8 +27,8 @@ If you are using PNP you may add the definitions to your `package.json` like so.
 
 ```JSON 
 "dependencies": {
-    "@types/lipemat__js-boilerplate": "lipemat/types-js-boilerplate#semver:^1.0.0"
-  }
+"@types/lipemat__js-boilerplate": "lipemat/types-js-boilerplate#semver:^3.0.0"
+}
 ```
 
 ### Application Passwords
@@ -43,9 +43,9 @@ import {setRootURL, wpapi, enableApplicationPassword, getAuthorizationUrl} from 
 setRootURL( 'https://starting-point.dev/wp-json/' );
 
 // Retrieve the URL to redirect your users to for authorization.
-const URL = await getAuthorizationUrl({
-    app_name: 'Test Application'
-});
+const URL = await getAuthorizationUrl( {
+	app_name: 'Test Application'
+} );
 
 // Add an application password to all subsequent requests.
 enableApplicationPassword( 'test', 'nnXX zPX6 5Fqc 21tG zLH0 Rtep' );
@@ -59,7 +59,7 @@ const post = await wp.posts().create( {
 
 ### Hot Module Reloading For Blocks and Plugins
 
-Helper methods exists for automatically loading block or plugin files based on a `REGEX` filter as well as handling the various `register` and `unregister` requirements to make HMR work. 
+Helper methods exists for automatically loading block or plugin files based on a `REGEX` filter as well as handling the various `register` and `unregister` requirements to make HMR work.
 
 Loaded modules are expected to export:
 1. `name`: Name of plugin or block (id format).
@@ -95,11 +95,11 @@ Will return the current meta state as well as the original meta state before any
 
 You may work with a single meta key like so:
 ```typescript
-const [value, updateValue, previous] = usePostMeta( 'custom-meta-key' );
+const [ value, updateValue, previous ] = usePostMeta( 'custom-meta-key' );
 ```
 Or by default work with the whole meta object:
 ```typescript
-const [values, updateValues, previous] = usePostMeta();
+const [ values, updateValues, previous ] = usePostMeta();
 ```
 
 #### `useTerms`
@@ -108,7 +108,6 @@ const [values, updateValues, previous] = usePostMeta();
 
 Will return the current terms state as well as the original terms state before any changes were made.
 
-
 ```typescript
-const [terms, updateTerms, previous] = useTerms( 'category' );
+const [ terms, updateTerms, previous ] = useTerms( 'category' );
 ```

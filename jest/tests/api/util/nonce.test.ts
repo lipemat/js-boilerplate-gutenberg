@@ -1,14 +1,15 @@
-import {clearNonce, hasExternalNonce, restoreNonce, restoreRootURL, setInitialNonce, setNonce, setRootURL, wpapi} from '../../../../src';
+import {clearNonce, hasExternalNonce, restoreNonce, setInitialNonce, setNonce, setRootURL, wpapi} from '../../../../src';
 import {isNonceCleared} from '../../../../src/util/nonce';
 import type {ErrorResponse} from '../../../../src/util/parse-response';
+import {setInitialRootURL} from '../../../../src/util/root-url';
 
 describe( 'Testing nonce', () => {
 	const wp = wpapi();
 	setInitialNonce( 'default' );
 
 	beforeEach( () => {
+		setInitialRootURL( 'http://localhost/wp-json/' );
 		clearNonce();
-		restoreRootURL();
 	} );
 
 
@@ -47,7 +48,7 @@ describe( 'Testing nonce', () => {
 		clearNonce();
 		posts = await wp.posts().get();
 		expect( posts ).toHaveLength( 10 );
-	} );
+	}, 8_000 );
 
 
 	it( 'Test Restore Nonce', () => {

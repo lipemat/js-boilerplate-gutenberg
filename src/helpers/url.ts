@@ -21,11 +21,33 @@ export function addQueryArgs( url: string = '', args: QueryArgs ) {
 	return url.startsWith( 'http://' ) || url.startsWith( 'https://' ) ? path.toString() : path.pathname + path.search;
 }
 
+/**
+ * Adds a trailing slash to a URL if it doesn't already have one.
+ */
+export function addTrailingSlash( url: string ): string {
+	const trimmedURL = url.trim();
+	if ( '' === trimmedURL ) {
+		return url;
+	}
+	return url.replace( /\/?$/, '/' );
+}
+
+/**
+ * Removes a leading slash from a URL if it has one.
+ */
+export function removeLeadingSlash( url: string ): string {
+	const trimmedURL = url.trim();
+	if ( '' === trimmedURL ) {
+		return url;
+	}
+	return url.replace( /^\//, '' );
+}
+
 
 /**
  * Retrieve a URL object from either a full URL or a path.
  */
-function safeUrl( url: string ): URL {
+export function safeUrl( url: string ): URL {
 	if ( url.startsWith( 'http://' ) || url.startsWith( 'https://' ) ) {
 		return new URL( url );
 	}

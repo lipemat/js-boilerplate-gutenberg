@@ -1,17 +1,74 @@
 import {clearNonce, hasExternalNonce, restoreNonce, setNonce} from './nonce';
 import type {FetchOptions} from '@wordpress/api-fetch';
-import {addQueryArgs, getQueryArg} from '../helpers/url';
+import {addQueryArgs, addTrailingSlash, getQueryArg, safeUrl} from '../helpers/url';
 
 let rootURL: string = '';
+let initialRootURL: string = '';
 
-export function getRootURL(): string {
-	if ( '' === rootURL ) {
-		return window.location.origin + '/wp-json/';
-	}
-
-	return rootURL.replace( /\/$/, '' ) + '/';
+/**
+ * Set default the Root URL to use for all requests when
+ * `setRootURL` has not been called, or the `url` has been reset
+ * using `restoreRootURL`.
+ *
+ * Optional function for complex setup where automatic detection
+ * is impossible or not desired.
+ */
+export function setInitialRootURL( url: string ): void {
+	initialRootURL = url;
+	rootURL = url;
 }
 
+
+/**
+ * Restore original root URL either set by `setRootInitialURL`
+ * or automatically detected from the document.
+ */
+export function restoreRootURL(): void {
+	if ( '' === initialRootURL ) {
+		rootURL = '';
+		rootURL = getRootURL();
+	} else {
+		rootURL = initialRootURL;
+	}
+}
+
+
+/**
+ * Get the Root URL for the current site.
+ *
+ * If the root URL has not been set, it will attempt to
+ * detect the root URL from:
+ * 1. Document <link /> element (front-end).
+ * 2. `wpApiSettings` any page which has `wp-api-request` enqueued. (admin)
+ * 3. Use the `ajaxurl` to determine the base. (admin)
+ *
+ * Fallback to the current window location of still not found.
+ *
+ * If not working in specific cases, use `setRootURL` to set the root URL.
+ */
+export function getRootURL(): string {
+	if ( '' !== rootURL ) {
+		return addTrailingSlash( rootURL );
+	}
+	const linkElement = document.querySelector( 'link[rel="https://api.w.org/"]' );
+	const href = linkElement?.getAttribute( 'href' );
+	if ( 'string' === typeof href ) {
+		rootURL = href;
+	} else if ( undefined !== window.wpApiSettings?.root ) {
+		rootURL = window.wpApiSettings.root;
+	} else if ( undefined !== window.ajaxurl ) {
+		rootURL = safeUrl( window.ajaxurl.replace( /wp-admin\/admin-ajax.php$/, 'wp-json/' ) ).toString();
+	} else {
+		throw new URIError( 'Unable to determine the root URL. Use `setInitialRootURL` to set the root URL.' );
+	}
+
+	return addTrailingSlash( rootURL );
+}
+
+
+/**
+ * Get the full URL for a request.
+ */
 export function getFullUrl<D = object>( requestOptions: FetchOptions<D>, withLocal: boolean = true ): string {
 	let url = '';
 	if ( 'undefined' === typeof requestOptions.url ) {
@@ -24,20 +81,11 @@ export function getFullUrl<D = object>( requestOptions: FetchOptions<D>, withLoc
 		url = requestOptions.url;
 	}
 	if ( withLocal ) {
-		return userLocaleMiddleware( url );
+		return addLocalToRequests( url );
 	}
 	return url;
 }
 
-
-/**
- * Restore original root URL set by WordPress.
- *
- * @since 1.3.0
- */
-export function restoreRootURL(): void {
-	rootURL = '';
-}
 
 /**
  * Set the Root URL for any following requests.
@@ -75,7 +123,11 @@ export function setRootURL( url: string, nonce?: string ): void {
 	}
 }
 
-const userLocaleMiddleware = ( url: string ): string => {
+/**
+ * If the URL does not have a locale, add the default
+ * "_locale=user" to the URL.
+ */
+const addLocalToRequests = ( url: string ): string => {
 	if ( '' === getQueryArg( url, '_locale' ) ) {
 		url = addQueryArgs( url, {_locale: 'user'} );
 	}
