@@ -1,3 +1,5 @@
+export type QueryArgs = { [ name: string ]: string | number };
+
 export function getQueryArg( url: string, parameter: string ): string {
 	const urlParams = safeUrl( url ).searchParams;
 	if ( urlParams.has( parameter ) ) {
@@ -7,7 +9,7 @@ export function getQueryArg( url: string, parameter: string ): string {
 }
 
 
-export function addQueryArgs( url: string = '', args: { [ name: string ]: string | number } ) {
+export function addQueryArgs( url: string = '', args: QueryArgs ) {
 	const path: URL = safeUrl( url );
 	Object.keys( args ).forEach( arg => {
 		if ( path.searchParams.has( arg ) ) {

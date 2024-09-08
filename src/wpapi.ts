@@ -13,10 +13,12 @@ import type {MenuItem, MenuItemCreate, MenuItemsQuery, MenuItemUpdate} from '@wo
 import type {MenuLocation} from '@wordpress/api/menu-locations';
 import type {EditorBlock, EditorBlockCreate, EditorBlocksQuery, EditorBlockUpdate} from '@wordpress/api/editor-blocks';
 import type {TaxonomiesQuery} from '@wordpress/api/taxonomies';
-import {addQueryArgs} from './helpers/url';
+import {addQueryArgs, type QueryArgs} from './helpers/url';
+import type {Status, StatusQuery} from '@wordpress/api/statuses';
 
 export type CustomRoutes<K> = {
-	[path in keyof K]: () => Partial<RequestMethods<object, object, object>> | RequestMethods<object, object, object>;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- This is a super generic type.
+	[path in keyof K]: () => Partial<RequestMethods<any, any, any>> | RequestMethods<any, any, any>;
 }
 
 export interface Pagination<T> {
@@ -47,10 +49,9 @@ export interface Routes {
 		get: () => Promise<{ [ name: string ]: T }>;
 		getById: ( location: string ) => Promise<T>;
 	};
-	statuses: <T = object, Q = object, U = object>() => RequestMethods<T, Q, U>;
 	pages: <T = Page, Q = PagesQuery, U = PageUpdate, C = PageCreate, E = Page<'edit'>>() => RequestMethods<T, Q, U, C, E>;
 	posts: <T = Post, Q = PostsQuery, U = PostUpdate, C = PostCreate, E = Post<'edit'>>() => RequestMethods<T, Q, U, C, E>;
-	tags: <T = object, Q = object, U = object, C = U>() => Omit<RequestMethods<T, Q, U, C>, 'trash'>;
+	tags: <T = Category, Q = CategoriesQuery, U = CategoryUpdate, C = CategoryCreate, E = Category<'edit'>>() => Omit<RequestMethods<T, Q, U, C, E>, 'trash'>;
 	taxonomies: <T = Taxonomy, Q = TaxonomiesQuery>() => Pick<RequestMethods<T, Q, never>, 'get' | 'getById'>;
 	types: <T = Type, Q = TypesQuery>() => {
 		get: ( options?: Q ) => Promise<{ [ type: string ]: T }>;
@@ -67,14 +68,17 @@ export interface Routes {
 		get: () => Promise<T>;
 		update: ( data: U ) => Promise<T>;
 	};
+	statuses: <T = Status, Q = StatusQuery>() => {
+		get: ( options?: Q ) => Promise<{ [ status: string ]: T }>;
+	};
 }
 
 
 /**
  * T = Object Structure.
  * Q = Query params.
- * U = Update object properties.
- * C = Create object properties.
+ * U = Update any properties.
+ * C = Create any properties.
  * E = Object properties under 'edit' context.
  */
 export interface RequestMethods<T, Q, U, C = U, E = T> {
@@ -91,8 +95,8 @@ export interface RequestMethods<T, Q, U, C = U, E = T> {
 /**
  * T = Object Structure.
  * Q = Query params.
- * U = Update object properties.
- * C = Create object properties.
+ * U = Update any properties.
+ * C = Create any properties.
  * E = Object properties under 'edit' context.
  *
  * @param  path
@@ -120,15 +124,15 @@ export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMet
 		 */
 		get: ( data?: Q | undefined ) => doRequest<T[], Q>( path, 'GET', data as Q ),
 		/**
-		 * Get an item by it's id.
+		 * Get an item by its id.
 		 *
-		 * @param          id
-		 * @param {Object} data = {
-		 *                      context?: set to 'edit' if authenticated and want all properties.
-		 *                      password?: if the item is password protected (Probably only posts and pages);
-		 *                      }
+		 * @param  id
+		 * @param  data = {
+		 *              context?: set to 'edit' if authenticated and want all properties.
+		 *              password?: if the item is password protected (Probably only posts and pages);
+		 *              }
 		 */
-		getById: ( id, data? ) => doRequest<T, {
+		getById: ( id: number, data? ) => doRequest<T, {
 			password?: string,
 			context?: Context
 		}>( path + '/' + id, 'GET', data ),
@@ -165,7 +169,7 @@ export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMet
  * @param  data          - Query params.
  * @param  parse         - To parse the json result, or return raw Request
  */
-export async function doRequest<T, D = object>( path: string, requestMethod: Method, data?: D, parse: boolean = true ): Promise<T> {
+export async function doRequest<T, D = QueryArgs>( path: string, requestMethod: Method, data?: D, parse: boolean = true ): Promise<T> {
 	if ( 'undefined' === typeof data || 'GET' === requestMethod || 'OPTIONS' === requestMethod ) {
 		return fetchHandler<T, D>( {
 			method: requestMethod as Exclude<Method, 'POST' | 'PUT' | 'PATCH' | 'DELETE'>,
@@ -189,7 +193,7 @@ export async function doRequest<T, D = object>( path: string, requestMethod: Met
  * @param  requestMethod - GET, POST, PUT, DELETE, PATCH
  * @param  data          - Query params.
  */
-export async function doRequestWithPagination<T, D = object>( path: string, requestMethod: Method, data?: D ): Promise<Pagination<T>> {
+export async function doRequestWithPagination<T, D = QueryArgs>( path: string, requestMethod: Method, data?: D ): Promise<Pagination<T>> {
 	const Result = await doRequest<Response, D>( path, requestMethod, data, false );
 	const items = await parseResponseAndNormalizeError<T[]>( Result );
 
@@ -200,7 +204,7 @@ export async function doRequestWithPagination<T, D = object>( path: string, requ
 	};
 }
 
-export default function wpapi<T extends CustomRoutes<T> = object>( customRoutes?: T ): Routes & T {
+export default function wpapi<T extends CustomRoutes<T>>( customRoutes?: T ): Routes & T {
 	const routes: { [ key: string ]: () => object } = {};
 
 	const coreRoutes = [
@@ -211,7 +215,6 @@ export default function wpapi<T extends CustomRoutes<T> = object>( customRoutes?
 		'menus',
 		'menu-locations',
 		'menu-items',
-		'statuses',
 		'pages',
 		'posts',
 		'tags',
@@ -252,6 +255,13 @@ export default function wpapi<T extends CustomRoutes<T> = object>( customRoutes?
 		return {
 			get: () => doRequest( '/wp/v2/settings', 'GET' ),
 			update: ( data: Partial<Settings> ) => doRequest( '/wp/v2/settings', 'POST', data ),
+		};
+	};
+
+	// Statuses have limited endpoints.
+	routes.statuses = () => {
+		return {
+			get: ( data?: StatusQuery ) => doRequest( '/wp/v2/statuses', 'GET', data ?? {} ),
 		};
 	};
 
