@@ -68,7 +68,7 @@ module.exports = [
 ].reduce(
 	( externals, name ) => ( {
 		...externals,
-		[ `@wordpress/${name}` ]: `wp.${camelCaseDash( name )}`,
+		[ `@wordpress/${name}` ]: `window.wp?.${camelCaseDash( name )}`,
 	} ),
 	{
 		lodash: 'lodash',
