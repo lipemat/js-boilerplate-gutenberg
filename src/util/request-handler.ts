@@ -1,5 +1,4 @@
 import {parseAndThrowError, parseResponseAndNormalizeError} from './parse-response';
-import {__} from '@wordpress/i18n';
 import type {FetchOptions} from '@wordpress/api-fetch';
 import {getFullUrl} from './root-url';
 import {getNonce, refreshNonce} from './nonce';
@@ -45,7 +44,7 @@ export const checkStatus = ( response: Response ) => {
  * Similar to apiFetch but without middle ware.
  *
  */
-export const fetchHandler = <T, D = {}>( requestOptions: FetchOptions<D> ): Promise<T> => {
+export const fetchHandler = <T, D = object>( requestOptions: FetchOptions<D> ): Promise<T> => {
 	const options: RequestInit = requestOptions;
 	const {url, path, data, parse = true, ...remainingOptions} = requestOptions;
 
@@ -100,7 +99,7 @@ export const fetchHandler = <T, D = {}>( requestOptions: FetchOptions<D> ): Prom
 
 					throw {
 						code: 'fetch_error',
-						message: __( 'You are probably offline.' ),
+						message: 'You are probably offline.',
 					};
 				},
 			)
