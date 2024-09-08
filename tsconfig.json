@@ -3,8 +3,10 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "JS Boilerplate Gutenberg",
   "include": [
-    "./src/**/*",
-    "./jest/**/*"
+    "config",
+    "helpers",
+    "jest",
+    "src"
   ],
   "exclude": [
     "node_modules"
