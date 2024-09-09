@@ -1,7 +1,7 @@
 export * from './wpapi';
 export {default as wpapi} from './wpapi';
 export {setRootURL, restoreRootURL, setInitialRootURL} from './util/root-url';
-export {fetchHandler, getAuthorizationUrl, refreshNonce} from './util/request-handler';
+export {fetchHandler, getAuthorizationUrl, maybeRefreshNonce} from './util/request-handler';
 export * from './util/authorize';
 export * from './util/autoload';
 export {setNonce, restoreNonce, clearNonce, hasExternalNonce, setInitialNonce} from './util/nonce';

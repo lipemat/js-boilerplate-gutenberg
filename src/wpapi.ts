@@ -1,11 +1,11 @@
 import type {ApplicationPassword, ApplicationPasswordCreate, Context, Global, Method, Post, PostsQuery, Settings, Taxonomy, Type, TypesQuery} from '@wordpress/api';
-import {parseResponseAndNormalizeError} from './util/parse-response';
+import {type ErrorResponse, parseResponseAndNormalizeError} from './util/parse-response';
 import type {CategoriesQuery, Category, CategoryCreate, CategoryUpdate} from '@wordpress/api/categories';
 import type {Comment, CommentCreate, CommentsQuery, CommentUpdate} from '@wordpress/api/comments';
 import type {PostCreate, PostUpdate} from '@wordpress/api/posts';
 import type {Page, PageCreate, PagesQuery, PageUpdate} from '@wordpress/api/pages';
 import type {Media, MediaCreate, MediaQuery, MediaUpdate} from '@wordpress/api/media';
-import {fetchHandler} from './util/request-handler';
+import {fetchHandler, maybeRefreshNonce} from './util/request-handler';
 import type {SearchItem, SearchQuery} from '@wordpress/api/search';
 import type {Menu, MenuCreate, MenusQuery, MenuUpdate} from '@wordpress/api/menus';
 import type {User, UserCreate, UsersQuery, UserUpdate} from '@wordpress/api/users';
@@ -194,7 +194,14 @@ export async function doRequest<T, D = QueryArgs>( path: string, requestMethod: 
  * @param  data          - Query params.
  */
 export async function doRequestWithPagination<T, D = QueryArgs>( path: string, requestMethod: Method, data?: D ): Promise<Pagination<T>> {
-	const Result = await doRequest<Response, D>( path, requestMethod, data, false );
+	let Result: Response;
+	try {
+		Result = await doRequest<Response, D>( path, requestMethod, data, false );
+	} catch ( error ) {
+		const parsedError: ErrorResponse = await parseResponseAndNormalizeError<ErrorResponse>( error as Response );
+		return maybeRefreshNonce<Pagination<T>>( parsedError, () => doRequestWithPagination( path, requestMethod, data ) );
+	}
+
 	const items = await parseResponseAndNormalizeError<T[]>( Result );
 
 	return {

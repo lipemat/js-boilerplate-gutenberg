@@ -98,7 +98,7 @@ export const fetchHandler = <T, D = object>( requestOptions: FetchOptions<D> ): 
 						.then( ( response: Response ) =>
 							parseResponseAndNormalizeError<T>( response, parse ),
 						)
-						.catch( response => refreshNonce<T, D>( response, requestOptions )
+						.catch( response => maybeRefreshNonce<T>( response, () => fetchHandler<T, D>( requestOptions ) )
 						),
 				( err: Error | null ) => {
 					// Re-throw AbortError for the users to handle it themselves.
@@ -149,12 +149,13 @@ export async function getAuthorizationUrl( data: AuthorizationParams ): Promise<
 
 /**
  * Refresh the nonce if the request failed because the nonce has expired.
+ * Request will fail if the user is not logged in.
  *
  * Similar to the `apiFetch` function in the `@wordpress/api-fetch` package.
  *
- * See @wordpress/api-fetch.apiFetch
+ * @see @wordpress/api-fetch.apiFetch
  */
-export function refreshNonce<T, D = object>( error: ErrorResponse, requestOptions: FetchOptions<D> ): Promise<T> {
+export function maybeRefreshNonce<T>( error: ErrorResponse, onComplete: () => Promise<T> ): Promise<T> {
 	if ( error.code !== 'rest_cookie_invalid_nonce' ) {
 		return Promise.reject( error );
 	}
@@ -170,7 +171,7 @@ export function refreshNonce<T, D = object>( error: ErrorResponse, requestOption
 			.then( data => data.text() )
 			.then( text => {
 				setNonce( text );
-				return fetchHandler<T, D>( requestOptions );
+				return onComplete();
 			} )
 			.finally( () => {
 				refreshingNonce = false;
