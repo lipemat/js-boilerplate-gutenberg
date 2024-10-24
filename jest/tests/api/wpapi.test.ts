@@ -9,6 +9,7 @@ describe( 'Testing wpapi', () => {
 		clearNonce();
 	} );
 
+
 	it( 'Test for retrieval', async () => {
 		setRootURL( 'https://onpointplugins.com/wp-json' );
 		const posts = await wp.posts().get( {
@@ -19,6 +20,7 @@ describe( 'Testing wpapi', () => {
 		const single = await wp.posts().getById( posts[ 0 ].id );
 		expect( single.title ).toEqual( posts[ 0 ].title );
 	} );
+
 
 	it( 'Test for pagination', async () => {
 		setRootURL( 'https://onpointplugins.com/wp-json' );
@@ -34,6 +36,7 @@ describe( 'Testing wpapi', () => {
 		expect( response.totalPages ).toBe( 2 );
 		expect( response.items.length ).toBeGreaterThan( 1 );
 	} );
+
 
 	it( 'Test for fields and embed', async () => {
 		setRootURL( 'https://onpointplugins.com/wp-json' );

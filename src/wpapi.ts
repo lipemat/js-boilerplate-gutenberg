@@ -13,7 +13,7 @@ import type {MenuItem, MenuItemCreate, MenuItemsQuery, MenuItemUpdate} from '@wo
 import type {MenuLocation} from '@wordpress/api/menu-locations';
 import type {EditorBlock, EditorBlockCreate, EditorBlocksQuery, EditorBlockUpdate} from '@wordpress/api/editor-blocks';
 import type {TaxonomiesQuery} from '@wordpress/api/taxonomies';
-import {addQueryArgs, type QueryArgs} from './helpers/url';
+import {addLeadingSlash, addQueryArgs, addTrailingSlash, type QueryArgs} from './helpers/url';
 import type {Status, StatusQuery} from '@wordpress/api/statuses';
 
 export type CustomRoutes<K> = {
@@ -102,13 +102,15 @@ export interface RequestMethods<T, Q, U, C = U, E = T> {
  * @param  path
  */
 export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMethods<T, Q, U, C, E> {
+	const sanitizedPath = addLeadingSlash( path );
+
 	return {
 		/**
 		 * Create a new item.
 		 *
 		 * @param  data
 		 */
-		create: data => doRequest<E, C>( path, 'POST', data ),
+		create: data => doRequest<E, C>( sanitizedPath, 'POST', data ),
 		/**
 		 * Force delete while skipping trash.
 		 *
@@ -116,13 +118,13 @@ export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMet
 		 */
 		delete: id => doRequest<{ deleted: boolean, previous: E }, {
 			force: true
-		}>( path + '/' + id, 'DELETE', {force: true} ),
+		}>( addTrailingSlash( sanitizedPath ) + id, 'DELETE', {force: true} ),
 		/**
 		 * Get items based on query arguments or no query arguments for default response.
 		 *
 		 * @param  data
 		 */
-		get: ( data?: Q | undefined ) => doRequest<T[], Q>( path, 'GET', data as Q ),
+		get: ( data?: Q | undefined ) => doRequest<T[], Q>( sanitizedPath, 'GET', data as Q ),
 		/**
 		 * Get an item by its id.
 		 *
@@ -135,14 +137,14 @@ export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMet
 		getById: ( id: number, data? ) => doRequest<T, {
 			password?: string,
 			context?: Context
-		}>( path + '/' + id, 'GET', data ),
+		}>( addTrailingSlash( sanitizedPath ) + id, 'GET', data ),
 		/**
 		 * Same as `get` but returns the pagination information as well as
 		 * the items.
 		 *
 		 * @param  data
 		 */
-		getWithPagination: ( data?: Q | undefined ) => doRequestWithPagination<T, Q>( path, 'GET', data as Q ),
+		getWithPagination: ( data?: Q | undefined ) => doRequestWithPagination<T, Q>( sanitizedPath, 'GET', data as Q ),
 		/**
 		 * Move an item to trash without force deleting it.
 		 * Many types do not support this method and must use
@@ -150,13 +152,13 @@ export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMet
 		 *
 		 * @param  id
 		 */
-		trash: id => doRequest<E>( path + '/' + id, 'DELETE' ),
+		trash: id => doRequest<E>( addTrailingSlash( sanitizedPath ) + id, 'DELETE' ),
 		/**
 		 * Update an item.
 		 *
 		 * @param  data
 		 */
-		update: data => doRequest<E, U>( path + '/' + data.id, 'PATCH', data ),
+		update: data => doRequest<E, U>( addTrailingSlash( sanitizedPath ) + data.id, 'PATCH', data ),
 	};
 }
 
