@@ -1,8 +1,12 @@
+##########################################################
+# Publish Beta version on npm.js
+#
+# @version 4.0.0
+#
+###########################################################
+
 name: Publish Beta
-env:
-  VERSION: 3.3.0
-  NODE_VERSION: '20.11.0'
-  TZ: 'America/Chicago'
+run-name: Publish beta version ${{ github.ref_name }}.
 
 on:
   push:
@@ -12,14 +16,9 @@ on:
 jobs:
   publish:
     name: Publish Beta on npm.js
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v4
-
-      - uses: ./.github/actions/setup
-
-      - name: Publish to NPM
-        run: npm publish --tag beta
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+    uses: lipemat/public-actions/.github/workflows/publish-package.yml@version/1
+    with:
+      beta: true
+      nodeVersion: '20.11.0'
+      withInstall: true
+    secrets: inherit
