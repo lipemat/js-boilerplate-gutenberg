@@ -16,7 +16,7 @@ on:
 jobs:
   publish:
     name: Publish Beta on npm.js
-    uses: lipemat/public-actions/.github/workflows/public-package.yml@version/1
+    uses: lipemat/public-actions/.github/workflows/publish-package.yml@version/1
     with:
       beta: true
       nodeVersion: '20.11.0'
