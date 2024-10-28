@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/lipemat/js-boilerplate-gutenberg#readme",
   "dependencies": {
-    "@types/lipemat__js-boilerplate": "lipemat/types-js-boilerplate#semver:^3"
+    "@types/lipemat__js-boilerplate": "github:lipemat/types-js-boilerplate#semver:^3"
   },
   "devDependencies": {
     "@lipemat/js-boilerplate": "^10.4.0",
