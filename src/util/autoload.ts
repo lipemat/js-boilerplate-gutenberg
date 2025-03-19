@@ -44,7 +44,7 @@ import {registerFormatType, unregisterFormatType, type WPFormat} from '@wordpres
  * exclude = Exclude a plugin or block from the current context.
  *
  */
-export type PluginModule<T = BlockSettings<object> | PluginSettings> = {
+export type PluginModule<T = BlockSettings<object> | PluginSettings | WPFormat> = {
 	name: string;
 	settings: T;
 	exclude?: boolean;
@@ -101,7 +101,7 @@ export const autoloadPlugins = ( getContext: () => __WebpackModuleApi.RequireCon
  * @param pluginModule
  */
 export const autoloadFormats = ( getContext: () => __WebpackModuleApi.RequireContext, pluginModule: NodeJS.Module ) => {
-	autoload<PluginSettings>( {
+	autoload<WPFormat>( {
 		afterReload: () => {
 		},
 		beforeReload: () => {
@@ -136,7 +136,7 @@ type Autoload<T> = {
  * which already exist in the cache are unregistered with the provided function,
  * then any incoming (new or updated) modules will be registered.
  */
-export const autoload = <T extends BlockSettings<object> | PluginSettings>( {
+export const autoload = <T extends BlockSettings<object> | PluginSettings | WPFormat>( {
 	afterReload,
 	beforeReload,
 	getContext,
