@@ -6,7 +6,6 @@
  * 2. Have SSL or 'WP_ENVIRONMENT_TYPE' set to 'local'.
  *
  * @link https://make.wordpress.org/core/2020/11/05/application-passwords-integration-guide/
- *
  */
 
 export interface AuthenticationRestRoute {
@@ -26,7 +25,7 @@ export interface AuthenticationFailure {
 }
 
 export type AuthorizationParams = {
-	/* eslint-disable camelcase */
+
 	/**
 	 * Plain text application identifier.
 	 */
@@ -57,7 +56,7 @@ export type AuthorizationParams = {
 	 * If `success_url` is also omitted will direct to WP dashboard.
 	 */
 	reject_url?: string;
-	/* eslint-enable camelcase */
+
 }
 
 let applicationPassword: string = '';

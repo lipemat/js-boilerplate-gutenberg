@@ -99,7 +99,7 @@ export interface RequestMethods<T, Q, U, C = U, E = T> {
  * C = Create any properties.
  * E = Object properties under 'edit' context.
  *
- * @param  path
+ * @param path
  */
 export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMethods<T, Q, U, C, E> {
 	const sanitizedPath = addLeadingSlash( path );
@@ -108,13 +108,13 @@ export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMet
 		/**
 		 * Create a new item.
 		 *
-		 * @param  data
+		 * @param data
 		 */
 		create: data => doRequest<E, C>( sanitizedPath, 'POST', data ),
 		/**
 		 * Force delete while skipping trash.
 		 *
-		 * @param  id
+		 * @param id
 		 */
 		delete: id => doRequest<{ deleted: boolean, previous: E }, {
 			force: true
@@ -122,17 +122,17 @@ export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMet
 		/**
 		 * Get items based on query arguments or no query arguments for default response.
 		 *
-		 * @param  data
+		 * @param data
 		 */
 		get: ( data?: Q | undefined ) => doRequest<T[], Q>( sanitizedPath, 'GET', data as Q ),
 		/**
 		 * Get an item by its id.
 		 *
-		 * @param  id
-		 * @param  data = {
-		 *              context?: set to 'edit' if authenticated and want all properties.
-		 *              password?: if the item is password protected (Probably only posts and pages);
-		 *              }
+		 * @param id
+		 * @param data = {
+		 *             context?: set to 'edit' if authenticated and want all properties.
+		 *             password?: if the item is password protected (Probably only posts and pages);
+		 *             }
 		 */
 		getById: ( id: number, data? ) => doRequest<T, {
 			password?: string,
@@ -142,7 +142,7 @@ export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMet
 		 * Same as `get` but returns the pagination information as well as
 		 * the items.
 		 *
-		 * @param  data
+		 * @param data
 		 */
 		getWithPagination: ( data?: Q | undefined ) => doRequestWithPagination<T, Q>( sanitizedPath, 'GET', data as Q ),
 		/**
@@ -150,13 +150,13 @@ export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMet
 		 * Many types do not support this method and must use
 		 * the `delete` method.
 		 *
-		 * @param  id
+		 * @param id
 		 */
 		trash: id => doRequest<E>( addTrailingSlash( sanitizedPath ) + id, 'DELETE' ),
 		/**
 		 * Update an item.
 		 *
-		 * @param  data
+		 * @param data
 		 */
 		update: data => doRequest<E, U>( addTrailingSlash( sanitizedPath ) + data.id, 'PATCH', data ),
 	};
@@ -166,10 +166,10 @@ export function createMethods<T, Q, U, C = U, E = T>( path: string ): RequestMet
  * T = Object structure | Response if parse is false.
  * D = Query params.
  *
- * @param  path          - Path relative to root.
- * @param  requestMethod - GET, POST, PUT, DELETE, PATCH
- * @param  data          - Query params.
- * @param  parse         - To parse the json result, or return raw Request
+ * @param path          - Path relative to root.
+ * @param requestMethod - GET, POST, PUT, DELETE, PATCH
+ * @param data          - Query params.
+ * @param parse         - To parse the json result, or return raw Request
  */
 export async function doRequest<T, D = QueryArgs>( path: string, requestMethod: Method, data?: D, parse: boolean = true ): Promise<T> {
 	if ( 'undefined' === typeof data || 'GET' === requestMethod || 'OPTIONS' === requestMethod ) {
@@ -191,9 +191,9 @@ export async function doRequest<T, D = QueryArgs>( path: string, requestMethod: 
  * T = Object structure.
  * D = Query params.
  *
- * @param  path          - Path relative to root.
- * @param  requestMethod - GET, POST, PUT, DELETE, PATCH
- * @param  data          - Query params.
+ * @param path          - Path relative to root.
+ * @param requestMethod - GET, POST, PUT, DELETE, PATCH
+ * @param data          - Query params.
  */
 export async function doRequestWithPagination<T, D = QueryArgs>( path: string, requestMethod: Method, data?: D ): Promise<Pagination<T>> {
 	let Result: Response;

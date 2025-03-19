@@ -57,7 +57,6 @@ export function setNonce( nonce: string ): void {
  * Middleware for clearing nonce values to allow external requests.
  *
  * @link https://developer.wordpress.org/block-editor/packages/packages-api-fetch/#middlewares
- *
  */
 export function clearNonce(): void {
 	currentNonce = '';

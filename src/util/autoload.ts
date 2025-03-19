@@ -28,12 +28,11 @@
  *
  * @link https://github.com/kadamwhite/wp-block-hmr-demo
  * @link https://www.npmjs.com/package/@blockhandbook/block-hot-loader
- *
  */
 import {type BlockSettings, type CreateBlock, registerBlockType, unregisterBlockType} from '@wordpress/blocks';
 import {type PluginSettings, registerPlugin, unregisterPlugin} from '@wordpress/plugins';
 import {dispatch, select} from '@wordpress/data';
-import {registerFormatType, unregisterFormatType} from '@wordpress/rich-text';
+import {registerFormatType, unregisterFormatType, type WPFormat} from '@wordpress/rich-text';
 
 
 /**
@@ -98,8 +97,8 @@ export const autoloadPlugins = ( getContext: () => __WebpackModuleApi.RequireCon
  *
  * @example autoloadFormats(() => require.context('./formats', true, /index\.tsx$/), module);
  *
- * @param  getContext
- * @param  pluginModule
+ * @param getContext
+ * @param pluginModule
  */
 export const autoloadFormats = ( getContext: () => __WebpackModuleApi.RequireContext, pluginModule: NodeJS.Module ) => {
 	autoload<PluginSettings>( {
@@ -226,7 +225,7 @@ const retrieveBlocksToRefresh = ( changedNames: string[] = [], block: CreateBloc
  * When finished select the originally selected block before we
  * fired the HMR update.
  *
- * @param  changedNames
+ * @param changedNames
  */
 const refreshAllBlocks = async ( changedNames: string[] = [] ) => {
 	await dispatch( 'core/block-editor' ).clearSelectedBlock();

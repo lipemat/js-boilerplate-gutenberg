@@ -1,4 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/ban-types -- We don't know the shape of the callback.
+// eslint-disable-next-line @typescript-eslint/no-restricted-types -- Could be anything.
 type DependencyList = ReadonlyArray<unknown>;
 
 /**
