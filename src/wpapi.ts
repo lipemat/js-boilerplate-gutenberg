@@ -233,8 +233,7 @@ export default function wpapi<T extends CustomRoutes<T>>( customRoutes?: T ): Ro
 
 	coreRoutes.map( route => routes[ route ] = () => createMethods( '/wp/v2/' + route ) );
 
-	// Menu items use a "-".
-	routes.menuLocations = () => createMethods( '/wp/v2/menu-locations' );
+	// Menu items use a '-'.
 	routes.menuItems = () => createMethods( '/wp/v2/menu-items' );
 
 	// Users have a special parameter required for delete.
@@ -256,6 +255,14 @@ export default function wpapi<T extends CustomRoutes<T>>( customRoutes?: T ): Ro
 			getById: ( userId: number, uuid: string ) => doRequest( `/wp/v2/users/${userId}/application-passwords/${uuid}`, 'GET' ),
 			introspect: ( userId: number ) => doRequest( `/wp/v2/users/${userId}/application-passwords/introspect`, 'GET' ),
 			update: ( userId: number, uuid: string, data: ApplicationPasswordCreate ) => doRequest( `/wp/v2/users/${userId}/application-passwords/${uuid}`, 'PUT', data ),
+		};
+	};
+
+	// Menu locations have limited endpoints.
+	routes.menuLocations = () => {
+		return {
+			get: () => doRequest( '/wp/v2/menu-locations', 'GET' ),
+			getById: ( location: string ) => doRequest( `/wp/v2/menu-locations/${location}`, 'GET' ),
 		};
 	};
 
