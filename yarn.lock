@@ -2364,7 +2364,7 @@ __metadata:
   resolution: "@lipemat/js-boilerplate-gutenberg@workspace:."
   dependencies:
     "@lipemat/eslint-config": "npm:^4.0.1"
-    "@lipemat/js-boilerplate": "npm:^10.4.0"
+    "@lipemat/js-boilerplate": "npm:^10.11.5"
     "@types/jest": "npm:^29"
     "@types/lipemat__js-boilerplate": "github:lipemat/types-js-boilerplate#semver:^3"
     "@types/regenerator-runtime": "npm:^0"
@@ -2373,6 +2373,7 @@ __metadata:
     "@wordpress/data": "npm:^4.27.1"
     "@wordpress/plugins": "npm:^2.25.2"
     "@wordpress/rich-text": "npm:^6.14.0"
+    "@wordpress/url": "npm:^4.22.0"
     core-js: "npm:^3.38.1"
     eslint: "npm:^9"
     jest: "npm:^29"
@@ -2386,7 +2387,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@lipemat/js-boilerplate@npm:^10.10.6, @lipemat/js-boilerplate@npm:^10.4.0":
+"@lipemat/js-boilerplate@npm:^10.10.6, @lipemat/js-boilerplate@npm:^10.11.5":
   version: 10.11.5
   resolution: "@lipemat/js-boilerplate@npm:10.11.5"
   dependencies:
@@ -4715,6 +4716,16 @@ __metadata:
     "@babel/runtime": "npm:^7.16.0"
     "@wordpress/is-shallow-equal": "npm:^4.58.0"
   checksum: 10c0/b920d0b00387588f79a5816a06b907f8b5b4d5d69eda35bf7ec4f4fffe1814de0a5b3805765adb7f817a4b70ae8fb2d23d955b8c76801ba86bdb449203ab48d5
+  languageName: node
+  linkType: hard
+
+"@wordpress/url@npm:^4.22.0":
+  version: 4.22.0
+  resolution: "@wordpress/url@npm:4.22.0"
+  dependencies:
+    "@babel/runtime": "npm:7.25.7"
+    remove-accents: "npm:^0.5.0"
+  checksum: 10c0/8c87c0231037a5630b4a9d8730638c7084c4920751eeedfae0771300e36c2cf1e95df1ebac05926e5d31b964491e971221b96d37914b16795f96f4615960e396
   languageName: node
   linkType: hard
 
@@ -12647,6 +12658,13 @@ __metadata:
   version: 4.0.2
   resolution: "rememo@npm:4.0.2"
   checksum: 10c0/de253eda9eb8d4b9d8f7e0fce16eb7e2a2c547e59bdb332e7dde326b74482e8f1fb5bca793df699f6f6cccf67e480fdd7c6fc7b8d4d180e6670fbeb4b6371853
+  languageName: node
+  linkType: hard
+
+"remove-accents@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "remove-accents@npm:0.5.0"
+  checksum: 10c0/a75321aa1b53d9abe82637115a492770bfe42bb38ed258be748bf6795871202bc8b4badff22013494a7029f5a241057ad8d3f72adf67884dbe15a9e37e87adc4
   languageName: node
   linkType: hard
 

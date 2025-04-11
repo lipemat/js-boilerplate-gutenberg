@@ -1,6 +1,7 @@
 import {clearNonce, hasExternalNonce, restoreNonce, setNonce} from './nonce';
 import type {FetchOptions} from '@wordpress/api-fetch';
-import {addQueryArgs, addTrailingSlash, getQueryArg, removeLeadingSlash} from '../helpers/url';
+import {addTrailingSlash, removeLeadingSlash} from '../helpers/url';
+import {addQueryArgs, getQueryArg} from '@wordpress/url';
 
 let rootURL: string = '';
 let initialRootURL: string = '';
@@ -130,7 +131,7 @@ export function setRootURL( url: string, nonce?: string ): void {
  * "_locale=user" to the URL.
  */
 const addLocalToRequests = ( url: string ): string => {
-	if ( '' === getQueryArg( url, '_locale' ) ) {
+	if ( undefined === getQueryArg( url, '_locale' ) ) {
 		url = addQueryArgs( url, {_locale: 'user'} );
 	}
 

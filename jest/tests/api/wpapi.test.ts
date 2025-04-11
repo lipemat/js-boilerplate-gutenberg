@@ -65,7 +65,38 @@ describe( 'Testing wpapi', () => {
 		await wp.posts().getWithPagination( {
 			categories: [ 1 ],
 		} );
-		expect( global.fetch ).toHaveBeenCalledWith( 'https://starting-point.loc/sub/index.php?rest_route=%2Fwp%2Fv2%2Fposts&categories=1&_locale=user', {
+		expect( global.fetch ).toHaveBeenCalledWith( 'https://starting-point.loc/sub/index.php?rest_route=%2Fwp%2Fv2%2Fposts&categories%5B0%5D=1&_locale=user', {
+			body: undefined,
+			credentials: 'include',
+			headers: {
+				Accept: 'application/json, */*;q=0.1',
+			},
+			method: 'GET',
+		} );
+	} );
+
+	test( 'Nested objects in query arguments', async () => {
+		global.fetch = jest.fn().mockImplementation( () => Promise.resolve( {
+			status: 200,
+			headers: new Headers(),
+			json: () => Promise.resolve( [] ),
+		} ) );
+
+		setRootURL( 'https://starting-point.loc/sub/index.php?rest_route=/' );
+
+		await wp.posts().getWithPagination( {
+			categories: [ 1 ],
+			// @ts-expect-error
+			meta_query: {
+				key: 'meta_key',
+				value: 'meta_value',
+				nested: {
+					key: 'nested_key',
+					value: 'nested_value',
+				},
+			},
+		} );
+		expect( global.fetch ).toHaveBeenCalledWith( 'https://starting-point.loc/sub/index.php?rest_route=%2Fwp%2Fv2%2Fposts&categories%5B0%5D=1&meta_query%5Bkey%5D=meta_key&meta_query%5Bvalue%5D=meta_value&meta_query%5Bnested%5D%5Bkey%5D=nested_key&meta_query%5Bnested%5D%5Bvalue%5D=nested_value&_locale=user', {
 			body: undefined,
 			credentials: 'include',
 			headers: {
