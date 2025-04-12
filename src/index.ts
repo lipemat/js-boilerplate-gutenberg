@@ -4,6 +4,7 @@ export {setRootURL, restoreRootURL, setInitialRootURL} from './util/root-url';
 export {fetchHandler, getAuthorizationUrl, maybeRefreshNonce} from './util/request-handler';
 export * from './util/authorize';
 export * from './util/autoload';
+export {getQueryArg, getQueryArgs, getFragment, getQueryString, addQueryArgs, buildQueryString} from './util/url';
 export {setNonce, restoreNonce, clearNonce, hasExternalNonce, setInitialNonce} from './util/nonce';
 export {usePostMeta} from './hooks/usePostMeta';
 export {useTerms} from './hooks/useTerms';

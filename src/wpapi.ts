@@ -15,7 +15,7 @@ import type {EditorBlock, EditorBlockCreate, EditorBlocksQuery, EditorBlockUpdat
 import type {TaxonomiesQuery} from '@wordpress/api/taxonomies';
 import {addLeadingSlash, addTrailingSlash, type QueryArgs} from './helpers/url';
 import type {Status, StatusQuery} from '@wordpress/api/statuses';
-import {addQueryArgs} from '@wordpress/url';
+import {addQueryArgs} from './util/url';
 
 export type CustomRoutes<K> = {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- This is a super generic type.

@@ -3,7 +3,7 @@ import type {FetchOptions} from '@wordpress/api-fetch';
 import {getFullUrl} from './root-url';
 import {clearNonce, getNonce, setNonce} from './nonce';
 import {type AuthenticationFailure, type AuthenticationRestRoute, type AuthorizationParams, getApplicationPassword} from './authorize';
-import {addQueryArgs} from '@wordpress/url';
+import {addQueryArgs} from './url';
 
 /**
  * Similar @wordpress/api-fetch/src/index.js
