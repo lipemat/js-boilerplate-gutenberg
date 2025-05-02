@@ -36,12 +36,13 @@ const iframeLoader = {
 			}
 
 			function cloneToGutenbergIframe() {
+				/** @member {HTMLIFrameElement| null} gutenbergEditor */
 				const gutenbergEditor = document.querySelector( 'iframe[name="editor-canvas"]' );
 				if ( null !== gutenbergEditor && gutenbergEditor.contentDocument.head ) {
-					if ( gutenbergEditor.contentDocument.head.innerText === '' ) {
+					if ( '' === gutenbergEditor.contentDocument.head.innerText ) {
 						return;
 					}
-					// Store the cloned style tag on property for reuse.
+					// Store the cloned style tag on property to reuse.
 					el.iframeCloned = el.cloneNode( true );
 					gutenbergEditor.contentDocument.head.appendChild( el.iframeCloned );
 				}
