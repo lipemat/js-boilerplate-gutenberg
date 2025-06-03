@@ -3637,8 +3637,8 @@ __metadata:
   linkType: hard
 
 "@types/lipemat__js-boilerplate@github:lipemat/types-js-boilerplate#semver:^3":
-  version: 3.2.0
-  resolution: "@types/lipemat__js-boilerplate@https://github.com/lipemat/types-js-boilerplate.git#commit=84b2bf32e3d5bf6a49f0b123e22ad9b7a3818b7f"
+  version: 3.3.3
+  resolution: "@types/lipemat__js-boilerplate@https://github.com/lipemat/types-js-boilerplate.git#commit=c43ad1d6a869b55cfed827f52bd4c7ef8b0a002c"
   dependencies:
     "@types/backbone": "npm:^1.4.22"
     "@types/codemirror": "npm:^5.60.5"
@@ -3647,7 +3647,7 @@ __metadata:
     "@types/react-dom": "npm:^16 || ^17 || ^18"
     "@types/tinymce": "npm:^4.5.23"
     "@types/webpack-env": "npm:^1.18.0"
-  checksum: 10c0/77863145eebcdebd65e3768160fda21cbea1c7861213424a5e78693f322561f2301a62ec79d2450c378eb5b41953d84f081a62b7be3ed1e1408eb76ed8faba4e
+  checksum: 10c0/e45243a8b89e20dcd284942662f62c81e2e9a2975b53c71767e2988bda7873b3b0d85d9fac4ac44511cd55fa92f6b680affed8c7b3c5027fe81ff1a66ef6f9e4
   languageName: node
   linkType: hard
 
