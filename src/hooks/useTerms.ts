@@ -1,5 +1,6 @@
 import {useDispatch, useSelect} from '@wordpress/data';
 import {useCallback} from './useCallback';
+import type {Taxonomy} from '@wordpress/api/taxonomies';
 
 type Taxonomies = 'category' | 'post_tag' | 'nav_menu';
 
@@ -8,18 +9,20 @@ type Taxonomies = 'category' | 'post_tag' | 'nav_menu';
  * Hook for simple interactions with the current post's terms
  * from sidebars or meta boxes within Gutenberg
  *
- * Will return the current terms state as well as the original terms
- * state before any changes were made.
- *
+ * Returns:
+ * - The current terms for the given taxonomy.
+ * - Original terms for the given taxonomy before any changes were made.
+ * - A function to update the terms for the given taxonomy.
  */
 export function useTerms<T extends string = Taxonomies>( taxonomySlug: T ): [ number[], ( terms: number[] ) => Promise<undefined>, number[] ] {
 	const {editPost} = useDispatch( 'core/editor' );
 	const data = useSelect( select => {
-		const taxonomy = select( 'core' ).getTaxonomy( taxonomySlug );
+		const taxonomy: Taxonomy<'edit'> | undefined = select( 'core' ).getTaxonomy( taxonomySlug );
 		if ( ! taxonomy ) {
 			return {
-				current: [],
-				previous: [],
+				taxonomy: null,
+				current: null,
+				previous: null,
 			};
 		}
 		return {
@@ -29,7 +32,7 @@ export function useTerms<T extends string = Taxonomies>( taxonomySlug: T ): [ nu
 		};
 	}, [ taxonomySlug ] );
 
-	const updateTerms = useCallback( async( terms: number[] ): Promise<undefined> => {
+	const updateTerms = useCallback( async ( terms: number[] ): Promise<undefined> => {
 		if ( ! data.taxonomy ) {
 			return undefined;
 		}
@@ -38,5 +41,5 @@ export function useTerms<T extends string = Taxonomies>( taxonomySlug: T ): [ nu
 		} );
 	}, [ data, editPost ] );
 
-	return [ data.current, updateTerms, data.previous ];
+	return [ data.current ?? [], updateTerms, data.previous ?? [] ];
 }
