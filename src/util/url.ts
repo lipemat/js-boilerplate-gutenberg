@@ -1,5 +1,8 @@
 import type {QueryArgObject, QueryArgParsed} from '@wordpress/url';
 
+export type QueryArgs = { [ name: string ]: string | number | QueryArgs };
+
+
 /**
  * Taken nearly verbatim from `@wordpress/url` package.
  * Maintained here to avoid a circular dependency on `@wordpress/url` package
