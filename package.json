@@ -29,14 +29,14 @@
   "homepage": "https://github.com/lipemat/js-boilerplate-gutenberg#readme",
   "dependencies": {
     "@types/lipemat__js-boilerplate": "github:lipemat/types-js-boilerplate#semver:^3",
-    "@wordpress/blocks": "^14.11.0",
-    "@wordpress/data": "^10.22.0",
-    "@wordpress/plugins": "^7.22.0",
-    "@wordpress/rich-text": "^7.22.0"
+    "@wordpress/blocks": "^15.1.0",
+    "@wordpress/data": "^10.28.0",
+    "@wordpress/plugins": "^7.28.0",
+    "@wordpress/rich-text": "^7.28.0"
   },
   "devDependencies": {
-    "@lipemat/eslint-config": "^4.0.1",
-    "@lipemat/js-boilerplate": "^10.11.5",
+    "@lipemat/eslint-config": "^4.0.4",
+    "@lipemat/js-boilerplate": "^10.13.1",
     "@types/jest": "^29",
     "@types/regenerator-runtime": "^0",
     "@types/webpack-env": "^1.18.0",
@@ -61,7 +61,8 @@
     "watch": "microbundle --tsconfig ./dev/tsconfig.json watch --external @wordpress/blocks,@wordpress/data,@wordpress/edit-post,@wordpress/plugins,@wordpress/rich-text,react,ReactDOM --globals @wordpress/blocks=wp.blocks,@wordpress/data=wp.data,@wordpress/edit-post=wp.editPost,@wordpress/plugins=wp.plugins,@wordpress/rich-text=wp.richText"
   },
   "resolutions": {
+    "@babel/runtime": "^7.26.10",
     "typescript": "^5.8.3"
   },
-  "packageManager": "yarn@4.7.0"
+  "packageManager": "yarn@4.9.2"
 }
