@@ -7,5 +7,6 @@ export * from './util/autoload';
 export {getQueryArg, getQueryArgs, getFragment, getQueryString, addQueryArgs, buildQueryString, type QueryArgs} from './util/url';
 export {addLeadingSlash, addTrailingSlash, removeLeadingSlash, removeTrailingSlash} from './util/string';
 export {setNonce, restoreNonce, clearNonce, hasExternalNonce, setInitialNonce} from './util/nonce';
+export {keysOf, entriesOf} from './util/objects';
 export {usePostMeta} from './hooks/usePostMeta';
 export {useTerms} from './hooks/useTerms';
