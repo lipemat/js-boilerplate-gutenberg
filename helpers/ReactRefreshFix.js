@@ -1,5 +1,4 @@
 const webpack = require( 'webpack' );
-const {getEntries} = require( '@lipemat/js-boilerplate/helpers/entries' );
 
 const {RuntimeModule, Template} = webpack;
 
@@ -45,7 +44,9 @@ class ReactRefreshFix {
 	 */
 	apply( compiler ) {
 		compiler.hooks.compilation.tap( 'ReactRefreshFix', compilation => {
-			compilation.hooks.additionalChunkRuntimeRequirements.tap( 'ReactRefreshFix', chunk => {
+			compilation.hooks.additionalChunkRuntimeRequirements.tap( 'ReactRefreshFix', async chunk => {
+				const {getEntries} = await import( '@lipemat/js-boilerplate/helpers/entries.js' );
+
 				// Only add the module to chunks that are entry points.
 				if ( Object.keys( getEntries() ).includes( chunk.name ) ) {
 					compilation.addRuntimeModule( chunk, new ReactRefreshFixRuntime() );
