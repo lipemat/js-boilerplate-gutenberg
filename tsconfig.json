@@ -2,19 +2,16 @@
   "extends": "@lipemat/js-boilerplate/config/tsconfig.json",
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "JS Boilerplate Gutenberg",
-  "include": [
-    "config",
-    "helpers",
-    "jest",
-    "src"
-  ],
-  "exclude": [
-    "node_modules"
-  ],
   "compilerOptions": {
     "esModuleInterop": true,
     "skipLibCheck": true,
     "verbatimModuleSyntax": true,
     "strict": true
-  }
+  },
+  "include": [
+    "config",
+    "helpers",
+    "jest",
+    "src"
+  ]
 }
