@@ -21,5 +21,7 @@ module.exports = function( config ) {
 	return {
 		// Add the global `wp` variable based externals.
 		externals: {...config.externals, ...wpExternals},
+		plugins: config.plugins,
+		module: config.module,
 	};
 };
