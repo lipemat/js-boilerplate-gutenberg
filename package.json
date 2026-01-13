@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/lipemat/js-boilerplate-gutenberg#readme",
   "dependencies": {
+    "@lipemat/js-boilerplate-shared": "link:../js-boilerplate-shared",
     "@types/lipemat__js-boilerplate": "github:lipemat/types-js-boilerplate#semver:^3",
     "@wordpress/blocks": "^15.1.0",
     "@wordpress/data": "^10.28.0",

@@ -31,6 +31,7 @@ describe( 'webpack.dev config', () => {
 
 
 	it( 'Does not change', () => {
+		// @ts-expect-error Will be fixed in the next release.
 		expect( getConfig( 'webpack.dev' ) ).toMatchSnapshot();
 	} );
 } );

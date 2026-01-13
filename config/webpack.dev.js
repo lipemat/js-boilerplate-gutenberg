@@ -1,4 +1,4 @@
-const wpExternals = require( '../helpers/wp-externals' );
+const wpExternals = require( '@lipemat/js-boilerplate-shared/helpers/wp-externals.js' );
 const iframeLoader = require( '../helpers/iframe-loader' );
 const ReactRefreshFix = require( '../helpers/ReactRefreshFix' );
 
@@ -20,7 +20,7 @@ module.exports = function( config ) {
 
 	return {
 		// Add the global `wp` variable based externals.
-		externals: {...config.externals, ...wpExternals},
+		externals: {...config.externals, ...wpExternals.default},
 		plugins: config.plugins,
 		module: config.module,
 	};

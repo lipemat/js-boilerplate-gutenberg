@@ -2679,6 +2679,7 @@ __metadata:
   dependencies:
     "@lipemat/eslint-config": "npm:^4.0.4"
     "@lipemat/js-boilerplate": "npm:^10.13.1"
+    "@lipemat/js-boilerplate-shared": "link:../js-boilerplate-shared"
     "@types/jest": "npm:^29"
     "@types/lipemat__js-boilerplate": "github:lipemat/types-js-boilerplate#semver:^3"
     "@types/regenerator-runtime": "npm:^0"
@@ -2698,6 +2699,12 @@ __metadata:
   peerDependencies:
     "@lipemat/js-boilerplate": ">=10.4.0"
   languageName: unknown
+  linkType: soft
+
+"@lipemat/js-boilerplate-shared@link:../js-boilerplate-shared::locator=%40lipemat%2Fjs-boilerplate-gutenberg%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@lipemat/js-boilerplate-shared@link:../js-boilerplate-shared::locator=%40lipemat%2Fjs-boilerplate-gutenberg%40workspace%3A."
+  languageName: node
   linkType: soft
 
 "@lipemat/js-boilerplate@npm:^10.10.6, @lipemat/js-boilerplate@npm:^10.13.1":
