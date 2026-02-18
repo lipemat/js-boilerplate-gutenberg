@@ -99,9 +99,9 @@ export function getFullUrl<D = object>( requestOptions: FetchOptions<D>, withLoc
  * @link https://developer.wordpress.org/block-editor/packages/packages-api-fetch/#middlewares
  *
  * @param {string} url   - URL of the endpoint.
- * @param {nonce}  nonce - Optionally provide a nonce for the external site.
+ * @param {nonce}  nonce - Optionally provide nonce for the external site.
  *                       This may be set prior or after via `setNonce`.
- *                       If previously set, and not provided here, the existing
+ *                       If previously set and not provided here, the existing
  *                       nonce will be used.
  *
  * @notice To use update calls, which send PUT requests an additional 'X-HTTP-Method-Override'
@@ -115,6 +115,7 @@ export function getFullUrl<D = object>( requestOptions: FetchOptions<D>, withLoc
 export function setRootURL( url: string, nonce?: string ): void {
 	rootURL = url.replace( /\/$/, '' ) + '/';
 
+	/* eslint-disable-next-line @lipemat/security/window-escaping */
 	if ( '' === window.location.hostname || new URL( rootURL ).hostname !== window.location.hostname ) {
 		if ( nonce !== undefined ) {
 			setNonce( nonce );
