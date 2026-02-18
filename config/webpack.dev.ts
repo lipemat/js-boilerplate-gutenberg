@@ -1,7 +1,7 @@
 import wpExternals from '@lipemat/js-boilerplate-shared/helpers/wp-externals.js';
 // @ts-expect-error Does not have types.
 import iframeLoader from '../helpers/iframe-loader.js';
-import ReactRefreshFix from '../helpers/ReactRefreshFix.mts';
+import ReactRefreshFix from '../helpers/ReactRefreshFix.mjs';
 
 import {type Configuration, type ExternalItemObjectUnknown, type ModuleOptions, type RuleSetRule, type WebpackPluginInstance} from 'webpack';
 import type {AtLeast} from '@lipemat/js-boilerplate-shared/types/utility';
