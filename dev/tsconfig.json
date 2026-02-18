@@ -6,6 +6,7 @@
     "../src/**/*"
   ],
   "compilerOptions": {
+    "allowImportingTsExtensions": false,
     "module": "ESNext",
     "target": "ESNext"
   }

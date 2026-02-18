@@ -5,8 +5,8 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "verbatimModuleSyntax": true,
-    "strict": true
+    "strict": true,
+    "verbatimModuleSyntax": false
   },
   "include": [
     "config",
