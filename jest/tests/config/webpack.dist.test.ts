@@ -9,6 +9,6 @@ describe( 'webpack.dist config', () => {
 
 
 	it( 'Does not change', () => {
-		expect( getConfig( 'webpack.dist' ) ).toMatchSnapshot();
+		expect( getConfig( 'webpack.dist.js' ) ).toMatchSnapshot();
 	} );
 } );

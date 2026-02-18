@@ -1,4 +1,5 @@
 # Build files
+config/webpack.dev.js
 helpers/ReactRefreshFix.mjs
 
 
