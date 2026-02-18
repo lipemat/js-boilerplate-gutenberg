@@ -13,6 +13,7 @@ type Rule = AtLeast<RuleSetRule, 'use'> & {
 	test: RegExp;
 };
 
+// @todo Import type from webpack.dist in js-boilerplate.
 export type WebpackConfig =
 	AtLeast<Omit<Configuration, 'module' | 'externals' | 'plugins'>, 'entry' | 'output'>
 	& {

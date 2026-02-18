@@ -1,5 +1,8 @@
 import type {Config} from 'jest';
 
-const config: Config = require( '@lipemat/js-boilerplate/config/jest.config' );
+import config from '@lipemat/js-boilerplate-shared/config/jest.config.js';
 
-module.exports = config;
+const jestConfig: Config = config;
+jestConfig.testEnvironment = 'jsdom';
+
+export default jestConfig;
