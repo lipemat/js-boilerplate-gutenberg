@@ -3,10 +3,6 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "JS Boilerplate Gutenberg",
   "compilerOptions": {
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "verbatimModuleSyntax": false
   },
   "include": [
     "config",

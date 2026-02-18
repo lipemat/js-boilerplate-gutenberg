@@ -36,11 +36,9 @@
     "@wordpress/rich-text": "^7.28.0"
   },
   "devDependencies": {
-    "@lipemat/eslint-config": "^4.0.4",
-    "@lipemat/js-boilerplate": "^10.13.1",
-    "@types/jest": "^29",
     "@lipemat/eslint-config": "^5.2.0-beta.2",
     "@lipemat/js-boilerplate": "^11.0.0-beta.1",
+    "@types/jest": "^29",
     "@types/regenerator-runtime": "^0",
     "@types/webpack-env": "^1.18.0",
     "core-js": "^3.38.1",
@@ -49,7 +47,7 @@
     "microbundle": "^0.15.1",
     "regenerator-runtime": "^0.14.1",
     "ts-node": "^10.9.1",
-    "typescript": "^5.8.3",
+    "typescript": "^5.9.3",
     "unfetch": "^4.1.0"
   },
   "peerDependencies": {
@@ -59,13 +57,9 @@
     "build": "tsc --project ./bin && microbundle --tsconfig ./dev/tsconfig.json --external @wordpress/blocks,@wordpress/data,@wordpress/edit-post,@wordpress/plugins,@wordpress/rich-text,react,ReactDOM --globals @wordpress/blocks=wp.blocks,@wordpress/data=wp.data,@wordpress/edit-post=wp.editPost,@wordpress/plugins=wp.plugins,@wordpress/rich-text=wp.richText",
     "lint": "lipemat-js-boilerplate lint",
     "prepublishOnly": "rm -rf dist/* && yarn run build",
-    "test": "lipemat-js-boilerplate test",
+    "test": "jest --config=jest/jest.config.ts",
     "validate-ts": "tsc --noEmit",
     "watch": "tsc --project ./bin --watch & microbundle --tsconfig ./dev/tsconfig.json watch --external @wordpress/blocks,@wordpress/data,@wordpress/edit-post,@wordpress/plugins,@wordpress/rich-text,react,ReactDOM --globals @wordpress/blocks=wp.blocks,@wordpress/data=wp.data,@wordpress/edit-post=wp.editPost,@wordpress/plugins=wp.plugins,@wordpress/rich-text=wp.richText"
-  },
-  "resolutions": {
-    "@babel/runtime": "^7.26.10",
-    "typescript": "^5.8.3"
   },
   "packageManager": "yarn@4.12.0"
 }
