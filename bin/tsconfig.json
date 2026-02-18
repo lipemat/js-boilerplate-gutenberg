@@ -1,0 +1,17 @@
+{
+  "extends": "../tsconfig.json",
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "JS Boilerplate Source Files",
+  "compilerOptions": {
+    "allowImportingTsExtensions": false,
+    "declaration": false,
+    "noEmit": false,
+    "sourceMap": true,
+    "strict": true,
+    "verbatimModuleSyntax": false
+  },
+  "include": [
+    "../config/*ts",
+    "../helpers/*ts"
+  ]
+}
