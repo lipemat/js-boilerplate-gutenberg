@@ -1,9 +1,15 @@
+# Build files
+helpers/ReactRefreshFix.mjs
+
+
+
 # system/hidden files
 *.bak
 *.code-workspace
 *.sublime-project
 *.sublime-workspace
 *.swp
+*.map
 *~
 .DS_Store
 .DS_Store?

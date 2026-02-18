@@ -1,4 +1,5 @@
-const webpack = require( 'webpack' );
+// eslint-disable-next-line import/no-extraneous-dependencies
+import webpack, {type Compiler} from 'webpack';
 
 const {RuntimeModule, Template} = webpack;
 
@@ -28,7 +29,7 @@ class ReactRefreshFixRuntime extends RuntimeModule {
 // If you expect React Refresh to be loaded, enqueue 'wp-react-refresh-runtime'.
 
 if ( 'undefined' === typeof ReactRefreshRuntime ) {
-	console.debug( '@lipemat/js-boilerplate-gutenberg: React Refresh Runtime is not loaded.' );
+	console.debug( '@lipemat/js-boilerplate-gutenberg: React Refresh Runtime is not loaded.');
 	window.ReactRefreshRuntime = {
 		injectIntoGlobalHook: function () {},
 		isLikelyComponentType: function () {},
@@ -42,18 +43,18 @@ class ReactRefreshFix {
 	/**
 	 * Tap into the compilation to add the ReactRefreshFixRuntime module.
 	 */
-	apply( compiler ) {
+	apply( compiler: Compiler ) {
 		compiler.hooks.compilation.tap( 'ReactRefreshFix', compilation => {
-			compilation.hooks.additionalChunkRuntimeRequirements.tap( 'ReactRefreshFix', async chunk => {
-				const {getEntries} = await import( '@lipemat/js-boilerplate/helpers/entries.js' );
-
-				// Only add the module to chunks that are entry points.
-				if ( Object.keys( getEntries() ).includes( chunk.name ) ) {
-					compilation.addRuntimeModule( chunk, new ReactRefreshFixRuntime() );
-				}
-			} );
+			compilation.hooks.runtimeRequirementInTree
+				.for( webpack.RuntimeGlobals.require )
+				.tap( 'ReactRefreshFix', chunk => {
+					// Only add the module to chunks that are entry points.
+					if ( chunk.hasRuntime() && 'string' === typeof chunk.name ) {
+						compilation.addRuntimeModule( chunk, new ReactRefreshFixRuntime() );
+					}
+				} );
 		} );
 	}
 }
 
-module.exports = ReactRefreshFix;
+export default ReactRefreshFix;
