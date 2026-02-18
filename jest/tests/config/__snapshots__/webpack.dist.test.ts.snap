@@ -3,9 +3,7 @@
 exports[`webpack.dist config Does not change 1`] = `
 {
   "devtool": false,
-  "entry": {
-    "master": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-gutenberg\\src\\index.ts",
-  },
+  "entry": {},
   "externals": {
     "@wordpress/a11y": "window.wp?.a11y",
     "@wordpress/annotations": "window.wp?.annotations",
@@ -73,49 +71,7 @@ exports[`webpack.dist config Does not change 1`] = `
       {
         "exclude": /node_modules/,
         "loader": "babel-loader",
-        "options": {
-          "cacheDirectory": true,
-          "plugins": [
-            "@babel/plugin-syntax-dynamic-import",
-          ],
-          "presets": [
-            [
-              "@babel/preset-env",
-              {
-                "bugfixes": true,
-                "corejs": {
-                  "proposals": false,
-                  "version": "3.45.0",
-                },
-                "debug": false,
-                "ignoreBrowserslistConfig": true,
-                "shippedProposals": false,
-                "targets": {
-                  "browsers": [
-                    "> 1%",
-                    "last 1 Android versions",
-                    "last 1 ChromeAndroid versions",
-                    "last 2 Chrome versions",
-                    "last 2 Firefox versions",
-                    "last 2 Safari versions",
-                    "last 2 iOS versions",
-                    "last 2 Edge versions",
-                    "last 2 Opera versions",
-                  ],
-                },
-                "useBuiltIns": "usage",
-              },
-            ],
-            [
-              "@babel/preset-react",
-              {
-                "development": true,
-                "runtime": "automatic",
-              },
-            ],
-            "@babel/preset-typescript",
-          ],
-        },
+        "options": Promise {},
         "test": /\\\\\\.\\[jt\\]sx\\?\\$/,
       },
       {
@@ -124,11 +80,7 @@ exports[`webpack.dist config Does not change 1`] = `
           "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-gutenberg\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
           "css-loader",
           {
-            "loader": "clean-css-loader",
-            "options": {
-              "level": 2,
-              "sourceMap": false,
-            },
+            "loader": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-gutenberg\\node_modules\\@lipemat\\js-boilerplate\\lib\\clean-css-loader.js",
           },
         ],
       },
@@ -137,17 +89,11 @@ exports[`webpack.dist config Does not change 1`] = `
         "use": [
           "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-gutenberg\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
           {
+            "loader": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-gutenberg\\node_modules\\@lipemat\\js-boilerplate\\lib\\css-module-types.js",
+          },
+          {
             "loader": "css-loader",
-            "options": {
-              "importLoaders": 1,
-              "modules": {
-                "exportLocalsConvention": "camelCase",
-                "localIdentName": "Ⓜ[name]__[local]__[contenthash:base64:2]",
-                "mode": [Function],
-              },
-              "sourceMap": true,
-              "url": false,
-            },
+            "options": Promise {},
           },
           {
             "loader": "postcss-loader",
@@ -263,10 +209,9 @@ exports[`webpack.dist config Does not change 1`] = `
                   },
                   {
                     "OnceExit": [Function],
-                    "postcssPlugin": "js-boilerplate/postcss-pretty",
+                    "postcssPlugin": "clean",
                   },
                 ],
-                "sourceMap": true,
               },
             },
           },
@@ -355,6 +300,24 @@ exports[`webpack.dist config Does not change 1`] = `
         "typescript": {
           "configFile": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-gutenberg\\tsconfig.json",
         },
+      },
+    },
+    CompressionPlugin {
+      "algorithm": [Function],
+      "options": {
+        "algorithm": "brotliCompress",
+        "compressionOptions": {
+          "params": {
+            "1": 11,
+          },
+        },
+        "deleteOriginalAssets": false,
+        "exclude": undefined,
+        "filename": "[path][base].br",
+        "include": undefined,
+        "minRatio": 0.8,
+        "test": /\\\\\\.\\(js\\|css\\)\\$/,
+        "threshold": 0,
       },
     },
   ],

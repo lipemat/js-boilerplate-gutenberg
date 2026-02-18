@@ -3,9 +3,7 @@
 exports[`webpack.dev config Does not change 1`] = `
 {
   "devtool": "eval-source-map",
-  "entry": {
-    "master": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-gutenberg\\src\\index.ts",
-  },
+  "entry": {},
   "externals": {
     "@wordpress/a11y": "window.wp?.a11y",
     "@wordpress/annotations": "window.wp?.annotations",
@@ -74,51 +72,7 @@ exports[`webpack.dev config Does not change 1`] = `
         "exclude": /node_modules/,
         "include": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-gutenberg\\src",
         "loader": "babel-loader",
-        "options": {
-          "cacheDirectory": true,
-          "plugins": [
-            "react-refresh/babel",
-            "@babel/plugin-transform-react-jsx-source",
-            "@babel/plugin-syntax-dynamic-import",
-          ],
-          "presets": [
-            [
-              "@babel/preset-env",
-              {
-                "bugfixes": true,
-                "corejs": {
-                  "proposals": false,
-                  "version": "3.45.0",
-                },
-                "debug": false,
-                "ignoreBrowserslistConfig": true,
-                "shippedProposals": false,
-                "targets": {
-                  "browsers": [
-                    "> 1%",
-                    "last 1 Android versions",
-                    "last 1 ChromeAndroid versions",
-                    "last 2 Chrome versions",
-                    "last 2 Firefox versions",
-                    "last 2 Safari versions",
-                    "last 2 iOS versions",
-                    "last 2 Edge versions",
-                    "last 2 Opera versions",
-                  ],
-                },
-                "useBuiltIns": "usage",
-              },
-            ],
-            [
-              "@babel/preset-react",
-              {
-                "development": true,
-                "runtime": "automatic",
-              },
-            ],
-            "@babel/preset-typescript",
-          ],
-        },
+        "options": Promise {},
         "test": /\\\\\\.\\[jt\\]sx\\?\\$/,
       },
       {
@@ -141,17 +95,11 @@ exports[`webpack.dev config Does not change 1`] = `
             },
           },
           {
+            "loader": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-gutenberg\\node_modules\\@lipemat\\js-boilerplate\\lib\\css-module-types.js",
+          },
+          {
             "loader": "css-loader",
-            "options": {
-              "importLoaders": 1,
-              "modules": {
-                "exportLocalsConvention": "camelCase",
-                "localIdentName": "Ⓜ[name]__[local]__[contenthash:base64:2]",
-                "mode": [Function],
-              },
-              "sourceMap": true,
-              "url": false,
-            },
+            "options": Promise {},
           },
           {
             "loader": "postcss-loader",
@@ -287,7 +235,7 @@ exports[`webpack.dev config Does not change 1`] = `
     "chunkFilename": "[name].js",
     "filename": "[name].js",
     "path": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-gutenberg\\dist",
-    "publicPath": "http://localhost:3000/js/dist/",
+    "publicPath": "http://localhost:undefined/js/dist/",
   },
   "plugins": [
     ProvidePlugin {
