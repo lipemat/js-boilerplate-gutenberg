@@ -3687,7 +3687,7 @@ __metadata:
   dependencies:
     "@lipemat/eslint-config": "npm:^5.2.0-beta.2"
     "@lipemat/js-boilerplate": "npm:^11.0.0-beta.1"
-    "@lipemat/js-boilerplate-shared": "npm:^0.0.2"
+    "@lipemat/js-boilerplate-shared": "npm:>=0.1.1"
     "@types/jest": "npm:^30.0.0"
     "@types/lipemat__js-boilerplate": "github:lipemat/types-js-boilerplate#semver:^3"
     "@types/regenerator-runtime": "npm:^0"
@@ -3709,9 +3709,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@lipemat/js-boilerplate-shared@npm:>=0.0.4 <1.0.0":
-  version: 0.0.4
-  resolution: "@lipemat/js-boilerplate-shared@npm:0.0.4"
+"@lipemat/js-boilerplate-shared@npm:>=0.0.4 <1.0.0, @lipemat/js-boilerplate-shared@npm:>=0.1.1":
+  version: 0.1.1
+  resolution: "@lipemat/js-boilerplate-shared@npm:0.1.1"
   dependencies:
     "@babel/preset-env": "npm:^7.28.5"
     "@babel/preset-typescript": "npm:^7.28.5"
@@ -3736,38 +3736,9 @@ __metadata:
     postcss-sort-media-queries: "npm:^5.2.0"
   peerDependencies:
     typescript: ^5.9.3
-  checksum: 10c0/c012cb6d4cbf1acf24e6384be8ffe62226201ee95e2cce7813ab8bb0563812f16fcf402a0a3309ecc75732f920eec4a39b83365662ea5373898e58dbf11f0ebb
-  languageName: node
-  linkType: hard
-
-"@lipemat/js-boilerplate-shared@npm:^0.0.2":
-  version: 0.0.2
-  resolution: "@lipemat/js-boilerplate-shared@npm:0.0.2"
-  dependencies:
-    "@babel/preset-env": "npm:^7.28.5"
-    "@babel/preset-typescript": "npm:^7.28.5"
-    "@csstools/postcss-global-data": "npm:2.0.0"
-    "@types/clean-css": "npm:^4.2.11"
-    "@types/postcss-load-config": "npm:^3.0.1"
-    "@types/postcss-preset-env": "npm:^7.7.0"
-    "@types/webpack": "npm:^5.28.5"
-    babel-plugin-transform-import-meta: "npm:^2.3.3"
-    browserslist: "npm:^4.28.1"
-    clean-css: "npm:^5.3.3"
-    core-js: "npm:^3.33.1"
-    glob: "npm:^13.0.0"
-    postcss: "npm:^8.4.47"
-    postcss-color-mod-function: "npm:^4.1.1"
-    postcss-custom-media: "npm:^8.0.1"
-    postcss-import: "npm:^15.1.0"
-    postcss-loader: "npm:^8.1.1"
-    postcss-nested: "npm:^5.0.6"
-    postcss-preset-env: "npm:^7.8.3"
-    postcss-scss: "npm:^4.0.4"
-    postcss-sort-media-queries: "npm:^5.2.0"
-  peerDependencies:
-    typescript: ^5.9.3
-  checksum: 10c0/95928f81f1a7a7b237449b0d8e165ba78ddb320f1b621620a2d0e49f4633baf960f65bafbb4172bbb2404e121d666926a275d6dec09e9383a571f621ea80819d
+  bin:
+    js-boilerplate-shared__fix-pnp: bin/fix-pnp.js
+  checksum: 10c0/b872f596240db0df2ee303eb059e36172e6bccbadf860ce6ea1265a7dabc049079b67be57b2d34d5e5da78a1cd685737dfc7cc4ba9ffcf608d10d1dbe93e8621
   languageName: node
   linkType: hard
 
