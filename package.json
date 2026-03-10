@@ -43,6 +43,7 @@
     "@types/regenerator-runtime": "^0",
     "@types/webpack-env": "^1.18.0",
     "core-js": "^3.38.1",
+    "cross-fetch": "^4.1.0",
     "eslint": "^9",
     "jest": "^30.2.0",
     "microbundle": "^0.15.1",
