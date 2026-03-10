@@ -1,7 +1,7 @@
 ##########################################################
 # Publish on npm.js
 #
-# @version 4.0.0
+# @version 5.0.0
 #
 ###########################################################
 
@@ -12,14 +12,12 @@ on:
   push:
     tags:
       - "*"
-      - "!*beta*"
 
 jobs:
   publish:
     name: Publish on npm.js
-    uses: lipemat/public-actions/.github/workflows/publish-package.yml@version/1
+    uses: lipemat/public-actions/.github/workflows/publish-package.yml@version/2
     with:
-      beta: false
-      nodeVersion: '20.11.0'
+      beta: ${{ contains(github.ref_name, 'beta') }}
+      nodeVersion: '22.21.1'
       withInstall: true
-    secrets: inherit
