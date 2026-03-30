@@ -61,7 +61,6 @@ exports[`webpack.dist config Does not change 1`] = `
     "react": "React",
     "react-dom": "ReactDOM",
     "react-refresh/runtime": "ReactRefreshRuntime",
-    "react/jsx-runtime": "ReactJSXRuntime",
     "tinymce": "tinymce",
     "wp": "wp",
   },
@@ -322,6 +321,9 @@ exports[`webpack.dist config Does not change 1`] = `
     },
   ],
   "resolve": {
+    "alias": {
+      "$src": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-gutenberg\\src",
+    },
     "extensions": [
       ".ts",
       ".tsx",

@@ -1,10 +1,10 @@
 {
   "name": "@lipemat/js-boilerplate-gutenberg",
-  "version": "4.3.0-beta.3",
+  "version": "4.3.0",
   "description": "Gutenberg extension for @lipemat/js-boilerplate.",
   "jsPath": "./",
   "engines": {
-    "node": ">=20.11.0"
+    "node": ">=22.21.1"
   },
   "license": "MIT",
   "main": "dist/index.js",
@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/lipemat/js-boilerplate-gutenberg#readme",
   "dependencies": {
-    "@lipemat/js-boilerplate-shared": ">=0.1.1",
+    "@lipemat/js-boilerplate-shared": "^1.0.0",
     "@types/lipemat__js-boilerplate": "github:lipemat/types-js-boilerplate#semver:^3",
     "@wordpress/blocks": "^15.1.0",
     "@wordpress/data": "^10.28.0",
@@ -37,8 +37,8 @@
     "@wordpress/rich-text": "^7.28.0"
   },
   "devDependencies": {
-    "@lipemat/eslint-config": "^5.2.0-beta.2",
-    "@lipemat/js-boilerplate": "^11.0.0-beta.1",
+    "@lipemat/eslint-config": "^5.2.0",
+    "@lipemat/js-boilerplate": "^11.0.0",
     "@types/jest": "^30.0.0",
     "@types/regenerator-runtime": "^0",
     "@types/webpack-env": "^1.18.0",
@@ -53,7 +53,7 @@
     "unfetch": "^5.0.0"
   },
   "peerDependencies": {
-    "@lipemat/js-boilerplate": ">=11.0.0-beta.1"
+    "@lipemat/js-boilerplate": ">=11.0.0"
   },
   "scripts": {
     "build": "tsc --project ./bin && microbundle --tsconfig ./dev/tsconfig.json --external @wordpress/blocks,@wordpress/data,@wordpress/edit-post,@wordpress/plugins,@wordpress/rich-text,react,ReactDOM --globals @wordpress/blocks=wp.blocks,@wordpress/data=wp.data,@wordpress/edit-post=wp.editPost,@wordpress/plugins=wp.plugins,@wordpress/rich-text=wp.richText",
@@ -63,5 +63,5 @@
     "validate-ts": "tsc --noEmit",
     "watch": "tsc --project ./bin --watch & microbundle --tsconfig ./dev/tsconfig.json watch --external @wordpress/blocks,@wordpress/data,@wordpress/edit-post,@wordpress/plugins,@wordpress/rich-text,react,ReactDOM --globals @wordpress/blocks=wp.blocks,@wordpress/data=wp.data,@wordpress/edit-post=wp.editPost,@wordpress/plugins=wp.plugins,@wordpress/rich-text=wp.richText"
   },
-  "packageManager": "yarn@4.12.0"
+  "packageManager": "yarn@4.13.0"
 }
