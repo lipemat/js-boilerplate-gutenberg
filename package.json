@@ -30,11 +30,7 @@
   "homepage": "https://github.com/lipemat/js-boilerplate-gutenberg#readme",
   "dependencies": {
     "@lipemat/js-boilerplate-shared": "^1.0.0",
-    "@types/lipemat__js-boilerplate": "github:lipemat/types-js-boilerplate#semver:^3",
-    "@wordpress/blocks": "^15.1.0",
-    "@wordpress/data": "^10.28.0",
-    "@wordpress/plugins": "^7.28.0",
-    "@wordpress/rich-text": "^7.28.0"
+    "@types/lipemat__js-boilerplate": "github:lipemat/types-js-boilerplate#semver:^3"
   },
   "devDependencies": {
     "@lipemat/eslint-config": "^5.2.0",
@@ -42,6 +38,10 @@
     "@types/jest": "^30.0.0",
     "@types/regenerator-runtime": "^0",
     "@types/webpack-env": "^1.18.0",
+    "@wordpress/blocks": "^15.1.0",
+    "@wordpress/data": "^10.28.0",
+    "@wordpress/plugins": "^7.28.0",
+    "@wordpress/rich-text": "^7.28.0",
     "core-js": "^3.38.1",
     "cross-fetch": "^4.1.0",
     "eslint": "^9",
