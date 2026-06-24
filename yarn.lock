@@ -2,7 +2,7 @@
 # Manual changes might be lost - proceed with caution!
 
 __metadata:
-  version: 8
+  version: 10
   cacheKey: 10c0
 
 "@ampproject/remapping@npm:^2.2.0":
@@ -3779,7 +3779,7 @@ __metadata:
   dependencies:
     "@lipemat/eslint-config": "npm:^5.2.0"
     "@lipemat/js-boilerplate": "npm:^11.0.0"
-    "@lipemat/js-boilerplate-shared": "npm:^1.0.0"
+    "@lipemat/js-boilerplate-shared": "npm:^1.0.3"
     "@types/jest": "npm:^30.0.0"
     "@types/lipemat__js-boilerplate": "github:lipemat/types-js-boilerplate#semver:^3"
     "@types/regenerator-runtime": "npm:^0"
@@ -3832,6 +3832,41 @@ __metadata:
   bin:
     js-boilerplate-shared__fix-pnp: bin/fix-pnp.js
   checksum: 10c0/de8f35b2b8613f057e5c303382748d0294e7ae4c62aa4eb2dbebf970f52040c062d5cb5715f6dc699c06c93fd638298504c217f1bbbad16ceab6736623ae7bcb
+  languageName: node
+  linkType: hard
+
+"@lipemat/js-boilerplate-shared@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "@lipemat/js-boilerplate-shared@npm:1.0.3"
+  dependencies:
+    "@babel/preset-env": "npm:^7.28.5"
+    "@babel/preset-typescript": "npm:^7.28.5"
+    "@csstools/postcss-global-data": "npm:2.0.0"
+    "@types/clean-css": "npm:^4.2.11"
+    "@types/postcss-load-config": "npm:^3.0.1"
+    "@types/postcss-preset-env": "npm:^7.7.0"
+    "@types/webpack": "npm:^5.28.5"
+    "@wordpress/browserslist-config": "npm:^6.47.0"
+    babel-plugin-transform-import-meta: "npm:^2.3.3"
+    browserslist: "npm:^4.28.1"
+    clean-css: "npm:^5.3.3"
+    core-js: "npm:^3.33.1"
+    glob: "npm:^13.0.0"
+    identity-obj-proxy: "npm:^3.0.0"
+    postcss: "npm:^8.5.10"
+    postcss-color-mod-function: "npm:^4.1.1"
+    postcss-custom-media: "npm:^8.0.1"
+    postcss-import: "npm:^15.1.0"
+    postcss-loader: "npm:^8.1.1"
+    postcss-nested: "npm:^5.0.6"
+    postcss-preset-env: "npm:^7.8.3"
+    postcss-scss: "npm:^4.0.4"
+    postcss-sort-media-queries: "npm:^5.2.0"
+  peerDependencies:
+    typescript: ^5.9.3
+  bin:
+    js-boilerplate-shared__fix-pnp: bin/fix-pnp.js
+  checksum: 10c0/ae79e5df4950930582b6c233809d41145170420818f4fb48a231e52447b24949b58bb9088f8d5e5b9e13bfeb8870d73abb94d2c6312613947a8e9a5c8f48eb66
   languageName: node
   linkType: hard
 
@@ -6101,6 +6136,13 @@ __metadata:
   version: 6.39.0
   resolution: "@wordpress/browserslist-config@npm:6.39.0"
   checksum: 10c0/a6c00fbf22f2d3bb84b3a17c3be34a1912235eb07cf49e3b1ac0906934712e1709e4c64cd5c85606a76295fb17038fb2c4f850b1367ad91070fdd97dbd1d776f
+  languageName: node
+  linkType: hard
+
+"@wordpress/browserslist-config@npm:^6.47.0":
+  version: 6.48.1
+  resolution: "@wordpress/browserslist-config@npm:6.48.1"
+  checksum: 10c0/69012e884608dca90576e11bbd33ef08716df263634435d4b07cb882b0558ba4f719c3df482bb2333525671071504b29b572e7315b4f260c9daf6da2564c7a64
   languageName: node
   linkType: hard
 
@@ -12530,6 +12572,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nanoid@npm:^3.3.12":
+  version: 3.3.12
+  resolution: "nanoid@npm:3.3.12"
+  bin:
+    nanoid: bin/nanoid.cjs
+  checksum: 10c0/ba142b7b39e11e80c16dd74b0365d407880c87c1cf7e1480956981ae940ee36060fa5b6f092cd1e315184dd19244c657bd017d03327bd3c62247d691c5e8edfb
+  languageName: node
+  linkType: hard
+
 "napi-postinstall@npm:^0.3.0":
   version: 0.3.4
   resolution: "napi-postinstall@npm:0.3.4"
@@ -14136,6 +14187,17 @@ __metadata:
     picocolors: "npm:^1.1.1"
     source-map-js: "npm:^1.2.1"
   checksum: 10c0/5127cc7c91ed7a133a1b7318012d8bfa112da9ef092dddf369ae699a1f10ebbd89b1b9f25f3228795b84585c72aabd5ced5fc11f2ba467eedf7b081a66fad024
+  languageName: node
+  linkType: hard
+
+"postcss@npm:^8.5.10":
+  version: 8.5.15
+  resolution: "postcss@npm:8.5.15"
+  dependencies:
+    nanoid: "npm:^3.3.12"
+    picocolors: "npm:^1.1.1"
+    source-map-js: "npm:^1.2.1"
+  checksum: 10c0/7f2e63ae22fbe43aace1bf652bd99da4e90737c64194d49e51ddc9cd0f9e51ff2861a7d734379b494deffa03a880a5c65eec70bc29ee9ebaa7136dde3eee8f31
   languageName: node
   linkType: hard
 
