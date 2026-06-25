@@ -67,7 +67,7 @@ Loaded modules are expected to export:
 3. `exclude`: Exclude plugin or block from the current context.
 
 ```typescript
-import {autoloadBlocks, autoloadPlugins} from '@lipemat/js-boilerplate-gutenberg';
+import {autoloadBlocks, autoloadPlugins} from '@lipemat/js-boilerplate-gutenberg/autoload';
 
 /**
  * Use our custom autoloader to automatically require,
@@ -86,6 +86,12 @@ export default () => {
 ````
 
 ### Hooks
+
+> Hooks are published under the `@lipemat/js-boilerplate-gutenberg/hooks` subpath and require `@wordpress/data`.
+>
+> ```typescript
+> import {usePostMeta, useTerms} from '@lipemat/js-boilerplate-gutenberg/hooks';
+> ```
 
 #### `usePostMeta`
 

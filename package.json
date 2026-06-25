@@ -14,6 +14,27 @@
   "react-native": "dist/index.module.js",
   "source": "src/index.ts",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.modern.mjs",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./autoload": {
+      "types": "./dist/autoload.d.ts",
+      "import": "./dist/autoload.modern.mjs",
+      "require": "./dist/autoload.js",
+      "default": "./dist/autoload.js"
+    },
+    "./hooks": {
+      "types": "./dist/hooks.d.ts",
+      "import": "./dist/hooks.modern.mjs",
+      "require": "./dist/hooks.js",
+      "default": "./dist/hooks.js"
+    },
+    "./package.json": "./package.json"
+  },
   "files": [
     "config/",
     "dist/",
@@ -56,12 +77,12 @@
     "@lipemat/js-boilerplate": ">=11.0.0"
   },
   "scripts": {
-    "build": "tsc --project ./bin && microbundle --tsconfig ./dev/tsconfig.json --external @wordpress/blocks,@wordpress/data,@wordpress/edit-post,@wordpress/plugins,@wordpress/rich-text,react,ReactDOM --globals @wordpress/blocks=wp.blocks,@wordpress/data=wp.data,@wordpress/edit-post=wp.editPost,@wordpress/plugins=wp.plugins,@wordpress/rich-text=wp.richText",
+    "build": "tsc --project ./bin && microbundle src/index.ts src/autoload.ts src/hooks.ts --tsconfig ./dev/tsconfig.json --external @wordpress/blocks,@wordpress/data,@wordpress/edit-post,@wordpress/plugins,@wordpress/rich-text,react,ReactDOM --globals @wordpress/blocks=wp.blocks,@wordpress/data=wp.data,@wordpress/edit-post=wp.editPost,@wordpress/plugins=wp.plugins,@wordpress/rich-text=wp.richText",
     "lint": "lipemat-js-boilerplate lint",
     "prepublishOnly": "rm -rf dist/* && yarn run build",
     "test": "jest --config=jest/jest.config.ts",
     "validate-ts": "tsc --noEmit",
-    "watch": "tsc --project ./bin --watch & microbundle --tsconfig ./dev/tsconfig.json watch --external @wordpress/blocks,@wordpress/data,@wordpress/edit-post,@wordpress/plugins,@wordpress/rich-text,react,ReactDOM --globals @wordpress/blocks=wp.blocks,@wordpress/data=wp.data,@wordpress/edit-post=wp.editPost,@wordpress/plugins=wp.plugins,@wordpress/rich-text=wp.richText"
+    "watch": "tsc --project ./bin --watch & microbundle watch src/index.ts src/autoload.ts src/hooks.ts --tsconfig ./dev/tsconfig.json --external @wordpress/blocks,@wordpress/data,@wordpress/edit-post,@wordpress/plugins,@wordpress/rich-text,react,ReactDOM --globals @wordpress/blocks=wp.blocks,@wordpress/data=wp.data,@wordpress/edit-post=wp.editPost,@wordpress/plugins=wp.plugins,@wordpress/rich-text=wp.richText"
   },
   "packageManager": "yarn@4.17.0"
 }
