@@ -1,7 +1,7 @@
 ##########################################################
 # Publish on npm.js
 #
-# @version 5.0.0
+# @version 5.0.1
 #
 ###########################################################
 
@@ -12,6 +12,11 @@ on:
   push:
     tags:
       - "*"
+
+permissions:
+  actions: read
+  id-token: write
+  contents: read
 
 jobs:
   publish:
