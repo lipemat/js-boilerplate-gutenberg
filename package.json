@@ -33,6 +33,9 @@
       "require": "./dist/hooks.js",
       "default": "./dist/hooks.js"
     },
+    "./config/*": "./config/*",
+    "./helpers/*": "./helpers/*",
+    "./dist/*": "./dist/*",
     "./package.json": "./package.json"
   },
   "files": [
