@@ -5,7 +5,7 @@ type DependencyList = ReadonlyArray<unknown>;
  * Mimics the React `useCallback` hook but does not require React
  * as a dependency.
  *
- * Even though React is loaded on a page where `usePostMeta` or `useTerms` is used, the rest of this package does not need React. Having react as a requirement for any part of this package makes it a requirement for all of it.
+ * Even though React is loaded on a page where `usePostMeta` or `useTerms` is used, the rest of this package does not need React. Having React as a requirement for any part of this package makes it a requirement for all of it.
  *
  * Internal use only.
  *

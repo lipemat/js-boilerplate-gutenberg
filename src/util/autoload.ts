@@ -1,15 +1,15 @@
 /**
- * Dynamically locate, load & register all Editor Blocks & Plugins.
+ * Dynamically locate, load, and register all Editor Blocks & Plugins.
  * Supports HOT Module Reloading.
  *
- * Given a path and a entry point's file name, this will automatically
+ * Given a path and an entry point's file name, this will automatically
  * load the module and support HMR within Gutenberg.
  *
  * Your module's entry point must export a `name` and a `settings` constant
  * which will be used to either `registerBlockType` or `registerPlugin`.
  *
- * You may export an optional `exclude` const to dynamical exclude a block/plugin
- * from particular context.
+ * You may export an optional `exclude` const to dynamically exclude a block/plugin
+ * from a particular context.
  *
  * @see PluginModule
  *
@@ -29,10 +29,12 @@
  * @link https://github.com/kadamwhite/wp-block-hmr-demo
  * @link https://www.npmjs.com/package/@blockhandbook/block-hot-loader
  */
-import {type BlockSettings, type CreateBlock, registerBlockType, unregisterBlockType} from '@wordpress/blocks';
-import {type PluginSettings, registerPlugin, unregisterPlugin} from '@wordpress/plugins';
-import {dispatch, select} from '@wordpress/data';
-import {registerFormatType, unregisterFormatType, type WPFormat} from '@wordpress/rich-text';
+import type {BlockSettings, CreateBlock} from '@wordpress/blocks';
+import type {PluginSettings} from '@wordpress/plugins';
+import type {WPFormat} from '@wordpress/rich-text';
+
+type WPDataDispatch = typeof import( '@wordpress/data' )['dispatch'];
+type WPDataSelect = typeof import( '@wordpress/data' )['select'];
 
 
 /**
@@ -58,16 +60,25 @@ export type PluginModule<T = BlockSettings<object> | PluginSettings | WPFormat> 
  * @param {Function} getContext   Execute and return a `require.context()` call.
  * @param            pluginModule - Module of the current file from the global {module}.
  */
-export const autoloadBlocks = ( getContext: () => __WebpackModuleApi.RequireContext, pluginModule: NodeJS.Module ) => {
-	autoload<BlockSettings<object>>( {
-		afterReload: refreshAllBlocks,
-		beforeReload: storeSelectedBlock,
-		getContext,
-		pluginModule,
-		register: registerBlockType,
-		unregister: unregisterBlockType,
-		type: 'block',
-	} );
+export const autoloadBlocks = ( getContext: () => __WebpackModuleApi.RequireContext, pluginModule: NodeJS.Module ): void => {
+	void ( async () => {
+		const [ {registerBlockType, unregisterBlockType}, {
+			dispatch,
+			select,
+		} ] = await Promise.all( [
+			import( '@wordpress/blocks' ),
+			import( '@wordpress/data' ),
+		] );
+		autoload<BlockSettings<object>>( {
+			afterReload: changedNames => refreshAllBlocks( dispatch, select, changedNames ),
+			beforeReload: () => storeSelectedBlock( select ),
+			getContext,
+			pluginModule,
+			register: registerBlockType,
+			unregister: unregisterBlockType,
+			type: 'block',
+		} );
+	} )();
 };
 
 /**
@@ -78,18 +89,21 @@ export const autoloadBlocks = ( getContext: () => __WebpackModuleApi.RequireCont
  * @param {Function} getContext   Execute and return a `require.context()` call.
  * @param            pluginModule - Module of the current file from the global {module}.
  */
-export const autoloadPlugins = ( getContext: () => __WebpackModuleApi.RequireContext, pluginModule: NodeJS.Module ) => {
-	autoload<PluginSettings>( {
-		afterReload: () => {
-		},
-		beforeReload: () => {
-		},
-		getContext,
-		pluginModule,
-		register: registerPlugin,
-		unregister: unregisterPlugin,
-		type: 'plugin',
-	} );
+export const autoloadPlugins = ( getContext: () => __WebpackModuleApi.RequireContext, pluginModule: NodeJS.Module ): void => {
+	void ( async () => {
+		const {registerPlugin, unregisterPlugin} = await import( '@wordpress/plugins' );
+		autoload<PluginSettings>( {
+			afterReload: () => {
+			},
+			beforeReload: () => {
+			},
+			getContext,
+			pluginModule,
+			register: registerPlugin,
+			unregister: unregisterPlugin,
+			type: 'plugin',
+		} );
+	} )();
 };
 
 /**
@@ -100,18 +114,21 @@ export const autoloadPlugins = ( getContext: () => __WebpackModuleApi.RequireCon
  * @param getContext
  * @param pluginModule
  */
-export const autoloadFormats = ( getContext: () => __WebpackModuleApi.RequireContext, pluginModule: NodeJS.Module ) => {
-	autoload<WPFormat>( {
-		afterReload: () => {
-		},
-		beforeReload: () => {
-		},
-		getContext,
-		pluginModule,
-		register: registerFormatType,
-		unregister: unregisterFormatType,
-		type: 'format',
-	} );
+export const autoloadFormats = ( getContext: () => __WebpackModuleApi.RequireContext, pluginModule: NodeJS.Module ): void => {
+	void ( async () => {
+		const {registerFormatType, unregisterFormatType} = await import( '@wordpress/rich-text' );
+		autoload<WPFormat>( {
+			afterReload: () => {
+			},
+			beforeReload: () => {
+			},
+			getContext,
+			pluginModule,
+			register: registerFormatType,
+			unregister: unregisterFormatType,
+			type: 'format',
+		} );
+	} )();
 };
 
 
@@ -201,12 +218,12 @@ let refreshClientIds: string[] = [];
  * Allows us to reselect the previously selected block after
  * we've replaced the block with our HMR changed one.
  */
-const storeSelectedBlock = () => {
+const storeSelectedBlock = ( select: WPDataSelect ) => {
 	selectedBlockId = select( 'core/block-editor' ).getSelectedBlockClientId();
 };
 
 /**
- * Recursively find all blocks, which match the changed block names, so
+ * Recursively find all blocks which match the changed block names, so
  * we can touch each one.
  *
  */
@@ -219,15 +236,12 @@ const retrieveBlocksToRefresh = ( changedNames: string[] = [], block: CreateBloc
 };
 
 /**
- * Select each block one at a time to refresh all the blocks
+ * 1. Select each block one at a time to refresh all the blocks
  * on the page.
+ * 2. Select the previously selected block before the HMR update.
  *
- * When finished select the originally selected block before we
- * fired the HMR update.
- *
- * @param changedNames
  */
-const refreshAllBlocks = async ( changedNames: string[] = [] ) => {
+const refreshAllBlocks = async ( dispatch: WPDataDispatch, select: WPDataSelect, changedNames: string[] = [] ) => {
 	await dispatch( 'core/block-editor' ).clearSelectedBlock();
 	// Refresh all blocks by iteratively selecting each one.
 	select( 'core/block-editor' ).getBlocks().forEach( block => retrieveBlocksToRefresh( changedNames, block ) );
