@@ -3,7 +3,5 @@ export {default as wpapi} from './wpapi';
 export {setRootURL, restoreRootURL, setInitialRootURL} from './util/root-url';
 export {fetchHandler, getAuthorizationUrl, maybeRefreshNonce} from './util/request-handler';
 export * from './util/authorize';
-export {getQueryArg, getQueryArgs, getFragment, getQueryString, addQueryArgs, buildQueryString, type QueryArgs} from './util/url';
-export {addLeadingSlash, addTrailingSlash, removeLeadingSlash, removeTrailingSlash} from './util/string';
 export {setNonce, restoreNonce, clearNonce, hasExternalNonce, setInitialNonce} from './util/nonce';
 export {keysOf, entriesOf} from './util/objects';

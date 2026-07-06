@@ -1,7 +1,6 @@
 import {clearNonce, hasExternalNonce, restoreNonce, setNonce} from './nonce';
 import type {FetchOptions} from '@wordpress/api-fetch';
-import {addTrailingSlash, removeLeadingSlash} from './string';
-import {addQueryArgs, getQueryArg} from './url';
+import {addQueryArgs, addTrailingSlash, getQueryArg, removeLeadingSlash} from '@lipemat/js-helpers';
 
 let rootURL: string = '';
 let initialRootURL: string = '';
