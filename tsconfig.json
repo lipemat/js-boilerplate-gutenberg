@@ -1,8 +1,15 @@
 {
-  "extends": "@lipemat/js-boilerplate/config/tsconfig.json",
+  "extends": "@lipemat/js-boilerplate-shared/config/tsconfig.json",
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "JS Boilerplate Gutenberg",
   "compilerOptions": {
+    "rootDir": ".",
+    "types": [
+      "jest",
+      "lipemat__js-boilerplate",
+      "node",
+      "webpack-env"
+    ]
   },
   "include": [
     "config",

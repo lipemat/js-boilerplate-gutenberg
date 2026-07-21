@@ -1,5 +1,5 @@
 {
-  "extends": "@lipemat/js-boilerplate/config/tsconfig.json",
+  "extends": "../tsconfig.json",
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Special configuration for micro bundle.",
   "include": [
@@ -8,6 +8,7 @@
   "compilerOptions": {
     "allowImportingTsExtensions": false,
     "module": "ESNext",
+    "rootDir": "../src",
     "target": "ESNext"
   }
 }

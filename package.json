@@ -52,14 +52,17 @@
     "url": "https://github.com/lipemat/js-boilerplate-gutenberg/issues"
   },
   "homepage": "https://github.com/lipemat/js-boilerplate-gutenberg#readme",
+  "resolutions": {
+    "microbundle/rollup-plugin-typescript2": "^0.37.0"
+  },
   "dependencies": {
-    "@lipemat/js-boilerplate-shared": "^1.0.3",
+    "@lipemat/js-boilerplate-shared": "^1.1.1",
     "@lipemat/js-helpers": "^1.3.0",
     "@types/lipemat__js-boilerplate": "github:lipemat/types-js-boilerplate#semver:^3"
   },
   "devDependencies": {
-    "@lipemat/eslint-config": "^5.2.0",
-    "@lipemat/js-boilerplate": "^11.0.0",
+    "@lipemat/eslint-config": "^5.3.0",
+    "@lipemat/js-boilerplate": "^11.2.0",
     "@types/jest": "^30.0.0",
     "@types/regenerator-runtime": "^0",
     "@types/webpack-env": "^1.18.0",
@@ -74,11 +77,8 @@
     "microbundle": "^0.15.1",
     "regenerator-runtime": "^0.14.1",
     "ts-node": "^10.9.1",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.3",
     "unfetch": "^5.0.0"
-  },
-  "peerDependencies": {
-    "@lipemat/js-boilerplate": ">=11.0.0"
   },
   "scripts": {
     "build": "tsc --project ./bin && microbundle src/index.ts src/autoload.ts src/hooks.ts --tsconfig ./dev/tsconfig.json --external @wordpress/blocks,@wordpress/data,@wordpress/edit-post,@wordpress/plugins,@wordpress/rich-text,react,ReactDOM --globals @wordpress/blocks=wp.blocks,@wordpress/data=wp.data,@wordpress/edit-post=wp.editPost,@wordpress/plugins=wp.plugins,@wordpress/rich-text=wp.richText",
@@ -88,5 +88,5 @@
     "validate-ts": "tsc --noEmit",
     "watch": "tsc --project ./bin --watch & microbundle watch src/index.ts src/autoload.ts src/hooks.ts --tsconfig ./dev/tsconfig.json --external @wordpress/blocks,@wordpress/data,@wordpress/edit-post,@wordpress/plugins,@wordpress/rich-text,react,ReactDOM --globals @wordpress/blocks=wp.blocks,@wordpress/data=wp.data,@wordpress/edit-post=wp.editPost,@wordpress/plugins=wp.plugins,@wordpress/rich-text=wp.richText"
   },
-  "packageManager": "yarn@4.17.0"
+  "packageManager": "yarn@4.17.1"
 }
