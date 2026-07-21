@@ -44,13 +44,18 @@ describe( 'Testing wpapi', () => {
 			per_page: 1,
 			_embed: true,
 		} );
-		expect( posts[ 0 ]._embedded?.author?.length ).toBe( 1 );
-
+		expect( posts[ 0 ]?._embedded?.[ 'wp:featuredmedia' ]?.length ).toBe( 1 );
 		posts = await wp.posts().get( {
+			per_page: 1,
 			_fields: [ 'title' ],
 		} );
 		expect( typeof ( posts[ 0 ].title.rendered ) ).toBe( 'string' );
 		expect( posts[ 0 ].content ).toBe( undefined );
+
+		posts = await wp.posts().get( {
+			per_page: 1,
+		} );
+		expect( posts[ 0 ] ).not.toHaveProperty( '_embedded' );
 	} );
 
 
