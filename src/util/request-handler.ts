@@ -165,8 +165,11 @@ export function maybeRefreshNonce<T>( error: ErrorResponse, onComplete: () => Pr
 	}
 	refreshingNonce = true;
 
+	const ajaxUrl = getFullUrl( {path: 'wp-admin/admin-ajax.php?action=rest-nonce'}, false )
+		.replace( /\/wp-json\//, '/' );
+
 	return (
-		window.fetch( getFullUrl( {path: 'wp-admin/admin-ajax.php?action=rest-nonce'}, false ) )
+		window.fetch( ajaxUrl )
 			.then( checkStatus )
 			.then( data => data.text() )
 			.then( text => {

@@ -147,6 +147,35 @@ describe( 'request-handler.ts', () => {
 	} );
 
 
+	it( 'excludes wp-json from refresh nonce ajax endpoint', async () => {
+		setRootURL( 'https://example.com/sub/wp-json/', 'default' );
+		mockNonceRefresh();
+
+		await wpapi().users().get();
+		expect( fetch ).toHaveBeenNthCalledWith( 1, 'https://example.com/sub/wp-json/wp/v2/users?_locale=user', {
+			body: undefined,
+			credentials: 'include',
+			headers: {
+				Accept: 'application/json, */*;q=0.1',
+				'X-WP-Nonce': 'default',
+			},
+			method: 'GET',
+		} );
+
+		expect( fetch ).toHaveBeenNthCalledWith( 2, 'https://example.com/sub/wp-admin/admin-ajax.php?action=rest-nonce' );
+
+		expect( fetch ).toHaveBeenNthCalledWith( 3, 'https://example.com/sub/wp-json/wp/v2/users?_locale=user', {
+			body: undefined,
+			credentials: 'include',
+			headers: {
+				Accept: 'application/json, */*;q=0.1',
+				'X-WP-Nonce': '6666667',
+			},
+			method: 'GET',
+		} );
+	} );
+
+
 	it( 'Should handle none in doRequestWithPagination', async () => {
 		mockNonceRefresh();
 
