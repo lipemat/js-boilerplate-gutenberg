@@ -66,7 +66,7 @@ export function getRootURL(): string {
 /**
  * Get the full URL for a request.
  */
-export function getFullUrl<D = object>( requestOptions: FetchOptions<D>, withLocal: boolean = true ): string {
+export function getFullUrl<D = object>( requestOptions: FetchOptions<D>, withLocale: boolean = true ): string {
 	let url = '';
 	if ( 'undefined' === typeof requestOptions.url ) {
 		if ( 'string' === typeof requestOptions.path ) {
@@ -82,8 +82,8 @@ export function getFullUrl<D = object>( requestOptions: FetchOptions<D>, withLoc
 	} else {
 		url = requestOptions.url;
 	}
-	if ( withLocal ) {
-		return addLocalToRequests( url );
+	if ( withLocale ) {
+		return addLocaleToRequests( url );
 	}
 	return url;
 }
@@ -130,7 +130,7 @@ export function setRootURL( url: string, nonce?: string ): void {
  * If the URL does not have a locale, add the default
  * "_locale=user" to the URL.
  */
-const addLocalToRequests = ( url: string ): string => {
+const addLocaleToRequests = ( url: string ): string => {
 	if ( undefined === getQueryArg( url, '_locale' ) ) {
 		url = addQueryArgs( url, {_locale: 'user'} );
 	}
