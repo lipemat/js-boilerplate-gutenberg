@@ -119,10 +119,6 @@ exports[`webpack.dev config Does not change 1`] = `
                   {
                     "plugins": [
                       {
-                        "postcssPlugin": "postcss-normalize-display-values",
-                        "prepare": [Function],
-                      },
-                      {
                         "AtRule": [Function],
                         "postcssPlugin": "postcss-font-format-keywords",
                       },

@@ -15,7 +15,7 @@ describe( 'Testing root URL', () => {
 
 	it( 'Test outside requests', async () => {
 		setInitialNonce( '365edf6304' );
-		setRootURL( 'http://starting-point.loc/wp-json/' );
+		setRootURL( 'https://starting-point.loc/wp-json/' );
 		try {
 			await wp.posts().create( {
 				title: 'JS test',

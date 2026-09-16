@@ -3,15 +3,17 @@ import type {ErrorResponse} from '../../../../src/util/parse-response';
 
 describe( 'Testing authorize', () => {
 	const wp = wpapi( '' );
-	const PASSWORD = 'J3wb fq94 xlqk YdGI my9E 8egk';
+	const PASSWORD = process.env.JEST_APP_PASSWORD ?? '';
+	const USERNAME = process.env.JEST_APP_USER ?? '';
+	const itWithAuth = '' !== PASSWORD && '' !== USERNAME ? it : it.skip;
 
 	beforeEach( () => {
-		setRootURL( 'http://starting-point.loc/wp-json/' );
+		setRootURL( 'https://starting-point.loc/wp-json/' );
 		clearApplicationPassword();
 	} );
 
 	it( 'Test application passwords URL', async () => {
-		setRootURL( 'http://starting-point.loc/wp-json/' );
+		setRootURL( 'https://starting-point.loc/wp-json/' );
 		const url = await getAuthorizationUrl( {
 			app_id: '92ee9ae3-6f64-4234-9856-f9c863af5916',
 			app_name: 'Jest Unit Test',
@@ -23,16 +25,16 @@ describe( 'Testing authorize', () => {
 
 	it( 'Test clear of application password', async () => {
 		expect( hasApplicationPassword() ).toBeFalsy();
-		enableApplicationPassword( 'test', PASSWORD );
+		enableApplicationPassword( 'user', 'password' );
 		expect( hasApplicationPassword() ).toBeTruthy();
 		clearApplicationPassword();
 		expect( hasApplicationPassword() ).toBeFalsy();
 	} );
 
 
-	it( 'Test CRUD', async () => {
-		jest.setTimeout( 10000 );
-		enableApplicationPassword( 'test', PASSWORD );
+	itWithAuth( 'Test CRUD', async () => {
+		jest.setTimeout( 10_000 );
+		enableApplicationPassword( USERNAME, PASSWORD );
 
 		const post = await wp.posts().create( {
 			title: 'From JS Unit',

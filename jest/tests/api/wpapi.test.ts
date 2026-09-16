@@ -1,5 +1,4 @@
-import {clearNonce, setRootURL, wpapi} from '../../../src';
-import {setInitialRootURL} from '../../../src/util/root-url';
+import {clearNonce, setInitialRootURL, setRootURL, wpapi} from '../../../src';
 
 describe( 'Testing wpapi', () => {
 	const wp = wpapi( '' );
@@ -31,7 +30,7 @@ describe( 'Testing wpapi', () => {
 		expect( response.totalPages > 1 ).toBeTruthy();
 		expect( response.items.length ).toBe( 10 );
 
-		setRootURL( 'http://starting-point.loc/wp-json/' );
+		setRootURL( 'https://starting-point.loc/wp-json/' );
 		response = await wp.posts().getWithPagination();
 		expect( response.totalPages ).toBe( 2 );
 		expect( response.items.length ).toBeGreaterThan( 1 );
