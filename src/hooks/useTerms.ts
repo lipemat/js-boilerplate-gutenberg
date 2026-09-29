@@ -27,8 +27,8 @@ export function useTerms<T extends string = Taxonomies>( taxonomySlug: T ): [ nu
 		}
 		return {
 			taxonomy,
-			current: select( 'core/editor' ).getEditedPostAttribute<{ [key in T]: number[] }, T>( taxonomy.rest_base as T ),
-			previous: select( 'core/editor' ).getCurrentPostAttribute<{ [key in T]: number[] }, T>( taxonomy.rest_base as T ),
+			current: select( 'core/editor' )?.getEditedPostAttribute<{ [key in T]: number[] }, T>( taxonomy.rest_base as T ),
+			previous: select( 'core/editor' )?.getCurrentPostAttribute<{ [key in T]: number[] }, T>( taxonomy.rest_base as T ),
 		};
 	}, [ taxonomySlug ] );
 

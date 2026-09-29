@@ -37,13 +37,13 @@ export function usePostMeta<T extends PostMeta, K extends keyof T = keyof T>( me
 export function usePostMeta<T extends PostMeta, K extends keyof T = keyof T>( metaKey?: K ) {
 	const {editPost} = useDispatch( 'core/editor' );
 	const meta = useSelect( select => ( {
-		previous: select( 'core/editor' ).getCurrentPostAttribute<PostEdit<T>, 'meta'>( 'meta' ),
-		current: select( 'core/editor' ).getEditedPostAttribute<PostEdit<T>, 'meta'>( 'meta' ),
+		previous: select( 'core/editor' )?.getCurrentPostAttribute<PostEdit<T>, 'meta'>( 'meta' ),
+		current: select( 'core/editor' )?.getEditedPostAttribute<PostEdit<T>, 'meta'>( 'meta' ),
 	} ), [] );
 	const single = 'string' === typeof metaKey && '' !== metaKey;
 
-	const current = single ? meta.current[ metaKey ] : meta.current;
-	const previous = single ? meta.previous[ metaKey ] : meta.previous;
+	const current = single ? meta.current?.[ metaKey ] : meta.current;
+	const previous = single ? meta.previous?.[ metaKey ] : meta.previous;
 
 	/**
 	 * Update a single value.
